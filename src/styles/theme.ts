@@ -26,10 +26,10 @@ const theme: DefaultTheme = {
     info: "#5bc0de",
   },
   window: {
-    pc: `@media screen and (max-width: ${size.pc}px)`,
-    tab: `@media screen and (max-width: ${size.tab}px)`,
-    mobile: `@media screen and (max-width: ${size.mobile}px)`,
-    mobileS: `@media screen and (max-width: ${size.mobileS}px)`,
+    pc: `@media only screen and (max-width: ${size.pc})`,
+    tab: `@media only screen and (max-width: ${size.tab})`,
+    mobile: `@media only screen and (max-width: ${size.mobile})`,
+    mobileS: `@media only screen and (max-width: ${size.mobileS})`,
   },
 };
 
