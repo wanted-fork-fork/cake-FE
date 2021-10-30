@@ -1,6 +1,6 @@
-# react-mobile-web-boilerplate
+# CAKE - Web Front End
 
-모바일 웹을 만들기 위한 보일러 플레이트 레포지토리입니다.
+
 
 ## 주요 기술
 
