@@ -4,7 +4,7 @@ import CountStore from "@src/store/count.store";
 import UserStore from "@src/store/user.store";
 import AuthService from "@src/services/Auth.service";
 
-import { createAxiosInstance } from "@src/lib/axios";
+import Axios from "@src/lib/axios";
 import { AxiosInstance } from "axios";
 
 export class RootStore {
@@ -15,7 +15,7 @@ export class RootStore {
   userStore: UserStore;
 
   constructor() {
-    this.axiosInstance = createAxiosInstance({});
+    this.axiosInstance = Axios.createAxiosInstance({});
 
     const authService = new AuthService(this.axiosInstance);
 
