@@ -1,5 +1,5 @@
 import BaseHttpService from "@src/services/BaseHttp.service";
-import { LoginDto } from "@src/dto/auth.dto";
+import { LoginDto } from "@src/models/dto/user.dto";
 
 export default class AuthService extends BaseHttpService {
   async login(loginDto: LoginDto): Promise<string> {

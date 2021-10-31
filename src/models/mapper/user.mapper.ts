@@ -10,8 +10,4 @@ function buildLoginDto({
   return { email, pwd: password };
 }
 
-const UserMapper = {
-  buildLoginDto,
-};
-
-export default UserMapper;
+export default { buildLoginDto };
