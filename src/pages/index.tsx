@@ -17,7 +17,9 @@ const Home: NextPage = observer(() => {
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      // @ts-ignore
       const email = e.target.email.value;
+      // @ts-ignore
       const password = e.target.password.value;
       await userStore.login({ email, password });
     },
