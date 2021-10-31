@@ -26,8 +26,12 @@ export default class BaseHttpService {
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
+    axios.defaults.withCredentials = true;
+    console.log(options);
     return axios
-      .post<APIResponse<T>>(`${this.BASE_URL}${path}`, data, options)
+      .post<APIResponse<T>>(`${this.BASE_URL}${path}`, data, {
+        withCredentials: true,
+      })
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
         this._handleHttpError(error),
@@ -85,7 +89,7 @@ export default class BaseHttpService {
     //   .catch(() => Router.push("/login"));
   }
 
-  _getCommonOptions() {
+  _getCommonOptions(): AxiosRequestConfig {
     const token = this.loadToken();
     if (token) {
       return {
