@@ -1,6 +1,27 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
-function useForm<T>({ initialValues, onSubmit, validate }) {
+interface useFormProp<T> {
+  initialValues: T;
+  onSubmit(values: T): void;
+  validate(values: T): T;
+}
+
+interface formErrors {
+  [name: string]: string;
+}
+
+interface useFormReturn<T> {
+  values: T;
+  errors: formErrors<T>;
+  submitting: boolean;
+  handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleSubmit(e: SubmitEvent): void;
+}
+function useForm<T>({
+  initialValues,
+  onSubmit,
+  validate,
+}: useFormProp<T>): useFormReturn<T> {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
