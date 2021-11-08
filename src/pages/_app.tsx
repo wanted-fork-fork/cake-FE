@@ -4,7 +4,7 @@ import styled, { ThemeProvider, css } from "styled-components";
 
 // styles
 import GlobalStyle from "@src/styles/globals";
-import theme, { size } from "@src/styles/theme";
+import theme, { windowSize } from "@src/styles/theme";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
@@ -16,7 +16,7 @@ const Content = styled.div`
   background-color: #fff;
   height: 100vh;
   margin: 0 auto;
-  width: ${size.mobile};
+  width: ${windowSize.mobile};
 
   ${({ theme: defaultTheme }) => {
     const { window } = defaultTheme;
