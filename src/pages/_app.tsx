@@ -1,10 +1,32 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, css } from "styled-components";
 
 // styles
 import GlobalStyle from "@src/styles/globals";
-import theme from "@src/styles/theme";
+import theme, { windowSize } from "@src/styles/theme";
+
+const Container = styled.div`
+  ${({ theme: defaultTheme }) => css`
+    background-color: ${defaultTheme.color.gray0};
+  `}
+`;
+
+const Content = styled.div`
+  background-color: #fff;
+  height: 100vh;
+  margin: 0 auto;
+  width: ${windowSize.mobile};
+
+  ${({ theme: defaultTheme }) => {
+    const { window } = defaultTheme;
+    return css`
+      ${window.mobile} {
+        width: 100vw;
+      }
+    `;
+  }}
+`;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -18,7 +40,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <Container>
+          <Content>
+            <Component {...pageProps} />
+          </Content>
+        </Container>
       </ThemeProvider>
     </>
   );

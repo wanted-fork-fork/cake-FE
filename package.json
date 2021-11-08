@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "NODE_ENV=development next dev",
+    "build": "NODE_ENV=production next build",
     "start": "next start",
     "netlify-deploy": "next build && next export",
-    "lint": "next lint --ext .ts,.tsx"
+    "lint": "./node_modules/.bin/eslint src --ext .ts,.tsx"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "3.9.2",

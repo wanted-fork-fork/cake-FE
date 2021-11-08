@@ -1,18 +1,32 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { APIErrorResponse, APIResponse } from "@src/dto/api/api-response";
+import {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+} from "axios";
+import { APIErrorResponse, APIResponse } from "@src/models/dto/api-response";
+import Router from "next/router";
+import { API_PREFIX } from "@src/constant/api.constant";
 
 // MobX store와 함께 사용되므로 class로 생성
 export default class BaseHttpService {
-  BASE_URL: string = process.env.BASE_URL || "http://localhost:8000";
+  axiosInstance: AxiosInstance;
+
+  BASE_URL: string = process.env.BASE_URL;
 
   _accessToken: string = null;
+
+  constructor(axiosInstance: AxiosInstance) {
+    this.axiosInstance = axiosInstance;
+  }
 
   async get<T = any>(
     path: string,
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
-    return axios
+    return this.axiosInstance
       .get<APIResponse<T>>(`${this.BASE_URL}${path}`, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
@@ -26,7 +40,7 @@ export default class BaseHttpService {
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
-    return axios
+    return this.axiosInstance
       .post<APIResponse<T>>(`${this.BASE_URL}${path}`, data, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
@@ -39,7 +53,7 @@ export default class BaseHttpService {
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
-    return axios
+    return this.axiosInstance
       .delete<APIResponse<T>>(`${this.BASE_URL}${path}`, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
@@ -53,7 +67,7 @@ export default class BaseHttpService {
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
-    return axios
+    return this.axiosInstance
       .patch<APIResponse<T>>(`${this.BASE_URL}${path}`, data, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
@@ -63,10 +77,8 @@ export default class BaseHttpService {
 
   _handleHttpError(error: AxiosError<APIErrorResponse>) {
     if (error?.response?.data) {
-      const { statusCode } = error?.response?.data;
-      // const requestUrl = error.response?.config.url;
-
-      if (statusCode !== 401) {
+      const { status } = error?.response?.data;
+      if (status !== 401) {
         throw error.response.data;
       } else {
         return this._handle401(error);
@@ -76,16 +88,22 @@ export default class BaseHttpService {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   _handle401(error: AxiosError<APIErrorResponse>) {
-    // TODO:: refresh the token
-    console.log(error.message);
-    // this.get("/api/auth/refresh")
-    //   .then(() => axios.request(error.config))
-    //   .catch(() => Router.push("/login"));
+    // refresh token
+    this.post<string>(`${API_PREFIX.AUTH}/refresh`)
+      .then((res: string) => {
+        this._saveToken(res);
+
+        // request again
+        const { config } = error;
+        config.headers = this._getCommonOptions()
+          .headers as AxiosRequestHeaders;
+        return this.axiosInstance.request(config);
+      })
+      .catch(() => Router.push("/login"));
   }
 
-  _getCommonOptions() {
+  _getCommonOptions(): AxiosRequestConfig {
     const token = this.loadToken();
     if (token) {
       return {
