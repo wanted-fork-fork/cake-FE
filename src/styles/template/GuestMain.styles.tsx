@@ -23,7 +23,9 @@ const TextButton = styled.button`
   color: #fff;
 `;
 
-const RoundedButton = styled.button`
+const RoundedButton = styled.button<MyThemeProps>`
+  ${MarginBottom};
+
   background: #fff;
 
   width: 100%;

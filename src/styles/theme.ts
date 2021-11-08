@@ -34,7 +34,7 @@ const theme: DefaultTheme = {
 };
 
 export interface MyThemeProps extends ThemeProps<DefaultTheme> {
-  mb: string;
+  mb?: string;
 }
 
 export const Color = {
