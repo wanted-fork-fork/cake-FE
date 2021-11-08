@@ -15,7 +15,7 @@ export class RootStore {
   userStore: UserStore;
 
   constructor() {
-    this.axiosInstance = Axios.createAxiosInstance({});
+    this.axiosInstance = Axios.createAxiosInstance();
 
     const authService = new AuthService(this.axiosInstance);
 
