@@ -1,4 +1,6 @@
 export interface APIResponse<T> {
+  success: boolean;
+  code: number;
   data: T;
 }
 
