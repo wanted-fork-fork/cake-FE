@@ -17,7 +17,7 @@ export default class AuthService extends BaseHttpService {
   }
 
   async test(): Promise<string> {
-    return (await this.get<string>(`${this.prefix}/test`)) as string;
+    return (await this.get<string>(`/test`)) as string;
   }
 
   async refresh(): Promise<string> {
