@@ -26,9 +26,23 @@ const Home: NextPage = observer(() => {
     [userStore],
   );
 
+  const onTest = useCallback(async () => {
+    await userStore.test();
+  }, [userStore]);
+
+  const onRefresh = useCallback(async () => {
+    await userStore.refresh();
+  }, [userStore]);
+
   return (
     <Container>
       <LoginPageTemplate onSubmit={onSubmit} />
+      <button type="button" onClick={onTest}>
+        test auth
+      </button>{" "}
+      <button type="button" onClick={onRefresh}>
+        test refresh
+      </button>
     </Container>
   );
 });

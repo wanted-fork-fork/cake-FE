@@ -22,6 +22,16 @@ export default class UserStore {
 
   async login({ email, password }) {
     const loginDto: LoginDto = UserMapper.buildLoginDto({ email, password });
-    await this.authService.login(loginDto);
+    const token = await this.authService.login(loginDto);
+    this.authService._saveToken(token);
+  }
+
+  async test() {
+    await this.authService.test();
+  }
+
+  async refresh() {
+    const token = await this.authService.refresh();
+    this.authService._saveToken(token);
   }
 }

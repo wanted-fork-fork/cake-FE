@@ -1,11 +1,12 @@
 import axios from "axios";
-import { Agent, AgentOptions } from "https";
+import { Agent } from "https";
 
-function createAxiosInstance(options: AgentOptions) {
+function createAxiosInstance() {
   return axios.create({
     httpsAgent: new Agent({
       rejectUnauthorized: false,
     }),
+    withCredentials: true,
   });
 }
 
