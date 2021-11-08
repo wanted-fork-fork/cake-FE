@@ -1,5 +1,9 @@
 # CAKE - Web Front End
 
+## 페이지 링크
+
+- 웹 페이지: https://wanted-cake.netlify.app/
+- 스토리북: https://wanted-fork-fork.github.io/cake-FE/
 
 ## 주요 기술
 
