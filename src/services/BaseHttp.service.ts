@@ -2,15 +2,17 @@ import {
   AxiosError,
   AxiosInstance,
   AxiosRequestConfig,
+  AxiosRequestHeaders,
   AxiosResponse,
 } from "axios";
 import { APIErrorResponse, APIResponse } from "@src/models/dto/api-response";
+import Router from "next/router";
 
 // MobX store와 함께 사용되므로 class로 생성
 export default class BaseHttpService {
   axiosInstance: AxiosInstance;
 
-  BASE_URL: string = process.env.BASE_URL || "http://localhost:8000";
+  BASE_URL: string = process.env.BASE_URL;
 
   _accessToken: string = null;
 
@@ -38,9 +40,7 @@ export default class BaseHttpService {
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
     return this.axiosInstance
-      .post<APIResponse<T>>(`${this.BASE_URL}${path}`, data, {
-        withCredentials: true,
-      })
+      .post<APIResponse<T>>(`${this.BASE_URL}${path}`, data, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
         this._handleHttpError(error),
@@ -76,10 +76,8 @@ export default class BaseHttpService {
 
   _handleHttpError(error: AxiosError<APIErrorResponse>) {
     if (error?.response?.data) {
-      const { statusCode } = error?.response?.data;
-      // const requestUrl = error.response?.config.url;
-
-      if (statusCode !== 401) {
+      const { status } = error?.response?.data;
+      if (status !== 401) {
         throw error.response.data;
       } else {
         return this._handle401(error);
@@ -89,13 +87,19 @@ export default class BaseHttpService {
     }
   }
 
-  // eslint-disable-next-line
   _handle401(error: AxiosError<APIErrorResponse>) {
-    // TODO:: refresh the token
-    // console.log(error.message);
-    // this.get("/api/auth/refresh")
-    //   .then(() => axios.request(error.config))
-    //   .catch(() => Router.push("/login"));
+    // refresh token
+    this.post<string>("/refresh")
+      .then((res: string) => {
+        this._saveToken(res);
+
+        // request again
+        const { config } = error;
+        config.headers = this._getCommonOptions()
+          .headers as AxiosRequestHeaders;
+        return this.axiosInstance.request(config);
+      })
+      .catch(() => Router.push("/login"));
   }
 
   _getCommonOptions(): AxiosRequestConfig {

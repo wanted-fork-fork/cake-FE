@@ -9,4 +9,12 @@ export default class AuthService extends BaseHttpService {
   logout() {
     this.removeToken();
   }
+
+  async test(): Promise<string> {
+    return (await this.get<string>("/test")) as string;
+  }
+
+  async refresh(): Promise<string> {
+    return (await this.post<string>("/refresh")) as string;
+  }
 }

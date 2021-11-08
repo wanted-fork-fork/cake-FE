@@ -3,7 +3,7 @@ export interface APIResponse<T> {
 }
 
 export interface APIErrorResponse {
-  statusCode: number;
+  status: number;
   message: string;
   error?: string;
 }
