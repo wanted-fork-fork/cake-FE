@@ -24,11 +24,11 @@ export default class SignupService extends BaseHttpService {
     )) as boolean;
   }
 
-  async confirmCertification(param: ConfirmCertificationDto): Promise<boolean> {
-    return (await this.post<boolean>(
+  async confirmCertification(param: ConfirmCertificationDto): Promise<string> {
+    return (await this.post<string>(
       `${this.prefix}/certification/confirm`,
       param,
-    )) as boolean;
+    )) as string;
   }
 
   async checkOverlapEmail(param: CheckOverlapEmailDto): Promise<boolean> {
