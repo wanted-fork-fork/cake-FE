@@ -4,8 +4,14 @@ import Link from "next/link";
 import AppTitleComponent from "@src/components/molcules/AppTitle.component";
 
 import SGuestMain from "@src/styles/template/GuestMain.styles";
+import { EventHandler, MouseEventHandler } from "react";
 
-function GuestMainTemplate({ onClickLogin, onClickSignup }) {
+export type GuestMainProps = {
+  onClickLogin: MouseEventHandler;
+  onClickSignup: MouseEventHandler;
+};
+
+function GuestMainTemplate({ onClickLogin, onClickSignup }: GuestMainProps) {
   return (
     <SGuestMain.Container>
       <AppTitleComponent mb="100px" />
