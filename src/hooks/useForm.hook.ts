@@ -3,7 +3,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 interface useFormProp<T> {
   initialValues: T;
   onSubmit(values: T): void;
-  validate(values: T): T;
+  validate(values: T): formErrors;
 }
 
 interface formErrors {
@@ -12,7 +12,7 @@ interface formErrors {
 
 interface useFormReturn<T> {
   values: T;
-  errors: formErrors<T>;
+  errors: formErrors;
   submitting: boolean;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
   handleSubmit(e: SubmitEvent): void;

@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme, ThemeProps } from "styled-components";
 
 export const windowSize = {
   pc: "75em", // 1200px
@@ -33,17 +33,29 @@ const theme: DefaultTheme = {
   },
 };
 
+export interface MyThemeProps extends ThemeProps<DefaultTheme> {
+  mb?: string;
+}
+
 export const Color = {
   mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.secondary} 100%`,
 };
 
 export const FontSize = {
-  MainTitle: "2rem",
-  SubTitle: "1.5rem",
+  MainTitle: "1.5rem",
+  MainTitleStrong: "1.563rem",
+  SubTitle: "1.125rem",
+  Default: "1rem",
   PrimaryLabel: "0.9rem",
   SecondaryLabel: "0.8rem",
   PrimaryDescription: "0.7rem",
   SecondaryDescription: "0.6rem",
+  Small: "0.75rem",
+};
+
+export const FontFamily = {
+  point: "GmarketSans",
+  default: "Spoqa Han Sans",
 };
 
 export default theme;

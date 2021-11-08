@@ -5,14 +5,17 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+
   html,
   body {
-    -webkit-text-size-adjust: none;   // 뷰포트 변경 시 자동 폰트 조절 방지 
+    -webkit-text-size-adjust: none; // 뷰포트 변경 시 자동 폰트 조절 방지 
 
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    //font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    //Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    color: #222;
   }
 
   a {
