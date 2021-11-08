@@ -7,7 +7,9 @@
     "build": "NODE_ENV=production next build",
     "start": "next start",
     "netlify-deploy": "next build && next export",
-    "lint": "./node_modules/.bin/eslint src --ext .ts,.tsx"
+    "lint": "./node_modules/.bin/eslint src --ext .ts,.tsx",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "3.9.2",
@@ -21,10 +23,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "@storybook/addon-actions": "6.3.12",
+    "@storybook/addon-essentials": "6.3.12",
+    "@storybook/addon-links": "6.3.12",
+    "@storybook/addon-viewport": "6.3.12",
+    "@storybook/react": "6.3.12",
     "@types/react": "17.0.33",
     "@types/styled-components": "5.1.15",
     "@typescript-eslint/eslint-plugin": "5.2.0",
     "@typescript-eslint/parser": "5.2.0",
+    "babel-loader": "8.2.3",
     "babel-plugin-styled-components": "1.13.3",
     "eslint": "8.1.0",
     "eslint-config-airbnb": "18.2.1",
@@ -37,6 +45,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "prettier": "2.4.1",
+    "react-is": "17.0.2",
     "typescript": "4.4.4"
   }
 }
