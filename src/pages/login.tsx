@@ -7,7 +7,10 @@ import { observer } from "mobx-react";
 import { useStores } from "@src/store/root.store";
 
 // templates
-import LoginPageTemplate from "@src/templates/LoginPage.template";
+import LoginPageTemplate, {
+  LoginForm,
+} from "@src/templates/LoginPage.template";
+import useForm from "@src/hooks/useForm.hook";
 
 const Container = styled.div``;
 
@@ -15,16 +18,20 @@ const LoginPage: NextPage = observer(() => {
   const { userStore } = useStores();
 
   const onSubmit = useCallback(
-    async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      // @ts-ignore
-      const email = e.target.email.value;
-      // @ts-ignore
-      const password = e.target.password.value;
-      await userStore.login({ email, password });
+    async (values) => {
+      console.log(values);
+      await userStore.login(values);
     },
     [userStore],
   );
+
+  const { values, handleSubmit, handleChange } = useForm<LoginForm>({
+    initialValues: { email: "", password: "" },
+    onSubmit,
+    validate(values: LoginForm) {
+      return {};
+    },
+  });
 
   const onTest = useCallback(async () => {
     await userStore.test();
@@ -36,7 +43,11 @@ const LoginPage: NextPage = observer(() => {
 
   return (
     <Container>
-      <LoginPageTemplate onSubmit={onSubmit} />
+      <LoginPageTemplate
+        values={values}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
       <button type="button" onClick={onTest}>
         test auth
       </button>{" "}
@@ -46,5 +57,4 @@ const LoginPage: NextPage = observer(() => {
     </Container>
   );
 });
-
 export default LoginPage;

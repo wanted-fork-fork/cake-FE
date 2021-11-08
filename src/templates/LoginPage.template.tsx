@@ -8,7 +8,7 @@ import SGuestMain from "@src/styles/template/GuestMain.styles";
 import theme, { FontSize, MyThemeProps } from "@src/styles/theme";
 import { MarginBottom } from "@src/styles/common";
 
-const ContentsWrap = styled.div<MyThemeProps>`
+const ContentsWrap = styled.form<MyThemeProps>`
   ${MarginBottom};
 
   background: #fff;
@@ -36,13 +36,32 @@ const Input = styled.input`
 
 const S = { ContentsWrap, Input };
 
-function LoginPageTemplate(): JSX.Element {
+export type LoginForm = {
+  email: string;
+  password: string;
+};
+
+function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
   return (
     <SGuestMain.Container>
       <AppTitleComponent mb="100px" />
-      <S.ContentsWrap mb="20px">
-        <S.Input placeholder="아이디" type="email" />
-        <S.Input placeholder="비밀번호" type="password" />
+      <S.ContentsWrap mb="20px" onSubmit={onSubmit}>
+        <S.Input
+          value={values.email}
+          onChange={onChange}
+          placeholder="아이디"
+          id="email"
+          name="email"
+          type="email"
+        />
+        <S.Input
+          value={values.password}
+          onChange={onChange}
+          placeholder="비밀번호"
+          id="password"
+          name="password"
+          type="password"
+        />
       </S.ContentsWrap>
       <SGuestMain.TextButton type="button">
         아이디 | 비밀번호 찾기
@@ -50,5 +69,10 @@ function LoginPageTemplate(): JSX.Element {
     </SGuestMain.Container>
   );
 }
+
+// Login Button
+// <SGuestMain.RoundedButton type="button" onClick={onSubmit} mb="20px">
+//   로그인
+// </SGuestMain.RoundedButton>
 
 export default LoginPageTemplate;
