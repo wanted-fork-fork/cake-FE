@@ -7,6 +7,7 @@ import {
 } from "axios";
 import { APIErrorResponse, APIResponse } from "@src/models/dto/api-response";
 import Router from "next/router";
+import { API_PREFIX } from "@src/constant/api.constant";
 
 // MobX store와 함께 사용되므로 class로 생성
 export default class BaseHttpService {
@@ -89,7 +90,7 @@ export default class BaseHttpService {
 
   _handle401(error: AxiosError<APIErrorResponse>) {
     // refresh token
-    this.post<string>("/refresh")
+    this.post<string>(`${API_PREFIX.AUTH}/refresh`)
       .then((res: string) => {
         this._saveToken(res);
 
