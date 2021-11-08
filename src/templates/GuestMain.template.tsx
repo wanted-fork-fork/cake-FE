@@ -23,9 +23,13 @@ function GuestMainTemplate({ onClickLogin, onClickSignup }: GuestMainProps) {
             </SGuestMain.RoundedButton>
           </a>
         </Link>
-        <SGuestMain.RoundedButton type="button" onClick={onClickSignup}>
-          학교 계정으로 회원가입
-        </SGuestMain.RoundedButton>
+        <Link href="/signup">
+          <a>
+            <SGuestMain.RoundedButton type="button" onClick={onClickSignup}>
+              학교 계정으로 회원가입
+            </SGuestMain.RoundedButton>
+          </a>
+        </Link>
       </SGuestMain.ContentsWrap>
       <SGuestMain.TextButton type="button">
         아이디 | 비밀번호 찾기
