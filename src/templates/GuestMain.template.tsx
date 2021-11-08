@@ -1,10 +1,11 @@
+import { MouseEventHandler } from "react";
 import Link from "next/link";
 
 // components
 import AppTitleComponent from "@src/components/molcules/AppTitle.component";
 
+// styles
 import SGuestMain from "@src/styles/template/GuestMain.styles";
-import { EventHandler, MouseEventHandler } from "react";
 
 export type GuestMainProps = {
   onClickLogin: MouseEventHandler;

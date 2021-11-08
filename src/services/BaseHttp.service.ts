@@ -21,7 +21,7 @@ export default class BaseHttpService {
     this.axiosInstance = axiosInstance;
   }
 
-  async get<T = any>(
+  async get<T>(
     path: string,
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
@@ -34,9 +34,9 @@ export default class BaseHttpService {
       );
   }
 
-  async post<T = any>(
+  async post<T>(
     path: string,
-    data: any = {},
+    data = {},
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());
@@ -48,7 +48,7 @@ export default class BaseHttpService {
       );
   }
 
-  async delete<T = any>(
+  async delete<T>(
     path: string,
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
@@ -61,9 +61,9 @@ export default class BaseHttpService {
       );
   }
 
-  async patch<T = any>(
+  async patch<T>(
     path: string,
-    data: any = {},
+    data = {},
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
     Object.assign(options, this._getCommonOptions());

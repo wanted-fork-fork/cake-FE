@@ -2,7 +2,6 @@ import LoginPageTemplate, {
   LoginForm,
 } from "@src/templates/LoginPage.template";
 import useForm from "@src/hooks/useForm.hook";
-import { MyThemeProps } from "@src/styles/theme";
 
 export default {
   title: "template/Login",
@@ -12,10 +11,10 @@ export default {
 const Template = (args) => {
   const { values, handleChange } = useForm<LoginForm>({
     initialValues: { email: "", password: "" },
-    onSubmit(v: LoginForm) {
-      console.log(v);
+    onSubmit() {
+      return null;
     },
-    validate(_: LoginForm) {
+    validate() {
       return {};
     },
   });
