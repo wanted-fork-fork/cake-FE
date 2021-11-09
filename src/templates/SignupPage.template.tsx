@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { useMemo } from "react";
 
 // constant
 import { SignupTitleMessages } from "@src/constant/message.constant";
+import { Category } from "@src/models/dto/signup.dto";
 
 // components
 import SelectSchoolStepComponent from "@src/components/organs/signup/SelectSchoolStep.component";
@@ -9,18 +11,23 @@ import ConfirmEmailStepComponent from "@src/components/organs/signup/ConfirmEmai
 import PasswordInputStepComponent from "@src/components/organs/signup/PasswordInputStep.component";
 import DetailsInputStepComponent from "@src/components/organs/signup/DetailsInputStep.component";
 import SelectCategoryStepComponent from "@src/components/organs/signup/SelectCategoryStep.component";
+import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import { Button } from "@src/components/atoms/Button";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import { useMemo } from "react";
-import { Category } from "@src/models/dto/signup.dto";
+import { TextButton } from "@src/components/atoms/LinkButton";
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
   padding: ${Padding.page};
+`;
+
+const BackWrap = styled.div`
+  margin-bottom: 20px;
+  width: fit-content;
 `;
 
 const TitleWrap = styled.div<BaseProps>`
@@ -71,6 +78,7 @@ export enum SignupStep {
 export type SignupTemplateProps = {
   step: SignupStep;
   onClickNext?: () => void;
+  onClickPrev?: () => void;
   categoryList: Category[];
   selectedList: number[];
 };
@@ -80,18 +88,16 @@ function SignupPageTemplate({
   categoryList = [],
   selectedList = [],
   onClickNext,
+  onClickPrev,
 }: SignupTemplateProps) {
-  const titlePt = useMemo(
-    () =>
-      step === SignupStep.SELECT_GIVE_CATEGORY ||
-      step === SignupStep.SELECT_TAKE_CATEGORY
-        ? "50px"
-        : "160px",
-    [step],
-  );
   return (
     <S.Container>
-      <S.TitleWrap pt={titlePt} mb="60px">
+      <S.TitleWrap pt="50px" mb="60px">
+        <BackWrap>
+          <TextButton color="black" onClick={onClickPrev}>
+            <LeftArrowIcon />
+          </TextButton>
+        </BackWrap>
         <S.TitleText mb="8px">{SignupTitleMessages[step].title}</S.TitleText>
         <S.DescriptionText>
           {SignupTitleMessages[step].description}

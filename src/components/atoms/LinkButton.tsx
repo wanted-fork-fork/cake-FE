@@ -10,6 +10,7 @@ export const TextButton = styled.button<TextButtonStyleProps>`
   border: none;
   width: 100%;
   text-align: center;
+  cursor: pointer;
 
   color: ${({ color }) => {
     switch (color) {
