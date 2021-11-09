@@ -13,7 +13,9 @@ import { Button } from "@src/components/atoms/Button";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
-import { BaseMarginBottom, BaseProps } from "@src/styles/common";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import { useMemo } from "react";
+import { Category } from "@src/models/dto/signup.dto";
 
 const Container = styled.div`
   width: 100%;
@@ -22,25 +24,27 @@ const Container = styled.div`
 `;
 
 const TitleWrap = styled.div<BaseProps>`
-  ${BaseMarginBottom};
-  height: 200px;
-  padding-top: 160px;
+  ${BaseStyleProps};
 `;
 
 const TitleText = styled.h2<BaseProps>`
-  ${BaseMarginBottom};
+  ${BaseStyleProps};
   font-size: ${FontSize.PrimaryLabel};
   font-weight: 500;
+  word-break: keep-all;
+  line-height: ${FontSize.MainTitle};
 `;
 const DescriptionText = styled.p`
   font-size: ${FontSize.PrimaryDescription};
   font-weight: 400;
+  word-break: keep-all;
+  line-height: ${FontSize.PrimaryLabel};
 `;
 
 const ContentWrap = styled.div``;
 
 const BottomWrap = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 60px;
   left: ${Padding.pageX};
   right: ${Padding.pageX};
@@ -67,15 +71,27 @@ export enum SignupStep {
 export type SignupTemplateProps = {
   step: SignupStep;
   onClickNext?: () => void;
+  categoryList: Category[];
+  selectedList: number[];
 };
 
 function SignupPageTemplate({
   step = SignupStep.SELECT_SCHOOL,
+  categoryList = [],
+  selectedList = [],
   onClickNext,
 }: SignupTemplateProps) {
+  const titlePt = useMemo(
+    () =>
+      step === SignupStep.SELECT_GIVE_CATEGORY ||
+      step === SignupStep.SELECT_TAKE_CATEGORY
+        ? "50px"
+        : "160px",
+    [step],
+  );
   return (
     <S.Container>
-      <S.TitleWrap mb="30px">
+      <S.TitleWrap pt={titlePt} mb="60px">
         <S.TitleText mb="8px">{SignupTitleMessages[step].title}</S.TitleText>
         <S.DescriptionText>
           {SignupTitleMessages[step].description}
@@ -87,10 +103,16 @@ function SignupPageTemplate({
         {step === SignupStep.PASSWORD_INPUT && <PasswordInputStepComponent />}
         {step === SignupStep.DETAILS_INPUT && <DetailsInputStepComponent />}
         {step === SignupStep.SELECT_GIVE_CATEGORY && (
-          <SelectCategoryStepComponent />
+          <SelectCategoryStepComponent
+            categoryList={categoryList}
+            selectedList={selectedList}
+          />
         )}
         {step === SignupStep.SELECT_TAKE_CATEGORY && (
-          <SelectCategoryStepComponent />
+          <SelectCategoryStepComponent
+            categoryList={categoryList}
+            selectedList={selectedList}
+          />
         )}
       </S.ContentWrap>
       {SignupTitleMessages[step].button && (

@@ -25,3 +25,9 @@ export type Univ = {
   name: string;
   email: string;
 };
+
+export type Category = {
+  id: number;
+  name: string;
+  img: string;
+};

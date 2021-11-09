@@ -3,11 +3,16 @@ import { FontSize } from "@src/styles/theme";
 
 export interface BaseProps extends ThemeProps<DefaultTheme> {
   mb?: string;
+  pt?: string;
   fontSize?: "small" | "default" | "large";
 }
 
 export const BaseMarginBottom = css`
   margin-bottom: ${(props: BaseProps) => props.mb};
+`;
+
+export const BasePaddingTop = css`
+  padding-top: ${(props: BaseProps) => props.pt};
 `;
 
 export const BaseFontSize = css`
@@ -25,7 +30,16 @@ export const BaseFontSize = css`
   }};
 `;
 
+export const NoScroll = css`
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+`;
+
 export const BaseStyleProps = css`
+  ${BasePaddingTop};
   ${BaseMarginBottom};
   ${BaseFontSize};
 `;
