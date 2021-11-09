@@ -6,6 +6,8 @@ import AppTitleComponent from "@src/components/molcules/AppTitle.component";
 
 // styles
 import SGuestMain from "@src/styles/template/GuestMain.styles";
+import { Button } from "@src/components/atoms/Button";
+import { TextButton } from "@src/components/atoms/LinkButton";
 
 export type GuestMainProps = {
   onClickLogin: MouseEventHandler;
@@ -19,22 +21,22 @@ function GuestMainTemplate({ onClickLogin, onClickSignup }: GuestMainProps) {
       <SGuestMain.ContentsWrap mb="20px">
         <Link href="/login">
           <a>
-            <SGuestMain.RoundedButton type="button" onClick={onClickLogin}>
+            <Button color="white" type="button" onClick={onClickLogin}>
               로그인
-            </SGuestMain.RoundedButton>
+            </Button>
           </a>
         </Link>
         <Link href="/signup">
           <a>
-            <SGuestMain.RoundedButton type="button" onClick={onClickSignup}>
+            <Button color="white" type="button" onClick={onClickSignup}>
               학교 계정으로 회원가입
-            </SGuestMain.RoundedButton>
+            </Button>
           </a>
         </Link>
       </SGuestMain.ContentsWrap>
-      <SGuestMain.TextButton type="button">
+      <TextButton color="white" type="button">
         아이디 | 비밀번호 찾기
-      </SGuestMain.TextButton>
+      </TextButton>
     </SGuestMain.Container>
   );
 }
