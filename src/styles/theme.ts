@@ -1,4 +1,4 @@
-import { DefaultTheme, ThemeProps } from "styled-components";
+import { DefaultTheme } from "styled-components";
 
 export const windowSize = {
   pc: "75em", // 1200px
@@ -33,12 +33,8 @@ const theme: DefaultTheme = {
   },
 };
 
-export interface MyThemeProps extends ThemeProps<DefaultTheme> {
-  mb?: string;
-}
-
 export const Color = {
-  mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.secondary} 100%`,
+  mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.secondary} 100%)`,
 };
 
 export const FontSize = {
@@ -46,11 +42,16 @@ export const FontSize = {
   MainTitleStrong: "1.563rem",
   SubTitle: "1.125rem",
   Default: "1rem",
-  PrimaryLabel: "0.9rem",
+  PrimaryLabel: "1.25rem", // 20px
   SecondaryLabel: "0.8rem",
-  PrimaryDescription: "0.7rem",
+  PrimaryDescription: "0.875rem", // 14px
   SecondaryDescription: "0.6rem",
   Small: "0.75rem",
+};
+
+export const Padding = {
+  page: "0 20px",
+  pageX: "20px",
 };
 
 export const FontFamily = {
