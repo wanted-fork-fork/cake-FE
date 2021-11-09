@@ -31,6 +31,8 @@ export const UnderlineInput = styled.input<InputStyleProps>`
   font-weight: 400;
   padding: 15px 10px;
 
+  text-align: inherit;
+
   &:focus {
     border-color: ${theme.color.primary};
   }
