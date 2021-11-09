@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 // components
 import AppTitleComponent from "@src/components/molcules/AppTitle.component";
+import { TextButton } from "@src/components/atoms/LinkButton";
+import { DividedInput } from "@src/components/atoms/Input";
 
 // styles
 import SGuestMain from "@src/styles/template/GuestMain.styles";
-import theme, { FontSize, MyThemeProps } from "@src/styles/theme";
-import { MarginBottom } from "@src/styles/common";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
-const ContentsWrap = styled.form<MyThemeProps>`
-  ${MarginBottom};
+const ContentsWrap = styled.form<BaseProps>`
+  ${BaseStyleProps};
 
   background: #fff;
   border-radius: 12px;
@@ -20,21 +21,7 @@ const ContentsWrap = styled.form<MyThemeProps>`
   padding: 5px 20px;
 `;
 
-const Input = styled.input`
-  border: none;
-  height: 100%;
-  width: 100%;
-  font-size: ${FontSize.Default};
-
-  &:not(:first-child) {
-    border-top: 1px solid ${theme.color.gray2};
-  }
-  &:focus {
-    outline: none;
-  }
-`;
-
-const S = { ContentsWrap, Input };
+const S = { ContentsWrap };
 
 export type LoginForm = {
   email: string;
@@ -46,7 +33,7 @@ function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
     <SGuestMain.Container>
       <AppTitleComponent mb="100px" />
       <S.ContentsWrap mb="20px" onSubmit={onSubmit}>
-        <S.Input
+        <DividedInput
           value={values.email}
           onChange={onChange}
           placeholder="아이디"
@@ -54,7 +41,7 @@ function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
           name="email"
           type="email"
         />
-        <S.Input
+        <DividedInput
           value={values.password}
           onChange={onChange}
           placeholder="비밀번호"
@@ -63,9 +50,9 @@ function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
           type="password"
         />
       </S.ContentsWrap>
-      <SGuestMain.TextButton type="button">
+      <TextButton color="white" type="button">
         아이디 | 비밀번호 찾기
-      </SGuestMain.TextButton>
+      </TextButton>
     </SGuestMain.Container>
   );
 }

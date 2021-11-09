@@ -1,13 +1,13 @@
 import styled, { css } from "styled-components";
 import { FontFamily, FontSize, MyThemeProps } from "@src/styles/theme";
-import { MarginBottom } from "@src/styles/common";
+import { BaseMarginBottom } from "@src/styles/common";
 
 const Container = styled.div<MyThemeProps>`
-  ${MarginBottom}
+  ${BaseMarginBottom}
 `;
 
 const MainText = css`
-  ${MarginBottom};
+  ${BaseMarginBottom};
 
   color: #fff;
   font-family: ${FontFamily.point};
