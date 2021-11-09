@@ -3,6 +3,7 @@ import styled from "styled-components";
 import theme, { FontSize } from "@src/styles/theme";
 import { Button } from "@src/components/atoms/Button";
 import { UnderlineInput } from "@src/components/atoms/Input";
+import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
 
 const EmailWrap = styled.div<BaseProps>`
   ${BaseMarginBottom};
@@ -50,10 +51,10 @@ function ConfirmEmailStepComponent() {
         이메일로 인증번호 받기
       </Button>
       <S.ConfirmCodeWrap mb="10px">
-        <S.CodeInputWrap>
-          <UnderlineInput />
-          <span>04:59</span>
-        </S.CodeInputWrap>
+        <InputWithSuffixComponent
+          input={<UnderlineInput />}
+          suffix={<span>04:59</span>}
+        />
         <div>
           <Button color="primary" filled={false} width="4.45rem">
             인증

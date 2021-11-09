@@ -8,6 +8,8 @@ import CameraIcon from "@src/components/icon/Camera.icon";
 // styles
 import theme from "@src/styles/theme";
 import { ButtonStyleProps } from "@src/components/atoms/Button";
+import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
+import DownArrowIcon from "@src/components/icon/DownArrow.icon";
 
 const Container = styled.div`
   display: flex;
@@ -39,14 +41,19 @@ const IconButton = styled.button<ButtonStyleProps>`
   bottom: 0;
   right: 0;
   z-index: 10;
+
   border: 1px solid ${theme.color.gray2};
   border-radius: 50%;
   background-color: #fff;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   height: 32px;
   width: 32px;
+
+  cursor: pointer;
 `;
 
 const FormWrapper = styled.div`
@@ -89,7 +96,12 @@ function DetailsInputStepComponent() {
           <UnderlineInput placeholder="닉네임" type="text" />
         </NicknameWrapper>
         <DetailWrapper>
-          <UnderlineInput placeholder="어느 단과대이신가요?" type="text" />
+          <InputWithSuffixComponent
+            input={
+              <UnderlineInput placeholder="어느 단과대이신가요?" type="text" />
+            }
+            suffix={<DownArrowIcon />}
+          />
         </DetailWrapper>
       </FormWrapper>
     </S.Container>
