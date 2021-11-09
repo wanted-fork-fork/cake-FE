@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
+// types
+import { ButtonStyleProps } from "@src/components/atoms/Button";
+
 // components
 import { UnderlineInput } from "@src/components/atoms/Input";
 import PatisserieIcon from "@src/components/icon/Patisserie.icon";
 import CameraIcon from "@src/components/icon/Camera.icon";
+import DownArrowIcon from "@src/components/icon/DownArrow.icon";
+import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
 
 // styles
 import theme from "@src/styles/theme";
-import { ButtonStyleProps } from "@src/components/atoms/Button";
-import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
-import DownArrowIcon from "@src/components/icon/DownArrow.icon";
 
 const Container = styled.div`
   display: flex;

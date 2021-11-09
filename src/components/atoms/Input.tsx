@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
-import theme from "@src/styles/theme";
+
+// styles
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import theme from "@src/styles/theme";
 
 export interface InputStyleProps extends BaseProps {
   shape?: "underline";

@@ -1,10 +1,14 @@
+import { useMemo } from "react";
 import styled from "styled-components";
+
+// types
+import { Category } from "@src/models/dto/signup.dto";
+
 // component
 import CategoryComponent from "@src/components/molcules/Category.component";
+
 // styles
 import { NoScroll } from "@src/styles/common";
-import { Category } from "@src/models/dto/signup.dto";
-import { useMemo } from "react";
 
 const Container = styled.div`
   ${NoScroll};
@@ -31,12 +35,13 @@ function SelectCategoryStepComponent({
 }: SelectCategoryStepProps) {
   const categoryListDom = useMemo(
     () =>
-      categoryList.map((x, idx) => (
+      categoryList.map((x) => (
         <CategoryComponent
           key={x.id}
           img={x.img}
           selected={selectedList.find((y) => y === x.id) !== undefined}
           name={x.name}
+          onClick={null}
         />
       )),
     [categoryList, selectedList],

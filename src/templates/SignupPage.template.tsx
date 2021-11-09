@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useMemo } from "react";
 
 // constant
 import { SignupTitleMessages } from "@src/constant/message.constant";
@@ -13,11 +12,11 @@ import DetailsInputStepComponent from "@src/components/organs/signup/DetailsInpu
 import SelectCategoryStepComponent from "@src/components/organs/signup/SelectCategoryStep.component";
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import { Button } from "@src/components/atoms/Button";
+import { TextButton } from "@src/components/atoms/LinkButton";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import { TextButton } from "@src/components/atoms/LinkButton";
 
 const Container = styled.div`
   width: 100%;

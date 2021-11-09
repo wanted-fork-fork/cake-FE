@@ -1,9 +1,13 @@
-import { BaseMarginBottom, BaseProps } from "@src/styles/common";
 import styled from "styled-components";
-import theme, { FontSize } from "@src/styles/theme";
+
+// components
 import { Button } from "@src/components/atoms/Button";
 import { UnderlineInput } from "@src/components/atoms/Input";
 import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
+
+// styles
+import theme, { FontSize } from "@src/styles/theme";
+import { BaseMarginBottom, BaseProps } from "@src/styles/common";
 
 const EmailWrap = styled.div<BaseProps>`
   ${BaseMarginBottom};
