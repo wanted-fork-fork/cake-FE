@@ -6,6 +6,7 @@ import styled, { ThemeProvider, css } from "styled-components";
 import GlobalStyle from "@src/styles/globals";
 import theme, { windowSize } from "@src/styles/theme";
 import GlobalFonts from "@src/styles/fonts";
+import "../styles/variables.less";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
