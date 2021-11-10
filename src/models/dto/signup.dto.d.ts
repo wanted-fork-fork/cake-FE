@@ -6,6 +6,10 @@ export type CheckOverlapEmailDto = {
   email: string;
 };
 
+export type CheckOverlapNicknameDto = {
+  nickname: string;
+};
+
 export type ConfirmCertificationDto = {
   email: string;
   code: string;

@@ -2,6 +2,7 @@ import BaseHttpService from "@src/services/BaseHttp.service";
 import { API_PREFIX } from "@src/constant/api.constant";
 import {
   CheckOverlapEmailDto,
+  CheckOverlapNicknameDto,
   ConfirmCertificationDto,
   SendCertificationMailDto,
   SignupForm,
@@ -33,7 +34,14 @@ export default class SignupService extends BaseHttpService {
 
   async checkOverlapEmail(param: CheckOverlapEmailDto): Promise<boolean> {
     return (await this.post<boolean>(
-      `${this.prefix}/overlap`,
+      `${this.prefix}/overlap/email`,
+      param,
+    )) as boolean;
+  }
+
+  async checkOverlapNickname(param: CheckOverlapNicknameDto): Promise<boolean> {
+    return (await this.post<boolean>(
+      `${this.prefix}/overlap/nickname`,
       param,
     )) as boolean;
   }

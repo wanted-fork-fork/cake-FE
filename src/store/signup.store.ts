@@ -86,6 +86,18 @@ export default class SignupStore {
     }
   }
 
+  async checkNicknameOverlap(nickname: string) {
+    try {
+      await this.signupService.checkOverlapNickname({ nickname });
+      this.form.nickname = nickname;
+      this._cleanErrors();
+    } catch (e) {
+      if (e.code === 400) {
+        this.errors = { nickname: e.message };
+      }
+    }
+  }
+
   // 인증 메일 재전송 요청
   async sendAgainCertificationMail() {
     try {
