@@ -25,6 +25,8 @@ export class RootStore {
     const signupService = new SignupService(this.axiosInstance);
     const resourceService = new ResourceService(this.axiosInstance);
 
+    this.resourceService = resourceService;
+
     this.userStore = new UserStore(this, authService);
     this.signupStore = new SignupStore(this, signupService);
   }
