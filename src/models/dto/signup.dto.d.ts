@@ -17,7 +17,7 @@ export type SignupForm = {
   nickname: string;
   img: string | null;
   univCategory: number;
-  univ: number;
+  univ: string;
 };
 
 export type Univ = {

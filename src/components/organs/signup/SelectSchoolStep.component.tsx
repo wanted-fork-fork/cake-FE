@@ -1,35 +1,39 @@
-import { Dispatch, SetStateAction, useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { observer } from "mobx-react";
+
+// store
+import { useStores } from "@src/store/root.store";
+
+// hooks
+import useInput from "@src/hooks/useInput.hook";
 
 // components
 import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
 import AutoCompleteInputComponent from "@src/components/molcules/AutoCompleteInput.component";
 import SearchIcon from "@src/components/icon/Search.icon";
 
-// model
-import { Univ } from "@src/models/dto/signup.dto";
-import useInput from "@src/hooks/useInput.hook";
+const SelectSchoolStepComponent = observer(() => {
+  const { signupStore } = useStores();
 
-type SelectSchoolStepProps = {
-  univList: Univ[];
-  univId: string;
-  setUnivId: Dispatch<SetStateAction<string>>;
-};
-
-function SelectSchoolStepComponent({ univList, univId, setUnivId }: SelectSchoolStepProps) {
   const { value, handleChange, setValue } = useInput("");
 
-  const handleSelect = useCallback((e) => {
-    const key = e.key
-    const univ = univList.find(x => x.id == key)
-    setValue(univ?.name || "")
-    setUnivId(key.toString())
-  }, [univList, setUnivId]);
+  const handleSelect = useCallback(
+    (e) => {
+      const univId = e.key;
+      const univ = signupStore.univList.find((x) => x.id.toString() === univId);
+      setValue(univ?.name || "");
+      signupStore.setFormValue("univ", univId);
+    },
+    [signupStore.univList],
+  );
+
+  const univId = useMemo(() => signupStore.form.univ.toString(), [signupStore]);
 
   return (
     <InputWithSuffixComponent
       input={
         <AutoCompleteInputComponent
-          list={univList}
+          list={signupStore.univList}
           labelKeyName="name"
           valueKeyName="id"
           placeholder="학교 이름을 검색하세요"
@@ -42,6 +46,6 @@ function SelectSchoolStepComponent({ univList, univId, setUnivId }: SelectSchool
       suffix={<SearchIcon />}
     />
   );
-}
+});
 
 export default SelectSchoolStepComponent;

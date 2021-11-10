@@ -79,9 +79,9 @@ export type SignupTemplateProps = {
   step: SignupStep;
   onClickNext?: () => void;
   onClickPrev?: () => void;
-  univList: Univ[];
-  univId: string;
-  setUnivId: Dispatch<SetStateAction<string>>;
+  onCheckConfirmMail?: (email: string) => void;
+  onClickReqConfirmMail?: (code: string) => void;
+  selectedUniv: Univ;
   isStepCompleted: object;
   categoryList: Category[];
   selectedList: number[];
@@ -89,14 +89,14 @@ export type SignupTemplateProps = {
 
 function SignupPageTemplate({
   step = SignupStep.SELECT_SCHOOL,
-  univList = [],
-  univId,
-  setUnivId,
+  selectedUniv,
   isStepCompleted,
   categoryList = [],
   selectedList = [],
   onClickNext,
   onClickPrev,
+  onClickReqConfirmMail,
+  onCheckConfirmMail,
 }: SignupTemplateProps) {
   return (
     <S.Container>
@@ -112,14 +112,14 @@ function SignupPageTemplate({
         </S.DescriptionText>
       </S.TitleWrap>
       <S.ContentWrap>
-        {step === SignupStep.SELECT_SCHOOL && (
-          <SelectSchoolStepComponent
-            univList={univList}
-            univId={univId}
-            setUnivId={setUnivId}
+        {step === SignupStep.SELECT_SCHOOL && <SelectSchoolStepComponent />}
+        {step === SignupStep.CONFIRM_EMAIL && (
+          <ConfirmEmailStepComponent
+            selectedUniv={selectedUniv}
+            onClickReqConfirmMail={onClickReqConfirmMail}
+            onCheckConfirmMail={onCheckConfirmMail}
           />
         )}
-        {step === SignupStep.CONFIRM_EMAIL && <ConfirmEmailStepComponent />}
         {step === SignupStep.PASSWORD_INPUT && <PasswordInputStepComponent />}
         {step === SignupStep.DETAILS_INPUT && <DetailsInputStepComponent />}
         {step === SignupStep.SELECT_GIVE_CATEGORY && (

@@ -9,8 +9,29 @@ const SignupPage = observer(() => {
   const { signupStore } = useStores();
 
   const [step, setStep] = useState<SignupStep>(SignupStep.SELECT_SCHOOL);
-  const [univId, setUnivId] = useState("");
 
+  const selectedUniv = useMemo(
+    () =>
+      signupStore.univList.find(
+        (x) => x.id.toString() === signupStore.form.univ,
+      ),
+    [signupStore.univList, signupStore.form.univ],
+  );
+
+  const isStepCompleted = useMemo(
+    () => ({
+      [SignupStep.SELECT_SCHOOL]: signupStore.form.univ !== "",
+      [SignupStep.CONFIRM_EMAIL]: signupStore.emailConfirmed,
+      [SignupStep.PASSWORD_INPUT]: false,
+      [SignupStep.DETAILS_INPUT]: false,
+      [SignupStep.SELECT_GIVE_CATEGORY]: false,
+      [SignupStep.SELECT_TAKE_CATEGORY]: false,
+    }),
+    [signupStore.form, signupStore.emailConfirmed],
+  );
+
+  console.log(isStepCompleted);
+  console.log(isStepCompleted[step]);
   const onMoveNext = useCallback(
     () => setStep((step + 1) as SignupStep),
     [step],
@@ -19,17 +40,14 @@ const SignupPage = observer(() => {
     () => setStep((step - 1) as SignupStep),
     [step],
   );
-
-  const isStepCompleted = useMemo(
-    () => ({
-      [SignupStep.SELECT_SCHOOL]: univId !== "",
-      [SignupStep.CONFIRM_EMAIL]: true,
-      [SignupStep.PASSWORD_INPUT]: true,
-      [SignupStep.DETAILS_INPUT]: true,
-      [SignupStep.SELECT_GIVE_CATEGORY]: true,
-      [SignupStep.SELECT_TAKE_CATEGORY]: true,
-    }),
-    [univId],
+  const onClickReqConfirmMail = useCallback(
+    (email) =>
+      signupStore.sendCertificationMail(`${email}@${selectedUniv.email}`),
+    [signupStore, selectedUniv],
+  );
+  const onCheckConfirmMail = useCallback(
+    (code) => signupStore.confirmCertification(code),
+    [signupStore],
   );
 
   useEffect(() => {
@@ -44,9 +62,9 @@ const SignupPage = observer(() => {
       step={step}
       onClickNext={onMoveNext}
       onClickPrev={onMovePrev}
-      univList={signupStore.univList}
-      univId={univId}
-      setUnivId={setUnivId}
+      onClickReqConfirmMail={onClickReqConfirmMail}
+      onCheckConfirmMail={onCheckConfirmMail}
+      selectedUniv={selectedUniv}
       isStepCompleted={isStepCompleted}
       categoryList={[]}
       selectedList={[]}

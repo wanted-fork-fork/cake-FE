@@ -5,7 +5,7 @@ import { RootStore } from "@src/store/root.store";
 import SignupService from "@src/services/Signup.service";
 
 // Models
-import { Univ } from "@src/models/dto/signup.dto";
+import { SignupForm, Univ } from "@src/models/dto/signup.dto";
 
 export type SignupFormError = {
   email?: string;
@@ -25,7 +25,16 @@ export default class SignupStore {
 
   errors: SignupFormError = {};
 
-  email = "";
+  emailConfirmed = false;
+
+  form: SignupForm = {
+    email: "",
+    pwd: null,
+    nickname: null,
+    img: null,
+    univCategory: null,
+    univ: "",
+  };
 
   constructor(rootStore: RootStore, signupService: SignupService) {
     this.rootStore = rootStore;
@@ -37,6 +46,10 @@ export default class SignupStore {
   // 에러 초기화
   _cleanErrors() {
     this.errors = {};
+  }
+
+  setFormValue(name, value) {
+    this.form = { ...this.form, [name]: value };
   }
 
   // 대학 및 도메인 리스트를 요청
@@ -53,7 +66,7 @@ export default class SignupStore {
       // 중복 이메일이 아닐 경우 메일을 전송
       await this.signupService.sendCertificationMail({ email });
 
-      this.email = email;
+      this.form.email = email;
 
       this._cleanErrors();
 
@@ -69,7 +82,9 @@ export default class SignupStore {
   // 인증 메일 재전송 요청
   async sendAgainCertificationMail() {
     try {
-      await this.signupService.sendCertificationMail({ email: this.email });
+      await this.signupService.sendCertificationMail({
+        email: this.form.email,
+      });
 
       this._cleanErrors();
 
@@ -87,11 +102,12 @@ export default class SignupStore {
     try {
       // 코드 틀렸을 경우 400 에러 발생
       await this.signupService.confirmCertification({
-        email: this.email,
+        email: this.form.email,
         code,
       });
 
       this._cleanErrors();
+      this.emailConfirmed = true;
 
       return true;
     } catch (e) {
@@ -105,7 +121,7 @@ export default class SignupStore {
   // 회원가입 요청
   async signup({ pwd, nickname, img = null, univCategory, univ }) {
     await this.signupService.signupUser({
-      email: this.email,
+      email: this.form.email,
       pwd,
       nickname,
       img,
