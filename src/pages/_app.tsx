@@ -5,6 +5,8 @@ import styled, { ThemeProvider, css } from "styled-components";
 // styles
 import GlobalStyle from "@src/styles/globals";
 import theme, { windowSize } from "@src/styles/theme";
+import GlobalFonts from "@src/styles/fonts";
+import "../styles/variables.less";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
@@ -36,10 +38,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <title>앱 이름</title>
+        <title>Cake</title>
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <GlobalFonts />
         <Container>
           <Content>
             <Component {...pageProps} />

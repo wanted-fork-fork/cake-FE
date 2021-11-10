@@ -1,26 +1,44 @@
 import { createContext, useContext } from "react";
 
-import CountStore from "@src/store/count.store";
 import UserStore from "@src/store/user.store";
 import AuthService from "@src/services/Auth.service";
 
 import Axios from "@src/lib/axios";
 import { AxiosInstance } from "axios";
+import SignupStore from "@src/store/signup.store";
+import SignupService from "@src/services/Signup.service";
+import ResourceService from "@src/services/Resource.service";
+import CategoryService from "@src/services/Category.service";
+import CategoryStore from "@src/store/category.store";
 
 export class RootStore {
   axiosInstance: AxiosInstance;
 
-  countStore: CountStore;
-
   userStore: UserStore;
+
+  signupStore: SignupStore;
+
+  categoryStore: CategoryStore;
+
+  resourceService: ResourceService;
 
   constructor() {
     this.axiosInstance = Axios.createAxiosInstance();
 
     const authService = new AuthService(this.axiosInstance);
+    const signupService = new SignupService(this.axiosInstance);
+    const resourceService = new ResourceService(this.axiosInstance);
+    const categoryService = new CategoryService(this.axiosInstance);
 
-    this.countStore = new CountStore(this);
+    this.resourceService = resourceService;
+
     this.userStore = new UserStore(this, authService);
+    this.categoryStore = new CategoryStore(this, categoryService);
+    this.signupStore = new SignupStore(this, signupService);
+  }
+
+  async uploadImage(file) {
+    return this.resourceService.uploadImage(file);
   }
 }
 

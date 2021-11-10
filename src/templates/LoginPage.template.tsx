@@ -1,28 +1,78 @@
-import { FormEventHandler } from "react";
+import styled from "styled-components";
+import Link from "next/link";
 
-interface Props {
-  onSubmit: FormEventHandler;
-}
+// components
+import AppTitleComponent from "@src/components/molcules/AppTitle.component";
+import { TextButton } from "@src/components/atoms/LinkButton";
+import { DividedInput } from "@src/components/atoms/Input";
+import { Button } from "@src/components/atoms/Button";
 
-function LoginPageTemplate({ onSubmit }: Props): JSX.Element {
+// styles
+import SGuestMain from "@src/styles/template/GuestMain.styles";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
+
+const ContentsWrap = styled.form<BaseProps>`
+  ${BaseStyleProps};
+
+  background: #fff;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+`;
+
+const S = { ContentsWrap };
+
+export type LoginForm = {
+  email: string;
+  password: string;
+};
+
+function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
   return (
-    <form onSubmit={onSubmit}>
-      <label htmlFor="email">
-        이메일
-        <input id="email" type="email" name="email" placeholder="이메일 입력" />
-      </label>
-      <label htmlFor="password">
-        비밀번호
-        <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="비밀번호 입력"
+    <SGuestMain.Container>
+      <AppTitleComponent mb="100px" />
+      <S.ContentsWrap mb="20px" onSubmit={onSubmit}>
+        <DividedInput
+          height="65px"
+          value={values.email}
+          onChange={onChange}
+          placeholder="아이디"
+          id="email"
+          name="email"
+          type="email"
         />
-      </label>
-      <button type="submit">로그인</button>
-    </form>
+        <DividedInput
+          height="65px"
+          value={values.password}
+          onChange={onChange}
+          placeholder="비밀번호"
+          id="password"
+          name="password"
+          type="password"
+        />
+        <Button color="primary" height="50px" mb="10px">
+          로그인
+        </Button>
+      </S.ContentsWrap>
+      <Link href="/signup">
+        <a>
+          <Button color="gray" mb="20px">
+            학교 계정으로 회원가입
+          </Button>
+        </a>
+      </Link>
+      <TextButton color="white" type="button">
+        아이디 | 비밀번호 찾기
+      </TextButton>
+    </SGuestMain.Container>
   );
 }
+
+// Login Button
+// <SGuestMain.RoundedButton type="button" onClick={onSubmit} mb="20px">
+//   로그인
+// </SGuestMain.RoundedButton>
 
 export default LoginPageTemplate;

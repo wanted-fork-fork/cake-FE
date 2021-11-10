@@ -1,0 +1,23 @@
+name: 'Deploy Storybook'
+on:
+  pull_request:
+    paths:
+      - 'src/stories/**'
+      - '.storybook/**'
+jobs:
+  deploy-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          github-token: ${{secrets.TOKEN}}
+      - name: Install npm packages
+        run: npm ci
+      - name: Build storybook
+        run: npm run build-storybook
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: storybook-static
+          token: ${{ secrets.TOKEN }}

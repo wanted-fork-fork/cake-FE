@@ -27,23 +27,36 @@ const theme: DefaultTheme = {
   },
   window: {
     pc: `@media only screen and (max-width: ${windowSize.pc})`,
-    tab: `@media only screen and (max-width: ${windowSize.tab})`,
+    tab: `@media only screen and (min-width: ${windowSize.mobile})`,
     mobile: `@media only screen and (max-width: ${windowSize.mobile})`,
     mobileS: `@media only screen and (max-width: ${windowSize.mobileS})`,
   },
 };
 
 export const Color = {
-  mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.secondary} 100%`,
+  mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.secondary} 100%)`,
 };
 
 export const FontSize = {
-  MainTitle: "2rem",
-  SubTitle: "1.5rem",
-  PrimaryLabel: "0.9rem",
+  MainTitle: "1.5rem",
+  MainTitleStrong: "1.563rem",
+  SubTitle: "1.125rem",
+  Default: "1rem",
+  PrimaryLabel: "1.25rem", // 20px
   SecondaryLabel: "0.8rem",
-  PrimaryDescription: "0.7rem",
+  PrimaryDescription: "0.875rem", // 14px
   SecondaryDescription: "0.6rem",
+  Small: "0.75rem",
+};
+
+export const Padding = {
+  page: "0 20px",
+  pageX: "20px",
+};
+
+export const FontFamily = {
+  point: "GmarketSans",
+  default: "Spoqa Han Sans",
 };
 
 export default theme;
