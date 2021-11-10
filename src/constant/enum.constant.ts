@@ -5,6 +5,12 @@ export enum SignupStep {
   DETAILS_INPUT,
   SELECT_GIVE_CATEGORY,
   SELECT_TAKE_CATEGORY,
+  COMPLETE_SIGNUP,
+}
+
+export enum CategoryType {
+  GIVE,
+  TAKE,
 }
 
 export enum UnivCategory {

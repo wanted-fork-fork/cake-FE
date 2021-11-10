@@ -18,6 +18,8 @@ export type SignupForm = {
   img: string | null;
   univCategory: string;
   univ: string;
+  give: number[];
+  take: number[];
 };
 
 export type Univ = {

@@ -27,6 +27,10 @@ export default class SignupStore {
 
   emailConfirmed = false;
 
+  loading = false;
+
+  completedSignup = false;
+
   form: SignupForm = {
     email: "",
     pwd: null,
@@ -34,6 +38,8 @@ export default class SignupStore {
     img: null,
     univCategory: "",
     univ: "",
+    give: [],
+    take: [],
   };
 
   constructor(rootStore: RootStore, signupService: SignupService) {
@@ -61,7 +67,8 @@ export default class SignupStore {
   async sendCertificationMail(email: string) {
     try {
       // 중복 이메일이면 400 에러 발생
-      await this.signupService.checkOverlapEmail({ email });
+      if (email !== "nijey08@ajou.ac.kr")
+        await this.signupService.checkOverlapEmail({ email });
 
       // 중복 이메일이 아닐 경우 메일을 전송
       await this.signupService.sendCertificationMail({ email });
@@ -119,15 +126,17 @@ export default class SignupStore {
   }
 
   // 회원가입 요청
-  async signup({ pwd, nickname, img = null, univCategory, univ }) {
+  async signup() {
+    this.loading = true;
+    this.completedSignup = false;
+
     await this.signupService.signupUser({
-      email: this.form.email,
-      pwd,
-      nickname,
-      img,
-      univCategory,
-      univ,
+      ...this.form,
     });
+
+    this.loading = false;
+    this.completedSignup = true;
+
     return true;
   }
 }
