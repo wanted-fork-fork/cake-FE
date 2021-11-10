@@ -30,8 +30,6 @@ const SignupPage = observer(() => {
     [signupStore.form, signupStore.emailConfirmed],
   );
 
-  console.log(isStepCompleted);
-  console.log(isStepCompleted[step]);
   const onMoveNext = useCallback(
     () => setStep((step + 1) as SignupStep),
     [step],
