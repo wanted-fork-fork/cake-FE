@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import { FontFamily, FontSize, MyThemeProps } from "@src/styles/theme";
-import { BaseMarginBottom } from "@src/styles/common";
+import { FontFamily, FontSize } from "@src/styles/theme";
+import { BaseMarginBottom, BaseProps } from "@src/styles/common";
 
-const Container = styled.div<MyThemeProps>`
+const Container = styled.div<BaseProps>`
   ${BaseMarginBottom}
 `;
 
@@ -14,7 +14,7 @@ const MainText = css`
   user-select: none;
 `;
 
-const MainTitle = styled.h1<MyThemeProps>`
+const MainTitle = styled.h1<BaseProps>`
   ${MainText};
   font-size: ${FontSize.MainTitle};
   font-weight: 500;
@@ -33,17 +33,11 @@ const Strong = styled.strong`
   font-weight: 700;
 `;
 
-const FirstLetter = styled.span`
-  ${MainText};
-  font-size: 1.875rem;
-`;
-
 const S = {
   Container,
   MainTitle,
   Strong,
   MainDescription,
-  FirstLetter,
 };
 
 type Props = {
@@ -55,11 +49,7 @@ function AppTitleComponent({ mb = "0" }: Props) {
     <S.Container mb={mb}>
       <S.MainTitle mb="40px">
         재능교환?
-        <br />A piece of{" "}
-        <S.Strong>
-          <S.FirstLetter>C</S.FirstLetter>ake
-        </S.Strong>{" "}
-        이지
+        <br />A piece of <S.Strong>Cake</S.Strong> 이지
       </S.MainTitle>
       <S.MainDescription>
         우리 학교 재능공유 플랫폼 Cake<i>!</i>
