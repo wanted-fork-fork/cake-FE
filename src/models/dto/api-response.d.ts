@@ -9,3 +9,8 @@ export interface APIErrorResponse {
   message: string;
   error?: string;
 }
+
+export interface Resource {
+  path: string;
+  url: string;
+}

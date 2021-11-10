@@ -7,6 +7,7 @@ import Axios from "@src/lib/axios";
 import { AxiosInstance } from "axios";
 import SignupStore from "@src/store/signup.store";
 import SignupService from "@src/services/Signup.service";
+import ResourceService from "@src/services/Resource.service";
 
 export class RootStore {
   axiosInstance: AxiosInstance;
@@ -15,14 +16,21 @@ export class RootStore {
 
   signupStore: SignupStore;
 
+  resourceService: ResourceService;
+
   constructor() {
     this.axiosInstance = Axios.createAxiosInstance();
 
     const authService = new AuthService(this.axiosInstance);
     const signupService = new SignupService(this.axiosInstance);
+    const resourceService = new ResourceService(this.axiosInstance);
 
     this.userStore = new UserStore(this, authService);
     this.signupStore = new SignupStore(this, signupService);
+  }
+
+  async uploadImage(file) {
+    return this.resourceService.uploadImage(file);
   }
 }
 
