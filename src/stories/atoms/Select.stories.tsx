@@ -16,6 +16,7 @@ const Template = () => (
     list={values}
     idKeyName="key"
     labelKeyName="value"
+    defaultText=""
     onSelect={null}
     selected={null}
   />
