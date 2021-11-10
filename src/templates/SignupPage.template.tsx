@@ -11,10 +11,10 @@ import ConfirmEmailStepComponent from "@src/components/organs/signup/ConfirmEmai
 import PasswordInputStepComponent from "@src/components/organs/signup/PasswordInputStep.component";
 import DetailsInputStepComponent from "@src/components/organs/signup/DetailsInputStep.component";
 import SelectCategoryStepComponent from "@src/components/organs/signup/SelectCategoryStep.component";
+import SignupCompleteStepComponent from "@src/components/organs/signup/SignupCompleteStep.component";
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import { Button } from "@src/components/atoms/Button";
 import { TextButton } from "@src/components/atoms/LinkButton";
-import SignupCompleteStepComponent from "@src/components/organs/signup/SignupCompleteStep.component";
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
@@ -83,7 +83,7 @@ export type SignupTemplateProps = {
   onClickNext?: () => void;
   onClickPrev?: () => void;
   onCheckConfirmMail?: (email: string) => void;
-  onClickReqConfirmMail?: (code: string) => void;
+  onClickReqConfirmMail?: (email: string) => Promise<boolean>;
   onToggleCategory?: (type: CategoryType, id: number) => void;
   selectedUniv: Univ;
   isStepCompleted: object;

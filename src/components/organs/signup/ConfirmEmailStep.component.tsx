@@ -48,7 +48,7 @@ const Space = styled.span<SpaceProp>`
 
 type ConfirmEmailStepComponentProps = {
   selectedUniv: Univ;
-  onClickReqConfirmMail: (email: string) => void;
+  onClickReqConfirmMail: (email: string) => Promise<boolean>;
   onCheckConfirmMail: (code: string) => void;
 };
 
@@ -69,32 +69,57 @@ const ConfirmEmailStepComponent = observer(
     const { signupStore } = useStores();
     const [allowInputCode, setAllowInputCode] = useState(false);
     const [requestedMail, setRequestedMail] = useState(false);
+    const [allowResend, setAllowResend] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const { value: email, handleChange: handleChangeEmail } = useInput("");
+    const [email, setEmail] = useState("");
     const { value: code, handleChange: handleChangeCode } = useInput("");
 
-    const onSendEmail = useCallback(() => {
-      setRequestedMail(true);
-      setAllowInputCode(true);
-      onClickReqConfirmMail(email);
+    const onChangeEmail = useCallback(
+      (e) => {
+        setAllowResend(false);
+        setEmail(e.target.value);
+      },
+      [setEmail],
+    );
+    const onSendEmail = useCallback(async () => {
+      setLoading(true);
+      setRequestedMail(false);
+      setAllowInputCode(false);
+      const success = await onClickReqConfirmMail(email);
+      if (success) {
+        setRequestedMail(true);
+        setAllowInputCode(true);
+        setAllowResend(true);
+      }
+      setLoading(false);
     }, [email, onClickReqConfirmMail]);
 
     const onCheckCode = useCallback(() => {
       onCheckConfirmMail(code);
     }, [code, onCheckConfirmMail]);
 
-    const disableRequestMail = useMemo(() => email.length === 0, [email]);
+    const disableRequestMail = useMemo(
+      () => loading || email.length === 0,
+      [email, loading],
+    );
     const disableConfirmCode = useMemo(
       () => code.length === 0 || !allowInputCode,
       [allowInputCode, code],
     );
+
+    const sendEmailButtonText = useMemo(() => {
+      if (loading) return "이메일 전송중입니다.";
+      if (allowResend) return "이메일로 인증번호 다시 받기";
+      return "이메일로 인증번호 받기";
+    }, [allowResend, loading]);
 
     return (
       <div>
         <S.EmailWrap mb="20px">
           <UnderlineInput
             value={email}
-            onChange={handleChangeEmail}
+            onChange={onChangeEmail}
             placeholder="이메일"
           />
           <span>@</span>
@@ -106,10 +131,10 @@ const ConfirmEmailStepComponent = observer(
           onClick={onSendEmail}
           disabled={disableRequestMail}
         >
-          이메일로 인증번호 받기
+          {sendEmailButtonText}
         </Button>
         {requestedMail && (
-          <S.ConfirmCodeWrap mb="10px">
+          <S.ConfirmCodeWrap mb="20px">
             <InputWithSuffixComponent
               input={
                 <UnderlineInput
@@ -134,7 +159,9 @@ const ConfirmEmailStepComponent = observer(
             </div>
           </S.ConfirmCodeWrap>
         )}
-        <ErrorMessage>이미 가입된 이메일입니다!</ErrorMessage>
+        {!loading && signupStore.errors.email && (
+          <ErrorMessage>{signupStore.errors.email}</ErrorMessage>
+        )}
       </div>
     );
   },

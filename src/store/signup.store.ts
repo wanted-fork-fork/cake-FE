@@ -80,7 +80,7 @@ export default class SignupStore {
       return true;
     } catch (e) {
       if (e.code === 400) {
-        this.errors = { email: e.message };
+        this.errors = { email: e.data };
       }
       return false;
     }
@@ -94,7 +94,7 @@ export default class SignupStore {
       return true;
     } catch (e) {
       if (e.code === 400) {
-        this.errors = { nickname: e.message };
+        this.errors = { nickname: e.data };
       }
       return false;
     }
@@ -112,7 +112,7 @@ export default class SignupStore {
       return true;
     } catch (e) {
       if (e.code === 400) {
-        this.errors = { email: e.message };
+        this.errors = { email: e.data };
       }
       return false;
     }
@@ -129,11 +129,12 @@ export default class SignupStore {
 
       this._cleanErrors();
       this.emailConfirmed = true;
+      this.errors = { email: "인증되었습니다." };
 
       return true;
     } catch (e) {
       if (e.code === 400) {
-        this.errors = { email: e.message };
+        this.errors = { email: e.data };
       }
       return false;
     }
