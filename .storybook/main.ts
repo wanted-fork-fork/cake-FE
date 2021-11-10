@@ -7,7 +7,17 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    "@storybook/addon-essentials",
+    {
+      name: '@storybook/preset-ant-design',
+      options: {
+        lessOptions: {
+          modifyVars: {
+            'primary-color': '#fc1150',
+          },
+        },
+      },
+    },
   ],
   webpackFinal: async (config) => {
     // node_modules, styles 폴더 내부 모듈 인식시키기
