@@ -1,12 +1,19 @@
 import styled from "styled-components";
+import { useCallback } from "react";
+
+// models
+import { Univ } from "@src/models/dto/signup.dto";
+
+// hooks
+import useInput from "@src/hooks/useInput.hook";
 
 // components
 import { Button } from "@src/components/atoms/Button";
 import { UnderlineInput } from "@src/components/atoms/Input";
 import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 // styles
-import theme, { FontSize } from "@src/styles/theme";
 import { BaseMarginBottom, BaseProps } from "@src/styles/common";
 
 const EmailWrap = styled.div<BaseProps>`
@@ -14,11 +21,6 @@ const EmailWrap = styled.div<BaseProps>`
   display: flex;
   align-items: center;
   width: 100%;
-`;
-
-const ErrorMessage = styled.p`
-  font-size: ${FontSize.PrimaryDescription};
-  color: ${theme.color.black};
 `;
 
 const ConfirmCodeWrap = styled.div<BaseProps>`
@@ -42,30 +44,73 @@ const Space = styled.span<SpaceProp>`
   width: ${({ width }) => width};
 `;
 
-const S = { EmailWrap, ConfirmCodeWrap, ErrorMessage, Space, CodeInputWrap };
-function ConfirmEmailStepComponent() {
+type ConfirmEmailStepComponentProps = {
+  selectedUniv: Univ;
+  onClickReqConfirmMail: (email: string) => void;
+  onCheckConfirmMail: (code: string) => void;
+};
+
+const S = {
+  EmailWrap,
+  ConfirmCodeWrap,
+  ErrorMessage,
+  Space,
+  CodeInputWrap,
+};
+
+function ConfirmEmailStepComponent({
+  selectedUniv,
+  onClickReqConfirmMail,
+  onCheckConfirmMail,
+}: ConfirmEmailStepComponentProps) {
+  const { value: email, handleChange: handleChangeEmail } = useInput("");
+  const { value: code, handleChange: handleChangeCode } = useInput("");
+
+  const onSendEmail = useCallback(() => {
+    onClickReqConfirmMail(email);
+  }, [email, onClickReqConfirmMail]);
+
+  const onCheckCode = useCallback(() => {
+    onCheckConfirmMail(code);
+  }, [code, onCheckConfirmMail]);
+
   return (
     <div>
       <S.EmailWrap mb="20px">
-        <UnderlineInput />
+        <UnderlineInput
+          value={email}
+          onChange={handleChangeEmail}
+          placeholder="이메일"
+        />
         <span>@</span>
-        <UnderlineInput />
+        <UnderlineInput value={selectedUniv.email} disabled />
       </S.EmailWrap>
-      <Button color="primary" mb="20px">
+      <Button color="primary" mb="20px" onClick={onSendEmail}>
         이메일로 인증번호 받기
       </Button>
       <S.ConfirmCodeWrap mb="10px">
         <InputWithSuffixComponent
-          input={<UnderlineInput />}
+          input={
+            <UnderlineInput
+              placeholder="인증번호 입력"
+              value={code}
+              onChange={handleChangeCode}
+            />
+          }
           suffix={<span>04:59</span>}
         />
         <div>
-          <Button color="primary" filled={false} width="4.45rem">
+          <Button
+            color="primary"
+            filled={false}
+            width="4.45rem"
+            onClick={onCheckCode}
+          >
             인증
           </Button>
         </div>
       </S.ConfirmCodeWrap>
-      <S.ErrorMessage>이미 가입된 이메일입니다!</S.ErrorMessage>
+      <ErrorMessage>이미 가입된 이메일입니다!</ErrorMessage>
     </div>
   );
 }

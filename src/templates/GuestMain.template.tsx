@@ -1,34 +1,28 @@
-import { MouseEventHandler } from "react";
 import Link from "next/link";
 
 // components
 import AppTitleComponent from "@src/components/molcules/AppTitle.component";
-
-// styles
-import SGuestMain from "@src/styles/template/GuestMain.styles";
 import { Button } from "@src/components/atoms/Button";
 import { TextButton } from "@src/components/atoms/LinkButton";
 
-export type GuestMainProps = {
-  onClickLogin: MouseEventHandler;
-  onClickSignup: MouseEventHandler;
-};
+// styles
+import SGuestMain from "@src/styles/template/GuestMain.styles";
 
-function GuestMainTemplate({ onClickLogin, onClickSignup }: GuestMainProps) {
+function GuestMainTemplate() {
   return (
     <SGuestMain.Container>
       <AppTitleComponent mb="100px" />
       <SGuestMain.ContentsWrap mb="20px">
         <Link href="/login">
           <a>
-            <Button color="white" type="button" onClick={onClickLogin}>
+            <Button color="white" type="button">
               로그인
             </Button>
           </a>
         </Link>
         <Link href="/signup">
           <a>
-            <Button color="white" type="button" onClick={onClickSignup}>
+            <Button color="white" type="button">
               학교 계정으로 회원가입
             </Button>
           </a>

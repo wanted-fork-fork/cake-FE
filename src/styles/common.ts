@@ -1,5 +1,5 @@
 import { css, DefaultTheme, ThemeProps } from "styled-components";
-import { FontSize } from "@src/styles/theme";
+import theme, { FontSize } from "@src/styles/theme";
 
 export interface BaseProps extends ThemeProps<DefaultTheme> {
   mb?: string;
@@ -28,6 +28,20 @@ export const BaseFontSize = css`
         return FontSize.Default;
     }
   }};
+`;
+
+export const Underline = css`
+  border: none;
+  border-bottom: 3px solid ${theme.color.primary};
+
+  font-weight: 400;
+  padding: 15px 10px;
+
+  text-align: inherit;
+
+  &:focus {
+    border-color: ${theme.color.primary};
+  }
 `;
 
 export const NoScroll = css`

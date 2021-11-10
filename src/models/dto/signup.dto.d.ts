@@ -16,8 +16,10 @@ export type SignupForm = {
   pwd: string;
   nickname: string;
   img: string | null;
-  univCategory: number;
-  univ: number;
+  univCategory: string;
+  univ: string;
+  give: number[];
+  take: number[];
 };
 
 export type Univ = {

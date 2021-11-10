@@ -75,6 +75,21 @@ export default class BaseHttpService {
       );
   }
 
+  async postFile<T>(path: string, file: File): Promise<T | void> {
+    const form = new FormData();
+    form.set("file", file);
+    return this.axiosInstance
+      .post<APIResponse<T>>(
+        `${this.BASE_URL}${path}`,
+        form,
+        this._getCommonOptions(),
+      )
+      .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
+      .catch((error: AxiosError<APIErrorResponse>) =>
+        this._handleHttpError(error),
+      );
+  }
+
   _handleHttpError(error: AxiosError<APIErrorResponse>) {
     if (error?.response?.data) {
       const { status } = error?.response?.data;

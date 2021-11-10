@@ -8,6 +8,9 @@ const nextConfig = {
     BASE_URL:
       process.env.BASE_URL ||
       "https://ec2-13-124-94-121.ap-northeast-2.compute.amazonaws.com:8080",
+    IMAGE_ENDPOINT:
+      process.env.IMAGE_ENDPOINT ||
+      "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com",
     IS_DEV: process.env.NODE_ENV === "development",
   },
 };

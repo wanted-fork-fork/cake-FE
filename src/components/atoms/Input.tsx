@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 // styles
-import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import { BaseProps, BaseStyleProps, Underline } from "@src/styles/common";
 import theme from "@src/styles/theme";
 
 export interface InputStyleProps extends BaseProps {
@@ -28,14 +28,14 @@ export const DividedInput = styled.input`
 
 export const UnderlineInput = styled.input<InputStyleProps>`
   ${BaseInput};
-  border: none;
-  border-bottom: 3px solid ${theme.color.gray3};
-  font-weight: 400;
-  padding: 15px 10px;
+  ${Underline};
 
-  text-align: inherit;
+  &:placeholder-shown {
+    border-bottom: 3px solid ${theme.color.gray3};
+  }
 
-  &:focus {
-    border-color: ${theme.color.primary};
+  &:disabled {
+    background: transparent;
+    color: ${theme.color.gray5};
   }
 `;

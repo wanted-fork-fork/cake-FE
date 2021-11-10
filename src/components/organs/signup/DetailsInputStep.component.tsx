@@ -1,61 +1,22 @@
+import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 
-// types
-import { ButtonStyleProps } from "@src/components/atoms/Button";
+// store
+import { useStores } from "@src/store/root.store";
+
+// util
+import { getUnivCategoryList } from "@src/utils/enum.util";
 
 // components
 import { UnderlineInput } from "@src/components/atoms/Input";
-import PatisserieIcon from "@src/components/icon/Patisserie.icon";
-import CameraIcon from "@src/components/icon/Camera.icon";
-import DownArrowIcon from "@src/components/icon/DownArrow.icon";
-import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
-
-// styles
-import theme from "@src/styles/theme";
+import SelectComponent from "@src/components/atoms/Select";
+import ProfileFrameComponent from "@src/components/molcules/ProfileFrame.component";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-const ProfileImageWrapper = styled.div`
-  position: relative;
-`;
-const CircleImageFrame = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-
-  position: relative;
-
-  background-color: ${theme.color.gray0};
-
-  border: 6px solid ${theme.color.primary};
-`;
-
-const IconButton = styled.button<ButtonStyleProps>`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 10;
-
-  border: 1px solid ${theme.color.gray2};
-  border-radius: 50%;
-  background-color: #fff;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 32px;
-  width: 32px;
-
-  cursor: pointer;
 `;
 
 const FormWrapper = styled.div`
@@ -75,39 +36,76 @@ const DetailWrapper = styled.div`
 
 const S = {
   Container,
-  ProfileImageWrapper,
-  CircleImageFrame,
-  IconButton,
   FormWrapper,
   NicknameWrapper,
   DetailWrapper,
 };
-function DetailsInputStepComponent() {
+const DetailsInputStepComponent = observer(() => {
+  const { signupStore } = useStores();
+
+  const [nickname, setNickname] = useState("");
+
+  const onUploadImage = useCallback(
+    (uploaded) => {
+      signupStore.setFormValue("img", uploaded.path);
+    },
+    [signupStore],
+  );
+
+  const onSelectUnivCategory = useCallback(
+    (e) => {
+      signupStore.setFormValue("univCategory", e.target.value);
+    },
+    [signupStore],
+  );
+
+  const onChangeNickname = useCallback(
+    (e) => {
+      setNickname(e.target.value);
+      signupStore.setFormValue("nickname", e.target.value);
+    },
+    [signupStore],
+  );
+
+  const univCategoryList = useMemo(() => getUnivCategoryList(), []);
+  const univCategory = useMemo(
+    () => signupStore.form.univCategory.toString(),
+    [signupStore.form],
+  );
+
   return (
     <S.Container>
-      <S.ProfileImageWrapper>
-        <S.CircleImageFrame>
-          <PatisserieIcon />
-        </S.CircleImageFrame>
-        <S.IconButton color="gray">
-          <CameraIcon />
-        </S.IconButton>
-      </S.ProfileImageWrapper>
       <FormWrapper>
+        <ProfileFrameComponent
+          imgSrc={
+            signupStore.form.img &&
+            process.env.IMAGE_ENDPOINT + signupStore.form.img
+          }
+          onUploadImage={onUploadImage}
+          allowUpload
+          mb="20px"
+        />
         <NicknameWrapper>
-          <UnderlineInput placeholder="닉네임" type="text" />
+          <UnderlineInput
+            value={nickname}
+            onChange={onChangeNickname}
+            placeholder="닉네임"
+            type="text"
+          />
         </NicknameWrapper>
         <DetailWrapper>
-          <InputWithSuffixComponent
-            input={
-              <UnderlineInput placeholder="어느 단과대이신가요?" type="text" />
-            }
-            suffix={<DownArrowIcon />}
+          <SelectComponent
+            list={univCategoryList}
+            labelKeyName="value"
+            idKeyName="key"
+            selected={univCategory}
+            onSelect={onSelectUnivCategory}
+            defaultText="소속된 단과대학을 선택해주세요."
           />
         </DetailWrapper>
       </FormWrapper>
     </S.Container>
   );
-}
+});
 
 export default DetailsInputStepComponent;

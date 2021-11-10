@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 // constant
 import { SignupTitleMessages } from "@src/constant/message.constant";
-import { Category } from "@src/models/dto/signup.dto";
+import { Univ } from "@src/models/dto/signup.dto";
+import { CategoryType, SignupStep } from "@src/constant/enum.constant";
 
 // components
 import SelectSchoolStepComponent from "@src/components/organs/signup/SelectSchoolStep.component";
@@ -13,9 +14,10 @@ import SelectCategoryStepComponent from "@src/components/organs/signup/SelectCat
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import { Button } from "@src/components/atoms/Button";
 import { TextButton } from "@src/components/atoms/LinkButton";
+import SignupCompleteStepComponent from "@src/components/organs/signup/SignupCompleteStep.component";
 
 // styles
-import { FontSize, Padding } from "@src/styles/theme";
+import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
 const Container = styled.div`
@@ -24,7 +26,12 @@ const Container = styled.div`
   padding: ${Padding.page};
 `;
 
-const BackWrap = styled.div`
+interface BackWrapProp {
+  show: boolean;
+}
+
+const BackWrap = styled.div<BackWrapProp>`
+  visibility: ${({ show }) => (show ? "visible" : "hidden")};
   margin-bottom: 20px;
   width: fit-content;
 `;
@@ -54,6 +61,12 @@ const BottomWrap = styled.div`
   bottom: 60px;
   left: ${Padding.pageX};
   right: ${Padding.pageX};
+
+  ${theme.window.tab} {
+    width: calc(${windowSize.mobile} - ${Padding.pageX} * 2);
+    left: auto;
+    right: auto;
+  }
 `;
 
 const S = {
@@ -65,34 +78,31 @@ const S = {
   DescriptionText,
 };
 
-export enum SignupStep {
-  SELECT_SCHOOL,
-  CONFIRM_EMAIL,
-  PASSWORD_INPUT,
-  DETAILS_INPUT,
-  SELECT_GIVE_CATEGORY,
-  SELECT_TAKE_CATEGORY,
-}
-
 export type SignupTemplateProps = {
   step: SignupStep;
   onClickNext?: () => void;
   onClickPrev?: () => void;
-  categoryList: Category[];
-  selectedList: number[];
+  onCheckConfirmMail?: (email: string) => void;
+  onClickReqConfirmMail?: (code: string) => void;
+  onToggleCategory?: (type: CategoryType, id: number) => void;
+  selectedUniv: Univ;
+  isStepCompleted: object;
 };
 
 function SignupPageTemplate({
   step = SignupStep.SELECT_SCHOOL,
-  categoryList = [],
-  selectedList = [],
+  selectedUniv,
+  isStepCompleted,
   onClickNext,
   onClickPrev,
+  onClickReqConfirmMail,
+  onCheckConfirmMail,
+  onToggleCategory,
 }: SignupTemplateProps) {
   return (
     <S.Container>
       <S.TitleWrap pt="50px" mb="60px">
-        <BackWrap>
+        <BackWrap show={SignupTitleMessages[step].allowBack}>
           <TextButton color="black" onClick={onClickPrev}>
             <LeftArrowIcon />
           </TextButton>
@@ -104,28 +114,35 @@ function SignupPageTemplate({
       </S.TitleWrap>
       <S.ContentWrap>
         {step === SignupStep.SELECT_SCHOOL && <SelectSchoolStepComponent />}
-        {step === SignupStep.CONFIRM_EMAIL && <ConfirmEmailStepComponent />}
+        {step === SignupStep.CONFIRM_EMAIL && (
+          <ConfirmEmailStepComponent
+            selectedUniv={selectedUniv}
+            onClickReqConfirmMail={onClickReqConfirmMail}
+            onCheckConfirmMail={onCheckConfirmMail}
+          />
+        )}
         {step === SignupStep.PASSWORD_INPUT && <PasswordInputStepComponent />}
         {step === SignupStep.DETAILS_INPUT && <DetailsInputStepComponent />}
         {step === SignupStep.SELECT_GIVE_CATEGORY && (
           <SelectCategoryStepComponent
-            categoryList={categoryList}
-            selectedList={selectedList}
+            type={CategoryType.GIVE}
+            onSelect={onToggleCategory}
           />
         )}
         {step === SignupStep.SELECT_TAKE_CATEGORY && (
           <SelectCategoryStepComponent
-            categoryList={categoryList}
-            selectedList={selectedList}
+            type={CategoryType.TAKE}
+            onSelect={onToggleCategory}
           />
         )}
+        {step === SignupStep.COMPLETE_SIGNUP && <SignupCompleteStepComponent />}
       </S.ContentWrap>
       {SignupTitleMessages[step].button && (
         <S.BottomWrap>
           <Button
             type="button"
             color="primary"
-            disabled={false}
+            disabled={!isStepCompleted[step]}
             onClick={onClickNext}
           >
             {SignupTitleMessages[step].button}

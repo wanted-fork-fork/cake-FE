@@ -1,12 +1,15 @@
 import CameraIcon from "@src/components/icon/Camera.icon";
 import styled from "styled-components";
-import theme, { Padding } from "@src/styles/theme";
+import theme, { Padding, windowSize } from "@src/styles/theme";
 import CheckIcon from "@src/components/icon/Check.icon";
 import { MouseEventHandler } from "react";
 
 const CategoryWrapper = styled.div<CategoryWrapperProp>`
   cursor: pointer;
   user-select: none;
+
+  width: fit-content;
+  margin: 0;
 `;
 const CategoryImageWrapper = styled.div`
   border-radius: 12px;
@@ -14,20 +17,32 @@ const CategoryImageWrapper = styled.div`
 
   height: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
   width: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
+
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 
   position: relative;
+
+  ${theme.window.tab} {
+    height: calc((${windowSize.mobile} - 2 * ${Padding.pageX} - 30px) / 4);
+    width: calc((${windowSize.mobile} - 2 * ${Padding.pageX} - 30px) / 4);
+  }
 `;
 const CategoryImage = styled.img`
   height: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
   width: auto;
+  user-select: none;
+
+  ${theme.window.tab} {
+    height: calc((${windowSize.mobile} - 2 * ${Padding.pageX} - 30px) / 4);
+  }
 `;
 const CategoryDescription = styled.p`
   margin-top: 10px;
   text-align: center;
+  user-select: none;
 `;
 const SelectedMask = styled.div<{ selected: boolean }>`
   display: ${({ selected }) => (selected ? "flex" : "none")};
