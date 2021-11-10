@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // constant
 import { SignupTitleMessages } from "@src/constant/message.constant";
-import { Category } from "@src/models/dto/signup.dto";
+import { Category, Univ } from "@src/models/dto/signup.dto";
 
 // components
 import SelectSchoolStepComponent from "@src/components/organs/signup/SelectSchoolStep.component";
@@ -17,6 +17,7 @@ import { TextButton } from "@src/components/atoms/LinkButton";
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import { Dispatch, SetStateAction } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -78,12 +79,20 @@ export type SignupTemplateProps = {
   step: SignupStep;
   onClickNext?: () => void;
   onClickPrev?: () => void;
+  univList: Univ[];
+  univId: string;
+  setUnivId: Dispatch<SetStateAction<string>>;
+  isStepCompleted: object;
   categoryList: Category[];
   selectedList: number[];
 };
 
 function SignupPageTemplate({
   step = SignupStep.SELECT_SCHOOL,
+  univList = [],
+  univId,
+  setUnivId,
+  isStepCompleted,
   categoryList = [],
   selectedList = [],
   onClickNext,
@@ -103,7 +112,13 @@ function SignupPageTemplate({
         </S.DescriptionText>
       </S.TitleWrap>
       <S.ContentWrap>
-        {step === SignupStep.SELECT_SCHOOL && <SelectSchoolStepComponent />}
+        {step === SignupStep.SELECT_SCHOOL && (
+          <SelectSchoolStepComponent
+            univList={univList}
+            univId={univId}
+            setUnivId={setUnivId}
+          />
+        )}
         {step === SignupStep.CONFIRM_EMAIL && <ConfirmEmailStepComponent />}
         {step === SignupStep.PASSWORD_INPUT && <PasswordInputStepComponent />}
         {step === SignupStep.DETAILS_INPUT && <DetailsInputStepComponent />}
@@ -125,7 +140,7 @@ function SignupPageTemplate({
           <Button
             type="button"
             color="primary"
-            disabled={false}
+            disabled={!isStepCompleted[step]}
             onClick={onClickNext}
           >
             {SignupTitleMessages[step].button}
