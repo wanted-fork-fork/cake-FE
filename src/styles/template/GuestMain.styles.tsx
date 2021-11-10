@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 // styles
-import theme from "@src/styles/theme";
+import theme, { Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
-const Container = styled.div`
+const Container = styled.div<BaseProps>`
+  ${BaseStyleProps};
   background-color: ${theme.color.point};
   height: 100vh;
-  padding: 0 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding-top: 20vh;
+  padding-left: ${Padding.pageX};
+  padding-right: ${Padding.pageX};
 `;
 
 const ContentsWrap = styled.div<BaseProps>`

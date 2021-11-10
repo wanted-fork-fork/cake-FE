@@ -19,7 +19,6 @@ const BaseInput = css<InputStyleProps>`
 
 export const DividedInput = styled.input`
   ${BaseInput};
-  height: 100%;
   border: none;
   &:not(:first-child) {
     border-top: 1px solid ${theme.color.gray2};

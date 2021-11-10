@@ -5,6 +5,7 @@ export interface BaseProps extends ThemeProps<DefaultTheme> {
   mb?: string;
   pt?: string;
   fontSize?: "small" | "default" | "large";
+  height?: string;
 }
 
 export const BaseMarginBottom = css`
@@ -13,6 +14,10 @@ export const BaseMarginBottom = css`
 
 export const BasePaddingTop = css`
   padding-top: ${(props: BaseProps) => props.pt};
+`;
+
+export const BaseHeight = css`
+  height: ${(props: BaseProps) => props.height};
 `;
 
 export const BaseFontSize = css`
@@ -56,4 +61,5 @@ export const BaseStyleProps = css`
   ${BasePaddingTop};
   ${BaseMarginBottom};
   ${BaseFontSize};
+  ${BaseHeight};
 `;
