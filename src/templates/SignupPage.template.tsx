@@ -17,8 +17,9 @@ import { Button } from "@src/components/atoms/Button";
 import { TextButton } from "@src/components/atoms/LinkButton";
 
 // styles
-import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import { GuestMain } from "@src/styles/template/GuestMain.styles";
 
 const Container = styled.div`
   width: 100%;
@@ -56,24 +57,10 @@ const DescriptionText = styled.p`
 
 const ContentWrap = styled.div``;
 
-const BottomWrap = styled.div`
-  position: fixed;
-  bottom: 60px;
-  left: ${Padding.pageX};
-  right: ${Padding.pageX};
-
-  ${theme.window.tab} {
-    width: calc(${windowSize.mobile} - ${Padding.pageX} * 2);
-    left: auto;
-    right: auto;
-  }
-`;
-
 const S = {
   Container,
   TitleWrap,
   ContentWrap,
-  BottomWrap,
   TitleText,
   DescriptionText,
 };
@@ -127,18 +114,22 @@ function SignupPageTemplate({
           <SelectCategoryStepComponent
             type={CategoryType.GIVE}
             onSelect={onToggleCategory}
+            onClickNext={onClickNext}
+            buttonTextOnEmpty="아직 없어요"
           />
         )}
         {step === SignupStep.SELECT_TAKE_CATEGORY && (
           <SelectCategoryStepComponent
             type={CategoryType.TAKE}
             onSelect={onToggleCategory}
+            onClickNext={onClickNext}
+            buttonTextOnEmpty="다 좋아요!"
           />
         )}
         {step === SignupStep.COMPLETE_SIGNUP && <SignupCompleteStepComponent />}
       </S.ContentWrap>
       {SignupTitleMessages[step].button && (
-        <S.BottomWrap>
+        <GuestMain.BottomWrap>
           <Button
             type="button"
             color="primary"
@@ -147,7 +138,7 @@ function SignupPageTemplate({
           >
             {SignupTitleMessages[step].button}
           </Button>
-        </S.BottomWrap>
+        </GuestMain.BottomWrap>
       )}
     </S.Container>
   );

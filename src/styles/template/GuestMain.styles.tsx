@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // styles
-import theme, { Padding } from "@src/styles/theme";
+import theme, { Padding, windowSize } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
 const Container = styled.div<BaseProps>`
@@ -22,12 +22,27 @@ const ContentsWrap = styled.div<BaseProps>`
   justify-content: space-between;
 `;
 
+const BottomWrap = styled.div`
+  position: fixed;
+  bottom: 60px;
+  left: ${Padding.pageX};
+  right: ${Padding.pageX};
+
+  ${theme.window.tab} {
+    width: calc(${windowSize.mobile} - ${Padding.pageX} * 2);
+    left: auto;
+    right: auto;
+  }
+`;
+
 export const GuestMain = {
   Container,
   ContentsWrap,
+  BottomWrap,
 };
 
 export default {
   Container,
   ContentsWrap,
+  BottomWrap,
 };
