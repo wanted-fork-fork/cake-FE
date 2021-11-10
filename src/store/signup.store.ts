@@ -50,12 +50,16 @@ export default class SignupStore {
   }
 
   // 에러 초기화
-  _cleanErrors() {
+  cleanErrors() {
     this.errors = {};
   }
 
   setFormValue(name, value) {
     this.form = { ...this.form, [name]: value };
+  }
+
+  setErrorValue(name, value) {
+    this.errors = { ...this.errors, [name]: value };
   }
 
   // 대학 및 도메인 리스트를 요청
@@ -75,7 +79,7 @@ export default class SignupStore {
 
       this.form.email = email;
 
-      this._cleanErrors();
+      this.cleanErrors();
 
       return true;
     } catch (e) {
@@ -90,7 +94,7 @@ export default class SignupStore {
     try {
       await this.signupService.checkOverlapNickname({ nickname });
       this.form.nickname = nickname;
-      this._cleanErrors();
+      this.cleanErrors();
       return true;
     } catch (e) {
       if (e.code === 400) {
@@ -107,7 +111,7 @@ export default class SignupStore {
         email: this.form.email,
       });
 
-      this._cleanErrors();
+      this.cleanErrors();
 
       return true;
     } catch (e) {
@@ -127,7 +131,7 @@ export default class SignupStore {
         code,
       });
 
-      this._cleanErrors();
+      this.cleanErrors();
       this.emailConfirmed = true;
       this.errors = { email: "인증되었습니다." };
 
