@@ -79,6 +79,7 @@ const ConfirmEmailStepComponent = observer(
 
     const { formatted } = useTimer({
       limit: requestedMail ? EmailConfirmLimitTimeInSeconds : 0,
+      onTimerEnded: () => setAllowInputCode(false),
     });
 
     const onChangeEmail = useCallback(

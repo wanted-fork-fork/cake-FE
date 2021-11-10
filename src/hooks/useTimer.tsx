@@ -3,14 +3,15 @@ import dayjs from "dayjs";
 
 interface TimerProp {
   limit: number;
+  onTimerEnded: () => void;
 }
 
-function useTimer({ limit }: TimerProp) {
+function useTimer({ limit, onTimerEnded }: TimerProp) {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    setMinutes(limit / 60);
+    setMinutes(parseInt((limit / 60).toString(), 10));
     setSeconds(limit % 60);
   }, [limit]);
   useEffect(() => {
@@ -20,6 +21,7 @@ function useTimer({ limit }: TimerProp) {
       }
       if (seconds === 0) {
         if (minutes === 0) {
+          onTimerEnded();
           clearInterval(timer);
         } else {
           setMinutes(minutes - 1);
@@ -29,7 +31,7 @@ function useTimer({ limit }: TimerProp) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [limit, minutes, seconds]);
+  }, [limit, minutes, onTimerEnded, seconds]);
 
   const formatted = useMemo(
     () => dayjs().minute(minutes).second(seconds).format("mm:ss"),
