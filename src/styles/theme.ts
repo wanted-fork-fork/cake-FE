@@ -27,7 +27,7 @@ const theme: DefaultTheme = {
   },
   window: {
     pc: `@media only screen and (max-width: ${windowSize.pc})`,
-    tab: `@media only screen and (max-width: ${windowSize.tab})`,
+    tab: `@media only screen and (min-width: ${windowSize.mobile})`,
     mobile: `@media only screen and (max-width: ${windowSize.mobile})`,
     mobileS: `@media only screen and (max-width: ${windowSize.mobileS})`,
   },
