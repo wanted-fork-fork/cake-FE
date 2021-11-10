@@ -12,7 +12,7 @@ export const SignupTitleMessages: TitleMessageType[] = [
   {
     title: "학교 계정을 입력해주세요.",
     description: "학교 인증을 위해 학교 계정으로만 회원가입이 가능합니다.",
-    button: false,
+    button: "다음",
   },
   {
     title: "비밀번호를 설정해주세요.",
