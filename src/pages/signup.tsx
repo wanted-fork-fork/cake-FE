@@ -75,7 +75,7 @@ const SignupPage = observer(() => {
         ]);
       else signupStore.setFormValue(typeToText, [...originalList, id]);
     },
-    [signupStore, signupStore.form],
+    [signupStore],
   );
 
   useEffect(() => {

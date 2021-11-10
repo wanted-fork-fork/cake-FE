@@ -24,7 +24,7 @@ const SelectSchoolStepComponent = observer(() => {
       setValue(univ?.name || "");
       signupStore.setFormValue("univ", univId);
     },
-    [signupStore.univList],
+    [setValue, signupStore],
   );
 
   const univId = useMemo(

@@ -30,7 +30,6 @@
     "prettier"
   ],
   "rules": {
-    "react-hooks/exhaustive-deps": "off",
     "no-shadow": "off",
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-shadow": [
