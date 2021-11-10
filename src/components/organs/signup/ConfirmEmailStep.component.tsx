@@ -17,6 +17,8 @@ import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 import { BaseMarginBottom, BaseProps } from "@src/styles/common";
 import { useStores } from "@src/store/root.store";
 import { observer } from "mobx-react";
+import useTimer from "@src/hooks/useTimer";
+import { EmailConfirmLimitTimeInSeconds } from "@src/constant/policy.constant";
 
 const EmailWrap = styled.div<BaseProps>`
   ${BaseMarginBottom};
@@ -74,6 +76,10 @@ const ConfirmEmailStepComponent = observer(
 
     const [email, setEmail] = useState("");
     const { value: code, handleChange: handleChangeCode } = useInput("");
+
+    const { formatted } = useTimer({
+      limit: requestedMail ? EmailConfirmLimitTimeInSeconds : 0,
+    });
 
     const onChangeEmail = useCallback(
       (e) => {
@@ -144,7 +150,7 @@ const ConfirmEmailStepComponent = observer(
                   disabled={!allowInputCode}
                 />
               }
-              suffix={<span>04:59</span>}
+              suffix={<span>{formatted}</span>}
             />
             <div>
               <Button
