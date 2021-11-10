@@ -7,16 +7,17 @@ export interface ButtonStyleProps extends BaseProps {
   disabled?: boolean;
   filled?: boolean;
   width?: string;
+  height?: string;
   color: "gray" | "primary" | "white";
 }
 
 const BaseButton = css<ButtonStyleProps>`
   ${BaseStyleProps};
+
   border: none;
   border-radius: 12px;
-  height: 58px;
+  height: ${({ height }) => height || "58px"};
   text-align: center;
-  font-weight: 500;
   cursor: pointer;
   user-select: none;
 `;
@@ -34,6 +35,14 @@ export const Button = styled.button<ButtonStyleProps>`
         return Color.mainGradient;
       default:
         return theme.color.gray2;
+    }
+  }};
+  font-weight: ${({ color }) => {
+    switch (color) {
+      case "white":
+        return 400;
+      default:
+        return 500;
     }
   }};
 
