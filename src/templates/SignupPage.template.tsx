@@ -17,7 +17,7 @@ import { TextButton } from "@src/components/atoms/LinkButton";
 import SignupCompleteStepComponent from "@src/components/organs/signup/SignupCompleteStep.component";
 
 // styles
-import { FontSize, Padding } from "@src/styles/theme";
+import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
 const Container = styled.div`
@@ -59,8 +59,10 @@ const ContentWrap = styled.div``;
 const BottomWrap = styled.div`
   position: fixed;
   bottom: 60px;
-  left: ${Padding.pageX};
-  right: ${Padding.pageX};
+
+  ${theme.window.tab} {
+    width: calc(${windowSize.mobile} - ${Padding.pageX} * 2);
+  }
 `;
 
 const S = {
