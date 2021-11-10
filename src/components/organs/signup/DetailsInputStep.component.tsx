@@ -12,14 +12,14 @@ import { getUnivCategoryList } from "@src/utils/enum.util";
 import { UnderlineInput } from "@src/components/atoms/Input";
 import SelectComponent from "@src/components/atoms/Select";
 import ProfileFrameComponent from "@src/components/molcules/ProfileFrame.component";
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+const Container = styled.div``;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.div<BaseProps>`
+  ${BaseStyleProps}
+
   text-align: center;
   margin-top: 10px;
   width: 100%;
@@ -63,6 +63,7 @@ const DetailsInputStepComponent = observer(() => {
     (e) => {
       setNickname(e.target.value);
       signupStore.setFormValue("nickname", e.target.value);
+      signupStore.cleanErrors();
     },
     [signupStore],
   );
@@ -75,7 +76,7 @@ const DetailsInputStepComponent = observer(() => {
 
   return (
     <S.Container>
-      <FormWrapper>
+      <FormWrapper mb="20px">
         <ProfileFrameComponent
           imgSrc={
             signupStore.form.img &&
@@ -104,6 +105,9 @@ const DetailsInputStepComponent = observer(() => {
           />
         </DetailWrapper>
       </FormWrapper>
+      {signupStore.errors.nickname && (
+        <ErrorMessage>{signupStore.errors.nickname}</ErrorMessage>
+      )}
     </S.Container>
   );
 });

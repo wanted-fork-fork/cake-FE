@@ -21,11 +21,6 @@ const Template = (args: SignupTemplateProps) => {
   return <SignupPageTemplate isStepCompleted={isStepCompleted} {...args} />;
 };
 
-export const Signup = Template.bind({});
-Signup.args = {
-  step: SignupStep.CONFIRM_EMAIL,
-};
-
 export const SelectSchoolStep = Template.bind({});
 SelectSchoolStep.args = {
   step: SignupStep.SELECT_SCHOOL,

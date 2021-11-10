@@ -1,2 +1,2 @@
 export const EmailConfirmLimitTimeInSeconds = 5 * 60;
-export default {};
+export const PasswordMinLength = 8;

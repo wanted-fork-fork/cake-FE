@@ -1,10 +1,15 @@
 import { UnderlineInput } from "@src/components/atoms/Input";
 import useInput from "@src/hooks/useInput.hook";
-import { useEffect, useMemo } from "react";
-import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
+import { useCallback, useEffect, useMemo } from "react";
+import { observer } from "mobx-react";
+// stores
 import { useStores } from "@src/store/root.store";
+// constant
+import { PasswordMinLength } from "@src/constant/policy.constant";
+// components
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
-function PasswordInputStepComponent() {
+const PasswordInputStepComponent = observer(() => {
   const { signupStore } = useStores();
 
   const { value: password1, handleChange: handleChangePassword1 } =
@@ -17,13 +22,27 @@ function PasswordInputStepComponent() {
     [password1, password2],
   );
 
-  useEffect(() => {
-    if (matched) {
-      signupStore.setFormValue("pwd", password1);
-    } else {
+  const validate = useCallback(() => {
+    if (password1.length < PasswordMinLength) {
+      signupStore.setErrorValue(
+        "pwd",
+        `비밀번호는 최소 ${PasswordMinLength}자 이상으로 설정해주세요.`,
+      );
+    } else if (password2 !== "" && !matched) {
       signupStore.setFormValue("pwd", "");
+      signupStore.setErrorValue("pwd", "비밀번호가 일치하지 않습니다.");
+    } else {
+      signupStore.cleanErrors();
     }
-  }, [matched, password1, signupStore]);
+    if (password1.length >= PasswordMinLength && password2 !== "" && matched) {
+      signupStore.setFormValue("pwd", password1);
+      signupStore.cleanErrors();
+    }
+  }, [matched, password1, password2, signupStore]);
+
+  useEffect(() => {
+    validate();
+  }, [password1, password2, validate]);
 
   return (
     <div>
@@ -39,10 +58,13 @@ function PasswordInputStepComponent() {
         onChange={handleChangePassword2}
         type="password"
         placeholder="비밀번호 확인"
+        mb="20px"
       />
-      <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
+      {signupStore.errors.pwd && (
+        <ErrorMessage>{signupStore.errors.pwd}</ErrorMessage>
+      )}
     </div>
   );
-}
+});
 
 export default PasswordInputStepComponent;
