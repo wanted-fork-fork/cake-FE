@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 // models
 import { Univ } from "@src/models/dto/signup.dto";
@@ -15,6 +15,8 @@ import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 // styles
 import { BaseMarginBottom, BaseProps } from "@src/styles/common";
+import { useStores } from "@src/store/root.store";
+import { observer } from "mobx-react";
 
 const EmailWrap = styled.div<BaseProps>`
   ${BaseMarginBottom};
@@ -58,61 +60,84 @@ const S = {
   CodeInputWrap,
 };
 
-function ConfirmEmailStepComponent({
-  selectedUniv,
-  onClickReqConfirmMail,
-  onCheckConfirmMail,
-}: ConfirmEmailStepComponentProps) {
-  const { value: email, handleChange: handleChangeEmail } = useInput("");
-  const { value: code, handleChange: handleChangeCode } = useInput("");
+const ConfirmEmailStepComponent = observer(
+  ({
+    selectedUniv,
+    onClickReqConfirmMail,
+    onCheckConfirmMail,
+  }: ConfirmEmailStepComponentProps) => {
+    const { signupStore } = useStores();
+    const [allowInputCode, setAllowInputCode] = useState(false);
+    const [requestedMail, setRequestedMail] = useState(false);
 
-  const onSendEmail = useCallback(() => {
-    onClickReqConfirmMail(email);
-  }, [email, onClickReqConfirmMail]);
+    const { value: email, handleChange: handleChangeEmail } = useInput("");
+    const { value: code, handleChange: handleChangeCode } = useInput("");
 
-  const onCheckCode = useCallback(() => {
-    onCheckConfirmMail(code);
-  }, [code, onCheckConfirmMail]);
+    const onSendEmail = useCallback(() => {
+      setRequestedMail(true);
+      setAllowInputCode(true);
+      onClickReqConfirmMail(email);
+    }, [email, onClickReqConfirmMail]);
 
-  return (
-    <div>
-      <S.EmailWrap mb="20px">
-        <UnderlineInput
-          value={email}
-          onChange={handleChangeEmail}
-          placeholder="이메일"
-        />
-        <span>@</span>
-        <UnderlineInput value={selectedUniv.email} disabled />
-      </S.EmailWrap>
-      <Button color="primary" mb="20px" onClick={onSendEmail}>
-        이메일로 인증번호 받기
-      </Button>
-      <S.ConfirmCodeWrap mb="10px">
-        <InputWithSuffixComponent
-          input={
-            <UnderlineInput
-              placeholder="인증번호 입력"
-              value={code}
-              onChange={handleChangeCode}
+    const onCheckCode = useCallback(() => {
+      onCheckConfirmMail(code);
+    }, [code, onCheckConfirmMail]);
+
+    const disableRequestMail = useMemo(() => email.length === 0, [email]);
+    const disableConfirmCode = useMemo(
+      () => code.length === 0 || !allowInputCode,
+      [allowInputCode, code],
+    );
+
+    return (
+      <div>
+        <S.EmailWrap mb="20px">
+          <UnderlineInput
+            value={email}
+            onChange={handleChangeEmail}
+            placeholder="이메일"
+          />
+          <span>@</span>
+          <UnderlineInput value={selectedUniv.email} disabled />
+        </S.EmailWrap>
+        <Button
+          color="primary"
+          mb="20px"
+          onClick={onSendEmail}
+          disabled={disableRequestMail}
+        >
+          이메일로 인증번호 받기
+        </Button>
+        {requestedMail && (
+          <S.ConfirmCodeWrap mb="10px">
+            <InputWithSuffixComponent
+              input={
+                <UnderlineInput
+                  placeholder="인증번호 입력"
+                  value={code}
+                  onChange={handleChangeCode}
+                  disabled={!allowInputCode}
+                />
+              }
+              suffix={<span>04:59</span>}
             />
-          }
-          suffix={<span>04:59</span>}
-        />
-        <div>
-          <Button
-            color="primary"
-            filled={false}
-            width="4.45rem"
-            onClick={onCheckCode}
-          >
-            인증
-          </Button>
-        </div>
-      </S.ConfirmCodeWrap>
-      <ErrorMessage>이미 가입된 이메일입니다!</ErrorMessage>
-    </div>
-  );
-}
+            <div>
+              <Button
+                color="primary"
+                filled={false}
+                width="4.45rem"
+                onClick={onCheckCode}
+                disabled={disableConfirmCode}
+              >
+                인증
+              </Button>
+            </div>
+          </S.ConfirmCodeWrap>
+        )}
+        <ErrorMessage>이미 가입된 이메일입니다!</ErrorMessage>
+      </div>
+    );
+  },
+);
 
 export default ConfirmEmailStepComponent;
