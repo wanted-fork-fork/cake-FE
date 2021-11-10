@@ -22,7 +22,7 @@ const SignupPage = observer(() => {
     () => ({
       [SignupStep.SELECT_SCHOOL]: signupStore.form.univ !== "",
       [SignupStep.CONFIRM_EMAIL]: signupStore.emailConfirmed,
-      [SignupStep.PASSWORD_INPUT]: false,
+      [SignupStep.PASSWORD_INPUT]: signupStore.form.pwd,
       [SignupStep.DETAILS_INPUT]: false,
       [SignupStep.SELECT_GIVE_CATEGORY]: false,
       [SignupStep.SELECT_TAKE_CATEGORY]: false,
