@@ -8,7 +8,7 @@ const Container = styled.div<BaseProps>`
   ${BaseStyleProps};
   background-color: ${theme.color.point};
   height: 100vh;
-  padding-top: 230px;
+  padding-top: 20vh;
   padding-left: ${Padding.pageX};
   padding-right: ${Padding.pageX};
 `;
