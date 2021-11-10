@@ -77,7 +77,10 @@ const DetailsInputStepComponent = observer(() => {
     <S.Container>
       <FormWrapper>
         <ProfileFrameComponent
-          imgSrc={process.env.IMAGE_ENDPOINT + signupStore.form.img}
+          imgSrc={
+            signupStore.form.img &&
+            process.env.IMAGE_ENDPOINT + signupStore.form.img
+          }
           onUploadImage={onUploadImage}
           allowUpload
           mb="20px"
