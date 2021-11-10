@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import theme, { FontSize } from "@src/styles/theme";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
-export type ErrorMessageProps = {};
-
-export const ErrorMessage = styled.p<ErrorMessageProps>`
+export default {};
+export const ErrorMessage = styled.p<BaseProps>`
+  ${BaseStyleProps};
   font-size: ${FontSize.PrimaryDescription};
   color: ${theme.color.black};
 `;

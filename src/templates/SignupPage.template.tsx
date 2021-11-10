@@ -59,9 +59,13 @@ const ContentWrap = styled.div``;
 const BottomWrap = styled.div`
   position: fixed;
   bottom: 60px;
+  left: ${Padding.pageX};
+  right: ${Padding.pageX};
 
   ${theme.window.tab} {
     width: calc(${windowSize.mobile} - ${Padding.pageX} * 2);
+    left: auto;
+    right: auto;
   }
 `;
 
@@ -83,14 +87,12 @@ export type SignupTemplateProps = {
   onToggleCategory?: (type: CategoryType, id: number) => void;
   selectedUniv: Univ;
   isStepCompleted: object;
-  selectedList: number[];
 };
 
 function SignupPageTemplate({
   step = SignupStep.SELECT_SCHOOL,
   selectedUniv,
   isStepCompleted,
-  selectedList = [],
   onClickNext,
   onClickPrev,
   onClickReqConfirmMail,

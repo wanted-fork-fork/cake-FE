@@ -1,8 +1,14 @@
-import SignupPageTemplate from "@src/templates/SignupPage.template";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useStores } from "@src/store/root.store";
 import { observer } from "mobx-react";
+
+// constants
 import { CategoryType, SignupStep } from "@src/constant/enum.constant";
+
+// stores
+import { useStores } from "@src/store/root.store";
+
+// components
+import SignupPageTemplate from "@src/templates/SignupPage.template";
 
 const SignupPage = observer(() => {
   const { signupStore, categoryStore } = useStores();
@@ -52,20 +58,22 @@ const SignupPage = observer(() => {
   const onToggleCategory = useCallback(
     (type, id) => {
       let originalList = [];
-      let typeToText = ""
+      let typeToText = "";
       if (type === CategoryType.GIVE) {
         originalList = [...signupStore.form.give];
-        typeToText = "give"
+        typeToText = "give";
       } else if (type === CategoryType.TAKE) {
         originalList = [...signupStore.form.take];
-        typeToText = "take"
+        typeToText = "take";
       }
 
       const found = originalList.find((x) => x === id);
 
-      if (found) signupStore.setFormValue(typeToText, [...originalList.filter(x => x !== id)])
-      else signupStore.setFormValue(typeToText, [...originalList, id])
-
+      if (found)
+        signupStore.setFormValue(typeToText, [
+          ...originalList.filter((x) => x !== id),
+        ]);
+      else signupStore.setFormValue(typeToText, [...originalList, id]);
     },
     [signupStore, signupStore.form],
   );
@@ -96,7 +104,6 @@ const SignupPage = observer(() => {
       onToggleCategory={onToggleCategory}
       selectedUniv={selectedUniv}
       isStepCompleted={isStepCompleted}
-      selectedList={[]}
     />
   );
 });

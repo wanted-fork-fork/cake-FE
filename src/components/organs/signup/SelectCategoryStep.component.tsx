@@ -33,9 +33,10 @@ const SelectCategoryStepComponent = observer(
   ({ type, onSelect }: SelectCategoryStepProps) => {
     const { categoryStore, signupStore } = useStores();
     const selectedList = useMemo(() => {
-      if (type == CategoryType.GIVE) return signupStore.form.give
-      else if (type == CategoryType.TAKE) return signupStore.form.take
-    }, [signupStore.form])
+      if (type === CategoryType.GIVE) return signupStore.form.give;
+      if (type === CategoryType.TAKE) return signupStore.form.take;
+      return [];
+    }, [signupStore.form]);
 
     const categoryListDom = useMemo(
       () =>

@@ -27,7 +27,10 @@ const SelectSchoolStepComponent = observer(() => {
     [signupStore.univList],
   );
 
-  const univId = useMemo(() => signupStore.form.univ.toString(), [signupStore]);
+  const univId = useMemo(
+    () => signupStore.form.univ.toString(),
+    [signupStore.form],
+  );
 
   return (
     <InputWithSuffixComponent
