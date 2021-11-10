@@ -17,7 +17,7 @@ import { TextButton } from "@src/components/atoms/LinkButton";
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import { Dispatch, SetStateAction } from "react";
+import { SignupStep } from "@src/constant/enum.constant";
 
 const Container = styled.div`
   width: 100%;
@@ -65,15 +65,6 @@ const S = {
   TitleText,
   DescriptionText,
 };
-
-export enum SignupStep {
-  SELECT_SCHOOL,
-  CONFIRM_EMAIL,
-  PASSWORD_INPUT,
-  DETAILS_INPUT,
-  SELECT_GIVE_CATEGORY,
-  SELECT_TAKE_CATEGORY,
-}
 
 export type SignupTemplateProps = {
   step: SignupStep;
