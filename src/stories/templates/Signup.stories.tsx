@@ -1,17 +1,25 @@
 import SignupPage from "@src/pages/signup";
 import SignupPageTemplate, {
-  SignupStep,
   SignupTemplateProps,
 } from "@src/templates/SignupPage.template";
+import { SignupStep } from "@src/constant/enum.constant";
 
 export default {
   title: "template/Signup",
   component: SignupPage,
 };
 
-const Template = (args: SignupTemplateProps) => (
-  <SignupPageTemplate {...args} />
-);
+const Template = (args: SignupTemplateProps) => {
+  const isStepCompleted = {
+    [SignupStep.SELECT_SCHOOL]: true,
+    [SignupStep.CONFIRM_EMAIL]: true,
+    [SignupStep.PASSWORD_INPUT]: true,
+    [SignupStep.DETAILS_INPUT]: true,
+    [SignupStep.SELECT_GIVE_CATEGORY]: true,
+    [SignupStep.SELECT_TAKE_CATEGORY]: true,
+  };
+  return <SignupPageTemplate isStepCompleted={isStepCompleted} {...args} />;
+};
 
 export const Signup = Template.bind({});
 Signup.args = {
