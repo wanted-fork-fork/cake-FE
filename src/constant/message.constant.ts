@@ -32,13 +32,13 @@ export const SignupTitleMessages: TitleMessageType[] = [
   {
     title: "자신 있는 재능을 선택해주세요.",
     description: "잘하는 것이 바뀌었다면 마이 페이지에서 수정해주세요!",
-    button: "선택 완료",
+    button: false,
     allowBack: true,
   },
   {
     title: "관심 있거나 배우고 싶은 주제를 선택해주세요.",
     description: "관심 있는 것이 바뀌었다면 마이 페이지에서 수정해주세요!",
-    button: "선택 완료",
+    button: false,
     allowBack: true,
   },
   { title: "", description: "", button: false, allowBack: false },

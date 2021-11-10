@@ -1,14 +1,18 @@
 import { useMemo } from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
+
+// lib
+import { useStores } from "@src/store/root.store";
+import { CategoryType } from "@src/constant/enum.constant";
 
 // component
 import CategoryComponent from "@src/components/molcules/Category.component";
+import { Button } from "@src/components/atoms/Button";
 
 // styles
 import { NoScroll } from "@src/styles/common";
-import { useStores } from "@src/store/root.store";
-import { observer } from "mobx-react";
-import { CategoryType } from "@src/constant/enum.constant";
+import { GuestMain } from "@src/styles/template/GuestMain.styles";
 
 const Container = styled.div`
   ${NoScroll};
@@ -27,10 +31,17 @@ const S = { Container };
 type SelectCategoryStepProps = {
   type: CategoryType;
   onSelect: (type: CategoryType, id: number) => void;
+  onClickNext: () => void;
+  buttonTextOnEmpty: string;
 };
 
 const SelectCategoryStepComponent = observer(
-  ({ type, onSelect }: SelectCategoryStepProps) => {
+  ({
+    type,
+    onSelect,
+    onClickNext,
+    buttonTextOnEmpty = "",
+  }: SelectCategoryStepProps) => {
     const { categoryStore, signupStore } = useStores();
     const selectedList = useMemo(() => {
       if (type === CategoryType.GIVE) return signupStore.form.give;
@@ -55,7 +66,25 @@ const SelectCategoryStepComponent = observer(
       [categoryStore.categoryList, selectedList, onSelect, type],
     );
 
-    return <S.Container>{categoryListDom}</S.Container>;
+    const selectedNothing = useMemo(
+      () => selectedList.length === 0,
+      [selectedList],
+    );
+
+    return (
+      <S.Container>
+        {categoryListDom}
+        <GuestMain.BottomWrap>
+          <Button
+            type="button"
+            color={selectedNothing ? "gray" : "primary"}
+            onClick={onClickNext}
+          >
+            {selectedNothing ? buttonTextOnEmpty : "선택 완료"}
+          </Button>
+        </GuestMain.BottomWrap>
+      </S.Container>
+    );
   },
 );
 

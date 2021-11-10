@@ -40,6 +40,8 @@ DetailsInputStep.args = {
 export const SelectCategoryStep = Template.bind({});
 SelectCategoryStep.args = {
   step: SignupStep.SELECT_GIVE_CATEGORY,
+  onClickNext: null,
+  buttonTextOnEmpty: "아직 없어요",
   categoryList: [
     {
       id: 2,
