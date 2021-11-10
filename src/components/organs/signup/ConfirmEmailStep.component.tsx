@@ -1,27 +1,26 @@
 import styled from "styled-components";
+import { useCallback } from "react";
+
+// models
+import { Univ } from "@src/models/dto/signup.dto";
+
+// hooks
+import useInput from "@src/hooks/useInput.hook";
 
 // components
 import { Button } from "@src/components/atoms/Button";
 import { UnderlineInput } from "@src/components/atoms/Input";
 import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 // styles
-import theme, { FontSize } from "@src/styles/theme";
 import { BaseMarginBottom, BaseProps } from "@src/styles/common";
-import { Univ } from "@src/models/dto/signup.dto";
-import useInput from "@src/hooks/useInput.hook";
-import { useCallback } from "react";
 
 const EmailWrap = styled.div<BaseProps>`
   ${BaseMarginBottom};
   display: flex;
   align-items: center;
   width: 100%;
-`;
-
-const ErrorMessage = styled.p`
-  font-size: ${FontSize.PrimaryDescription};
-  color: ${theme.color.black};
 `;
 
 const ConfirmCodeWrap = styled.div<BaseProps>`
@@ -47,6 +46,8 @@ const Space = styled.span<SpaceProp>`
 
 type ConfirmEmailStepComponentProps = {
   selectedUniv: Univ;
+  onClickReqConfirmMail: (email: string) => void;
+  onCheckConfirmMail: (code: string) => void;
 };
 
 const S = {
@@ -61,7 +62,7 @@ function ConfirmEmailStepComponent({
   selectedUniv,
   onClickReqConfirmMail,
   onCheckConfirmMail,
-}) {
+}: ConfirmEmailStepComponentProps) {
   const { value: email, handleChange: handleChangeEmail } = useInput("");
   const { value: code, handleChange: handleChangeCode } = useInput("");
 
@@ -109,7 +110,7 @@ function ConfirmEmailStepComponent({
           </Button>
         </div>
       </S.ConfirmCodeWrap>
-      <S.ErrorMessage>이미 가입된 이메일입니다!</S.ErrorMessage>
+      <ErrorMessage>이미 가입된 이메일입니다!</ErrorMessage>
     </div>
   );
 }
