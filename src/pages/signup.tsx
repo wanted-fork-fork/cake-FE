@@ -29,16 +29,31 @@ const SignupPage = observer(() => {
       [SignupStep.CONFIRM_EMAIL]: signupStore.emailConfirmed,
       [SignupStep.PASSWORD_INPUT]: signupStore.form.pwd,
       [SignupStep.DETAILS_INPUT]:
-        signupStore.form.univCategory && signupStore.form.nickname,
+        signupStore.form.univCategory &&
+        signupStore.form.nickname &&
+        !signupStore.errors.nickname,
       [SignupStep.SELECT_GIVE_CATEGORY]: true,
       [SignupStep.SELECT_TAKE_CATEGORY]: true,
     }),
-    [signupStore.form, signupStore.emailConfirmed],
+    [
+      signupStore.form.univ,
+      signupStore.form.pwd,
+      signupStore.form.univCategory,
+      signupStore.form.nickname,
+      signupStore.emailConfirmed,
+      signupStore.errors.nickname,
+    ],
   );
 
   const onMoveNext = useCallback(async () => {
     if (step + 1 === SignupStep.COMPLETE_SIGNUP) {
       await signupStore.signup();
+    }
+    if (step === SignupStep.DETAILS_INPUT) {
+      const result = await signupStore.checkNicknameOverlap(
+        signupStore.form.nickname,
+      );
+      if (!result) return;
     }
     setStep((step + 1) as SignupStep);
   }, [step, signupStore]);

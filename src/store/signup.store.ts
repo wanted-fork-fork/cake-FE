@@ -91,10 +91,12 @@ export default class SignupStore {
       await this.signupService.checkOverlapNickname({ nickname });
       this.form.nickname = nickname;
       this._cleanErrors();
+      return true;
     } catch (e) {
       if (e.code === 400) {
         this.errors = { nickname: e.message };
       }
+      return false;
     }
   }
 
