@@ -29,7 +29,8 @@ export const DividedInput = styled.input`
 export const UnderlineInput = styled.input<InputStyleProps>`
   ${BaseInput};
   border: none;
-  border-bottom: 3px solid ${theme.color.gray3};
+  border-bottom: 3px solid ${theme.color.primary};
+
   font-weight: 400;
   padding: 15px 10px;
 
@@ -37,5 +38,14 @@ export const UnderlineInput = styled.input<InputStyleProps>`
 
   &:focus {
     border-color: ${theme.color.primary};
+  }
+
+  &:placeholder-shown {
+    border-bottom: 3px solid ${theme.color.gray3};
+  }
+
+  &:disabled {
+    background: transparent;
+    color: ${theme.color.gray5};
   }
 `;
