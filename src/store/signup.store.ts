@@ -32,7 +32,7 @@ export default class SignupStore {
     pwd: null,
     nickname: null,
     img: null,
-    univCategory: null,
+    univCategory: "",
     univ: "",
   };
 

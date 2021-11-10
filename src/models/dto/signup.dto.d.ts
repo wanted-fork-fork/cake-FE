@@ -16,7 +16,7 @@ export type SignupForm = {
   pwd: string;
   nickname: string;
   img: string | null;
-  univCategory: number;
+  univCategory: string;
   univ: string;
 };
 

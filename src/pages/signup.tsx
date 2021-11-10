@@ -1,9 +1,8 @@
-import SignupPageTemplate, {
-  SignupStep,
-} from "@src/templates/SignupPage.template";
+import SignupPageTemplate from "@src/templates/SignupPage.template";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useStores } from "@src/store/root.store";
 import { observer } from "mobx-react";
+import { SignupStep } from "@src/constant/enum.constant";
 
 const SignupPage = observer(() => {
   const { signupStore } = useStores();
@@ -23,9 +22,10 @@ const SignupPage = observer(() => {
       [SignupStep.SELECT_SCHOOL]: signupStore.form.univ !== "",
       [SignupStep.CONFIRM_EMAIL]: signupStore.emailConfirmed,
       [SignupStep.PASSWORD_INPUT]: signupStore.form.pwd,
-      [SignupStep.DETAILS_INPUT]: false,
-      [SignupStep.SELECT_GIVE_CATEGORY]: false,
-      [SignupStep.SELECT_TAKE_CATEGORY]: false,
+      [SignupStep.DETAILS_INPUT]:
+        signupStore.form.univCategory && signupStore.form.nickname,
+      [SignupStep.SELECT_GIVE_CATEGORY]: true,
+      [SignupStep.SELECT_TAKE_CATEGORY]: true,
     }),
     [signupStore.form, signupStore.emailConfirmed],
   );
