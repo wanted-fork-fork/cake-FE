@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  html {
+    overscroll-behavior-y: contain; // 당겨서 새로고침 막기
+  }
+  
   html,
   body {
     -webkit-text-size-adjust: none; // 뷰포트 변경 시 자동 폰트 조절 방지 
