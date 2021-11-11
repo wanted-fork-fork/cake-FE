@@ -26,7 +26,7 @@ const LoginPage: NextPage = observer(() => {
       await userStore.login(values);
       router.push("/");
     },
-    [userStore],
+    [router, userStore],
   );
 
   const { values, handleSubmit, handleChange } = useForm<LoginForm>({
