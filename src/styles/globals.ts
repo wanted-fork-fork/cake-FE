@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     overscroll-behavior-y: contain; // 당겨서 새로고침 막기
+    overflow: hidden;
   }
   
   html,
