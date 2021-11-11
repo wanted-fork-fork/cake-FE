@@ -26,12 +26,22 @@ export default class UserStore {
     this.authService._saveToken(token);
   }
 
+  logout() {
+    this.authService.logout();
+  }
+
   async test() {
-    await this.authService.test();
+    const email = await this.authService.test();
+    return email;
   }
 
   async refresh() {
     const token = await this.authService.refresh();
     this.authService._saveToken(token);
+  }
+
+  isAuthenticated() {
+    const token = this.authService.accessToken;
+    return token !== null && token.length > 0;
   }
 }

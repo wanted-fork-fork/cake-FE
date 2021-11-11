@@ -13,15 +13,18 @@ import useForm from "@src/hooks/useForm.hook";
 import LoginPageTemplate, {
   LoginForm,
 } from "@src/templates/LoginPage.template";
+import { useRouter } from "next/router";
 
 const Container = styled.div``;
 
 const LoginPage: NextPage = observer(() => {
   const { userStore } = useStores();
+  const router = useRouter();
 
   const onSubmit = useCallback(
     async (values) => {
       await userStore.login(values);
+      router.push("/");
     },
     [userStore],
   );

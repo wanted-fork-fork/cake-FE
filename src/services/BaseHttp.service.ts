@@ -137,17 +137,18 @@ export default class BaseHttpService {
 
   _saveToken(accessToken: string) {
     this._accessToken = accessToken;
-    return localStorage.setItem("accessToken", accessToken);
+    return localStorage?.setItem("accessToken", accessToken);
   }
 
   loadToken() {
-    const token: string | null = localStorage.getItem("accessToken");
+    if (typeof window === "undefined") return null;
+    const token: string | null = localStorage?.getItem("accessToken");
     this._accessToken = token;
     return token;
   }
 
   removeToken() {
     this._accessToken = null;
-    localStorage.removeItem("accessToken");
+    localStorage?.removeItem("accessToken");
   }
 }
