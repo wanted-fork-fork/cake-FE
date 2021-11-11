@@ -28,7 +28,7 @@ export const BaseFontSize = css`
       case "default":
         return FontSize.Default;
       case "small":
-        return FontSize.Small;
+        return FontSize.PrimaryDescription;
       default:
         return FontSize.Default;
     }
