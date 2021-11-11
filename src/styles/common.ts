@@ -49,6 +49,14 @@ export const Underline = css`
   }
 `;
 
+export const LightUnderline = css`
+  border: none;
+  text-align: inherit;
+
+  padding: 10px 10px;
+  border-bottom: 1px solid ${theme.color.gray3};
+`;
+
 export const NoScroll = css`
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

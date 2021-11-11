@@ -2,10 +2,24 @@ import { ReactEventHandler, useMemo } from "react";
 import styled from "styled-components";
 
 // style
-import { Underline } from "@src/styles/common";
+import { LightUnderline, Underline } from "@src/styles/common";
 
-const Select = styled.select`
-  ${Underline};
+export type SelectStyleProp = {
+  shape: "default" | "light";
+};
+
+const Select = styled.select<SelectStyleProp>`
+  ${({ shape }) => {
+    switch (shape) {
+      case "default":
+        return Underline;
+      case "light":
+        return LightUnderline;
+      default:
+        return Underline;
+    }
+  }};
+
   width: 100%;
 
   cursor: pointer;
@@ -22,6 +36,10 @@ type SelectProp<T> = {
   labelKeyName: string;
   defaultText: string;
   onSelect: ReactEventHandler<HTMLSelectElement>;
+  shape?: "default" | "light";
+};
+SelectComponent.defaultProps = {
+  shape: "default",
 };
 function SelectComponent<T>({
   selected = "",
@@ -30,6 +48,7 @@ function SelectComponent<T>({
   labelKeyName,
   onSelect,
   defaultText = "",
+  shape,
 }: SelectProp<T>) {
   const options = useMemo(() => {
     const optionList = list.map((x) => ({
@@ -44,7 +63,7 @@ function SelectComponent<T>({
   }, [list, idKeyName, labelKeyName]);
 
   return (
-    <Select defaultValue={selected} onChange={onSelect}>
+    <Select defaultValue={selected} onChange={onSelect} shape={shape}>
       <option disabled value="">
         {defaultText}
       </option>
