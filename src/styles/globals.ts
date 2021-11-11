@@ -16,6 +16,8 @@ const GlobalStyle = createGlobalStyle`
     //font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     //Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     color: #222;
+
+    overscroll-behavior-y: none; // 당겨서 새로고침 막기
   }
 
   a {
