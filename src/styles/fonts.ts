@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
   @font-face {
     font-family: 'GmarketSans';
     font-weight: 700;
