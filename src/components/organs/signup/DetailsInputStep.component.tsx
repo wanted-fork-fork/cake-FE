@@ -11,7 +11,7 @@ import { getUnivCategoryList } from "@src/utils/enum.util";
 // components
 import { UnderlineInput } from "@src/components/atoms/Input";
 import SelectComponent from "@src/components/atoms/Select";
-import ProfileFrameComponent from "@src/components/molcules/ProfileFrame.component";
+import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
 import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 

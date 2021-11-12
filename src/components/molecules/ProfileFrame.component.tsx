@@ -1,5 +1,5 @@
 import PatisserieIcon from "@src/components/icon/Patisserie.icon";
-import UploadComponent from "@src/components/molcules/Upload.component";
+import UploadComponent from "@src/components/molecules/Upload.component";
 import styled from "styled-components";
 import theme from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";

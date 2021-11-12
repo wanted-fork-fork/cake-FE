@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // components
-import AppTitleComponent from "@src/components/molcules/AppTitle.component";
+import AppTitleComponent from "@src/components/molecules/AppTitle.component";
 import { Button } from "@src/components/atoms/Button";
 import { TextButton } from "@src/components/atoms/LinkButton";
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 // components
-import AppTitleComponent from "@src/components/molcules/AppTitle.component";
+import AppTitleComponent from "@src/components/molecules/AppTitle.component";
 import { TextButton } from "@src/components/atoms/LinkButton";
 import { DividedInput } from "@src/components/atoms/Input";
 import { Button } from "@src/components/atoms/Button";
