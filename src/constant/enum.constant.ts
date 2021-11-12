@@ -40,3 +40,9 @@ export enum StudyType {
   OneToMany,
   ManyToMany,
 }
+
+export const StudyTypeEnumToLabel = {
+  [StudyType.OneToOne]: "1:1",
+  [StudyType.OneToMany]: "1:n",
+  [StudyType.ManyToMany]: "n",
+};
