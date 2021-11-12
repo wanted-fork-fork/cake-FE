@@ -1,9 +1,13 @@
+// components
 import StudyCreateTemplate from "@src/templates/StudyCreate.template";
+
+// hooks
 import useForm from "@src/hooks/useForm.hook";
-import { CreateStudyDto } from "@src/models/dto/study.dto";
-import { useStores } from "@src/store/root.store";
-import { useEffect } from "react";
 import useDatepicker from "@src/hooks/useDatepicker";
+import { useStores } from "@src/store/root.store";
+
+// model
+import { CreateStudyDto } from "@src/models/dto/study.dto";
 
 function CreateStudyPage() {
   const { studyStore, categoryStore } = useStores();

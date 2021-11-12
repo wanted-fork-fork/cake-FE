@@ -1,15 +1,20 @@
-import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
-import { LightUnderlineInput } from "@src/components/atoms/Input";
-import Select from "@src/components/atoms/Select";
-import styled from "styled-components";
-import theme, { Padding } from "@src/styles/theme";
-import { DatePicker } from "antd";
-import { LightUnderline, NoScroll } from "@src/styles/common";
-import { Button, InputLikeButton } from "@src/components/atoms/Button";
-import CalendarIcon from "@src/components/icon/Calendar.icon";
 import { useMemo } from "react";
+import styled from "styled-components";
+
+// utils
 import { getStudyTypeList } from "@src/utils/enum.util";
-import AutoCompleteInputComponent from "@src/components/molecules/AutoCompleteInput.component";
+
+// components
+import CalendarIcon from "@src/components/icon/Calendar.icon";
+import { Button, InputLikeButton } from "@src/components/atoms/Button";
+import { LightUnderlineInput } from "@src/components/atoms/Input";
+import DatePicker from "@src/components/atoms/DatePicker";
+import Select from "@src/components/atoms/Select";
+import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
+
+// styles
+import theme, { Padding } from "@src/styles/theme";
+import { LightUnderline, NoScroll } from "@src/styles/common";
 
 const Container = styled.div`
   padding-top: 60px;
@@ -89,7 +94,6 @@ function StudyCreateTemplate({
   onChangeStartDate,
   endDate,
   onChangeEndDate,
-  categoryList,
 }) {
   const studyTypeList = useMemo(() => getStudyTypeList(), []);
   return (
