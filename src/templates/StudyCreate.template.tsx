@@ -37,6 +37,7 @@ const WithUnderline = styled.div`
   ${LightUnderline};
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
 `;
 
 const Textarea = styled.textarea`
@@ -124,7 +125,11 @@ function StudyCreateTemplate() {
           </Checkbox>
         </WithUnderline>
         <InputWithSuffixComponent
-          input={<LightUnderlineInput placeholder="장소" fontSize="small" />}
+          input={
+            <InputLikeButton color="gray" fontSize="small">
+              장소
+            </InputLikeButton>
+          }
           suffix={<PinIcon />}
         />
         <LightUnderlineInput placeholder="오픈채팅링크" fontSize="small" />

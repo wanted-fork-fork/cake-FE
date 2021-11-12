@@ -4,6 +4,7 @@ import theme, { Color, FontSize } from "@src/styles/theme";
 
 export interface ButtonStyleProps extends BaseProps {
   mb?: string;
+  mt?: string;
   disabled?: boolean;
   filled?: boolean;
   width?: string;
@@ -69,7 +70,6 @@ export const InputLikeButton = styled.button<InputLikeButtonStyleProps>`
   font-size: ${FontSize.PrimaryDescription};
   height: auto;
 
-  padding-bottom: 6px;
   width: 100%;
 
   color: ${({ selected = false }) =>
