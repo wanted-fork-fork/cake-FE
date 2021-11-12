@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme, { FontSize } from "@src/styles/theme";
 import { BaseButton, ButtonStyleProps } from "@src/components/atoms/Button";
 
-export const Category = styled.button<ButtonStyleProps>`
+export const CategoryTag = styled.button<ButtonStyleProps>`
   ${BaseButton};
   height: 32px;
   background-color: ${theme.color.gray1};

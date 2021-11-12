@@ -1,12 +1,12 @@
-import { Category as CategoryComponent } from "@src/components/atoms/Category";
+import { CategoryTag } from "@src/components/atoms/CategoryTag";
 
 export default {
   title: "atoms/Category",
-  component: CategoryComponent,
+  component: CategoryTag,
 };
 
 const Template = ({ contents }) => (
-  <CategoryComponent type="button">{contents}</CategoryComponent>
+  <CategoryTag type="button">{contents}</CategoryTag>
 );
 
 export const Category = Template.bind({});
