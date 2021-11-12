@@ -8,24 +8,28 @@ import { useStores } from "@src/store/root.store";
 
 // model
 import { CreateStudyDto } from "@src/models/dto/study.dto";
+import { useState } from "react";
+import { StudyType } from "@src/constant/enum.constant";
 
 function CreateStudyPage() {
-  const { studyStore, categoryStore } = useStores();
+  const { studyStore } = useStores();
 
   const { value: startDate, onChange: onChangeStartDate } = useDatepicker();
   const { value: endDate, onChange: onChangeEndDate } = useDatepicker();
+  const [selectedMine, setSelectedMine] = useState("");
+  const [selectedYours, setSelectedYours] = useState("");
 
   const { values, handleChange, handleSubmit } = useForm<CreateStudyDto>({
     initialValues: {
-      title: "string",
-      content: "string",
-      location: "string",
-      type: null,
+      title: "",
+      content: "",
+      location: "",
+      type: StudyType.OneToOne,
       startDate: "2021-11-12",
       endDate: "2021-11-12",
       peopleCnt: 1,
-      chatRoom: "string",
-      roomPwd: "string",
+      chatRoom: "",
+      roomPwd: "",
       images: [],
       give: [],
       take: [],
@@ -35,6 +39,8 @@ function CreateStudyPage() {
         ...v,
         startDate: startDate.format("YYYY-MM-DD"),
         endDate: endDate.format("YYYY-MM-DD"),
+        give: [selectedMine],
+        take: [selectedYours],
       });
     },
     validate() {
@@ -51,7 +57,10 @@ function CreateStudyPage() {
       onSubmit={handleSubmit}
       onChange={handleChange}
       values={values}
-      categoryList={categoryStore.categoryList}
+      selectedMine={selectedMine}
+      setSelectedMine={setSelectedMine}
+      selectedYours={selectedYours}
+      setSelectedYours={setSelectedYours}
     />
   );
 }

@@ -11,8 +11,8 @@ export interface CreateStudyDto {
   chatRoom: string;
   roomPwd: string;
   images: string[];
-  give: number[];
-  take: number[];
+  give: string[];
+  take: string[];
 }
 
 export default {};

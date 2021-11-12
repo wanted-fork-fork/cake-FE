@@ -119,7 +119,7 @@ function AutoCompleteInputComponent<T>({
           />
         );
     }
-  }, [shape, fontSize]);
+  }, [shape, inputValue, fontSize, onChange, placeholder]);
 
   return (
     <Wrapper>

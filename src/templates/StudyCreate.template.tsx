@@ -15,6 +15,7 @@ import TitleHeaderComponent from "@src/components/molecules/TitleHeader.componen
 // styles
 import theme, { Padding } from "@src/styles/theme";
 import { LightUnderline, NoScroll } from "@src/styles/common";
+import AutocompleteCategoryComponent from "@src/components/molecules/AutocompleteCategory.component";
 
 const Container = styled.div`
   padding-top: 60px;
@@ -94,6 +95,10 @@ function StudyCreateTemplate({
   onChangeStartDate,
   endDate,
   onChangeEndDate,
+  selectedMine,
+  setSelectedMine,
+  selectedYours,
+  setSelectedYours,
 }) {
   const studyTypeList = useMemo(() => getStudyTypeList(), []);
   return (
@@ -117,8 +122,16 @@ function StudyCreateTemplate({
           onSelect={onChange}
         />
         <CategoryWrapper>
-          <InputLikeButton color="gray">나의 능력</InputLikeButton>
-          <InputLikeButton color="gray">너의 능력</InputLikeButton>
+          <AutocompleteCategoryComponent
+            selected={selectedMine}
+            setSelected={setSelectedMine}
+            placeholder="나의 능력"
+          />
+          <AutocompleteCategoryComponent
+            selected={selectedYours}
+            setSelected={setSelectedYours}
+            placeholder="너의 능력"
+          />
         </CategoryWrapper>
         <CategoryWrapper>
           <WithPrefixIcon>
