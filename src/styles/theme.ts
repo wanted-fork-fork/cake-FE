@@ -20,7 +20,7 @@ const theme: DefaultTheme = {
     gray1: "#f6f6f6",
     gray0: "#FAFAFA",
     white: "#FFFFFF",
-    success: "#2ㅗ2bb33",
+    success: "#22bb33",
     danger: "#bb2124",
     warning: "#f0ad4e",
     info: "#5bc0de",

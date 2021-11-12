@@ -13,4 +13,4 @@ export const CategoryTag = styled.button<ButtonStyleProps>`
   border-radius: 20px;
 `;
 
-export default {};
+export default { CategoryTag };

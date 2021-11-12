@@ -17,6 +17,7 @@ import AutocompleteCategoryComponent from "@src/components/molecules/Autocomplet
 import theme, { Padding } from "@src/styles/theme";
 import { LightUnderline, NoScroll } from "@src/styles/common";
 import { BottomSection } from "@src/components/atoms/BottomSection";
+import { BoldDivider } from "@src/components/atoms/Divider";
 
 const Container = styled.div`
   padding-top: 60px;
@@ -55,11 +56,6 @@ const Textarea = styled.textarea`
   border-radius: 9px;
   border: 1px solid ${theme.color.gray3};
   padding: 8px;
-`;
-
-const BorderLine = styled.hr`
-  border: 4px solid ${theme.color.gray2};
-  margin: 20px 0;
 `;
 
 const MidLine = styled.hr`
@@ -179,7 +175,7 @@ function StudyCreateTemplate({
           onChange={onChange}
         />
       </FormWrapper>
-      <BorderLine />
+      <BoldDivider my="20px" />
       <FormWrapper>
         <Textarea
           name="content"

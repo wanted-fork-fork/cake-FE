@@ -27,7 +27,7 @@ const ContentsWrapper = styled.div`
   h3 {
     font-weight: 700;
     font-size: ${FontSize.PrimaryDescription};
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 `;
 const InfoWrapper = styled.div`
@@ -44,9 +44,11 @@ const IconPrefixWrapper = styled.span`
   }
 `;
 const CategoryWrapper = styled.div`
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
 `;
 const Category = styled.span`
   font-size: ${FontSize.Small};
