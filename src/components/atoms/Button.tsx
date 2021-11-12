@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import theme, { Color } from "@src/styles/theme";
+import { BaseProps, BaseStyleProps, LightUnderline } from "@src/styles/common";
+import theme, { Color, FontSize } from "@src/styles/theme";
 
 export interface ButtonStyleProps extends BaseProps {
   mb?: string;
@@ -11,11 +11,14 @@ export interface ButtonStyleProps extends BaseProps {
   color: "gray" | "primary" | "white";
 }
 
+export interface InputLikeButtonStyleProps extends ButtonStyleProps {
+  selected?: boolean;
+}
+
 const BaseButton = css<ButtonStyleProps>`
   ${BaseStyleProps};
 
   border: none;
-  border-radius: 12px;
   height: ${({ height }) => height || "58px"};
   text-align: center;
   cursor: pointer;
@@ -24,6 +27,8 @@ const BaseButton = css<ButtonStyleProps>`
 
 export const Button = styled.button<ButtonStyleProps>`
   ${BaseButton};
+
+  border-radius: 12px;
 
   background: ${({ color, disabled, filled = true }) => {
     if (disabled) return theme.color.gray2;
@@ -55,4 +60,18 @@ export const Button = styled.button<ButtonStyleProps>`
     color === "primary" && !disabled && filled ? "#fff" : theme.color.black};
 
   width: ${({ width }) => width || "100%"};
+`;
+
+export const InputLikeButton = styled.button<InputLikeButtonStyleProps>`
+  ${BaseButton};
+  ${LightUnderline};
+  background-color: transparent;
+  font-size: ${FontSize.PrimaryDescription};
+  height: auto;
+
+  padding-bottom: 6px;
+  width: 100%;
+
+  color: ${({ selected = false }) =>
+    selected ? theme.color.black : theme.color.gray4};
 `;
