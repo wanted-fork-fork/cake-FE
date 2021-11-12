@@ -38,8 +38,6 @@ function CreateStudyPage() {
     },
   });
 
-  useEffect(() => console.log(values), [values]);
-
   return (
     <StudyCreateTemplate
       startDate={startDate}
