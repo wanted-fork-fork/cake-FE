@@ -9,6 +9,15 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: ${Padding.pageX};
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  height: 60px;
+
+  z-index: 9999;
 `;
 
 const Title = styled.p`

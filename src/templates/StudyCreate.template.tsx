@@ -5,27 +5,38 @@ import styled from "styled-components";
 import theme, { Padding } from "@src/styles/theme";
 import { Checkbox, DatePicker } from "antd";
 import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
-import SearchIcon from "@src/components/icon/Search.icon";
-import { LightUnderline } from "@src/styles/common";
+import { LightUnderline, NoScroll } from "@src/styles/common";
+import { Button, InputLikeButton } from "@src/components/atoms/Button";
+import CalendarIcon from "@src/components/icon/Calendar.icon";
+import PinIcon from "@src/components/icon/Pin.icon";
 
-const Container = styled.form`
+const Container = styled.div`
+  padding-top: 60px;
+  padding-bottom: 80px;
+  height: 100vh;
+  overflow: auto;
+
+  ${NoScroll};
+`;
+const FormWrapper = styled.form`
   padding: 0 ${Padding.pageX};
+  input,
+  select {
+    margin-top: 5px;
+  }
 `;
 const CategoryWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 10px;
   text-align: center;
+  margin-top: 5px;
 `;
 const WithUnderline = styled.div`
   ${LightUnderline};
   display: flex;
   align-items: center;
-
-  .rc-checkbox {
-    vertical-align: center;
-    margin-right: 5px;
-  }
 `;
 
 const Textarea = styled.textarea`
@@ -34,15 +45,46 @@ const Textarea = styled.textarea`
   border: 1px solid ${theme.color.gray3};
   padding: 8px;
 `;
+
+const BorderLine = styled.hr`
+  border: 4px solid ${theme.color.gray2};
+  margin: 20px 0;
+`;
+
+const MidLine = styled.hr`
+  border: 1px solid ${theme.color.gray3};
+  border-radius: 0;
+  width: 15px;
+`;
+
+const WithPrefixIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Bottom = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: #fff;
+  border-top: 1px solid ${theme.color.gray3};
+  z-index: 9999;
+`;
+const SubmitWrapper = styled.div`
+  position: absolute;
+  right: ${Padding.pageX};
+  top: 10px;
+`;
 function StudyCreateTemplate() {
   return (
-    <div>
+    <Container>
       <TitleHeaderComponent title="스터디 생성" backLink="/" />
-      <Container>
+      <FormWrapper>
         <LightUnderlineInput placeholder="타이틀 입력" fontSize="small" />
         <Select
           shape="light"
-          selected={undefined}
           list={[]}
           idKeyName={undefined}
           labelKeyName={undefined}
@@ -50,41 +92,59 @@ function StudyCreateTemplate() {
           onSelect={undefined}
         />
         <CategoryWrapper>
-          <LightUnderlineInput placeholder="나의 능력" fontSize="small" />
-          <LightUnderlineInput placeholder="너의 능력" fontSize="small" />
+          <InputLikeButton color="gray">나의 능력</InputLikeButton>
+          <InputLikeButton color="gray">너의 능력</InputLikeButton>
         </CategoryWrapper>
         <CategoryWrapper>
-          <DatePicker
-            suffixIcon={null}
-            placeholder="스터디 시작일"
-            picker="date"
-            bordered={false}
-          />
-          <DatePicker
-            suffixIcon={null}
-            placeholder="스터디 종료일"
-            picker="date"
-            bordered={false}
-          />
+          <WithPrefixIcon>
+            <CalendarIcon color={theme.color.gray3} />
+            <DatePicker
+              suffixIcon={null}
+              placeholder="스터디 시작일"
+              picker="date"
+              bordered={false}
+              format="YY.MM.DD"
+            />
+          </WithPrefixIcon>
+          <MidLine />
+          <WithPrefixIcon>
+            <CalendarIcon color={theme.color.gray3} />
+            <DatePicker
+              suffixIcon={null}
+              placeholder="스터디 종료일"
+              picker="date"
+              bordered={false}
+              format="YY.MM.DD"
+            />
+          </WithPrefixIcon>
         </CategoryWrapper>
         <WithUnderline>
-          <Checkbox>참가자와 날짜 결정</Checkbox>
+          <Checkbox>
+            <span color={theme.color.gray3}>참가자와 날짜 결정</span>
+          </Checkbox>
         </WithUnderline>
         <InputWithSuffixComponent
           input={<LightUnderlineInput placeholder="장소" fontSize="small" />}
-          suffix={<SearchIcon />}
+          suffix={<PinIcon />}
         />
         <LightUnderlineInput placeholder="오픈채팅링크" fontSize="small" />
         <LightUnderlineInput placeholder="오픈채팅 비밀번호" fontSize="small" />
-      </Container>
-      <hr />
-      <Container>
+      </FormWrapper>
+      <BorderLine />
+      <FormWrapper>
         <Textarea
           placeholder="상세 내용, 일정 및 유의 사항을 입력해주세요."
           rows={10}
         />
-      </Container>
-    </div>
+      </FormWrapper>
+      <Bottom>
+        <SubmitWrapper>
+          <Button width="100px" height="44px" color="primary" fontSize="small">
+            게시물 작성
+          </Button>
+        </SubmitWrapper>
+      </Bottom>
+    </Container>
   );
 }
 

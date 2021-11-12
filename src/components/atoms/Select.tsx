@@ -3,9 +3,11 @@ import styled from "styled-components";
 
 // style
 import { LightUnderline, Underline } from "@src/styles/common";
+import theme from "@src/styles/theme";
 
 export type SelectStyleProp = {
   shape: "default" | "light";
+  selected: string | null;
 };
 
 const Select = styled.select<SelectStyleProp>`
@@ -20,29 +22,39 @@ const Select = styled.select<SelectStyleProp>`
     }
   }};
 
-  width: 100%;
+  ${({ shape }) => (shape === "light" ? "padding-left: 6px;" : "")};
 
+  width: 100%;
   cursor: pointer;
 
   &:focus {
     outline: none;
   }
+
+  color: ${({ selected }) =>
+    selected ? theme.color.black : theme.color.gray4};
+
+  option {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 type SelectProp<T> = {
-  selected: string;
+  selected?: string | null;
   list: T[];
   idKeyName: string;
   labelKeyName: string;
-  defaultText: string;
+  defaultText: string | null;
   onSelect: ReactEventHandler<HTMLSelectElement>;
   shape?: "default" | "light";
 };
 SelectComponent.defaultProps = {
   shape: "default",
+  selected: null,
 };
 function SelectComponent<T>({
-  selected = "",
+  selected,
   list,
   idKeyName,
   labelKeyName,
@@ -63,8 +75,14 @@ function SelectComponent<T>({
   }, [list, idKeyName, labelKeyName]);
 
   return (
-    <Select defaultValue={selected} onChange={onSelect} shape={shape}>
-      <option disabled value="">
+    <Select
+      selected={selected}
+      defaultValue={selected}
+      placeholder={defaultText}
+      onChange={onSelect}
+      shape={shape}
+    >
+      <option disabled selected hidden>
         {defaultText}
       </option>
       {options}
