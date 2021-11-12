@@ -1,4 +1,9 @@
-import { ReactEventHandler, useMemo } from "react";
+import {
+  DetailedHTMLProps,
+  ReactEventHandler,
+  SelectHTMLAttributes,
+  useMemo,
+} from "react";
 import styled from "styled-components";
 
 // style
@@ -40,7 +45,7 @@ const Select = styled.select<SelectStyleProp>`
   }
 `;
 
-type SelectProp<T> = {
+interface SelectProp<T> extends SelectHTMLAttributes<HTMLSelectElement> {
   selected?: string | null;
   list: T[];
   idKeyName: string;
@@ -48,12 +53,13 @@ type SelectProp<T> = {
   defaultText: string | null;
   onSelect: ReactEventHandler<HTMLSelectElement>;
   shape?: "default" | "light";
-};
+}
 SelectComponent.defaultProps = {
   shape: "default",
   selected: null,
 };
 function SelectComponent<T>({
+  name,
   selected,
   list,
   idKeyName,
@@ -63,12 +69,14 @@ function SelectComponent<T>({
   shape,
 }: SelectProp<T>) {
   const options = useMemo(() => {
+    const disabledKeyName = "disabled";
     const optionList = list.map((x) => ({
       key: x[idKeyName],
       label: x[labelKeyName],
+      disabled: x[disabledKeyName],
     }));
     return optionList.map((x) => (
-      <option key={x.key} value={x.key}>
+      <option key={x.key} value={x.key} disabled={x.disabled}>
         {x.label}
       </option>
     ));
@@ -76,13 +84,14 @@ function SelectComponent<T>({
 
   return (
     <Select
+      name={name}
       selected={selected}
       defaultValue={selected}
       placeholder={defaultText}
       onChange={onSelect}
       shape={shape}
     >
-      <option disabled selected hidden>
+      <option disabled hidden>
         {defaultText}
       </option>
       {options}

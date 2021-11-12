@@ -34,3 +34,15 @@ export const UnivCategoryEnumToLabel = {
   [UnivCategory.ARTS]: "예술대학",
   [UnivCategory.IT]: "정보통신대학",
 };
+
+export enum StudyType {
+  OneToOne,
+  OneToMany,
+  ManyToMany,
+}
+
+export const StudyTypeEnumToLabel = {
+  [StudyType.OneToOne]: "1:1",
+  [StudyType.OneToMany]: "1:n",
+  [StudyType.ManyToMany]: "n",
+};
