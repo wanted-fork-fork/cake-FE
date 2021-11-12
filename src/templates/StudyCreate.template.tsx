@@ -3,12 +3,13 @@ import { LightUnderlineInput } from "@src/components/atoms/Input";
 import Select from "@src/components/atoms/Select";
 import styled from "styled-components";
 import theme, { Padding } from "@src/styles/theme";
-import { Checkbox, DatePicker } from "antd";
-import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
+import { DatePicker } from "antd";
 import { LightUnderline, NoScroll } from "@src/styles/common";
 import { Button, InputLikeButton } from "@src/components/atoms/Button";
 import CalendarIcon from "@src/components/icon/Calendar.icon";
-import PinIcon from "@src/components/icon/Pin.icon";
+import { useMemo } from "react";
+import { getStudyTypeList } from "@src/utils/enum.util";
+import AutoCompleteInputComponent from "@src/components/molecules/AutoCompleteInput.component";
 
 const Container = styled.div`
   padding-top: 60px;
@@ -18,7 +19,7 @@ const Container = styled.div`
 
   ${NoScroll};
 `;
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   padding: 0 ${Padding.pageX};
   input,
   select {
@@ -37,6 +38,8 @@ const WithUnderline = styled.div`
   ${LightUnderline};
   display: flex;
   align-items: center;
+  padding-top: 8px;
+  padding-bottom: 0;
   margin-bottom: 5px;
 `;
 
@@ -78,19 +81,36 @@ const SubmitWrapper = styled.div`
   right: ${Padding.pageX};
   top: 10px;
 `;
-function StudyCreateTemplate() {
+function StudyCreateTemplate({
+  onSubmit,
+  values,
+  onChange,
+  startDate,
+  onChangeStartDate,
+  endDate,
+  onChangeEndDate,
+  categoryList,
+}) {
+  const studyTypeList = useMemo(() => getStudyTypeList(), []);
   return (
     <Container>
       <TitleHeaderComponent title="스터디 생성" backLink="/" />
       <FormWrapper>
-        <LightUnderlineInput placeholder="타이틀 입력" fontSize="small" />
+        <LightUnderlineInput
+          name="title"
+          placeholder="타이틀 입력"
+          fontSize="small"
+          onChange={onChange}
+        />
         <Select
+          name="type"
+          selected={values.type}
           shape="light"
-          list={[]}
-          idKeyName={undefined}
-          labelKeyName={undefined}
+          list={studyTypeList}
+          idKeyName="key"
+          labelKeyName="value"
           defaultText="모임 형태"
-          onSelect={undefined}
+          onSelect={onChange}
         />
         <CategoryWrapper>
           <InputLikeButton color="gray">나의 능력</InputLikeButton>
@@ -105,6 +125,8 @@ function StudyCreateTemplate() {
               picker="date"
               bordered={false}
               format="YY.MM.DD"
+              value={startDate}
+              onChange={onChangeStartDate}
             />
           </WithPrefixIcon>
           <MidLine />
@@ -116,35 +138,56 @@ function StudyCreateTemplate() {
               picker="date"
               bordered={false}
               format="YY.MM.DD"
+              value={endDate}
+              onChange={onChangeEndDate}
             />
           </WithPrefixIcon>
         </CategoryWrapper>
-        <WithUnderline>
-          <Checkbox>
-            <span color={theme.color.gray3}>참가자와 날짜 결정</span>
-          </Checkbox>
-        </WithUnderline>
-        <InputWithSuffixComponent
-          input={
-            <InputLikeButton color="gray" fontSize="small">
-              장소
-            </InputLikeButton>
-          }
-          suffix={<PinIcon />}
+        <WithUnderline />
+        {/* <InputWithSuffixComponent */}
+        {/*  input={ */}
+        {/*    <InputLikeButton */}
+        {/*      type="button" */}
+        {/*      color="gray" */}
+        {/*      fontSize="small" */}
+        {/*      onClick={null} */}
+        {/*    > */}
+        {/*      장소 */}
+        {/*    </InputLikeButton> */}
+        {/*  } */}
+        {/*  suffix={<PinIcon />} */}
+        {/* /> */}
+        <LightUnderlineInput
+          name="chatRoom"
+          placeholder="오픈채팅링크"
+          fontSize="small"
+          onChange={onChange}
         />
-        <LightUnderlineInput placeholder="오픈채팅링크" fontSize="small" />
-        <LightUnderlineInput placeholder="오픈채팅 비밀번호" fontSize="small" />
+        <LightUnderlineInput
+          name="roomPwd"
+          placeholder="오픈채팅 비밀번호"
+          fontSize="small"
+          onChange={onChange}
+        />
       </FormWrapper>
       <BorderLine />
       <FormWrapper>
         <Textarea
+          name="content"
           placeholder="상세 내용, 일정 및 유의 사항을 입력해주세요."
           rows={10}
+          onChange={onChange}
         />
       </FormWrapper>
       <Bottom>
         <SubmitWrapper>
-          <Button width="100px" height="44px" color="primary" fontSize="small">
+          <Button
+            onClick={onSubmit}
+            width="100px"
+            height="44px"
+            color="primary"
+            fontSize="small"
+          >
             게시물 작성
           </Button>
         </SubmitWrapper>
