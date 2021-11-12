@@ -10,6 +10,8 @@ import SignupService from "@src/services/Signup.service";
 import ResourceService from "@src/services/Resource.service";
 import CategoryService from "@src/services/Category.service";
 import CategoryStore from "@src/store/category.store";
+import StudyService from "@src/services/Study.service";
+import StudyStore from "@src/store/study.store";
 
 export class RootStore {
   axiosInstance: AxiosInstance;
@@ -20,6 +22,8 @@ export class RootStore {
 
   categoryStore: CategoryStore;
 
+  studyStore: StudyStore;
+
   resourceService: ResourceService;
 
   constructor() {
@@ -29,12 +33,14 @@ export class RootStore {
     const signupService = new SignupService(this.axiosInstance);
     const resourceService = new ResourceService(this.axiosInstance);
     const categoryService = new CategoryService(this.axiosInstance);
+    const studyService = new StudyService(this.axiosInstance);
 
     this.resourceService = resourceService;
 
     this.userStore = new UserStore(this, authService);
     this.categoryStore = new CategoryStore(this, categoryService);
     this.signupStore = new SignupStore(this, signupService);
+    this.studyStore = new StudyStore(this, studyService);
   }
 
   async uploadImage(file) {

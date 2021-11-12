@@ -28,7 +28,7 @@ export const BaseFontSize = css`
       case "default":
         return FontSize.Default;
       case "small":
-        return FontSize.Small;
+        return FontSize.PrimaryDescription;
       default:
         return FontSize.Default;
     }
@@ -47,6 +47,14 @@ export const Underline = css`
   &:focus {
     border-color: ${theme.color.primary};
   }
+`;
+
+export const LightUnderline = css`
+  border: none;
+  text-align: inherit;
+
+  padding: 10px 10px;
+  border-bottom: 1px solid ${theme.color.gray3};
 `;
 
 export const NoScroll = css`

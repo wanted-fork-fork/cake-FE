@@ -7,7 +7,7 @@ import { useStores } from "@src/store/root.store";
 import { CategoryType } from "@src/constant/enum.constant";
 
 // component
-import CategoryComponent from "@src/components/molcules/Category.component";
+import CategoryComponent from "@src/components/molecules/Category.component";
 import { Button } from "@src/components/atoms/Button";
 
 // styles

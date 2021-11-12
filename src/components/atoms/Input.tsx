@@ -1,7 +1,12 @@
 import styled, { css } from "styled-components";
 
 // styles
-import { BaseProps, BaseStyleProps, Underline } from "@src/styles/common";
+import {
+  BaseProps,
+  BaseStyleProps,
+  LightUnderline,
+  Underline,
+} from "@src/styles/common";
 import theme from "@src/styles/theme";
 
 export interface InputStyleProps extends BaseProps {
@@ -37,4 +42,9 @@ export const UnderlineInput = styled.input<InputStyleProps>`
     background: transparent;
     color: ${theme.color.gray5};
   }
+`;
+
+export const LightUnderlineInput = styled.input<InputStyleProps>`
+  ${LightUnderline};
+  ${BaseInput};
 `;

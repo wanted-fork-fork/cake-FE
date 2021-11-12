@@ -4,11 +4,16 @@ import { SelectEventHandler } from "rc-menu/es/interface";
 import styled from "styled-components";
 
 // components
-import { UnderlineInput } from "@src/components/atoms/Input";
+import {
+  LightUnderlineInput,
+  UnderlineInput,
+} from "@src/components/atoms/Input";
 
 interface AutoCompleteInputProps<T> {
   list: T[];
   inputValue: string;
+  shape?: string;
+  fontSize?: "default" | "large" | "small";
   selected: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onSelect: SelectEventHandler;
@@ -22,10 +27,16 @@ const Wrapper = styled.div`
     width: 100%;
   }
 `;
+AutoCompleteInputComponent.defaultProps = {
+  shape: "default",
+  fontSize: "default",
+};
 
 function AutoCompleteInputComponent<T>({
   list,
   inputValue,
+  shape = "default",
+  fontSize,
   selected,
   onChange,
   onSelect,
@@ -78,14 +89,42 @@ function AutoCompleteInputComponent<T>({
     [options, selected, onSelect, inputValue],
   );
 
+  const input = useMemo(() => {
+    switch (shape) {
+      case "default":
+        return (
+          <UnderlineInput
+            value={inputValue}
+            fontSize={fontSize}
+            onChange={onChange}
+            placeholder={placeholder}
+          />
+        );
+      case "light":
+        return (
+          <LightUnderlineInput
+            value={inputValue}
+            onChange={onChange}
+            fontSize={fontSize}
+            placeholder={placeholder}
+          />
+        );
+      default:
+        return (
+          <UnderlineInput
+            value={inputValue}
+            onChange={onChange}
+            fontSize={fontSize}
+            placeholder={placeholder}
+          />
+        );
+    }
+  }, [shape, inputValue, fontSize, onChange, placeholder]);
+
   return (
     <Wrapper>
       <Dropdown overlay={menu} trigger={["click"]}>
-        <UnderlineInput
-          value={inputValue}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
+        {input}
       </Dropdown>
     </Wrapper>
   );

@@ -8,8 +8,8 @@ import { useStores } from "@src/store/root.store";
 import useInput from "@src/hooks/useInput.hook";
 
 // components
-import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
-import AutoCompleteInputComponent from "@src/components/molcules/AutoCompleteInput.component";
+import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
+import AutoCompleteInputComponent from "@src/components/molecules/AutoCompleteInput.component";
 import SearchIcon from "@src/components/icon/Search.icon";
 
 const SelectSchoolStepComponent = observer(() => {

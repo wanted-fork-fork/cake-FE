@@ -15,6 +15,11 @@ function UserMainTemplate({ email }) {
   return (
     <Container>
       <div>email: {email}</div>
+      <Link href="/study/create">
+        <a>
+          <Button color="primary">스터디 생성</Button>
+        </a>
+      </Link>
       <Link href="/logout">
         <a>
           <Button color="primary">로그아웃</Button>

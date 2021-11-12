@@ -1,4 +1,4 @@
-import SelectComponent from "@src/components/atoms/Select";
+import SelectComponent, { SelectStyleProp } from "@src/components/atoms/Select";
 import { UnivCategoryEnumToLabel } from "@src/constant/enum.constant";
 
 export default {
@@ -11,7 +11,7 @@ const values = Object.entries(UnivCategoryEnumToLabel).map((x) => ({
   value: x[1],
 }));
 
-const Template = () => (
+const Template = ({ shape = "default" }: SelectStyleProp) => (
   <SelectComponent
     list={values}
     idKeyName="key"
@@ -19,7 +19,10 @@ const Template = () => (
     defaultText=""
     onSelect={null}
     selected={null}
+    shape={shape}
   />
 );
 
 export const Select = Template.bind({});
+export const LightSelect = Template.bind({});
+LightSelect.args = { shape: "light" };

@@ -10,7 +10,7 @@ import useInput from "@src/hooks/useInput.hook";
 // components
 import { Button } from "@src/components/atoms/Button";
 import { UnderlineInput } from "@src/components/atoms/Input";
-import InputWithSuffixComponent from "@src/components/molcules/InputWithSuffix.component";
+import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
 import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 // styles
