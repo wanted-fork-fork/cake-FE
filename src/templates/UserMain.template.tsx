@@ -44,6 +44,9 @@ const HeaderSectionsWrapper = styled.div`
 `;
 const CurationSectionsWrapper = styled.div`
   ${BasePadding};
+  h2 {
+    margin-bottom: 20px;
+  }
 `;
 const CategoryListElementWrapper = styled.div`
   display: flex;
@@ -64,7 +67,7 @@ const SearchContentsWrapper = styled.div`
 `;
 
 const categories = ["일러스트", "운동", "JAVA"];
-function UserMainTemplate({ studyList = [], bannerImg }) {
+function UserMainTemplate({ studyList = [] }) {
   const studyListDom = useMemo(
     () =>
       studyList.map((study, index) => {

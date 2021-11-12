@@ -16,10 +16,8 @@ const studySample: StudyListElementDto = {
   take: ["운동", "영상 편집"],
   img: "https://cdn.pixabay.com/photo/2021/09/01/16/09/cake-6591719__340.jpg",
 };
-const bannerImage =
-  "https://cdn.pixabay.com/photo/2020/03/10/03/49/red-velvet-cake-4917734_960_720.jpg";
 const Template = ({ studyList = [] }) => (
-  <UserMainTemplate studyList={studyList} bannerImg={bannerImage} />
+  <UserMainTemplate studyList={studyList} />
 );
 
 export const UserMain = Template.bind({});
