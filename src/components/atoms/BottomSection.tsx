@@ -11,7 +11,7 @@ export const BottomSection = styled.div<BottomProps>`
   right: 0;
   height: ${({ height }) => height ?? "68px"};
   background: #fff;
-  border-top: 1px solid ${theme.color.gray3};
+  border-top: 1px solid ${theme.color.gray2};
   z-index: 9999;
   ${theme.window.tab} {
     width: ${windowSize.mobile};

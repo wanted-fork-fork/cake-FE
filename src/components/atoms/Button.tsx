@@ -9,14 +9,14 @@ export interface ButtonStyleProps extends BaseProps {
   filled?: boolean;
   width?: string;
   height?: string;
-  color: "gray" | "primary" | "white";
+  color?: "gray" | "primary" | "white";
 }
 
 export interface InputLikeButtonStyleProps extends ButtonStyleProps {
   selected?: boolean;
 }
 
-const BaseButton = css<ButtonStyleProps>`
+export const BaseButton = css<ButtonStyleProps>`
   ${BaseStyleProps};
 
   border: none;
