@@ -14,13 +14,13 @@ const theme: DefaultTheme = {
     point: "#F95E66", // custom
     black: "#000000",
     gray5: "#444444",
-    gray4: "#767676",
+    gray4: "#a6a29d",
     gray3: "#bdbdbd", // custom
     gray2: "#e9e9e9", // custom
-    gray1: "#E5E5E5",
+    gray1: "#f6f6f6",
     gray0: "#FAFAFA",
     white: "#FFFFFF",
-    success: "#22bb33",
+    success: "#2ㅗ2bb33",
     danger: "#bb2124",
     warning: "#f0ad4e",
     info: "#5bc0de",

@@ -15,4 +15,15 @@ export interface CreateStudyDto {
   take: string[];
 }
 
+export interface StudyListElement {
+  id: number;
+  title: string;
+  peopleCnt: number;
+  startDate: string;
+  endDate: string;
+  give: string[];
+  take: string[];
+  img: string;
+}
+
 export default {};
