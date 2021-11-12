@@ -11,11 +11,12 @@ import { LightUnderlineInput } from "@src/components/atoms/Input";
 import DatePicker from "@src/components/atoms/DatePicker";
 import Select from "@src/components/atoms/Select";
 import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
+import AutocompleteCategoryComponent from "@src/components/molecules/AutocompleteCategory.component";
 
 // styles
 import theme, { Padding } from "@src/styles/theme";
 import { LightUnderline, NoScroll } from "@src/styles/common";
-import AutocompleteCategoryComponent from "@src/components/molecules/AutocompleteCategory.component";
+import { BottomSection } from "@src/components/atoms/BottomSection";
 
 const Container = styled.div`
   padding-top: 60px;
@@ -72,16 +73,7 @@ const WithPrefixIcon = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Bottom = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 68px;
-  background: #fff;
-  border-top: 1px solid ${theme.color.gray3};
-  z-index: 9999;
-`;
+
 const SubmitWrapper = styled.div`
   position: absolute;
   right: ${Padding.pageX};
@@ -196,7 +188,7 @@ function StudyCreateTemplate({
           onChange={onChange}
         />
       </FormWrapper>
-      <Bottom>
+      <BottomSection>
         <SubmitWrapper>
           <Button
             onClick={onSubmit}
@@ -208,7 +200,7 @@ function StudyCreateTemplate({
             게시물 작성
           </Button>
         </SubmitWrapper>
-      </Bottom>
+      </BottomSection>
     </Container>
   );
 }
