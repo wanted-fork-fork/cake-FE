@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import styled from "styled-components";
-import { FontSize, Padding } from "@src/styles/theme";
+import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 
 const Container = styled.div`
   display: flex;
@@ -18,6 +18,12 @@ const Container = styled.div`
   height: 60px;
 
   z-index: 9999;
+
+  ${theme.window.tab} {
+    width: ${windowSize.mobile};
+    left: auto;
+    right: auto;
+  }
 `;
 
 const Title = styled.p`
