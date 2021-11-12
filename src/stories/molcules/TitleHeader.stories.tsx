@@ -1,7 +1,7 @@
 import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
 
 export default {
-  title: "molecules",
+  title: "molecules/Title Header",
   component: TitleHeaderComponent,
 };
 
