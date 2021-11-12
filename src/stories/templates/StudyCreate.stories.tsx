@@ -1,10 +1,10 @@
-import StudyCreateTemplate from "@src/templates/StudyCreate.template";
+import CreateStudyPage from "@src/pages/study/create";
 
 export default {
   title: "template",
-  component: StudyCreateTemplate,
+  component: CreateStudyPage,
 };
 
-const Template = () => <StudyCreateTemplate />;
+const Template = () => <CreateStudyPage />;
 
 export const StudyCreate = Template.bind({});

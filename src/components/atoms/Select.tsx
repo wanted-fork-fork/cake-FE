@@ -1,9 +1,4 @@
-import {
-  DetailedHTMLProps,
-  ReactEventHandler,
-  SelectHTMLAttributes,
-  useMemo,
-} from "react";
+import { ReactEventHandler, SelectHTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
 
 // style

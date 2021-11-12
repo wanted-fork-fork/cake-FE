@@ -6,7 +6,7 @@ import { getStudyTypeList } from "@src/utils/enum.util";
 
 // components
 import CalendarIcon from "@src/components/icon/Calendar.icon";
-import { Button, InputLikeButton } from "@src/components/atoms/Button";
+import { Button } from "@src/components/atoms/Button";
 import { LightUnderlineInput } from "@src/components/atoms/Input";
 import DatePicker from "@src/components/atoms/DatePicker";
 import Select from "@src/components/atoms/Select";
