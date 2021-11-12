@@ -71,7 +71,7 @@ type CategoryWrapperProp = {
   onClick: MouseEventHandler<HTMLDivElement>;
 };
 
-function CategoryComponent({
+function CategorySelectComponent({
   selected = false,
   img = null,
   name = "",
@@ -91,4 +91,4 @@ function CategoryComponent({
   );
 }
 
-export default CategoryComponent;
+export default CategorySelectComponent;

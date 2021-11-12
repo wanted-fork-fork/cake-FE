@@ -7,7 +7,7 @@ import { useStores } from "@src/store/root.store";
 import { CategoryType } from "@src/constant/enum.constant";
 
 // component
-import CategoryComponent from "@src/components/molecules/Category.component";
+import CategorySelectComponent from "@src/components/molecules/CategorySelectComponent";
 import { Button } from "@src/components/atoms/Button";
 
 // styles
@@ -54,7 +54,7 @@ const SelectCategoryStepComponent = observer(
         categoryStore.categoryList.map((x) => {
           const onClick = () => onSelect(type, x.id);
           return (
-            <CategoryComponent
+            <CategorySelectComponent
               key={x.id}
               img={x.img}
               selected={selectedList.find((y) => y === x.id) !== undefined}
