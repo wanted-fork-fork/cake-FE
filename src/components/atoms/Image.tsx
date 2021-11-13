@@ -1,6 +1,6 @@
 import { ImgHTMLAttributes, useCallback, useState } from "react";
 
-interface Props extends ImgHTMLAttributes<any> {
+interface Props extends ImgHTMLAttributes<HTMLImageElement> {
   fallback?: string;
 }
 
@@ -13,8 +13,8 @@ function Image({ fallback, src, alt, ...props }: Props) {
   const [imgSrc, setImgSrc] = useState<string | undefined>(src);
   const onError = useCallback(() => setImgSrc(fallback), [fallback]);
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <img src={imgSrc || fallback} alt={alt} {...props} onError={onError} />
   );
 }
