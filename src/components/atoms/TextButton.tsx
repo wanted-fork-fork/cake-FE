@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import theme from "@src/styles/theme";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
-export type TextButtonStyleProps = {
-  color: "gray" | "primary" | "white" | "black";
-};
+export interface TextButtonStyleProps extends BaseProps {
+  color?: "gray" | "primary" | "white" | "black";
+}
 
 export const TextButton = styled.button<TextButtonStyleProps>`
+  ${BaseStyleProps};
+
   background: transparent;
   border: none;
   width: 100%;

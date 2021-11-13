@@ -13,6 +13,7 @@ import StudyListElementComponent from "@src/components/molecules/StudyListElemen
 import { NoScroll } from "@src/styles/common";
 import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
 import { useMemo } from "react";
+import { TextButton } from "@src/components/atoms/TextButton";
 
 const Container = styled.div`
   ${NoScroll};
@@ -67,7 +68,11 @@ const SearchContentsWrapper = styled.div`
 `;
 
 const categories = ["일러스트", "운동", "JAVA"];
-function UserMainTemplate({ studyList = [] }) {
+function UserMainTemplate({
+  studyList = [],
+  onClickNext = () => null,
+  hasMore = false,
+}) {
   const studyListDom = useMemo(
     () =>
       studyList.map((study, index) => {
@@ -78,7 +83,7 @@ function UserMainTemplate({ studyList = [] }) {
           </StudyListElementWrapper>,
         );
         if (index < studyList.length - 1)
-          elements.push(<BoldDivider my="20px" />);
+          elements.push(<BoldDivider key={`${study.id}-div`} my="20px" />);
         return elements;
       }),
     [studyList],
@@ -116,6 +121,12 @@ function UserMainTemplate({ studyList = [] }) {
       </CurationSectionsWrapper>
       <LightDivider my="20px" />
       <div>{studyListDom}</div>
+      <LightDivider my="20px" />
+      {hasMore && (
+        <TextButton fontSize="small" onClick={onClickNext}>
+          더보기
+        </TextButton>
+      )}
       <BottomNavigationComponent />
     </Container>
   );
