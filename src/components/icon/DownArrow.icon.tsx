@@ -1,4 +1,4 @@
-function DownArrowIcon() {
+function DownArrowIcon({ color = "#333" }) {
   return (
     <svg
       width="17"
@@ -7,7 +7,7 @@ function DownArrowIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M1 1L8.5 8.5L16 1" stroke="#333333" strokeWidth="2" />
+      <path d="M1 1L8.5 8.5L16 1" stroke={color} strokeWidth="2" />
     </svg>
   );
 }
