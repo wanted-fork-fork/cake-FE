@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import styled from "styled-components";
 
 // components
@@ -10,7 +10,8 @@ import ColoredCalendarIcon from "@src/components/icon/ColoredCalendar.icon";
 import { dateToFormatted } from "@src/utils/dayjs.util";
 
 // styles
-import theme, { FontSize } from "@src/styles/theme";
+import theme, { FontSize, Padding } from "@src/styles/theme";
+import Image from "@src/components/atoms/Image";
 
 export interface StudyListElementComponentProps {
   study: StudyListElement;
@@ -20,6 +21,9 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: auto 100px;
   width: 100%;
+  cursor: pointer;
+  user-select: none;
+  padding: ${Padding.pageX};
 `;
 const ContentsWrapper = styled.div`
   width: 100%;
@@ -46,6 +50,7 @@ const IconPrefixWrapper = styled.span`
 const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
+  font-size: ${FontSize.Small};
   &:not(:last-child) {
     margin-bottom: 10px;
   }
@@ -104,6 +109,7 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
       `${dateToFormatted(study.startDate)} - ${dateToFormatted(study.endDate)}`,
     [study],
   );
+  const people = useMemo(() => `${study.peopleCnt || 1}명`, [study]);
   return (
     <S.Container key={study.id}>
       <S.ContentsWrapper>
@@ -111,7 +117,7 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
         <S.InfoWrapper>
           <S.IconPrefixWrapper>
             <PersonIcon />
-            <span>{study.peopleCnt}명</span>
+            <span>{people}</span>
           </S.IconPrefixWrapper>
           <S.IconPrefixWrapper>
             <ColoredCalendarIcon />
@@ -120,19 +126,21 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
         </S.InfoWrapper>
         <S.CategoryWrapper>
           <S.CategoryTypeTag>GIVE</S.CategoryTypeTag>
+          {study.give.length === 0 ? "아직 없어요" : ""}
           {study.give.map((x) => (
             <Category key={x}>{x}</Category>
           ))}
         </S.CategoryWrapper>
         <S.CategoryWrapper>
           <S.CategoryTypeTag>TAKE</S.CategoryTypeTag>
+          {study.take.length === 0 ? "다 좋아요!" : ""}
           {study.take.map((x) => (
             <S.Category key={x}>{x}</S.Category>
           ))}
         </S.CategoryWrapper>
       </S.ContentsWrapper>
       <S.ImageWrapper>
-        <img src={study.img} alt={study.title} height={100} />
+        <Image src={study.img} alt={study.title} height={100} />
       </S.ImageWrapper>
     </S.Container>
   );

@@ -1,7 +1,7 @@
-import GuestMainTemplate from "@src/templates/GuestMain.template";
 import { useStores } from "@src/store/root.store";
 import { useMemo } from "react";
 import UserMainTemplate from "@src/templates/UserMain.template";
+import GuestMainTemplate from "@src/templates/GuestMain.template";
 
 function MainPage() {
   const { userStore } = useStores();
