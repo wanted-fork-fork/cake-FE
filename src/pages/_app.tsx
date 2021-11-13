@@ -7,6 +7,8 @@ import GlobalStyle from "@src/styles/globals";
 import theme, { windowSize } from "@src/styles/theme";
 import GlobalFonts from "@src/styles/fonts";
 import "../styles/variables.less";
+import WithAuthenticationHoc from "@src/hooks/withAuthentication.hoc";
+import SafeHydrateHoc from "@src/hooks/safeHydrate.hoc";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
@@ -45,7 +47,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalFonts />
         <Container>
           <Content>
-            <Component {...pageProps} />
+            <SafeHydrateHoc>
+              <WithAuthenticationHoc>
+                <Component {...pageProps} />
+              </WithAuthenticationHoc>
+            </SafeHydrateHoc>
           </Content>
         </Container>
       </ThemeProvider>
