@@ -17,7 +17,7 @@ const Container = styled.div`
   background-color: #fff;
   height: 60px;
 
-  z-index: 9999;
+  z-index: 5000;
 
   ${theme.window.tab} {
     width: ${windowSize.mobile};

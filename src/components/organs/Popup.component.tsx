@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { Button } from "@src/components/atoms/Button";
-
 const Wrapper = styled.div`
   position: fixed;
   left: 0;
@@ -13,6 +11,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 40px;
+  z-index: 9999;
 `;
 
 const Modal = styled.div`

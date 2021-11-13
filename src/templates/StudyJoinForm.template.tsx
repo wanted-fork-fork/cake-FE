@@ -9,6 +9,7 @@ import { FontSize, Padding } from "@src/styles/theme";
 import { LightUnderlineInput } from "@src/components/atoms/Input";
 import { Textarea } from "@src/components/atoms/Textarea";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import StudyJoinSuccessModalComponent from "@src/stories/templates/StudyJoinSuccessModal.component";
 
 const ContentsWrapper = styled.div`
   padding: ${Padding.page};
@@ -49,6 +50,7 @@ function StudyJoinFormTemplate({ study }) {
           />
         </FormWrapper>
       </ContentsWrapper>
+      <StudyJoinSuccessModalComponent />
     </PageWrapperComponent>
   );
 }
