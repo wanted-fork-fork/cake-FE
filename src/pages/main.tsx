@@ -1,23 +1,28 @@
-import UserMainTemplate from "@src/templates/UserMain.template";
-import { useEffect, useState } from "react";
-import { StudyListElement } from "@src/models/dto/study.dto";
+// lib
+import useInfiniteLoading from "@src/hooks/useInfiniteLoading.hook";
 import { useStores } from "@src/store/root.store";
+// components
+import UserMainTemplate from "@src/templates/UserMain.template";
 
 function UserMainPage() {
   const { studyStore } = useStores();
 
-  const [studyList, setStudyList] = useState<StudyListElement[]>([]);
-  const [page, setPage] = useState<number>(0);
+  const {
+    items: studyList,
+    hasMore,
+    onNext,
+  } = useInfiniteLoading({
+    getItems: (p) => studyStore.getStudyFeed(p),
+    pageToLoad: 0,
+  });
 
-  useEffect(() => {
-    const getFeed = async function getFeed() {
-      const list = await studyStore.getStudyFeed(page);
-      setStudyList(list);
-    };
-    getFeed();
-  }, [page, studyStore]);
-
-  return <UserMainTemplate studyList={studyList} />;
+  return (
+    <UserMainTemplate
+      studyList={studyList}
+      onClickNext={onNext}
+      hasMore={hasMore}
+    />
+  );
 }
 
 export default UserMainPage;
