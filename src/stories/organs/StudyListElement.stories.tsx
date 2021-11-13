@@ -1,8 +1,8 @@
-import StudyListElementComponent from "@src/components/molecules/StudyListElement.component";
+import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 import { StudyListElement as StudyListElementDto } from "@src/models/dto/study.dto";
 
 export default {
-  title: "molecules/Study List Element",
+  title: "organs/Study List Element",
   component: StudyListElementComponent,
 };
 

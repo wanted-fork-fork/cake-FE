@@ -9,7 +9,7 @@ import BottomNavigationComponent from "@src/components/organs/BottomNavigation.c
 import CakeIcon from "@src/components/icon/Cake.icon";
 import { TextButton } from "@src/components/atoms/TextButton";
 import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
-import StudyListElementComponent from "@src/components/molecules/StudyListElement.component";
+import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 
 // styles
 import theme, { Color, FontSize, Padding } from "@src/styles/theme";
