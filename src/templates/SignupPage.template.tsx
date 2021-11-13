@@ -14,7 +14,7 @@ import SelectCategoryStepComponent from "@src/components/organs/signup/SelectCat
 import SignupCompleteStepComponent from "@src/components/organs/signup/SignupCompleteStep.component";
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import { Button } from "@src/components/atoms/Button";
-import { TextButton } from "@src/components/atoms/LinkButton";
+import { TextButton } from "@src/components/atoms/TextButton";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";

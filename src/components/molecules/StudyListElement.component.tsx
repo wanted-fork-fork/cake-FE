@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
 
 // components
@@ -106,7 +106,11 @@ const S = {
 function StudyListElementComponent({ study }: StudyListElementComponentProps) {
   const date = useMemo(
     () =>
-      `${dateToFormatted(study.startDate)} - ${dateToFormatted(study.endDate)}`,
+      study.startDate && study.endDate
+        ? `${dateToFormatted(study.startDate)} - ${dateToFormatted(
+            study.endDate,
+          )}`
+        : "협의 후 결정",
     [study],
   );
   const people = useMemo(() => `${study.peopleCnt || 1}명`, [study]);

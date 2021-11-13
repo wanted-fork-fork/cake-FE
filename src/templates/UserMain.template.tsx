@@ -86,7 +86,11 @@ const SearchContentsWrapper = styled.div`
 `;
 
 const categories = ["일러스트", "운동", "JAVA"];
-function UserMainTemplate({ studyList = [] }) {
+function UserMainTemplate({
+  studyList = [],
+  onClickNext = () => null,
+  hasMore = false,
+}) {
   const studyListDom = useMemo(
     () =>
       studyList.map((study, index) => {
@@ -144,7 +148,12 @@ function UserMainTemplate({ studyList = [] }) {
       </CurationSectionsWrapper>
       <LightDivider />
       <div>{studyListDom}</div>
-      {hasMore && <TextButton>더보기</TextButton>}
+      <LightDivider my="20px" />
+      {hasMore && (
+        <TextButton fontSize="small" onClick={onClickNext}>
+          더보기
+        </TextButton>
+      )}
       <BottomNavigationComponent />
     </Container>
   );
