@@ -10,23 +10,15 @@ import { Button } from "@src/components/atoms/Button";
 import { LightUnderlineInput } from "@src/components/atoms/Input";
 import DatePicker from "@src/components/atoms/DatePicker";
 import Select from "@src/components/atoms/Select";
-import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
 import AutocompleteCategoryComponent from "@src/components/molecules/AutocompleteCategory.component";
+import { BoldDivider } from "@src/components/atoms/Divider";
+import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
+import { Textarea } from "@src/components/atoms/Textarea";
 
 // styles
 import theme, { Padding } from "@src/styles/theme";
-import { LightUnderline, NoScroll } from "@src/styles/common";
-import { BottomSection } from "@src/components/atoms/BottomSection";
-import { BoldDivider } from "@src/components/atoms/Divider";
+import { LightUnderline } from "@src/styles/common";
 
-const Container = styled.div`
-  padding-top: 60px;
-  padding-bottom: 80px;
-  height: 100vh;
-  overflow: auto;
-
-  ${NoScroll};
-`;
 const FormWrapper = styled.div`
   padding: 0 ${Padding.pageX};
   input,
@@ -51,13 +43,6 @@ const WithUnderline = styled.div`
   margin-bottom: 5px;
 `;
 
-const Textarea = styled.textarea`
-  width: 100%;
-  border-radius: 9px;
-  border: 1px solid ${theme.color.gray3};
-  padding: 8px;
-`;
-
 const MidLine = styled.hr`
   border: 1px solid ${theme.color.gray3};
   border-radius: 0;
@@ -70,11 +55,6 @@ const WithPrefixIcon = styled.div`
   align-items: center;
 `;
 
-const SubmitWrapper = styled.div`
-  position: absolute;
-  right: ${Padding.pageX};
-  top: 10px;
-`;
 function StudyCreateTemplate({
   onSubmit,
   values,
@@ -90,8 +70,21 @@ function StudyCreateTemplate({
 }) {
   const studyTypeList = useMemo(() => getStudyTypeList(), []);
   return (
-    <Container>
-      <TitleHeaderComponent title="스터디 생성" backLink="/" />
+    <PageWrapperComponent
+      title="스터디 생성"
+      backLink="/"
+      button={
+        <Button
+          onClick={onSubmit}
+          width="100px"
+          height="44px"
+          color="primary"
+          fontSize="small"
+        >
+          게시물 작성
+        </Button>
+      }
+    >
       <FormWrapper>
         <LightUnderlineInput
           name="title"
@@ -184,20 +177,7 @@ function StudyCreateTemplate({
           onChange={onChange}
         />
       </FormWrapper>
-      <BottomSection>
-        <SubmitWrapper>
-          <Button
-            onClick={onSubmit}
-            width="100px"
-            height="44px"
-            color="primary"
-            fontSize="small"
-          >
-            게시물 작성
-          </Button>
-        </SubmitWrapper>
-      </BottomSection>
-    </Container>
+    </PageWrapperComponent>
   );
 }
 
