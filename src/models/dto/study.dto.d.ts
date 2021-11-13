@@ -26,4 +26,10 @@ export interface StudyListElement {
   img: string;
 }
 
+export interface StudyDetailDto extends StudyListElement {
+  contents: string;
+  location: string;
+  createdAt: string;
+}
+
 export default {};

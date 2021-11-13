@@ -9,7 +9,7 @@ export interface ButtonStyleProps extends BaseProps {
   filled?: boolean;
   width?: string;
   height?: string;
-  color?: "gray" | "primary" | "white" | string;
+  color?: "gray" | "primary" | "white" | "point" | string;
   shape?: "rounded" | "full-rounded";
   textAlign?: "left" | "center";
 }
@@ -53,6 +53,8 @@ export const Button = styled.button<ButtonStyleProps>`
         return Color.mainGradient;
       case "gray":
         return theme.color.gray2;
+      case "point":
+        return theme.color.point;
       default:
         return color;
     }
@@ -72,7 +74,9 @@ export const Button = styled.button<ButtonStyleProps>`
   }};
 
   color: ${({ color, disabled, filled = true }) =>
-    color === "primary" && !disabled && filled ? "#fff" : theme.color.black};
+    (color === "primary" || color === "point") && !disabled && filled
+      ? "#fff"
+      : theme.color.black};
 
   width: ${({ width }) => width || "100%"};
 `;
