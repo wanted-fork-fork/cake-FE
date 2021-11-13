@@ -1,25 +1,22 @@
 import Image from "@src/components/atoms/Image";
-import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
-import StarIcon from "@src/components/icon/Star.icon";
+import styled from "styled-components";
+
+// lib
 import { dateToFormatted } from "@src/utils/dayjs.util";
-import { LightDivider } from "@src/components/atoms/Divider";
-import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
+
+// components
+import StarIcon from "@src/components/icon/Star.icon";
 import ColoredPinIcon from "@src/components/icon/ColoredPin.icon";
 import ColoredCopyIcon from "@src/components/icon/ColoredCopy.icon";
-import styled from "styled-components";
-import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
-import { BottomSection } from "@src/components/atoms/BottomSection";
+import { LightDivider } from "@src/components/atoms/Divider";
 import { Button } from "@src/components/atoms/Button";
-import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
-import { NoScroll } from "@src/styles/common";
+import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
+import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
+import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 
-const Container = styled.div`
-  padding-top: 60px;
-  padding-bottom: 80px;
-  overflow: auto;
-  height: 100vh;
-  ${NoScroll};
-`;
+// styles
+import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
   h3 {
@@ -80,18 +77,17 @@ const StudyWrapper = styled.div`
   margin-top: 20px;
 `;
 
-const SubmitWrapper = styled.div`
-  position: absolute;
-  right: 20px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-`;
 function StudyDetailTemplate({ study }) {
   return (
-    <Container>
-      <TitleHeaderComponent title="" backLink="/" />
+    <PageWrapperComponent
+      title=""
+      backLink="/"
+      button={
+        <Button color="point" height="44px" fontSize="small" width="100px">
+          참여 신청
+        </Button>
+      }
+    >
       {/* Thumbnail */}
       <ImageWrapper>
         <Image alt={study.title} />
@@ -129,14 +125,7 @@ function StudyDetailTemplate({ study }) {
         {/* Contents */}
         <StudyWrapper>{study.contents}</StudyWrapper>
       </StudyContentsWrapper>
-      <BottomSection>
-        <SubmitWrapper>
-          <Button color="point" height="44px" fontSize="small" width="100px">
-            참여 신청
-          </Button>
-        </SubmitWrapper>
-      </BottomSection>
-    </Container>
+    </PageWrapperComponent>
   );
 }
 
