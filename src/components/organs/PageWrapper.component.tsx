@@ -1,12 +1,14 @@
+import styled from "styled-components";
+
+// components
 import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
 import { BottomSection } from "@src/components/atoms/BottomSection";
-import { Button } from "@src/components/atoms/Button";
-import styled from "styled-components";
+
+// styles
 import { NoScroll } from "@src/styles/common";
-import { Padding } from "@src/styles/theme";
 
 const Container = styled.div`
-  padding-top: 60px;
+  padding-top: 80px;
   padding-bottom: 80px;
   overflow: auto;
   height: 100vh;

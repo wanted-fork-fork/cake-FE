@@ -13,6 +13,7 @@ import Select from "@src/components/atoms/Select";
 import AutocompleteCategoryComponent from "@src/components/molecules/AutocompleteCategory.component";
 import { BoldDivider } from "@src/components/atoms/Divider";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
+import { Textarea } from "@src/components/atoms/Textarea";
 
 // styles
 import theme, { Padding } from "@src/styles/theme";
@@ -40,13 +41,6 @@ const WithUnderline = styled.div`
   padding-top: 8px;
   padding-bottom: 0;
   margin-bottom: 5px;
-`;
-
-const Textarea = styled.textarea`
-  width: 100%;
-  border-radius: 9px;
-  border: 1px solid ${theme.color.gray3};
-  padding: 8px;
 `;
 
 const MidLine = styled.hr`

@@ -47,4 +47,8 @@ export const UnderlineInput = styled.input<InputStyleProps>`
 export const LightUnderlineInput = styled.input<InputStyleProps>`
   ${LightUnderline};
   ${BaseInput};
+
+  &:disabled {
+    background-color: #fff;
+  }
 `;
