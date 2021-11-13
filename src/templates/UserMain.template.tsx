@@ -16,7 +16,7 @@ import theme, { Color, FontSize, Padding } from "@src/styles/theme";
 import styled, { css } from "styled-components";
 import { NoScroll } from "@src/styles/common";
 
-const Container = styled.div`
+const MainContainer = styled.div`
   ${NoScroll};
   width: 100%;
   height: 100vh;
@@ -107,7 +107,7 @@ function UserMainTemplate({
     [studyList],
   );
   return (
-    <Container>
+    <MainContainer>
       <HeaderSectionsWrapper>
         <Link href="/search">
           <a>
@@ -155,7 +155,7 @@ function UserMainTemplate({
         </TextButton>
       )}
       <BottomNavigationComponent />
-    </Container>
+    </MainContainer>
   );
 }
 

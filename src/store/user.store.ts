@@ -13,6 +13,10 @@ export default class UserStore {
 
   private readonly authService: AuthService;
 
+  authLoading = true;
+
+  authenticated = false;
+
   constructor(rootStore: RootStore, authService: AuthService) {
     this.authService = authService;
     this.rootStore = rootStore;
@@ -42,6 +46,7 @@ export default class UserStore {
 
   isAuthenticated() {
     const token = this.authService.accessToken;
-    return token !== null && token.length > 0;
+    this.authLoading = false;
+    this.authenticated = token !== null && token.length > 0;
   }
 }
