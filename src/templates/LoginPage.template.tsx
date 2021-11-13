@@ -3,7 +3,7 @@ import Link from "next/link";
 
 // components
 import AppTitleComponent from "@src/components/molecules/AppTitle.component";
-import { TextButton } from "@src/components/atoms/LinkButton";
+import { TextButton } from "@src/components/atoms/TextButton";
 import { DividedInput } from "@src/components/atoms/Input";
 import { Button } from "@src/components/atoms/Button";
 

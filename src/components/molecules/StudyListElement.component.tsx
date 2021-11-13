@@ -20,6 +20,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: auto 100px;
   width: 100%;
+  cursor: pointer;
 `;
 const ContentsWrapper = styled.div`
   width: 100%;
@@ -101,9 +102,14 @@ const S = {
 function StudyListElementComponent({ study }: StudyListElementComponentProps) {
   const date = useMemo(
     () =>
-      `${dateToFormatted(study.startDate)} - ${dateToFormatted(study.endDate)}`,
+      study.startDate && study.endDate
+        ? `${dateToFormatted(study.startDate)} - ${dateToFormatted(
+            study.endDate,
+          )}`
+        : "협의 후 결정",
     [study],
   );
+  const people = useMemo(() => `${study.peopleCnt || 1}명`, [study]);
   return (
     <S.Container key={study.id}>
       <S.ContentsWrapper>
@@ -111,7 +117,7 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
         <S.InfoWrapper>
           <S.IconPrefixWrapper>
             <PersonIcon />
-            <span>{study.peopleCnt}명</span>
+            <span>{people}</span>
           </S.IconPrefixWrapper>
           <S.IconPrefixWrapper>
             <ColoredCalendarIcon />
