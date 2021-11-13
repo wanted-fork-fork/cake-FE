@@ -1,12 +1,8 @@
-import { useMemo } from "react";
 import styled from "styled-components";
 
 // components
 import { StudyListElement } from "@src/models/dto/study.dto";
 import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
-
-// utils
-import { dateToFormatted } from "@src/utils/dayjs.util";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
