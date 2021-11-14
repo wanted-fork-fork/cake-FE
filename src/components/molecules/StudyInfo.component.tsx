@@ -4,6 +4,7 @@ import styled from "styled-components";
 import theme, { FontSize } from "@src/styles/theme";
 import { useMemo } from "react";
 import { dateToFormatted } from "@src/utils/dayjs.util";
+import { Category } from "@src/components/atoms/Category";
 
 const InfoWrapper = styled.div`
   display: flex;
@@ -26,17 +27,7 @@ const CategoryWrapper = styled.div`
     margin-bottom: 10px;
   }
 `;
-const Category = styled.span`
-  font-size: ${FontSize.Small};
-  padding-top: 2px;
 
-  &:not(:last-child) {
-    ::after {
-      content: ",";
-      margin-right: 4px;
-    }
-  }
-`;
 const CategoryTypeTag = styled.span`
   background-color: ${theme.color.point};
   color: #fff;
@@ -55,7 +46,6 @@ const S = {
   IconPrefixWrapper,
   CategoryWrapper,
   CategoryTypeTag,
-  Category,
 };
 function StudyInfoComponent({ study }) {
   const date = useMemo(
@@ -92,7 +82,7 @@ function StudyInfoComponent({ study }) {
         <S.CategoryTypeTag>TAKE</S.CategoryTypeTag>
         {study.take.length === 0 ? "다 좋아요!" : ""}
         {study.take.map((x) => (
-          <S.Category key={`${study.id}-${x}`}>{x}</S.Category>
+          <Category key={`${study.id}-${x}`}>{x}</Category>
         ))}
       </S.CategoryWrapper>
     </div>

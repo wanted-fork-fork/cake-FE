@@ -12,6 +12,7 @@ import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import StudyJoinSuccessModalComponent from "@src/stories/templates/StudyJoinSuccessModal.component";
 import useInput from "@src/hooks/useInput.hook";
 import { useCallback, useState } from "react";
+import LoadingComponent from "@src/components/molecules/Loading.component";
 
 const ContentsWrapper = styled.div`
   padding: ${Padding.page};
@@ -70,7 +71,7 @@ function StudyJoinFormTemplate({ study, onSubmit }) {
       {popupVisible && <StudyJoinSuccessModalComponent />}
     </PageWrapperComponent>
   ) : (
-    <p>loading</p>
+    <LoadingComponent />
   );
 }
 

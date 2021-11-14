@@ -4,6 +4,8 @@ import styled from "styled-components";
 import theme from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { Resource } from "@src/models/dto/api-response";
+import { useMemo, useState } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
 
 interface ProfileFrameProps {
   mb?: string;
@@ -83,12 +85,20 @@ function ProfileFrameComponent({
   imgSrc = "",
   onUploadImage = null,
 }: ProfileFrameProps) {
+  const [loading, setLoading] = useState(false);
+
+  const image = useMemo(() => {
+    if (loading) return <LoadingOutlined />;
+    if (imgSrc) return <img src={imgSrc} alt="프로필 이미지" />;
+    return <PatisserieIcon />;
+  }, [imgSrc, loading]);
+
   return (
     <S.ProfileImageWrapper mb={mb}>
-      <S.CircleImageFrame size={size}>
-        {imgSrc ? <img src={imgSrc} alt="프로필 이미지" /> : <PatisserieIcon />}
-      </S.CircleImageFrame>
-      {allowUpload && <UploadComponent onUploaded={onUploadImage} />}
+      <S.CircleImageFrame size={size}>{image}</S.CircleImageFrame>
+      {allowUpload && (
+        <UploadComponent setLoading={setLoading} onUploaded={onUploadImage} />
+      )}
     </S.ProfileImageWrapper>
   );
 }
