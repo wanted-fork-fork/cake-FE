@@ -87,7 +87,7 @@ function CategorySelectDrawerComponent({
           />
         );
       }),
-    [categoryList, selectedList],
+    [categoryList, onToggleCategory, selectedList],
   );
 
   const selectedNothing = useMemo(
