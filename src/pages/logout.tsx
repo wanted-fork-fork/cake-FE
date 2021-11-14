@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useStores } from "@src/store/root.store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
 const Container = styled.div`
   display: flex;
@@ -31,3 +33,5 @@ function LogoutPage() {
 }
 
 export default LogoutPage;
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.USER);

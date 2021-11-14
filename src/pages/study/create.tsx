@@ -10,6 +10,8 @@ import { useStores } from "@src/store/root.store";
 import { CreateStudyDto } from "@src/models/dto/study.dto";
 import { useState } from "react";
 import { StudyType } from "@src/constant/enum.constant";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
 function CreateStudyPage() {
   const { studyStore } = useStores();
@@ -66,3 +68,5 @@ function CreateStudyPage() {
 }
 
 export default CreateStudyPage;
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.USER);

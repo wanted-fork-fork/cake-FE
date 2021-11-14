@@ -1,8 +1,10 @@
 // lib
 import useInfiniteLoading from "@src/hooks/useInfiniteLoading.hook";
 import { useStores } from "@src/store/root.store";
+
 // components
 import UserMainTemplate from "@src/templates/UserMain.template";
+import { memo } from "react";
 
 function UserMainPage() {
   const { studyStore } = useStores();
@@ -14,6 +16,7 @@ function UserMainPage() {
   } = useInfiniteLoading({
     getItems: (p) => studyStore.getStudyFeed(p),
     pageToLoad: 0,
+    listKeyName: "study",
   });
 
   return (
@@ -25,4 +28,4 @@ function UserMainPage() {
   );
 }
 
-export default UserMainPage;
+export default memo(UserMainPage);
