@@ -71,3 +71,10 @@ export const StudyManageTypeToLabel = {
   [StudyManageType.MINE]: "내가 연 스터디",
   [StudyManageType.OTHER]: "참여한 스터디",
 };
+
+export const NaviType = {
+  MAIN: "MAIN",
+  FILTER: "FILTER",
+  STUDY: "STUDY",
+  PROFILE: "PROFILE",
+};

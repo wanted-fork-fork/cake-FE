@@ -10,7 +10,8 @@ import MyPageIcon from "@src/components/icon/MyPage.icon";
 // styles
 import styled from "styled-components";
 import { BaseButton, ButtonStyleProps } from "@src/components/atoms/Button";
-import { FontSize } from "@src/styles/theme";
+import theme, { FontSize } from "@src/styles/theme";
+import { NaviType } from "@src/constant/enum.constant";
 
 const NavWrapper = styled.div`
   display: flex;
@@ -26,32 +27,47 @@ const NavButton = styled.a<ButtonStyleProps>`
     font-size: ${FontSize.Small};
   }
 `;
-function BottomNavigationComponent() {
+interface DesType {
+  selected: boolean;
+}
+const Description = styled.p<DesType>`
+  color: ${({ selected }) =>
+    selected ? theme.color.point : theme.color.black};
+`;
+function BottomNavigationComponent({ selected = NaviType.MAIN }) {
   return (
     <BottomSection height="80px">
       <NavWrapper>
         <Link href="/">
           <NavButton type="button">
-            <HomeIcon />
-            <p>메인</p>
+            <HomeIcon selected={selected === NaviType.MAIN} />
+            <Description selected={selected === NaviType.MAIN}>
+              메인
+            </Description>
           </NavButton>
         </Link>
         <Link href="/search">
           <NavButton type="button">
-            <CategoryMenuIcon />
-            <p>카테고리</p>
+            <CategoryMenuIcon selected={selected === NaviType.FILTER} />
+            <Description selected={selected === NaviType.FILTER}>
+              카테고리
+            </Description>
           </NavButton>
         </Link>
         <Link href="/profile/study">
           <NavButton type="button">
-            <StudyManageIcon />
-            <p>스터디 관리</p>
+            <StudyManageIcon selected={selected === NaviType.STUDY} />
+            <Description selected={selected === NaviType.STUDY}>
+              스터디 관리
+            </Description>
           </NavButton>
         </Link>
         <Link href="/profile">
           <NavButton type="button">
-            <MyPageIcon />
-            <p>마이페이지</p>
+            <MyPageIcon selected={selected === NaviType.PROFILE} />
+            <Description selected={selected === NaviType.PROFILE}>
+              마이페이지
+            </Description>
           </NavButton>
         </Link>
       </NavWrapper>

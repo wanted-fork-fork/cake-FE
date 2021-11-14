@@ -1,5 +1,6 @@
 // lib
 import {
+  NaviType,
   StudyManageType,
   StudyManageTypeToLabel,
 } from "@src/constant/enum.constant";
@@ -83,7 +84,7 @@ function MyStudyListTemplate({ studyList = [] }) {
         </Button>
       </HeadWrapper>
       <div>{studyListDOM}</div>
-      <BottomNavigationComponent />
+      <BottomNavigationComponent selected={NaviType.STUDY} />
     </Container>
   );
 }
