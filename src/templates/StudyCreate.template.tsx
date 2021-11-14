@@ -99,7 +99,6 @@ function StudyCreateTemplate({
           list={studyTypeList}
           idKeyName="key"
           labelKeyName="value"
-          defaultText="모임 형태"
           onSelect={onChange}
         />
         <CategoryWrapper>

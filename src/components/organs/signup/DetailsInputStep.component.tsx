@@ -107,7 +107,6 @@ const DetailsInputStepComponent = observer(() => {
             idKeyName="key"
             selected={univCategory}
             onSelect={onSelectUnivCategory}
-            defaultText="소속된 단과대학을 선택해주세요."
           />
         </DetailWrapper>
       </FormWrapper>

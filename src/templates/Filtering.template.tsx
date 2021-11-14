@@ -84,7 +84,7 @@ function FilteringTemplate() {
           />
         </SectionWrapper>
         <GuestMain.BottomWrap>
-          <Button color="primary" width="100%">
+          <Button color="primary" width="100%" disabled>
             스터디 검색
           </Button>
         </GuestMain.BottomWrap>
