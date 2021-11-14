@@ -10,14 +10,18 @@ import { useStores } from "@src/store/root.store";
 import { CreateStudyDto } from "@src/models/dto/study.dto";
 import { useState } from "react";
 import { StudyType } from "@src/constant/enum.constant";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
+import { useRouter } from "next/router";
 
 function CreateStudyPage() {
   const { studyStore } = useStores();
+  const router = useRouter();
 
   const { value: startDate, onChange: onChangeStartDate } = useDatepicker();
   const { value: endDate, onChange: onChangeEndDate } = useDatepicker();
-  const [selectedMine, setSelectedMine] = useState("");
-  const [selectedYours, setSelectedYours] = useState("");
+  const [selectedMine, setSelectedMine] = useState([]);
+  const [selectedYours, setSelectedYours] = useState([]);
 
   const { values, handleChange, handleSubmit } = useForm<CreateStudyDto>({
     initialValues: {
@@ -35,13 +39,15 @@ function CreateStudyPage() {
       take: [],
     },
     onSubmit(v: CreateStudyDto) {
-      studyStore.createStudy({
-        ...v,
-        startDate: startDate.format("YYYY-MM-DD"),
-        endDate: endDate.format("YYYY-MM-DD"),
-        give: [selectedMine],
-        take: [selectedYours],
-      });
+      studyStore
+        .createStudy({
+          ...v,
+          startDate: startDate.format("YYYY-MM-DD"),
+          endDate: endDate.format("YYYY-MM-DD"),
+          give: selectedMine.map((x) => x.id),
+          take: selectedYours.map((x) => x.id),
+        })
+        .then(() => router.push(`/`));
     },
     validate() {
       return {};
@@ -66,3 +72,5 @@ function CreateStudyPage() {
 }
 
 export default CreateStudyPage;
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.USER);

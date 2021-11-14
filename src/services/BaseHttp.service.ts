@@ -104,6 +104,8 @@ export default class BaseHttpService {
   }
 
   _handle401(error: AxiosError<APIErrorResponse>) {
+    this.removeToken();
+
     // refresh token
     this.post<string>(`${API_PREFIX.AUTH}/refresh`)
       .then((res: string) => {
@@ -115,7 +117,10 @@ export default class BaseHttpService {
           .headers as AxiosRequestHeaders;
         return this.axiosInstance.request(config);
       })
-      .catch(() => Router.push("/login"));
+      .catch(() => {
+        this.removeToken();
+        Router.push("/login");
+      });
   }
 
   _getCommonOptions(): AxiosRequestConfig {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const useInfiniteLoading = ({ getItems, pageToLoad = 0 }) => {
+const useInfiniteLoading = ({ getItems, pageToLoad = 0, listKeyName }) => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(pageToLoad);
   const initialPageLoaded = useRef(false);
@@ -10,13 +10,13 @@ const useInfiniteLoading = ({ getItems, pageToLoad = 0 }) => {
     async (nextPage) => {
       /* 3 */
       const data = await getItems(nextPage);
-      if (data.length === 0) setHasMore(false);
+      if (data[listKeyName].length === 0) setHasMore(false);
       else {
         setHasMore(true); /* 4 */
-        setItems((prevItems) => [...prevItems, ...data]);
+        setItems((prevItems) => [...prevItems, ...data[listKeyName]]);
       }
     },
-    [getItems],
+    [getItems, listKeyName],
   );
 
   const onNext = useCallback(() => {
@@ -31,7 +31,8 @@ const useInfiniteLoading = ({ getItems, pageToLoad = 0 }) => {
 
     loadItems(pageToLoad); /* 5 */
     initialPageLoaded.current = true;
-  }, [loadItems, pageToLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     items,

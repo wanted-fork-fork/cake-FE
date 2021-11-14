@@ -4,13 +4,20 @@ import styled from "styled-components";
 // style
 import { LightUnderline, Underline } from "@src/styles/common";
 import theme from "@src/styles/theme";
+import DownArrowIcon from "@src/components/icon/DownArrow.icon";
 
 export type SelectStyleProp = {
-  shape: "default" | "light";
+  shape: "default" | "light" | "rounded";
   selected: string | null;
 };
 
 const Select = styled.select<SelectStyleProp>`
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+
+  position: relative;
+
   ${({ shape }) => {
     switch (shape) {
       case "default":
@@ -29,15 +36,34 @@ const Select = styled.select<SelectStyleProp>`
 
   &:focus {
     outline: none;
+    background-color: #fff;
   }
 
   color: ${({ selected }) =>
     selected ? theme.color.black : theme.color.gray4};
 
+  ${({ shape }) =>
+    shape === "rounded"
+      ? `
+      height: 58px;
+      padding: 0 15px;
+    border-radius: 100px;
+    border: 1px solid ${theme.color.primary};  
+  `
+      : ""}
+
   option {
     margin: 0;
     padding: 0;
+    &:disabled {
+      background-color: #fff;
+    }
   }
+
+  &:disabled {
+    background-color: #fff;
+  }
+  background-color: #fff;
 `;
 
 interface SelectProp<T> extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -45,14 +71,29 @@ interface SelectProp<T> extends SelectHTMLAttributes<HTMLSelectElement> {
   list: T[];
   idKeyName: string;
   labelKeyName: string;
-  defaultText: string | null;
   onSelect: ReactEventHandler<HTMLSelectElement>;
-  shape?: "default" | "light";
+  shape?: "default" | "light" | "rounded";
+  iconPosition?: string;
 }
 SelectComponent.defaultProps = {
   shape: "default",
   selected: null,
+  iconPosition: "10px",
 };
+interface ArrowWrapperType {
+  iconPosition: string;
+}
+const ArrowWrapper = styled.div<ArrowWrapperType>`
+  position: absolute;
+  right: ${({ iconPosition }) => iconPosition};
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+`;
+const Wrapper = styled.div`
+  position: relative;
+`;
 function SelectComponent<T>({
   name,
   selected,
@@ -60,8 +101,9 @@ function SelectComponent<T>({
   idKeyName,
   labelKeyName,
   onSelect,
-  defaultText = "",
   shape,
+  iconPosition = "10px",
+  placeholder = "",
 }: SelectProp<T>) {
   const options = useMemo(() => {
     const disabledKeyName = "disabled";
@@ -78,19 +120,20 @@ function SelectComponent<T>({
   }, [list, idKeyName, labelKeyName]);
 
   return (
-    <Select
-      name={name}
-      selected={selected}
-      defaultValue={selected}
-      placeholder={defaultText}
-      onChange={onSelect}
-      shape={shape}
-    >
-      <option disabled hidden>
-        {defaultText}
-      </option>
-      {options}
-    </Select>
+    <Wrapper>
+      <Select
+        name={name}
+        selected={selected}
+        placeholder={placeholder}
+        onChange={onSelect}
+        shape={shape}
+      >
+        {options}
+      </Select>
+      <ArrowWrapper iconPosition={iconPosition}>
+        <DownArrowIcon color={theme.color.primary} />
+      </ArrowWrapper>
+    </Wrapper>
   );
 }
 

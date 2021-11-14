@@ -2,13 +2,13 @@ import Head from "next/head";
 import type { AppProps } from "next/app";
 import styled, { ThemeProvider, css } from "styled-components";
 
+import SafeHydrateHoc from "@src/hooks/safeHydrate.hoc";
+
 // styles
 import GlobalStyle from "@src/styles/globals";
 import theme, { windowSize } from "@src/styles/theme";
 import GlobalFonts from "@src/styles/fonts";
 import "../styles/variables.less";
-import WithAuthenticationHoc from "@src/hooks/withAuthentication.hoc";
-import SafeHydrateHoc from "@src/hooks/safeHydrate.hoc";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
@@ -48,9 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Container>
           <Content>
             <SafeHydrateHoc>
-              <WithAuthenticationHoc>
-                <Component {...pageProps} />
-              </WithAuthenticationHoc>
+              <Component {...pageProps} />
             </SafeHydrateHoc>
           </Content>
         </Container>

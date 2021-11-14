@@ -32,7 +32,7 @@ export type LoginForm = {
 function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
   return (
     <SGuestMain.Container>
-      <AppTitleComponent mb="100px" />
+      <AppTitleComponent mb="60px" />
       <S.ContentsWrap mb="20px" onSubmit={onSubmit}>
         <DividedInput
           height="65px"
@@ -58,7 +58,7 @@ function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
       </S.ContentsWrap>
       <Link href="/signup">
         <a>
-          <Button color="gray" mb="20px">
+          <Button color="white" mb="20px">
             학교 계정으로 회원가입
           </Button>
         </a>

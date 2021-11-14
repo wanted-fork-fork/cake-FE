@@ -14,11 +14,17 @@ import SelectComponent from "@src/components/atoms/Select";
 import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
 import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import { Resource } from "@src/models/dto/api-response";
 
 const Container = styled.div``;
 
 const FormWrapper = styled.div<BaseProps>`
-  ${BaseStyleProps}
+  ${BaseStyleProps};
+
+  div {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   text-align: center;
   margin-top: 10px;
@@ -46,7 +52,7 @@ const DetailsInputStepComponent = observer(() => {
   const [nickname, setNickname] = useState("");
 
   const onUploadImage = useCallback(
-    (uploaded) => {
+    (uploaded: Resource) => {
       signupStore.setFormValue("img", uploaded.path);
     },
     [signupStore],
@@ -101,7 +107,6 @@ const DetailsInputStepComponent = observer(() => {
             idKeyName="key"
             selected={univCategory}
             onSelect={onSelectUnivCategory}
-            defaultText="소속된 단과대학을 선택해주세요."
           />
         </DetailWrapper>
       </FormWrapper>

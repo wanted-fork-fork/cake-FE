@@ -9,6 +9,8 @@ import { useStores } from "@src/store/root.store";
 
 // components
 import SignupPageTemplate from "@src/templates/SignupPage.template";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
 const SignupPage = observer(() => {
   const { signupStore, categoryStore } = useStores();
@@ -124,3 +126,5 @@ const SignupPage = observer(() => {
 });
 
 export default SignupPage;
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.GUEST);

@@ -14,6 +14,8 @@ import LoginPageTemplate, {
   LoginForm,
 } from "@src/templates/LoginPage.template";
 import { useRouter } from "next/router";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
 const Container = styled.div``;
 
@@ -48,3 +50,5 @@ const LoginPage: NextPage = observer(() => {
   );
 });
 export default LoginPage;
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.GUEST);

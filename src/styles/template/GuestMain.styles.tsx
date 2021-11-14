@@ -8,7 +8,12 @@ const Container = styled.div<BaseProps>`
   ${BaseStyleProps};
   background-color: ${theme.color.point};
   height: 100vh;
+
   padding-top: 20vh;
+
+  @media (max-height: 670px) {
+    padding-top: 10vh;
+  }
   padding-left: ${Padding.pageX};
   padding-right: ${Padding.pageX};
 `;
@@ -24,7 +29,7 @@ const ContentsWrap = styled.div<BaseProps>`
 
 const BottomWrap = styled.div`
   position: fixed;
-  bottom: 60px;
+  bottom: 30px;
   left: ${Padding.pageX};
   right: ${Padding.pageX};
 

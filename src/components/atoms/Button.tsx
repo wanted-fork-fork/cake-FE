@@ -9,7 +9,7 @@ export interface ButtonStyleProps extends BaseProps {
   filled?: boolean;
   width?: string;
   height?: string;
-  color?: "gray" | "primary" | "white" | string;
+  color?: "gray" | "primary" | "white" | "point" | string;
   shape?: "rounded" | "full-rounded";
   textAlign?: "left" | "center";
 }
@@ -53,6 +53,8 @@ export const Button = styled.button<ButtonStyleProps>`
         return Color.mainGradient;
       case "gray":
         return theme.color.gray2;
+      case "point":
+        return theme.color.point;
       default:
         return color;
     }
@@ -71,21 +73,27 @@ export const Button = styled.button<ButtonStyleProps>`
     return `1px solid ${theme.color.primary}`;
   }};
 
-  color: ${({ color, disabled, filled = true }) =>
-    color === "primary" && !disabled && filled ? "#fff" : theme.color.black};
+  color: ${({ color, disabled, filled = true }) => {
+    if ((color === "primary" || color === "point") && !disabled && filled)
+      return "#fff";
+    if (color === "gray" || disabled) return theme.color.gray4;
+    return theme.color.black;
+  }};
 
   width: ${({ width }) => width || "100%"};
 `;
 
 export const InputLikeButton = styled.button<InputLikeButtonStyleProps>`
+  height: auto;
   ${BaseButton};
   ${LightUnderline};
   background-color: transparent;
   font-size: ${FontSize.PrimaryDescription};
-  height: auto;
 
   width: 100%;
 
   color: ${({ selected = false }) =>
     selected ? theme.color.black : theme.color.gray4};
+
+  border-radius: 0;
 `;

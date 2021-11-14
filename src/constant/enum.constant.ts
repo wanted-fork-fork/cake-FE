@@ -46,3 +46,28 @@ export const StudyTypeEnumToLabel = {
   [StudyType.OneToMany]: "1:n",
   [StudyType.ManyToMany]: "n",
 };
+
+export enum StudyState {
+  _,
+  CREATED,
+  APPLIED,
+  JOINED,
+  REJECTED,
+}
+
+export const StudyStateToManageButtonLabel = {
+  [StudyState.CREATED]: "신청자 명단",
+  [StudyState.APPLIED]: "참여 대기 중",
+  [StudyState.JOINED]: "참여중",
+  [StudyState.REJECTED]: "거절됨",
+};
+
+export const StudyManageType = {
+  MINE: "mine",
+  OTHER: "other",
+};
+
+export const StudyManageTypeToLabel = {
+  [StudyManageType.MINE]: "내가 연 스터디",
+  [StudyManageType.OTHER]: "참여한 스터디",
+};

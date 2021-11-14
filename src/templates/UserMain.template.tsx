@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 // components
 import { Button } from "@src/components/atoms/Button";
@@ -9,12 +9,15 @@ import BottomNavigationComponent from "@src/components/organs/BottomNavigation.c
 import CakeIcon from "@src/components/icon/Cake.icon";
 import { TextButton } from "@src/components/atoms/TextButton";
 import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
-import StudyListElementComponent from "@src/components/molecules/StudyListElement.component";
+import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 
 // styles
 import theme, { Color, FontSize, Padding } from "@src/styles/theme";
 import styled, { css } from "styled-components";
 import { NoScroll } from "@src/styles/common";
+import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
+import PencilIcon from "@src/components/icon/Pencil.icon";
+import { useRouter } from "next/router";
 
 const MainContainer = styled.div`
   ${NoScroll};
@@ -91,6 +94,7 @@ function UserMainTemplate({
   onClickNext = () => null,
   hasMore = false,
 }) {
+  const router = useRouter();
   const studyListDom = useMemo(
     () =>
       studyList.map((study, index) => {
@@ -106,6 +110,9 @@ function UserMainTemplate({
       }),
     [studyList],
   );
+  const onClickCreateStudy = useCallback(() => {
+    router.push("/study/create");
+  }, [router]);
   return (
     <MainContainer>
       <HeaderSectionsWrapper>
@@ -154,6 +161,10 @@ function UserMainTemplate({
           더보기
         </TextButton>
       )}
+      <FloatingButtonComponent
+        icon={<PencilIcon />}
+        onClick={onClickCreateStudy}
+      />
       <BottomNavigationComponent />
     </MainContainer>
   );

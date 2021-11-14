@@ -9,7 +9,7 @@ export const SignupTitleMessages: TitleMessageType[] = [
     title: "학교를 선택해주세요.",
     description: "",
     button: "학교 계정 인증하기",
-    allowBack: false,
+    allowBack: true,
   },
   {
     title: "학교 계정을 입력해주세요.",

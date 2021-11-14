@@ -5,6 +5,4 @@ export default {
   component: TitleHeaderComponent,
 };
 
-export const TitleHeader = () => (
-  <TitleHeaderComponent backLink="/" title="타이틀 제목" />
-);
+export const TitleHeader = () => <TitleHeaderComponent title="타이틀 제목" />;

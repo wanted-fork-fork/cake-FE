@@ -1,7 +1,13 @@
 import { RootStore } from "@src/store/root.store";
 import { makeAutoObservable } from "mobx";
 import StudyService from "@src/services/Study.service";
-import { CreateStudyDto, StudyListElement } from "@src/models/dto/study.dto";
+import {
+  CreateStudyDto,
+  StudyDetailDto,
+  StudyListElement,
+  StudyManageListElement,
+} from "@src/models/dto/study.dto";
+import { StudyType } from "@src/constant/enum.constant";
 
 export default class StudyStore {
   private readonly rootStore: RootStore;
@@ -21,5 +27,44 @@ export default class StudyStore {
 
   async getStudyFeed(page: number): Promise<StudyListElement[]> {
     return (await this.studyService.getStudyFeed(page)) as StudyListElement[];
+  }
+
+  async getFilteredStudy(
+    page: number,
+    give: number,
+    take: number,
+    type: StudyType,
+  ): Promise<StudyListElement[]> {
+    return (await this.studyService.getFilteredStudy(
+      page,
+      give,
+      take,
+      type,
+    )) as StudyListElement[];
+  }
+
+  async getMyStudyList(): Promise<StudyManageListElement[]> {
+    return (await this.studyService.getMyStudyList()) as StudyManageListElement[];
+  }
+
+  async getMyOtherStudyList(): Promise<StudyManageListElement[]> {
+    return (await this.studyService.getMyOtherStudyList()) as StudyManageListElement[];
+  }
+
+  async getStudyDetail(id: number): Promise<StudyDetailDto> {
+    return (await this.studyService.getStudyDetail(id)) as StudyDetailDto;
+  }
+
+  async applyStudy(
+    id: number,
+    content: string,
+    images: string[] = [],
+  ): Promise<boolean> {
+    try {
+      await this.studyService.applyStudy(id, content, images);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

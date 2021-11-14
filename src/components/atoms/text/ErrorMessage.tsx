@@ -6,5 +6,5 @@ export default {};
 export const ErrorMessage = styled.p<BaseProps>`
   ${BaseStyleProps};
   font-size: ${FontSize.PrimaryDescription};
-  color: ${theme.color.black};
+  color: ${theme.color.point};
 `;
