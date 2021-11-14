@@ -8,7 +8,7 @@ import { BottomSection } from "@src/components/atoms/BottomSection";
 import { NoScroll } from "@src/styles/common";
 
 const Container = styled.div`
-  padding-top: 80px;
+  padding-top: 60px;
   padding-bottom: 80px;
   overflow: auto;
   height: 100vh;

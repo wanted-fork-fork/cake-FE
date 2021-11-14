@@ -6,11 +6,10 @@ import { getStudyTypeList } from "@src/utils/enum.util";
 
 // components
 import CalendarIcon from "@src/components/icon/Calendar.icon";
-import { Button } from "@src/components/atoms/Button";
+import { Button, InputLikeButton } from "@src/components/atoms/Button";
 import { LightUnderlineInput } from "@src/components/atoms/Input";
 import DatePicker from "@src/components/atoms/DatePicker";
 import Select from "@src/components/atoms/Select";
-import AutocompleteCategoryComponent from "@src/components/molecules/AutocompleteCategory.component";
 import { BoldDivider } from "@src/components/atoms/Divider";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import { Textarea } from "@src/components/atoms/Textarea";
@@ -18,6 +17,10 @@ import { Textarea } from "@src/components/atoms/Textarea";
 // styles
 import theme, { Padding } from "@src/styles/theme";
 import { LightUnderline } from "@src/styles/common";
+import CategorySelectDrawerComponent from "@src/components/organs/CategorySelectDrawer.component";
+import { Category } from "@src/components/atoms/Category";
+import useVisibleHook from "@src/hooks/useVisible.hook";
+import TradeIcon from "@src/components/icon/Trade.icon";
 
 const FormWrapper = styled.div`
   padding: 0 ${Padding.pageX};
@@ -28,9 +31,8 @@ const FormWrapper = styled.div`
 `;
 const CategoryWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  gap: 10px;
+  justify-content: space-around;
   text-align: center;
   margin-top: 5px;
 `;
@@ -69,6 +71,25 @@ function StudyCreateTemplate({
   setSelectedYours,
 }) {
   const studyTypeList = useMemo(() => getStudyTypeList(), []);
+  const [mineVisible, setMineVisible, setMineInvisible] = useVisibleHook(false);
+  const [yoursVisible, setYourVisible, setYourInvisible] =
+    useVisibleHook(false);
+
+  const myCategoryDom = useMemo(
+    () =>
+      selectedMine.length === 0
+        ? "나의 능력"
+        : selectedMine.map((x) => <Category key={x.id}>{x.name}</Category>),
+    [selectedMine],
+  );
+
+  const yourCategoryDom = useMemo(
+    () =>
+      selectedYours.length === 0
+        ? "너의 능력"
+        : selectedYours.map((x) => <Category key={x.id}>{x.name}</Category>),
+    [selectedYours],
+  );
   return (
     <PageWrapperComponent
       title="스터디 생성"
@@ -101,15 +122,33 @@ function StudyCreateTemplate({
           onSelect={onChange}
         />
         <CategoryWrapper>
-          <AutocompleteCategoryComponent
-            selected={selectedMine}
-            setSelected={setSelectedMine}
-            placeholder="나의 능력"
+          <InputLikeButton onClick={setMineVisible}>
+            {myCategoryDom}
+          </InputLikeButton>
+          <CategorySelectDrawerComponent
+            title="자신 있는 재능을 선택해주세요."
+            selectedList={selectedMine}
+            setSelectedList={setSelectedMine}
+            buttonTextOnEmpty="아직 없어요"
+            onClose={setMineInvisible}
+            visible={mineVisible}
           />
-          <AutocompleteCategoryComponent
-            selected={selectedYours}
-            setSelected={setSelectedYours}
-            placeholder="너의 능력"
+          <div>
+            <TradeIcon
+              selectedMine={selectedMine.length}
+              selectedYours={selectedYours.length}
+            />
+          </div>
+          <InputLikeButton onClick={setYourVisible}>
+            {yourCategoryDom}
+          </InputLikeButton>
+          <CategorySelectDrawerComponent
+            title="관심 있거나 배우고 싶은 주제를 선택해주세요."
+            selectedList={selectedYours}
+            setSelectedList={setSelectedYours}
+            buttonTextOnEmpty="다 좋아요!"
+            onClose={setYourInvisible}
+            visible={yoursVisible}
           />
         </CategoryWrapper>
         <CategoryWrapper>
@@ -169,6 +208,7 @@ function StudyCreateTemplate({
       <BoldDivider my="20px" />
       <FormWrapper>
         <Textarea
+          fontSize="small"
           name="content"
           placeholder="상세 내용, 일정 및 유의 사항을 입력해주세요."
           rows={10}

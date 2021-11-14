@@ -76,7 +76,7 @@ export const Button = styled.button<ButtonStyleProps>`
   color: ${({ color, disabled, filled = true }) => {
     if ((color === "primary" || color === "point") && !disabled && filled)
       return "#fff";
-    if (color === "gray") return theme.color.gray4;
+    if (color === "gray" || disabled) return theme.color.gray4;
     return theme.color.black;
   }};
 
@@ -84,14 +84,16 @@ export const Button = styled.button<ButtonStyleProps>`
 `;
 
 export const InputLikeButton = styled.button<InputLikeButtonStyleProps>`
+  height: auto;
   ${BaseButton};
   ${LightUnderline};
   background-color: transparent;
   font-size: ${FontSize.PrimaryDescription};
-  height: auto;
 
   width: 100%;
 
   color: ${({ selected = false }) =>
     selected ? theme.color.black : theme.color.gray4};
+
+  border-radius: 0;
 `;

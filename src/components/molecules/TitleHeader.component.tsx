@@ -37,8 +37,15 @@ const IconWrapper = styled.a`
 `;
 
 const S = { Container, Title, IconWrapper };
-function TitleHeaderComponent({ title }) {
-  const back = useCallback(() => window.history.back(), []);
+function TitleHeaderComponent({ title, onBack = null }) {
+  const back = useCallback(
+    (e) => {
+      e.stopPropagation();
+      if (onBack) return onBack();
+      return window.history.back();
+    },
+    [onBack],
+  );
   return (
     <Container>
       <IconWrapper onClick={back}>

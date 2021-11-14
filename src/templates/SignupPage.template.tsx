@@ -37,6 +37,11 @@ const BackWrap = styled.div<BackWrapProp>`
   width: fit-content;
 `;
 
+const HeaderWrap = styled.div<BaseProps>`
+  ${BaseStyleProps};
+  height: 60px;
+`;
+
 const TitleWrap = styled.div<BaseProps>`
   ${BaseStyleProps};
 `;
@@ -60,6 +65,7 @@ const ContentWrap = styled.div``;
 const S = {
   Container,
   TitleWrap,
+  HeaderWrap,
   ContentWrap,
   TitleText,
   DescriptionText,
@@ -88,12 +94,14 @@ function SignupPageTemplate({
 }: SignupTemplateProps) {
   return (
     <S.Container>
-      <S.TitleWrap pt="50px" mb="60px">
+      <S.HeaderWrap pt="20px" mb="30px">
         <BackWrap show={SignupTitleMessages[step].allowBack}>
           <TextButton color="black" onClick={onClickPrev}>
             <LeftArrowIcon />
           </TextButton>
         </BackWrap>
+      </S.HeaderWrap>
+      <S.TitleWrap mb="60px">
         <S.TitleText mb="8px">{SignupTitleMessages[step].title}</S.TitleText>
         <S.DescriptionText>
           {SignupTitleMessages[step].description}
