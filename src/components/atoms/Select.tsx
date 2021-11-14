@@ -63,6 +63,7 @@ const Select = styled.select<SelectStyleProp>`
   &:disabled {
     background-color: #fff;
   }
+  background-color: #fff;
 `;
 
 interface SelectProp<T> extends SelectHTMLAttributes<HTMLSelectElement> {

@@ -1,6 +1,6 @@
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import styled from "styled-components";
-import theme, { Padding } from "@src/styles/theme";
+import theme, { FontSize, Padding } from "@src/styles/theme";
 import { Button } from "@src/components/atoms/Button";
 import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import SelectComponent from "@src/components/atoms/Select";
@@ -19,10 +19,14 @@ const SectionWrapper = styled.div`
 const LabelWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   h2 {
     margin-bottom: 0;
     margin-right: 10px;
+  }
+  span {
+    margin-left: 15px;
+    font-size: ${FontSize.Small};
   }
 `;
 const ButtonContentsWrapper = styled.div`
@@ -45,10 +49,16 @@ function FilteringTemplate() {
       <Wrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h2>나의 재능</h2>
+            <h3>나의 재능</h3>
             <span>다른 사람에게 줄 수 있는 재능은?</span>
           </LabelWrapper>
-          <Button color="primary" filled={false} shape="full-rounded">
+          <Button
+            height="56px"
+            fontSize="small"
+            color="primary"
+            filled={false}
+            shape="full-rounded"
+          >
             <ButtonContentsWrapper>
               <p>내가 잘 하는 것은?</p>
               <ColoredSearchIcon />
@@ -57,10 +67,16 @@ function FilteringTemplate() {
         </SectionWrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h2>배우고 싶은 재능</h2>
+            <h3>배우고 싶은 재능</h3>
             <span>배우고 싶은 재능은?</span>
           </LabelWrapper>
-          <Button color="primary" filled={false} shape="full-rounded">
+          <Button
+            height="56px"
+            fontSize="small"
+            color="primary"
+            filled={false}
+            shape="full-rounded"
+          >
             <ButtonContentsWrapper>
               <p>배우고 싶은 공부, 취미 모두!</p>
               <ColoredSearchIcon />
@@ -69,7 +85,7 @@ function FilteringTemplate() {
         </SectionWrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h2>몇 명과 함께하고 싶나요?</h2>
+            <h3>몇 명과 함께하고 싶나요?</h3>
           </LabelWrapper>
           <SelectComponent
             iconPosition="25px"
@@ -77,7 +93,7 @@ function FilteringTemplate() {
             shape="rounded"
             color="primary"
             onSelect={null}
-            selected=""
+            selected="0"
             list={studyList}
             idKeyName="key"
             labelKeyName="value"
