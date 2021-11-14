@@ -1,4 +1,5 @@
 import { StudyType } from "@src/constant/enum.constant";
+import { UserProfile } from "@src/models/dto/user.dto";
 
 export interface CreateStudyDto {
   title: string;
@@ -27,9 +28,12 @@ export interface StudyListElement {
 }
 
 export interface StudyDetailDto extends StudyListElement {
-  contents: string;
+  content: string;
   location: string;
   createdAt: string;
+  images: string[];
+  user: UserProfile;
+  apply: boolean;
 }
 
 export default {};
