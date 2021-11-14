@@ -25,7 +25,7 @@ function SimpleProfileComponent({ user }) {
       <ProfileFrameComponent
         allowUpload={false}
         size="small"
-        // imgSrc={user.img}
+        imgSrc={user.img}
       />
       <span>{user.nickname}</span>
       <span>
