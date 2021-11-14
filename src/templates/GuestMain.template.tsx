@@ -11,7 +11,7 @@ import SGuestMain from "@src/styles/template/GuestMain.styles";
 function GuestMainTemplate() {
   return (
     <SGuestMain.Container>
-      <AppTitleComponent mb="100px" />
+      <AppTitleComponent mb="60px" />
       <SGuestMain.ContentsWrap mb="20px">
         <Link href="/login">
           <a>
