@@ -12,7 +12,7 @@ import useVisibleHook from "@src/hooks/useVisible.hook";
 import CategorySelectDrawerComponent from "@src/components/organs/CategorySelectDrawer.component";
 
 const Wrapper = styled.div`
-  padding: 0 ${Padding.pageX};
+  padding: 20px ${Padding.pageX} 0;
 `;
 
 const SectionWrapper = styled.div`

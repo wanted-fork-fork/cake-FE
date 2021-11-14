@@ -17,6 +17,7 @@ import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.comp
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 import { useMemo } from "react";
+import LoadingComponent from "@src/components/molecules/Loading.component";
 
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
@@ -130,7 +131,7 @@ function StudyDetailTemplate({ study }) {
       </StudyContentsWrapper>
     </PageWrapperComponent>
   ) : (
-    <p>loading</p>
+    <LoadingComponent />
   );
 }
 
