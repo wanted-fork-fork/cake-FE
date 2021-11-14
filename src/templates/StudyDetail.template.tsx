@@ -116,16 +116,18 @@ function StudyDetailTemplate({ study }) {
         {/* Info */}
         <div>
           <StudyInfoComponent study={study} />
-          <LocationWrapper>
-            <div>
-              <ColoredPinIcon />
-            </div>
-            <span>{study.location}</span>
-            <button type="button">
-              <ColoredCopyIcon />
-              <div>복사</div>
-            </button>
-          </LocationWrapper>
+          {study.location && (
+            <LocationWrapper>
+              <div>
+                <ColoredPinIcon />
+              </div>
+              <span>{study.location}</span>
+              <button type="button">
+                <ColoredCopyIcon />
+                <div>복사</div>
+              </button>
+            </LocationWrapper>
+          )}
         </div>
         {/* Contents */}
         <StudyWrapper>{study.content}</StudyWrapper>
