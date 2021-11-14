@@ -78,7 +78,7 @@ const StudyWrapper = styled.div`
 `;
 
 function StudyDetailTemplate({ study }) {
-  return (
+  return study ? (
     <PageWrapperComponent
       title=""
       backLink="/"
@@ -126,6 +126,8 @@ function StudyDetailTemplate({ study }) {
         <StudyWrapper>{study.contents}</StudyWrapper>
       </StudyContentsWrapper>
     </PageWrapperComponent>
+  ) : (
+    <p>loading</p>
   );
 }
 
