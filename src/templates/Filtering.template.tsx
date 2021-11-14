@@ -4,7 +4,7 @@ import theme, { FontSize, Padding } from "@src/styles/theme";
 import { Button } from "@src/components/atoms/Button";
 import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import SelectComponent from "@src/components/atoms/Select";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { getStudyTypeList } from "@src/utils/enum.util";
 import { GuestMain } from "@src/styles/template/GuestMain.styles";
 import { Category } from "@src/components/atoms/Category";
