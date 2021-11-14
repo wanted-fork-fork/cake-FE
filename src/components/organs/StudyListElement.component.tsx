@@ -62,7 +62,11 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
             <StudyInfoComponent study={study} />
           </S.ContentsWrapper>
           <S.ImageWrapper>
-            <Image src={study.img} alt={study.title} height={100} />
+            <Image
+              src={study.img || "/img/default-thumbnail.png"}
+              alt={study.title}
+              height={100}
+            />
           </S.ImageWrapper>
         </S.Container>
       </a>
