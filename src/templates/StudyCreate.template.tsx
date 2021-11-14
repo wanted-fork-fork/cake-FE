@@ -32,6 +32,7 @@ const FormWrapper = styled.div`
 const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-around;
   text-align: center;
   margin-top: 5px;
 `;
