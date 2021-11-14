@@ -117,7 +117,10 @@ export default class BaseHttpService {
           .headers as AxiosRequestHeaders;
         return this.axiosInstance.request(config);
       })
-      .catch(() => Router.push("/login"));
+      .catch(() => {
+        this.removeToken();
+        Router.push("/login");
+      });
   }
 
   _getCommonOptions(): AxiosRequestConfig {
