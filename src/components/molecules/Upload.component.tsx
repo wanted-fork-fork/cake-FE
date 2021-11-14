@@ -31,14 +31,16 @@ const IconButton = styled.label<ButtonStyleProps>`
 
 const S = { IconButton };
 
-function UploadComponent({ onUploaded }) {
+function UploadComponent({ onUploaded, setLoading }) {
   const rootStore = useStores();
 
   const onUploadFile = useCallback(
     async (e) => {
+      setLoading(true);
       const file = e.target.files[0];
       const uploaded = await rootStore.uploadImage(file);
       onUploaded(uploaded);
+      setLoading(false);
     },
     [rootStore, onUploaded],
   );

@@ -58,7 +58,7 @@ function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
       </S.ContentsWrap>
       <Link href="/signup">
         <a>
-          <Button color="gray" mb="20px">
+          <Button color="white" mb="20px">
             학교 계정으로 회원가입
           </Button>
         </a>
