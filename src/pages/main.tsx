@@ -4,6 +4,7 @@ import { useStores } from "@src/store/root.store";
 
 // components
 import UserMainTemplate from "@src/templates/UserMain.template";
+import { memo } from "react";
 
 function UserMainPage() {
   const { studyStore } = useStores();
@@ -27,4 +28,4 @@ function UserMainPage() {
   );
 }
 
-export default UserMainPage;
+export default memo(UserMainPage);

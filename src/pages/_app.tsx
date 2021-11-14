@@ -48,9 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Container>
           <Content>
             <SafeHydrateHoc>
-              <WithAuthenticationHoc>
-                <Component {...pageProps} />
-              </WithAuthenticationHoc>
+              <Component {...pageProps} />
             </SafeHydrateHoc>
           </Content>
         </Container>

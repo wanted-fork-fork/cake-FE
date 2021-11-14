@@ -31,7 +31,8 @@ const useInfiniteLoading = ({ getItems, pageToLoad = 0, listKeyName }) => {
 
     loadItems(pageToLoad); /* 5 */
     initialPageLoaded.current = true;
-  }, [loadItems, pageToLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     items,

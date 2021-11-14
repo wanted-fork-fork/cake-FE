@@ -47,6 +47,6 @@ export default class UserStore {
   isAuthenticated() {
     const token = this.authService.accessToken;
     this.authLoading = false;
-    this.authenticated = token !== null && token.length > 0;
+    return (this.authenticated = token !== null && token.length > 0);
   }
 }

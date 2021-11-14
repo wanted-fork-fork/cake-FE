@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 // components
 import { StudyListElement } from "@src/models/dto/study.dto";
@@ -53,15 +54,19 @@ const S = {
 };
 function StudyListElementComponent({ study }: StudyListElementComponentProps) {
   return (
-    <S.Container key={study.id}>
-      <S.ContentsWrapper>
-        <h3>{study.title}</h3>
-        <StudyInfoComponent study={study} />
-      </S.ContentsWrapper>
-      <S.ImageWrapper>
-        <Image src={study.img} alt={study.title} height={100} />
-      </S.ImageWrapper>
-    </S.Container>
+    <Link href={`/study/${study.id}`}>
+      <a>
+        <S.Container key={study.id}>
+          <S.ContentsWrapper>
+            <h3>{study.title}</h3>
+            <StudyInfoComponent study={study} />
+          </S.ContentsWrapper>
+          <S.ImageWrapper>
+            <Image src={study.img} alt={study.title} height={100} />
+          </S.ImageWrapper>
+        </S.Container>
+      </a>
+    </Link>
   );
 }
 

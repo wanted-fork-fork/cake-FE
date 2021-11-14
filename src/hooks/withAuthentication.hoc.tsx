@@ -1,31 +1,53 @@
-import { useStores } from "@src/store/root.store";
-import { useEffect, useMemo } from "react";
-import GuestMainTemplate from "@src/templates/GuestMain.template";
-import { useRouter } from "next/router";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
-const allowedOnlyToGuest = ["/", "/login", "/signup"];
+export const withAuthentication = async (
+  ctx,
+  authPermission = AuthPermissionType.ALL,
+) => {
+  try {
+    let userPermission = AuthPermissionType.ALL;
 
-function WithAuthenticationHoc({ children }) {
-  const { userStore } = useStores();
-  const router = useRouter();
+    const user = localStorage.getItem("token");
+    if (user) {
+      userPermission = AuthPermissionType.USER;
 
-  useEffect(() => userStore.isAuthenticated());
+      if (authPermission === AuthPermissionType.GUEST) {
+        ctx.res.writeHeader(307, {
+          Location: "/",
+        });
+        ctx.res.end();
 
-  const component = useMemo(() => {
-    const unauthenticated = !userStore.authenticated;
-    const isAllowedForGuest = allowedOnlyToGuest.find(
-      (x) => x === router.pathname,
-    );
-    if (isAllowedForGuest) {
-      if (unauthenticated) return children;
-
-      router.push("/");
-      return children;
+        return { props: {} };
+      }
     }
-    return unauthenticated ? <GuestMainTemplate /> : children;
-  }, [userStore.authenticated, children, router]);
 
-  return component;
-}
+    if (userPermission >= authPermission) {
+      return { props: {} };
+    }
 
-export default WithAuthenticationHoc;
+    if (userPermission === AuthPermissionType.USER) {
+      ctx.res.writeHeader(307, {
+        Location: `/401`,
+      });
+      ctx.res.end();
+
+      return { props: {} };
+    }
+
+    ctx.res.writeHeader(307, {
+      Location: `login`,
+    });
+    ctx.res.end();
+
+    return { props: {} };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: {
+        error: e.toString(),
+      },
+    };
+  }
+};
+
+export default { withAuthentication };

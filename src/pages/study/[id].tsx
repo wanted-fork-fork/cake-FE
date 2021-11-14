@@ -1,8 +1,10 @@
 import StudyDetailTemplate from "@src/templates/StudyDetail.template";
 import { useStores } from "@src/store/root.store";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { StudyDetailDto } from "@src/models/dto/study.dto";
 import { useRouter } from "next/router";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
 function StudyDetailPage() {
   const { studyStore } = useStores();
@@ -19,4 +21,6 @@ function StudyDetailPage() {
   return <StudyDetailTemplate study={studyDetail} />;
 }
 
-export default StudyDetailPage;
+export default memo(StudyDetailPage);
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.USER);
