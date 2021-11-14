@@ -12,7 +12,7 @@ const Container = styled.div<BaseProps>`
   padding-top: 20vh;
 
   @media (max-height: 670px) {
-    padding-top: 10vh;
+    padding-top: 14vh;
   }
   padding-left: ${Padding.pageX};
   padding-right: ${Padding.pageX};
