@@ -6,14 +6,13 @@ import Link from "next/link";
 import { dateToFormatted } from "@src/utils/dayjs.util";
 
 // components
-import StarIcon from "@src/components/icon/Star.icon";
 import ColoredPinIcon from "@src/components/icon/ColoredPin.icon";
 import ColoredCopyIcon from "@src/components/icon/ColoredCopy.icon";
 import { LightDivider } from "@src/components/atoms/Divider";
 import { Button } from "@src/components/atoms/Button";
-import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
 import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
+import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
@@ -38,22 +37,6 @@ const ImageWrapper = styled.div`
   img {
     width: ${windowSize.mobile};
     height: auto;
-  }
-`;
-
-const ProfileWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: ${FontSize.Small};
-  span {
-    display: flex;
-    align-items: center;
-    svg {
-      margin-bottom: 3px;
-      margin-right: 4px;
-    }
   }
 `;
 
@@ -110,7 +93,7 @@ function StudyDetailTemplate({ study }) {
           </a>
         </Link>
       ),
-    [study, study],
+    [study],
   );
 
   return study ? (
@@ -121,18 +104,7 @@ function StudyDetailTemplate({ study }) {
       </ImageWrapper>
       <StudyContentsWrapper>
         {/* Profile */}
-        <ProfileWrapper>
-          <ProfileFrameComponent
-            allowUpload={false}
-            size="small"
-            imgSrc={study.user.img}
-          />
-          <span>{study.user.nickname}</span>
-          <span>
-            <StarIcon />
-            <span>{study.user.rate || "비공개"}</span>
-          </span>
-        </ProfileWrapper>
+        <SimpleProfileComponent user={study.user} />
         {/*  Title */}
         <div>
           <h3>{study.title}</h3>
