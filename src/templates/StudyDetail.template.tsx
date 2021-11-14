@@ -97,7 +97,7 @@ function StudyDetailTemplate({ study }) {
   );
 
   return study ? (
-    <PageWrapperComponent title="" backLink="/" button={applyButton}>
+    <PageWrapperComponent title="" button={applyButton}>
       {/* Thumbnail */}
       <ImageWrapper>
         <Image alt={study.title} />

@@ -72,7 +72,6 @@ function StudyCreateTemplate({
   return (
     <PageWrapperComponent
       title="스터디 생성"
-      backLink="/"
       button={
         <Button
           onClick={onSubmit}

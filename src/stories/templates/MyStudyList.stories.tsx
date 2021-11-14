@@ -1,7 +1,5 @@
 import MyStudyListTemplate from "@src/templates/MyStudyList.template";
 import { StudyManageListElement } from "@src/models/dto/study.dto";
-import { StudyManageType } from "@src/constant/enum.constant";
-import { useState } from "react";
 
 export default {
   title: "template/My Study List",

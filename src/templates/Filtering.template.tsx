@@ -41,7 +41,7 @@ const ButtonContentsWrapper = styled.div`
 function FilteringTemplate() {
   const studyList = useMemo(() => getStudyTypeList(), []);
   return (
-    <PageWrapperComponent title="스터디 필터링" backLink="/" button={null}>
+    <PageWrapperComponent title="스터디 필터링" button={null}>
       <Wrapper>
         <SectionWrapper>
           <LabelWrapper>
