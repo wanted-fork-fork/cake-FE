@@ -35,6 +35,7 @@ export interface StudyDetailDto extends StudyListElement {
   user: UserProfile;
   apply: boolean;
 }
+
 export interface StudyManageListElement extends StudyListElement {
   state: StudyState;
 }

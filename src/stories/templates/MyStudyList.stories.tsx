@@ -66,19 +66,11 @@ const studyListSample: StudyManageListElement[] = [
   },
 ];
 
-const Template = ({ type, studyList }) => {
-  const [nowType, setNowType] = useState(type);
-  return (
-    <MyStudyListTemplate
-      type={nowType}
-      setType={setNowType}
-      studyList={studyList}
-    />
-  );
-};
+const Template = ({ studyList }) => (
+  <MyStudyListTemplate studyList={studyList} />
+);
 
 export const MyStudyList = Template.bind({});
 MyStudyList.args = {
-  type: StudyManageType.MINE,
   studyList: studyListSample,
 };

@@ -12,7 +12,9 @@ import { BoldDivider } from "@src/components/atoms/Divider";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
 import { NoScroll } from "@src/styles/common";
 import { Padding } from "@src/styles/theme";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { useRouter } from "next/router";
+import useQueryPusher from "@src/hooks/useQueryPusher.hook";
 
 const Container = styled.div`
   height: 100vh;
@@ -29,14 +31,33 @@ const HeadWrapper = styled.div`
   padding: 0 ${Padding.pageX};
   margin-bottom: 20px;
 `;
-function MyStudyListTemplate({ type, setType, studyList = [] }) {
+function MyStudyListTemplate({ studyList = [] }) {
+  const router = useRouter();
+  const handleChangeQuery = useQueryPusher();
+
+  const type = useMemo(
+    () => router.query.type || StudyManageType.MINE,
+    [router],
+  );
   const onClickMine = useCallback(
-    () => setType(StudyManageType.MINE),
-    [setType],
+    () => handleChangeQuery({ type: StudyManageType.MINE }),
+    [handleChangeQuery],
   );
   const onClickOther = useCallback(
-    () => setType(StudyManageType.OTHER),
-    [setType],
+    () => handleChangeQuery({ type: StudyManageType.OTHER }),
+    [handleChangeQuery],
+  );
+
+  const studyListDOM = useMemo(
+    () =>
+      studyList.map((x, index) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <div key={x.id + index}>
+          <StudyManageListElementComponent study={x} />
+          {index < studyList.length - 1 && <BoldDivider />}
+        </div>
+      )),
+    [studyList],
   );
 
   return (
@@ -61,14 +82,7 @@ function MyStudyListTemplate({ type, setType, studyList = [] }) {
           {StudyManageTypeToLabel[StudyManageType.OTHER]}
         </Button>
       </HeadWrapper>
-      <div>
-        {studyList.map((x, index) => (
-          <div key={x.id}>
-            <StudyManageListElementComponent study={x} />
-            {index < studyList.length - 1 && <BoldDivider />}
-          </div>
-        ))}
-      </div>
+      <div>{studyListDOM}</div>
       <BottomNavigationComponent />
     </Container>
   );

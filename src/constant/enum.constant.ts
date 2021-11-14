@@ -48,6 +48,7 @@ export const StudyTypeEnumToLabel = {
 };
 
 export enum StudyState {
+  _,
   CREATED,
   APPLIED,
   JOINED,
@@ -61,10 +62,10 @@ export const StudyStateToManageButtonLabel = {
   [StudyState.REJECTED]: "거절됨",
 };
 
-export enum StudyManageType {
-  MINE,
-  OTHER,
-}
+export const StudyManageType = {
+  MINE: "mine",
+  OTHER: "other",
+};
 
 export const StudyManageTypeToLabel = {
   [StudyManageType.MINE]: "내가 연 스터디",

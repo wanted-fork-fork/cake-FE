@@ -85,14 +85,14 @@ function StudyInfoComponent({ study }) {
         <S.CategoryTypeTag>GIVE</S.CategoryTypeTag>
         {study.give.length === 0 ? "아직 없어요" : ""}
         {study.give.map((x) => (
-          <Category key={x}>{x}</Category>
+          <Category key={`${study.id}-${x}`}>{x}</Category>
         ))}
       </S.CategoryWrapper>
       <S.CategoryWrapper>
         <S.CategoryTypeTag>TAKE</S.CategoryTypeTag>
         {study.take.length === 0 ? "다 좋아요!" : ""}
         {study.take.map((x) => (
-          <S.Category key={x}>{x}</S.Category>
+          <S.Category key={`${study.id}-${x}`}>{x}</S.Category>
         ))}
       </S.CategoryWrapper>
     </div>
