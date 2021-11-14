@@ -1,8 +1,7 @@
-import Link from "next/link";
-
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import styled from "styled-components";
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+import { useCallback } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -38,14 +37,13 @@ const IconWrapper = styled.a`
 `;
 
 const S = { Container, Title, IconWrapper };
-function TitleHeaderComponent({ title, backLink }) {
+function TitleHeaderComponent({ title }) {
+  const back = useCallback(() => window.history.back(), []);
   return (
     <Container>
-      <Link href={backLink}>
-        <IconWrapper>
-          <LeftArrowIcon />
-        </IconWrapper>
-      </Link>
+      <IconWrapper onClick={back}>
+        <LeftArrowIcon />
+      </IconWrapper>
       <S.Title>{title}</S.Title>
       <div />
     </Container>

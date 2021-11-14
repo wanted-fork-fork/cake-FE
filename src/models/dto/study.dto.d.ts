@@ -1,4 +1,4 @@
-import { StudyType } from "@src/constant/enum.constant";
+import { StudyState, StudyType } from "@src/constant/enum.constant";
 import { UserProfile } from "@src/models/dto/user.dto";
 
 export interface CreateStudyDto {
@@ -36,4 +36,6 @@ export interface StudyDetailDto extends StudyListElement {
   apply: boolean;
 }
 
-export default {};
+export interface StudyManageListElement extends StudyListElement {
+  state: StudyState;
+}

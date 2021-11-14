@@ -39,7 +39,6 @@ function StudyJoinFormTemplate({ study, onSubmit }) {
   return study ? (
     <PageWrapperComponent
       title="참여 신청"
-      backLink="/"
       button={
         <Button
           onClick={handleSubmit}

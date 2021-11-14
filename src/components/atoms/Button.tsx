@@ -73,10 +73,12 @@ export const Button = styled.button<ButtonStyleProps>`
     return `1px solid ${theme.color.primary}`;
   }};
 
-  color: ${({ color, disabled, filled = true }) =>
-    (color === "primary" || color === "point") && !disabled && filled
-      ? "#fff"
-      : theme.color.black};
+  color: ${({ color, disabled, filled = true }) => {
+    if ((color === "primary" || color === "point") && !disabled && filled)
+      return "#fff";
+    if (color === "gray") return theme.color.gray4;
+    return theme.color.black;
+  }};
 
   width: ${({ width }) => width || "100%"};
 `;

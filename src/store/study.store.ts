@@ -5,6 +5,7 @@ import {
   CreateStudyDto,
   StudyDetailDto,
   StudyListElement,
+  StudyManageListElement,
 } from "@src/models/dto/study.dto";
 import { StudyType } from "@src/constant/enum.constant";
 
@@ -42,12 +43,12 @@ export default class StudyStore {
     )) as StudyListElement[];
   }
 
-  async getMyStudyList(): Promise<StudyListElement[]> {
-    return (await this.studyService.getMyStudyList()) as StudyListElement[];
+  async getMyStudyList(): Promise<StudyManageListElement[]> {
+    return (await this.studyService.getMyStudyList()) as StudyManageListElement[];
   }
 
-  async getMyOtherStudyList(): Promise<StudyListElement[]> {
-    return (await this.studyService.getMyOtherStudyList()) as StudyListElement[];
+  async getMyOtherStudyList(): Promise<StudyManageListElement[]> {
+    return (await this.studyService.getMyOtherStudyList()) as StudyManageListElement[];
   }
 
   async getStudyDetail(id: number): Promise<StudyDetailDto> {
