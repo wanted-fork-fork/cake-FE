@@ -36,6 +36,7 @@ const Select = styled.select<SelectStyleProp>`
 
   &:focus {
     outline: none;
+    background-color: #fff;
   }
 
   color: ${({ selected }) =>
@@ -54,6 +55,13 @@ const Select = styled.select<SelectStyleProp>`
   option {
     margin: 0;
     padding: 0;
+    &:disabled {
+      background-color: #fff;
+    }
+  }
+
+  &:disabled {
+    background-color: #fff;
   }
 `;
 

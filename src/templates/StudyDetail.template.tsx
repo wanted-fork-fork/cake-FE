@@ -68,7 +68,7 @@ const StudyWrapper = styled.div`
 function StudyDetailTemplate({ study }) {
   const applyButton = useMemo(
     () =>
-      !study || study.apply ? (
+      !study || !study.apply ? (
         <Button
           disabled
           color="point"
