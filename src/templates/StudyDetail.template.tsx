@@ -17,14 +17,16 @@ import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+import { useMemo } from "react";
 
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
   h3 {
-    margin-bottom: 2px;
+    margin-bottom: 7px;
   }
   p {
     margin-bottom: 0;
+    font-size: ${FontSize.Small};
   }
 `;
 
@@ -44,6 +46,7 @@ const ProfileWrapper = styled.div`
   gap: 8px;
   align-items: center;
   margin-bottom: 10px;
+  font-size: ${FontSize.Small};
   span {
     display: flex;
     align-items: center;
@@ -70,6 +73,7 @@ const LocationWrapper = styled.div`
     color: ${theme.color.primary};
     width: 70px;
     float: right;
+    font-size: ${FontSize.Small};
   }
 `;
 
@@ -79,20 +83,38 @@ const StudyWrapper = styled.div`
 `;
 
 function StudyDetailTemplate({ study }) {
-  return study ? (
-    <PageWrapperComponent
-      title=""
-      backLink="/"
-      button={
+  const applyButton = useMemo(
+    () =>
+      !study || study.apply ? (
+        <Button
+          disabled
+          color="point"
+          height="44px"
+          fontSize="small"
+          width="100px"
+        >
+          참여 신청
+        </Button>
+      ) : (
         <Link href={`/study/apply/${study.id}`}>
           <a>
-            <Button color="point" height="44px" fontSize="small" width="100px">
+            <Button
+              disabled={false}
+              color="point"
+              height="44px"
+              fontSize="small"
+              width="100px"
+            >
               참여 신청
             </Button>
           </a>
         </Link>
-      }
-    >
+      ),
+    [study, study],
+  );
+
+  return study ? (
+    <PageWrapperComponent title="" backLink="/" button={applyButton}>
       {/* Thumbnail */}
       <ImageWrapper>
         <Image alt={study.title} />
@@ -100,11 +122,15 @@ function StudyDetailTemplate({ study }) {
       <StudyContentsWrapper>
         {/* Profile */}
         <ProfileWrapper>
-          <ProfileFrameComponent allowUpload={false} size="small" />
-          <span>아주대애기</span>
+          <ProfileFrameComponent
+            allowUpload={false}
+            size="small"
+            imgSrc={study.user.img}
+          />
+          <span>{study.user.nickname}</span>
           <span>
             <StarIcon />
-            <span>4.8</span>
+            <span>{study.user.rate || "비공개"}</span>
           </span>
         </ProfileWrapper>
         {/*  Title */}
@@ -128,7 +154,7 @@ function StudyDetailTemplate({ study }) {
           </LocationWrapper>
         </div>
         {/* Contents */}
-        <StudyWrapper>{study.contents}</StudyWrapper>
+        <StudyWrapper>{study.content}</StudyWrapper>
       </StudyContentsWrapper>
     </PageWrapperComponent>
   ) : (

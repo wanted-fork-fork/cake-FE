@@ -9,7 +9,7 @@ export default {
 const studySample: StudyDetailDto = {
   id: 1,
   title: "애프터 이펙트 알려주실 분 구합니다.",
-  contents:
+  content:
     "저는 영상을 배우고 싶은데 혹시 영상러들 중 일러스트 관심잇으신 분 계신가요?",
   location: "아주대학교 카탈로그",
   peopleCnt: 1,
@@ -19,6 +19,14 @@ const studySample: StudyDetailDto = {
   give: ["요리", "베이킹"],
   take: ["운동", "영상 편집"],
   img: "https://cdn.pixabay.com/photo/2021/09/01/16/09/cake-6591719__340.jpg",
+  images: [],
+  user: {
+    id: 3,
+    nickname: "아주대애기",
+    rate: 4.3,
+    img: null,
+  },
+  apply: false,
 };
 
 const Template = () => <StudyDetailTemplate study={studySample} />;

@@ -1,10 +1,14 @@
-import StudyDetailTemplate from "@src/templates/StudyDetail.template";
-import { useStores } from "@src/store/root.store";
 import { memo, useEffect, useState } from "react";
-import { StudyDetailDto } from "@src/models/dto/study.dto";
 import { useRouter } from "next/router";
+
+// lib
+import { StudyDetailDto } from "@src/models/dto/study.dto";
+import { useStores } from "@src/store/root.store";
 import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
+
+// components
+import StudyDetailTemplate from "@src/templates/StudyDetail.template";
 
 function StudyDetailPage() {
   const { studyStore } = useStores();
