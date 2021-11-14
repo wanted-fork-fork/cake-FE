@@ -104,6 +104,8 @@ export default class BaseHttpService {
   }
 
   _handle401(error: AxiosError<APIErrorResponse>) {
+    this.removeToken();
+
     // refresh token
     this.post<string>(`${API_PREFIX.AUTH}/refresh`)
       .then((res: string) => {
