@@ -24,7 +24,7 @@ const ContentsWrap = styled.div<BaseProps>`
 
 const BottomWrap = styled.div`
   position: fixed;
-  bottom: 60px;
+  bottom: 30px;
   left: ${Padding.pageX};
   right: ${Padding.pageX};
 

@@ -16,7 +16,6 @@ const Template = ({ shape = "default" }: SelectStyleProp) => (
     list={values}
     idKeyName="key"
     labelKeyName="value"
-    defaultText=""
     onSelect={null}
     selected={null}
     shape={shape}

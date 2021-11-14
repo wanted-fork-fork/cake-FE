@@ -28,9 +28,11 @@ function PageWrapperComponent({ title, backLink, button, children }) {
     <Container>
       <TitleHeaderComponent title={title} backLink={backLink} />
       <div>{children}</div>
-      <BottomSection>
-        <SubmitWrapper>{button}</SubmitWrapper>
-      </BottomSection>
+      {button && (
+        <BottomSection>
+          <SubmitWrapper>{button}</SubmitWrapper>
+        </BottomSection>
+      )}
     </Container>
   );
 }
