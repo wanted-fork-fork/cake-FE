@@ -38,7 +38,7 @@ export const BaseFontSize = css`
 export const Underline = css`
   border: none;
   border-bottom: 3px solid ${theme.color.primary};
-
+  border-radius: 0;
   font-weight: 400;
   padding: 15px 10px;
 
@@ -52,6 +52,7 @@ export const Underline = css`
 export const LightUnderline = css`
   border: none;
   text-align: inherit;
+  border-radius: 0;
 
   padding: 10px 10px;
   border-bottom: 1px solid ${theme.color.gray3};
