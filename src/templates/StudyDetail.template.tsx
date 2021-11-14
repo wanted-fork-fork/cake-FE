@@ -64,6 +64,7 @@ const LocationWrapper = styled.div`
 const StudyWrapper = styled.div`
   white-space: pre-wrap;
   margin-top: 20px;
+  padding-bottom: 20px;
 `;
 
 function StudyDetailTemplate({ study }) {
