@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import styled from "styled-components";
 
 // utils
@@ -21,6 +21,7 @@ import CategorySelectDrawerComponent from "@src/components/organs/CategorySelect
 import { Category } from "@src/components/atoms/Category";
 import useVisibleHook from "@src/hooks/useVisible.hook";
 import TradeIcon from "@src/components/icon/Trade.icon";
+import dayjs from "dayjs";
 
 const FormWrapper = styled.div`
   padding: 0 ${Padding.pageX};
@@ -75,6 +76,16 @@ function StudyCreateTemplate({
   const [yoursVisible, setYourVisible, setYourInvisible] =
     useVisibleHook(false);
 
+  const disabledStart = useCallback(
+    (current) => current && current < dayjs().add(-1, "day").endOf("day"),
+    [],
+  );
+  const disabledEnd = useCallback(
+    (current) =>
+      (current && current < dayjs().add(-1, "day").endOf("day")) ||
+      (startDate && current < dayjs(startDate).add(-1, "day").endOf("day")),
+    [startDate],
+  );
   const myCategoryDom = useMemo(
     () =>
       selectedMine.length === 0
@@ -158,10 +169,12 @@ function StudyCreateTemplate({
               suffixIcon={null}
               placeholder="스터디 시작일"
               picker="date"
+              inputReadOnly
               bordered={false}
               format="YY.MM.DD"
               value={startDate}
               onChange={onChangeStartDate}
+              disabledDate={disabledStart}
             />
           </WithPrefixIcon>
           <MidLine />
@@ -171,10 +184,12 @@ function StudyCreateTemplate({
               suffixIcon={null}
               placeholder="스터디 종료일"
               picker="date"
+              inputReadOnly
               bordered={false}
               format="YY.MM.DD"
               value={endDate}
               onChange={onChangeEndDate}
+              disabledDate={disabledEnd}
             />
           </WithPrefixIcon>
         </CategoryWrapper>
