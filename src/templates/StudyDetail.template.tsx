@@ -101,7 +101,7 @@ function StudyDetailTemplate({ study }) {
     <PageWrapperComponent title="" button={applyButton}>
       {/* Thumbnail */}
       <ImageWrapper>
-        <Image alt={study.title} />
+        <Image src={study.images ? study.images[0] : null} alt={study.title} />
       </ImageWrapper>
       <StudyContentsWrapper>
         {/* Profile */}
