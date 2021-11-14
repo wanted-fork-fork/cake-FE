@@ -18,6 +18,7 @@ import { NoScroll } from "@src/styles/common";
 import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
 import PencilIcon from "@src/components/icon/Pencil.icon";
 import { useRouter } from "next/router";
+import { NaviType } from "@src/constant/enum.constant";
 
 const MainContainer = styled.div`
   ${NoScroll};
@@ -165,7 +166,7 @@ function UserMainTemplate({
         icon={<PencilIcon />}
         onClick={onClickCreateStudy}
       />
-      <BottomNavigationComponent />
+      <BottomNavigationComponent selected={NaviType.MAIN} />
     </MainContainer>
   );
 }
