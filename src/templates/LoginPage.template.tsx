@@ -32,7 +32,7 @@ export type LoginForm = {
 function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
   return (
     <SGuestMain.Container>
-      <AppTitleComponent mb="100px" />
+      <AppTitleComponent mb="60px" />
       <S.ContentsWrap mb="20px" onSubmit={onSubmit}>
         <DividedInput
           height="65px"

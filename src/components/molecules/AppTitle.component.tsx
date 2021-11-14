@@ -47,7 +47,7 @@ type Props = {
 function AppTitleComponent({ mb = "0" }: Props) {
   return (
     <S.Container mb={mb}>
-      <S.MainTitle mb="40px">
+      <S.MainTitle mb="20px">
         재능교환?
         <br />A piece of <S.Strong>Cake</S.Strong> 이지
       </S.MainTitle>
