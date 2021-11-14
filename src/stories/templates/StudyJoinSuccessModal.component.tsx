@@ -1,14 +1,23 @@
 import { Button } from "@src/components/atoms/Button";
+import Link from "next/link";
 import PopupComponent from "@src/components/organs/Popup.component";
 
-const bottom = (
+const Bottom = () => (
   <div>
-    <Button color="point" fontSize="small" height="48px" mb="10px">
-      스터디 관리로 이동
-    </Button>
-    <Button color="white" fontSize="small" filled={false} height="48px">
-      글 목록으로
-    </Button>
+    <Link href="/profile/study">
+      <a>
+        <Button color="point" fontSize="small" height="48px" mb="10px">
+          스터디 관리로 이동
+        </Button>
+      </a>
+    </Link>{" "}
+    <Link href="/">
+      <a>
+        <Button color="white" fontSize="small" filled={false} height="48px">
+          글 목록으로
+        </Button>
+      </a>
+    </Link>
   </div>
 );
 const contentPadding = { padding: "15px 0 10px 0" };
@@ -24,7 +33,7 @@ const content = (
 );
 
 function StudyJoinSuccessModalComponent() {
-  return <PopupComponent bottom={bottom} content={content} />;
+  return <PopupComponent bottom={<Bottom />} content={content} />;
 }
 
 export default StudyJoinSuccessModalComponent;

@@ -10,7 +10,7 @@ const useInfiniteLoading = ({ getItems, pageToLoad = 0, listKeyName }) => {
     async (nextPage) => {
       /* 3 */
       const data = await getItems(nextPage);
-      if (data.length === 0) setHasMore(false);
+      if (data[listKeyName].length === 0) setHasMore(false);
       else {
         setHasMore(true); /* 4 */
         setItems((prevItems) => [...prevItems, ...data[listKeyName]]);

@@ -1,5 +1,6 @@
 import Image from "@src/components/atoms/Image";
 import styled from "styled-components";
+import Link from "next/link";
 
 // lib
 import { dateToFormatted } from "@src/utils/dayjs.util";
@@ -83,9 +84,13 @@ function StudyDetailTemplate({ study }) {
       title=""
       backLink="/"
       button={
-        <Button color="point" height="44px" fontSize="small" width="100px">
-          참여 신청
-        </Button>
+        <Link href={`/study/apply/${study.id}`}>
+          <a>
+            <Button color="point" height="44px" fontSize="small" width="100px">
+              참여 신청
+            </Button>
+          </a>
+        </Link>
       }
     >
       {/* Thumbnail */}
