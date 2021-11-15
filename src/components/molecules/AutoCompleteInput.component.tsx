@@ -66,21 +66,26 @@ function AutoCompleteInputComponent<T>({
         style={{ maxHeight: "300px", overflowY: "auto" }}
       >
         {inputValue === "" && options.length === 0 ? (
-          <Menu.Item key={-1} disabled>
+          <Menu.Item style={{ height: "52px" }} key={-1} disabled>
             검색어를 입력해주세요.
           </Menu.Item>
         ) : (
           ""
         )}
         {inputValue !== "" && options.length === 0 ? (
-          <Menu.Item key={-2} disabled>
+          <Menu.Item style={{ height: "52px" }} key={-2} disabled>
             일치하는 항목을 찾지 못했습니다.
           </Menu.Item>
         ) : (
           ""
         )}
         {options.map((x) => (
-          <Menu.Item onClick={onSelect} key={x.key} title={x.label}>
+          <Menu.Item
+            style={{ height: "52px" }}
+            onClick={onSelect}
+            key={x.key}
+            title={x.label}
+          >
             {x.label}
           </Menu.Item>
         ))}

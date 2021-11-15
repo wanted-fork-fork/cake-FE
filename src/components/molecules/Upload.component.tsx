@@ -49,7 +49,7 @@ function UploadComponent({ onUploaded, setLoading }) {
     <form>
       <S.IconButton htmlFor="file" color="gray">
         <CameraIcon />
-        <input id="file" type="file" onChange={onUploadFile} />
+        <input id="file" type="file" accept="image/*" onChange={onUploadFile} />
       </S.IconButton>
     </form>
   );
