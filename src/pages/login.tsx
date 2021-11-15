@@ -25,8 +25,7 @@ const LoginPage: NextPage = observer(() => {
 
   const onSubmit = useCallback(
     async (values) => {
-      await userStore.login(values);
-      router.push("/");
+      if (await userStore.login(values)) router.push("/");
     },
     [router, userStore],
   );
@@ -43,6 +42,7 @@ const LoginPage: NextPage = observer(() => {
     <Container>
       <LoginPageTemplate
         values={values}
+        error={userStore.error}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />

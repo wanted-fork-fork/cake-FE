@@ -6,6 +6,7 @@ import AppTitleComponent from "@src/components/molecules/AppTitle.component";
 import { TextButton } from "@src/components/atoms/TextButton";
 import { DividedInput } from "@src/components/atoms/Input";
 import { Button } from "@src/components/atoms/Button";
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 // styles
 import SGuestMain from "@src/styles/template/GuestMain.styles";
@@ -29,7 +30,7 @@ export type LoginForm = {
   password: string;
 };
 
-function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
+function LoginPageTemplate({ onSubmit, onChange, values, error }): JSX.Element {
   return (
     <SGuestMain.Container>
       <AppTitleComponent mb="60px" />
@@ -55,6 +56,9 @@ function LoginPageTemplate({ onSubmit, onChange, values }): JSX.Element {
         <Button color="primary" height="50px" mb="10px">
           로그인
         </Button>
+        <ErrorMessage textAlign="center" mb="10px">
+          {error}
+        </ErrorMessage>
       </S.ContentsWrap>
       <Link href="/signup">
         <a>
