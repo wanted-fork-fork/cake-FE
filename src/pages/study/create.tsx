@@ -13,6 +13,7 @@ import { StudyType } from "@src/constant/enum.constant";
 import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
 import { useRouter } from "next/router";
+import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
 
 function CreateStudyPage() {
   const { studyStore } = useStores();
@@ -23,36 +24,39 @@ function CreateStudyPage() {
   const [selectedMine, setSelectedMine] = useState([]);
   const [selectedYours, setSelectedYours] = useState([]);
 
-  const { values, handleChange, handleSubmit } = useForm<CreateStudyDto>({
-    initialValues: {
-      title: "",
-      content: "",
-      location: "",
-      type: StudyType.OneToOne,
-      startDate: "2021-11-12",
-      endDate: "2021-11-12",
-      peopleCnt: 1,
-      chatRoom: "",
-      roomPwd: "",
-      images: [],
-      give: [],
-      take: [],
-    },
-    onSubmit(v: CreateStudyDto) {
-      studyStore
-        .createStudy({
-          ...v,
-          startDate: startDate.format("YYYY-MM-DD"),
-          endDate: endDate.format("YYYY-MM-DD"),
-          give: selectedMine.map((x) => x.id),
-          take: selectedYours.map((x) => x.id),
-        })
-        .then(() => router.push(`/`));
-    },
-    validate() {
-      return {};
-    },
-  });
+  const { values, handleChange, handleSubmit, submitted } =
+    useForm<CreateStudyDto>({
+      initialValues: {
+        title: "",
+        content: "",
+        location: "",
+        type: StudyType.OneToOne,
+        startDate: "2021-11-12",
+        endDate: "2021-11-12",
+        peopleCnt: 1,
+        chatRoom: "",
+        roomPwd: "",
+        images: [],
+        give: [],
+        take: [],
+      },
+      onSubmit(v: CreateStudyDto) {
+        studyStore
+          .createStudy({
+            ...v,
+            startDate: startDate.format("YYYY-MM-DD"),
+            endDate: endDate.format("YYYY-MM-DD"),
+            give: selectedMine.map((x) => x.id),
+            take: selectedYours.map((x) => x.id),
+          })
+          .then(() => router.push(`/`));
+      },
+      validate() {
+        return {};
+      },
+    });
+
+  usePreventRouteChangeIf(!submitted, null);
 
   return (
     <StudyCreateTemplate

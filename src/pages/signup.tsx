@@ -11,11 +11,14 @@ import { useStores } from "@src/store/root.store";
 import SignupPageTemplate from "@src/templates/SignupPage.template";
 import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
+import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
 
 const SignupPage = observer(() => {
   const { signupStore, categoryStore } = useStores();
 
   const [step, setStep] = useState<SignupStep>(SignupStep.SELECT_SCHOOL);
+
+  usePreventRouteChangeIf(step !== SignupStep.COMPLETE_SIGNUP, null);
 
   const selectedUniv = useMemo(
     () =>

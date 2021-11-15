@@ -5,12 +5,16 @@ import { useStores } from "@src/store/root.store";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { StudyDetailDto } from "@src/models/dto/study.dto";
+import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
 
 function ApplyStudyPage() {
   const { studyStore } = useStores();
   const router = useRouter();
 
   const [studyDetail, setStudyDetail] = useState<StudyDetailDto>(null);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
+  usePreventRouteChangeIf(!submitted, null);
 
   useEffect(() => {
     const { id = "1" } = router.query;
@@ -21,6 +25,7 @@ function ApplyStudyPage() {
   const onSubmit = useCallback(
     async (contents) => {
       await studyStore.applyStudy(studyDetail.id, contents, []);
+      setSubmitted(true);
     },
     [studyDetail, studyStore],
   );
