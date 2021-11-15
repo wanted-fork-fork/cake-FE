@@ -1,20 +1,22 @@
+import styled from "styled-components";
+
+// lib
+import { NaviType } from "@src/constant/enum.constant";
+
 // components
 import RightArrowIcon from "@src/components/icon/RightArrow.icon";
-import CoinIcon from "@src/components/icon/Coin.icon";
 import StarIcon from "@src/components/icon/Star.icon";
-import ForkRateIcon from "@src/components/icon/ForkRate.icon";
 import { TextButton } from "@src/components/atoms/TextButton";
 import { BoldDivider } from "@src/components/atoms/Divider";
-import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
-import styled, { css } from "styled-components";
-import theme, { FontSize, Padding } from "@src/styles/theme";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
-import { NaviType } from "@src/constant/enum.constant";
-import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import DetailUserInfoComponent from "@src/components/organs/profile/DetailUserInfo.component";
 import PointDetailComponent from "@src/components/organs/profile/PointDetail.component";
 import RateSliderComponent from "@src/components/organs/profile/RateSlider.component";
 import ProfileCategoryListBox from "@src/components/organs/profile/ProfileCategoryListBox";
+
+// styles
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import theme, { FontSize, Padding } from "@src/styles/theme";
 
 const Container = styled.div`
   padding-top: 20px;
