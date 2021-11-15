@@ -53,10 +53,9 @@ const profileSample = {
   ] as Category[],
 };
 
-const Template = (profile) => <MyPageTemplate profile={profileSample} />;
+const Template = ({ profile }) => <MyPageTemplate profile={profile} />;
 
 export const MyPage = Template.bind({});
-
 MyPage.args = {
   profile: profileSample,
 };
