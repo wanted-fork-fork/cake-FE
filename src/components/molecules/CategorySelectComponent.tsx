@@ -11,12 +11,22 @@ const CategoryWrapper = styled.div<CategoryWrapperProp>`
   width: fit-content;
   margin: 0;
 `;
-const CategoryImageWrapper = styled.div`
+const CategoryImageWrapper = styled.div<CategoryImageWrapperProp>`
   border-radius: 12px;
   background-color: ${theme.color.gray2};
 
-  height: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
-  width: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
+  ${({ size = "full" }) => {
+    switch (size) {
+      case "grid":
+        return `height: auto; width: 25%;`;
+      case "full":
+      default:
+        return `
+        height: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
+        width: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
+        `;
+    }
+  }};
 
   overflow: hidden;
   display: flex;
@@ -65,22 +75,29 @@ type CategoryComponentProp = {
   img: string | null;
   name: string;
   onClick: MouseEventHandler<HTMLDivElement>;
+  size?: "full" | "grid";
+};
+
+type CategoryImageWrapperProp = {
+  size?: "full" | "grid";
 };
 
 type CategoryWrapperProp = {
   onClick: MouseEventHandler<HTMLDivElement>;
 };
-
+CategorySelectComponent.defaultProps = {
+  size: "full",
+};
 function CategorySelectComponent({
   selected = false,
   img = null,
   name = "",
   onClick = null,
+  size,
 }: CategoryComponentProp) {
   return (
     <CategoryWrapper onClick={onClick}>
-      <CategoryImageWrapper>
-        {/* TODO:: 여기에 아이콘 대신 이미지를 삽입 */}
+      <CategoryImageWrapper size={size}>
         {img ? <CategoryImage src={img} alt={name} /> : <CameraIcon />}
         <SelectedMask selected={selected}>
           <CheckIcon />

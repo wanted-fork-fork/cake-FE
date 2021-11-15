@@ -9,7 +9,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 interface ProfileFrameProps {
   mb?: string;
-  size?: "large" | "small";
+  size?: "large" | "small" | "medium";
   allowUpload?: boolean;
   imgSrc?: string;
   onUploadImage?: (e: Resource) => void;
@@ -26,12 +26,34 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
 
   img {
     width: auto;
-    height: ${({ size }) => (size === "large" ? "80px" : "32px")};
+    height: ${({ size }) => {
+      switch (size) {
+        case "large":
+          return "80px";
+        case "medium":
+          return "72px";
+        case "small":
+          return "32px";
+        default:
+          return "80px";
+      }
+    }};
   }
 
   svg {
     width: auto;
-    height: ${({ size }) => (size === "large" ? "48px" : "18px")};
+    height: ${({ size }) => {
+      switch (size) {
+        case "large":
+          return "48px";
+        case "medium":
+          return "48px";
+        case "small":
+          return "18px";
+        default:
+          return "48px";
+      }
+    }};
   }
 
   ${({ size }) => {
@@ -40,6 +62,12 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
         return `  
         width: 80px;
        height: 80px;
+        `;
+      case "medium":
+        return `  
+        width: 72px;
+        height: 72px;
+        border-width: 5px;
         `;
       case "small":
         return `  
@@ -53,6 +81,7 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
         height: 80px;`;
     }
   }}
+
   border-radius: 50%;
 
   display: flex;

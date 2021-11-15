@@ -41,7 +41,7 @@ export const FontSize = {
   MainTitle: "1.5rem",
   MainTitleStrong: "1.563rem",
   SubTitle: "1.125rem",
-  Default: "1rem",
+  Default: "1rem", // 16px
   PrimaryLabel: "1.25rem", // 20px
   SecondaryLabel: "0.8rem",
   PrimaryDescription: "0.875rem", // 14px
