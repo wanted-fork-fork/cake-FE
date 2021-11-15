@@ -12,7 +12,7 @@ interface ProfileFrameProps {
   size?: "large" | "small" | "medium";
   allowUpload?: boolean;
   imgSrc?: string;
-  onUploadImage?: (e: Resource) => void;
+  onUploadImage?: (e: Resource[]) => void;
 }
 
 const ProfileImageWrapper = styled.div<BaseProps>`

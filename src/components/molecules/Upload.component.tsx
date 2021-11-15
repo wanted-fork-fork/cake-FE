@@ -31,14 +31,16 @@ const IconButton = styled.label<ButtonStyleProps>`
 
 const S = { IconButton };
 
-function UploadComponent({ onUploaded, setLoading }) {
+function UploadComponent({ onUploaded, setLoading, multiple = false }) {
   const rootStore = useStores();
 
   const onUploadFile = useCallback(
     async (e) => {
       setLoading(true);
-      const file = e.target.files[0];
-      const uploaded = await rootStore.uploadImage(file);
+      const uploaded = [];
+      e.target.files.forEach((file) => {
+        rootStore.uploadImage(file).then((resource) => uploaded.push(resource));
+      });
       onUploaded(uploaded);
       setLoading(false);
     },
@@ -49,7 +51,13 @@ function UploadComponent({ onUploaded, setLoading }) {
     <form>
       <S.IconButton htmlFor="file" color="gray">
         <CameraIcon />
-        <input id="file" type="file" accept="image/*" onChange={onUploadFile} />
+        <input
+          id="file"
+          type="file"
+          accept="image/*"
+          onChange={onUploadFile}
+          multiple={multiple}
+        />
       </S.IconButton>
     </form>
   );
