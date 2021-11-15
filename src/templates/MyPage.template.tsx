@@ -11,6 +11,10 @@ import theme, { FontSize, Padding } from "@src/styles/theme";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
 import { NaviType } from "@src/constant/enum.constant";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import DetailUserInfoComponent from "@src/components/organs/profile/DetailUserInfo.component";
+import PointDetailComponent from "@src/components/organs/profile/PointDetail.component";
+import RateSliderComponent from "@src/components/organs/profile/RateSlider.component";
+import ProfileCategoryListBox from "@src/components/organs/profile/ProfileCategoryListBox";
 
 const Container = styled.div`
   padding-top: 20px;
@@ -20,58 +24,7 @@ const Container = styled.div`
     font-size: ${FontSize.PrimaryDescription};
   }
 `;
-const ProfileWrapper = styled.div<BaseProps>`
-  ${BaseStyleProps};
-  padding: ${Padding.page};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-`;
-const ProfileInfoWrapper = styled.div`
-  width: 100%;
-  p {
-    margin-bottom: 0;
-  }
-`;
-const Nickname = styled.p`
-  font-size: ${FontSize.Default};
-`;
 
-const Email = styled.p`
-  font-size: ${FontSize.SecondaryLabel};
-`;
-
-const PointWrapper = styled.div<BaseProps>`
-  margin: ${Padding.page};
-  ${BaseStyleProps};
-
-  background-color: ${theme.color.point};
-  border-radius: 9px;
-  color: #fff;
-  padding: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-
-  svg {
-    display: flex;
-    align-items: center;
-  }
-  p {
-    margin-bottom: 0;
-    width: 50%;
-  }
-`;
-const PointButtonWrapper = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-`;
 const InfoBox = styled.div`
   //padding: 10px;
   p {
@@ -116,55 +69,6 @@ const InfoBoxTitleWrapper = styled.div`
   }
 `;
 
-const CategoryListWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 10px;
-  cursor: pointer;
-  div {
-    width: calc((100vw - 40px - 40px) / 6 - 10px);
-    height: calc((100vw - 40px - 40px) / 6 - 10px);
-    overflow: hidden;
-    border-radius: 5px;
-    border: 1px solid ${theme.color.point};
-  }
-  img {
-    width: calc((100vw - 40px - 40px) / 6 - 10px);
-    height: calc((100vw - 40px - 40px) / 6 - 10px);
-  }
-`;
-
-const Slider = styled.div`
-  width: 100%;
-  height: 10px;
-  border-radius: 50px;
-  background-color: ${theme.color.point};
-  position: relative;
-`;
-const MarkerWrapper = styled.div<{ rate: number }>`
-  position: absolute;
-  left: ${({ rate }) => `calc(${(rate / 5.0) * 100}% - 10px)`};
-  top: -28px;
-`;
-const SliderWrapper = styled.div`
-  width: 100%;
-  padding-right: 10px;
-  height: 60px;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  margin-bottom: 5px;
-`;
-const PointTextWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  p {
-    margin-bottom: 0;
-    font-size: ${FontSize.Small};
-    color: ${theme.color.point};
-  }
-`;
 const RateWrapper = styled.div`
   display: flex;
   gap: 5px;
@@ -190,32 +94,9 @@ function MyPageTemplate({ profile }) {
   return (
     <Container>
       {/* Profile */}
-      <ProfileWrapper mb="20px">
-        <ProfileFrameComponent imgSrc={profile.img} allowUpload size="medium" />
-        <ProfileInfoWrapper>
-          <Nickname>{profile.user.nickname}</Nickname>
-          <Email>{profile.user.email}</Email>
-        </ProfileInfoWrapper>
-        <div>
-          <RightArrowIcon />
-        </div>
-      </ProfileWrapper>
+      <DetailUserInfoComponent user={profile.user} mb="20px" />
       {/*  Point */}
-      <PointWrapper mb="20px">
-        <div>
-          <CoinIcon />
-        </div>
-        <p>{profile.point}</p>
-        <PointButtonWrapper>
-          <TextButton fontSize="small" color="white">
-            <b>충전하기</b>
-          </TextButton>
-          <span>|</span>
-          <TextButton fontSize="small" color="white">
-            <b>환급하기</b>
-          </TextButton>
-        </PointButtonWrapper>
-      </PointWrapper>
+      <PointDetailComponent point={profile.point} mb="20px" />
       {/*  InfoBox */}
       <InfoBoxContainer>
         {/* 신뢰도 */}
@@ -228,18 +109,7 @@ function MyPageTemplate({ profile }) {
             {profile.user.rate}
           </RateWrapper>
           {/* Slider */}
-          <SliderWrapper>
-            <Slider>
-              <MarkerWrapper rate={profile.user.rate}>
-                <ForkRateIcon />
-              </MarkerWrapper>
-            </Slider>
-            <PointTextWrapper>
-              <p>0</p>
-              <p>2.5</p>
-              <p>5</p>
-            </PointTextWrapper>
-          </SliderWrapper>
+          <RateSliderComponent rate={profile.user.rate} />
         </InfoBox>
         {/* 스터디 횟수 */}
         <InfoBox>
@@ -250,35 +120,15 @@ function MyPageTemplate({ profile }) {
         </InfoBox>
         {/* 카테고리 - GIVE */}
         <InfoBox>
-          <InfoBoxTitleWrapper>
-            <h3>Give</h3>
-            <div>
-              <RightArrowIcon />
-            </div>
-          </InfoBoxTitleWrapper>
-          <CategoryListWrapper>
-            {profile.give.map((x) => (
-              <div key={x.id}>
-                <img src={x.img} alt={x.name} />
-              </div>
-            ))}
-          </CategoryListWrapper>
+          <ProfileCategoryListBox
+            title="Give"
+            categories={profile.give}
+            pr="10px"
+          />
         </InfoBox>
         {/* 카테고리 - TAKE */}
         <InfoBox>
-          <InfoBoxTitleWrapper>
-            <h3>Take</h3>
-            <div>
-              <RightArrowIcon />
-            </div>
-          </InfoBoxTitleWrapper>
-          <CategoryListWrapper>
-            {profile.take.map((x) => (
-              <div key={x.id}>
-                <img src={x.img} alt={x.name} key={x.id} />
-              </div>
-            ))}
-          </CategoryListWrapper>
+          <ProfileCategoryListBox title="Take" categories={profile.give} />
         </InfoBox>
       </InfoBoxContainer>
 
