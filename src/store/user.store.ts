@@ -17,6 +17,8 @@ export default class UserStore {
 
   authenticated = false;
 
+  error = "";
+
   constructor(rootStore: RootStore, authService: AuthService) {
     this.authService = authService;
     this.rootStore = rootStore;
@@ -25,9 +27,15 @@ export default class UserStore {
   }
 
   async login({ email, password }) {
-    const loginDto: LoginDto = UserMapper.buildLoginDto({ email, password });
-    const token = await this.authService.login(loginDto);
-    this.authService._saveToken(token);
+    try {
+      const loginDto: LoginDto = UserMapper.buildLoginDto({ email, password });
+      const token = await this.authService.login(loginDto);
+      this.authService._saveToken(token);
+      return true;
+    } catch (e) {
+      this.error = e.data;
+      return false;
+    }
   }
 
   logout() {
