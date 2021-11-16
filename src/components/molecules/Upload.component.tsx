@@ -4,26 +4,12 @@ import CameraIcon from "@src/components/icon/Camera.icon";
 import styled from "styled-components";
 import { ButtonStyleProps } from "@src/components/atoms/Button";
 import theme from "@src/styles/theme";
+import { Resource } from "@src/models/dto/api-response";
 
 const IconButton = styled.label<ButtonStyleProps>`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 10;
-
-  border: 1px solid ${theme.color.gray2};
-  border-radius: 50%;
-  background-color: #fff;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  height: 32px;
-  width: 32px;
-
-  cursor: pointer;
-
   input {
     display: none;
   }
@@ -31,16 +17,19 @@ const IconButton = styled.label<ButtonStyleProps>`
 
 const S = { IconButton };
 
-function UploadComponent({ onUploaded, setLoading, multiple = false }) {
+function UploadComponent({ icon, onUploaded, setLoading, multiple = false }) {
   const rootStore = useStores();
 
   const onUploadFile = useCallback(
     async (e) => {
       setLoading(true);
-      const uploaded = [];
-      e.target.files.forEach((file) => {
-        rootStore.uploadImage(file).then((resource) => uploaded.push(resource));
-      });
+
+      const uploaded = await Promise.all(
+        Object.entries(e.target.files).map((file) =>
+          rootStore.uploadImage(file[1]),
+        ),
+      );
+
       onUploaded(uploaded);
       setLoading(false);
     },
@@ -50,7 +39,7 @@ function UploadComponent({ onUploaded, setLoading, multiple = false }) {
   return (
     <form>
       <S.IconButton htmlFor="file" color="gray">
-        <CameraIcon />
+        {icon}
         <input
           id="file"
           type="file"
