@@ -14,6 +14,7 @@ import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
 import { useRouter } from "next/router";
 import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
+import { Resource } from "@src/models/dto/api-response";
 
 function CreateStudyPage() {
   const { studyStore } = useStores();
@@ -23,6 +24,7 @@ function CreateStudyPage() {
   const { value: endDate, onChange: onChangeEndDate } = useDatepicker();
   const [selectedMine, setSelectedMine] = useState([]);
   const [selectedYours, setSelectedYours] = useState([]);
+  const [uploaded, setUploaded] = useState<Resource[]>([]);
 
   const { values, handleChange, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
@@ -48,6 +50,7 @@ function CreateStudyPage() {
             endDate: endDate.format("YYYY-MM-DD"),
             give: selectedMine.map((x) => x.id),
             take: selectedYours.map((x) => x.id),
+            images: uploaded.map((x) => x.path),
           })
           .then(() => router.push(`/`));
       },
@@ -71,6 +74,8 @@ function CreateStudyPage() {
       setSelectedMine={setSelectedMine}
       selectedYours={selectedYours}
       setSelectedYours={setSelectedYours}
+      uploaded={uploaded}
+      setUploaded={setUploaded}
     />
   );
 }

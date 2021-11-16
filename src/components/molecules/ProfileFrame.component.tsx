@@ -6,13 +6,14 @@ import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { Resource } from "@src/models/dto/api-response";
 import { useMemo, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
+import CameraIcon from "@src/components/icon/Camera.icon";
 
 interface ProfileFrameProps {
   mb?: string;
   size?: "large" | "small" | "medium";
   allowUpload?: boolean;
   imgSrc?: string;
-  onUploadImage?: (e: Resource) => void;
+  onUploadImage?: (e: Resource[]) => void;
 }
 
 const ProfileImageWrapper = styled.div<BaseProps>`
@@ -94,6 +95,26 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
   background-color: ${theme.color.gray0};
 `;
 
+const CameraButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+
+  border: 1px solid ${theme.color.gray2};
+  border-radius: 50%;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 32px;
+  width: 32px;
+
+  cursor: pointer;
+`;
+
 const S = {
   ProfileImageWrapper,
   CircleImageFrame,
@@ -126,7 +147,15 @@ function ProfileFrameComponent({
     <S.ProfileImageWrapper mb={mb}>
       <S.CircleImageFrame size={size}>{image}</S.CircleImageFrame>
       {allowUpload && (
-        <UploadComponent setLoading={setLoading} onUploaded={onUploadImage} />
+        <UploadComponent
+          icon={
+            <CameraButtonWrapper>
+              <CameraIcon />
+            </CameraButtonWrapper>
+          }
+          setLoading={setLoading}
+          onUploaded={onUploadImage}
+        />
       )}
     </S.ProfileImageWrapper>
   );
