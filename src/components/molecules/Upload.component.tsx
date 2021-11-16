@@ -1,10 +1,11 @@
-import { useStores } from "@src/store/root.store";
 import { useCallback } from "react";
-import CameraIcon from "@src/components/icon/Camera.icon";
 import styled from "styled-components";
+
+// lib
+import { useStores } from "@src/store/root.store";
+
+// component
 import { ButtonStyleProps } from "@src/components/atoms/Button";
-import theme from "@src/styles/theme";
-import { Resource } from "@src/models/dto/api-response";
 
 const IconButton = styled.label<ButtonStyleProps>`
   display: flex;

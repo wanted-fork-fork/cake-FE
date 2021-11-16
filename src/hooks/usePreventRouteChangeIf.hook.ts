@@ -22,6 +22,7 @@ function usePreventRouteChangeIf(
         // Following is a hack-ish solution to abort a Next.js route change
         // as there's currently no official API to do so
         // See https://github.com/zeit/next.js/issues/2476#issuecomment-573460710
+        // eslint-disable-next-line no-alert
         if (!window.confirm("페이지를 나가면 입력한 내용이 저장되지 않습니다."))
           // 에러 객체로 반환할 경우 internal error 발생
           // eslint-disable-next-line no-throw-literal

@@ -46,17 +46,6 @@ export class RootStore {
   async uploadImage(file) {
     return this.resourceService.uploadImage(file);
   }
-
-  asyncGenerator = async function* asyncGenerator(files) {
-    for await (const file of Object.entries(files)) {
-      yield this.rootStore.uploadImage(file[1]);
-    }
-  };
-
-  async uploadMultipleImage(files) {
-    for await (const file of this.asyncGenerator(files)) {
-    }
-  }
 }
 
 export const StoresContext = createContext(new RootStore());

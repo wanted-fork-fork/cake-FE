@@ -1,11 +1,14 @@
 import UploadComponent from "@src/components/molecules/Upload.component";
-import { useCallback, useMemo, useState } from "react";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Resource } from "@src/models/dto/api-response";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
-import theme, { FontSize } from "@src/styles/theme";
+import { LoadingOutlined } from "@ant-design/icons";
+
+// components
 import UploadedImageFrameComponent from "@src/components/molecules/UploadedImageFrame.component";
 import ColoredCameraIcon from "@src/components/icon/ColoredCamera.icon";
+
+// styles
+import theme, { FontSize } from "@src/styles/theme";
 
 const Container = styled.div`
   position: relative;
@@ -44,14 +47,14 @@ function MultipleImageUploadComponent({
     (resources) => {
       setUploaded([...uploaded, ...resources]);
     },
-    [uploaded],
+    [setUploaded, uploaded],
   );
 
   const onRemove = useCallback(
     (path) => {
       setUploaded(uploaded.filter((x) => x.path !== path));
     },
-    [uploaded],
+    [setUploaded, uploaded],
   );
 
   return (
