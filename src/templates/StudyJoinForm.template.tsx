@@ -13,9 +13,10 @@ import StudyJoinSuccessModalComponent from "@src/stories/templates/StudyJoinSucc
 import useInput from "@src/hooks/useInput.hook";
 import { useCallback, useState } from "react";
 import LoadingComponent from "@src/components/molecules/Loading.component";
+import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
 
 const ContentsWrapper = styled.div`
-  padding: ${Padding.page};
+  padding: 40px ${Padding.pageX};
 `;
 
 const FormWrapper = styled.div`
@@ -28,14 +29,20 @@ const Label = styled.p<BaseProps>`
   font-weight: 500;
   padding-left: 10px;
 `;
-function StudyJoinFormTemplate({ study, onSubmit }) {
-  const { value: contents, handleChange: handleChangeContents } = useInput("");
+function StudyJoinFormTemplate({
+  study,
+  onSubmit,
+  contents,
+  handleChangeContents,
+  uploaded,
+  setUploaded,
+}) {
   const [popupVisible, setPopupVisible] = useState(false);
 
   const handleSubmit = useCallback(async () => {
-    await onSubmit(contents);
+    await onSubmit();
     setPopupVisible(true);
-  }, [contents, onSubmit]);
+  }, [onSubmit]);
 
   return study ? (
     <PageWrapperComponent
@@ -65,6 +72,13 @@ function StudyJoinFormTemplate({ study, onSubmit }) {
             fontSize="small"
             rows={10}
             placeholder="스터디에 대한 관심 및 제안 사항을 입력해주세요!"
+          />
+        </FormWrapper>
+        <FormWrapper>
+          <MultipleImageUploadComponent
+            uploaded={uploaded}
+            setUploaded={setUploaded}
+            messageOnEmpty="재능을 어필할 수 있는 사진이 있나요?"
           />
         </FormWrapper>
       </ContentsWrapper>
