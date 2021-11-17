@@ -31,7 +31,8 @@ function CreateStudyPage() {
       initialValues: {
         title: "",
         content: "",
-        location: "",
+        storeName: "",
+        storeAddress: "",
         type: StudyType.OneToOne,
         startDate: "2021-11-12",
         endDate: "2021-11-12",

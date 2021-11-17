@@ -4,7 +4,8 @@ import { UserProfile } from "@src/models/dto/user.dto";
 export interface CreateStudyDto {
   title: string;
   content: string;
-  location: string;
+  storeName: string;
+  storeAddress: string;
   type: StudyType;
   startDate: string;
   endDate: string;
