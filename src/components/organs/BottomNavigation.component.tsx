@@ -46,7 +46,7 @@ function BottomNavigationComponent({ selected = NaviType.MAIN }) {
             </Description>
           </NavButton>
         </Link>
-        <Link href="/search">
+        <Link href="/filter">
           <NavButton type="button">
             <CategoryMenuIcon selected={selected === NaviType.FILTER} />
             <Description selected={selected === NaviType.FILTER}>

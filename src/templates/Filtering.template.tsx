@@ -10,6 +10,7 @@ import { GuestMain } from "@src/styles/template/GuestMain.styles";
 import { Category } from "@src/components/atoms/Category";
 import useVisibleHook from "@src/hooks/useVisible.hook";
 import CategorySelectDrawerComponent from "@src/components/organs/CategorySelectDrawer.component";
+import AutoCompleteInputComponent from "@src/components/molecules/AutoCompleteInput.component";
 
 const Wrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
@@ -50,6 +51,10 @@ function FilteringTemplate({
   setSelectedMine,
   selectedYours,
   setSelectedYours,
+  studyType,
+  setStudyType,
+  allowSearch,
+  onClickSearch,
 }) {
   const studyList = useMemo(() => getStudyTypeList(), []);
   const [mineVisible, setMineVisible, setMineInvisible] = useVisibleHook(false);
@@ -106,8 +111,8 @@ function FilteringTemplate({
       <Wrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h3>나의 재능</h3>
-            <span>다른 사람에게 줄 수 있는 재능은?</span>
+            <h3>Give</h3>
+            <span>다른 사람에게 줄 수 있는 것은 무엇인가요?</span>
           </LabelWrapper>
           <Button
             height="56px"
@@ -125,8 +130,8 @@ function FilteringTemplate({
         </SectionWrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h3>배우고 싶은 재능</h3>
-            <span>배우고 싶은 재능은?</span>
+            <h3>Take</h3>
+            <span>다른 사람에게 받고 싶은 것은 무엇인가요?</span>
           </LabelWrapper>
           <Button
             height="56px"
@@ -151,15 +156,20 @@ function FilteringTemplate({
             placeholder="여러명이서, 한 명만?"
             shape="rounded"
             color="primary"
-            onSelect={null}
-            selected="0"
+            onSelect={setStudyType}
+            selected={studyType}
             list={studyList}
             idKeyName="key"
             labelKeyName="value"
           />
         </SectionWrapper>
         <GuestMain.BottomWrap>
-          <Button color="primary" width="100%" disabled>
+          <Button
+            color="primary"
+            width="100%"
+            disabled={!allowSearch}
+            onClick={onClickSearch}
+          >
             스터디 검색
           </Button>
         </GuestMain.BottomWrap>
