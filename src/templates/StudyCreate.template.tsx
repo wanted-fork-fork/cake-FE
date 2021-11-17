@@ -23,6 +23,7 @@ import useVisibleHook from "@src/hooks/useVisible.hook";
 import TradeIcon from "@src/components/icon/Trade.icon";
 import dayjs from "dayjs";
 import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
+import { FolderPathType } from "@src/constant/enum.constant";
 
 const FormWrapper = styled.div<BaseProps>`
   ${BaseStyleProps};
@@ -238,6 +239,7 @@ function StudyCreateTemplate({
         <MultipleImageUploadComponent
           uploaded={uploaded}
           setUploaded={setUploaded}
+          folder={FolderPathType.STUDY}
           messageOnEmpty="강좌와 관련된 사진을 업로드 해주세요!"
         />
       </FormWrapper>

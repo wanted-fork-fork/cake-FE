@@ -40,6 +40,7 @@ function MultipleImageUploadComponent({
   messageOnEmpty,
   uploaded,
   setUploaded,
+  folder,
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -77,6 +78,7 @@ function MultipleImageUploadComponent({
             <ColoredCameraIcon />
           </ImageFrame>
         }
+        folder={folder}
         setLoading={setLoading}
         onUploaded={onUploaded}
         multiple

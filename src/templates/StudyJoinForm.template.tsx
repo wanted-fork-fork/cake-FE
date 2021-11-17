@@ -13,6 +13,7 @@ import { Textarea } from "@src/components/atoms/Textarea";
 import { FontSize, Padding } from "@src/styles/theme";
 import { LightUnderlineInput } from "@src/components/atoms/Input";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
+import { FolderPathType } from "@src/constant/enum.constant";
 
 const ContentsWrapper = styled.div`
   padding: 40px ${Padding.pageX};
@@ -76,6 +77,7 @@ function StudyJoinFormTemplate({
         <FormWrapper>
           <MultipleImageUploadComponent
             uploaded={uploaded}
+            folder={FolderPathType.APPLY}
             setUploaded={setUploaded}
             messageOnEmpty="재능을 어필할 수 있는 사진이 있나요?"
           />

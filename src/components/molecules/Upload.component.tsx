@@ -18,7 +18,13 @@ const IconButton = styled.label<ButtonStyleProps>`
 
 const S = { IconButton };
 
-function UploadComponent({ icon, onUploaded, setLoading, multiple = false }) {
+function UploadComponent({
+  icon,
+  folder,
+  onUploaded,
+  setLoading,
+  multiple = false,
+}) {
   const rootStore = useStores();
 
   const onUploadFile = useCallback(
@@ -27,7 +33,7 @@ function UploadComponent({ icon, onUploaded, setLoading, multiple = false }) {
 
       const uploaded = await Promise.all(
         Object.entries(e.target.files).map((file) =>
-          rootStore.uploadImage(file[1]),
+          rootStore.uploadImage(file[1], folder),
         ),
       );
 
