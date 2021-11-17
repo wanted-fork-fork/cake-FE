@@ -19,7 +19,6 @@ const CategoryListWrapper = styled.div<{ pr: string }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 10px;
-  cursor: pointer;
   div {
     width: calc((100vw - 40px - 40px) / 6 - 6px);
     height: calc((100vw - 40px - 40px) / 6 - 6px);

@@ -1,26 +1,25 @@
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+// lib
+import { useStores } from "@src/store/root.store";
 
 // components
 import { Button } from "@src/components/atoms/Button";
-import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import { CategoryTag } from "@src/components/atoms/CategoryTag";
-import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
+import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
+import PencilIcon from "@src/components/icon/Pencil.icon";
 import CakeIcon from "@src/components/icon/Cake.icon";
-import { TextButton } from "@src/components/atoms/TextButton";
-import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
-import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
+import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
+import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
+import StudyListComponent from "@src/components/organs/StudyList.component";
 
 // styles
 import theme, { Color, FontSize, Padding } from "@src/styles/theme";
 import styled, { css } from "styled-components";
 import { NoScroll } from "@src/styles/common";
-import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
-import PencilIcon from "@src/components/icon/Pencil.icon";
-import { useRouter } from "next/router";
 import { NaviType } from "@src/constant/enum.constant";
-import StudyListComponent from "@src/components/organs/StudyList.component";
-import { useStores } from "@src/store/root.store";
 
 const MainContainer = styled.div`
   ${NoScroll};
@@ -90,7 +89,6 @@ const SearchContentsWrapper = styled.div`
   }
 `;
 
-const categories = ["일러스트", "운동", "JAVA"];
 function UserMainTemplate({
   studyList = [],
   onClickNext = () => null,

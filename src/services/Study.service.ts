@@ -5,7 +5,6 @@ import {
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
-import { StudyType } from "@src/constant/enum.constant";
 
 export default class StudyService extends BaseHttpService {
   prefix = "/study";

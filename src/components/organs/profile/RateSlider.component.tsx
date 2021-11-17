@@ -11,7 +11,7 @@ const Slider = styled.div`
 `;
 const MarkerWrapper = styled.div<{ rate: number }>`
   position: absolute;
-  left: ${({ rate }) => `calc(${(rate / 5.0) * 100}% - 10px)`};
+  left: ${({ rate }) => `calc(min(${(rate / 5.0) * 100}% - 10px, 0))`};
   top: -28px;
 `;
 const SliderWrapper = styled.div`
