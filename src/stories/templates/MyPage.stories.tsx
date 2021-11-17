@@ -1,5 +1,5 @@
 import MyPageTemplate from "@src/templates/MyPage.template";
-import { UserProfile } from "@src/models/dto/user.dto";
+import { UserMyPageDto, UserProfile } from "@src/models/dto/user.dto";
 import { Category } from "@src/models/dto/signup.dto";
 
 export default {
@@ -7,16 +7,14 @@ export default {
   component: MyPageTemplate,
 };
 
-const profileSample = {
-  user: {
-    id: 3,
-    nickname: "아주맨",
-    email: "ajou@ajou.ac.kr",
-    rate: 4.7,
-    img: null,
-  } as UserProfile,
+const profileSample: UserMyPageDto = {
+  nickname: "아주맨",
+  email: "ajou@ajou.ac.kr",
+  rate: 4.7,
+  profileImg:
+    "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/profile/3b95bd536.jpg",
   point: 3000,
-  studyCount: 10,
+  studyCnt: 10,
   give: [
     {
       id: 2,
