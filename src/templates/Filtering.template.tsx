@@ -1,16 +1,21 @@
+import { useMemo } from "react";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import styled from "styled-components";
-import theme, { FontSize, Padding } from "@src/styles/theme";
+
+// lib
+import useVisibleHook from "@src/hooks/useVisible.hook";
+import { getStudyTypeList } from "@src/utils/enum.util";
+
+// components
 import { Button } from "@src/components/atoms/Button";
+import { Category } from "@src/components/atoms/Category";
 import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import SelectComponent from "@src/components/atoms/Select";
-import { useMemo } from "react";
-import { getStudyTypeList } from "@src/utils/enum.util";
-import { GuestMain } from "@src/styles/template/GuestMain.styles";
-import { Category } from "@src/components/atoms/Category";
-import useVisibleHook from "@src/hooks/useVisible.hook";
 import CategorySelectDrawerComponent from "@src/components/organs/CategorySelectDrawer.component";
-import AutoCompleteInputComponent from "@src/components/molecules/AutoCompleteInput.component";
+
+// styles
+import { GuestMain } from "@src/styles/template/GuestMain.styles";
+import theme, { FontSize, Padding } from "@src/styles/theme";
 
 const Wrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;

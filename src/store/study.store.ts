@@ -7,7 +7,6 @@ import {
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
-import { StudyType } from "@src/constant/enum.constant";
 
 export default class StudyStore {
   private readonly rootStore: RootStore;

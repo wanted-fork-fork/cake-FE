@@ -1,5 +1,5 @@
 import MyPageTemplate from "@src/templates/MyPage.template";
-import { UserMyPageDto, UserProfile } from "@src/models/dto/user.dto";
+import { UserMyPageDto } from "@src/models/dto/user.dto";
 import { Category } from "@src/models/dto/signup.dto";
 
 export default {
