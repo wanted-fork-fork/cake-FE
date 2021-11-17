@@ -7,7 +7,7 @@ const Container = styled.div`
   .image-gallery {
     width: 100vw;
   }
-  img {
+  .image-gallery-image {
     height: 250px;
   }
 `;
