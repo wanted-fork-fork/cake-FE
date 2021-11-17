@@ -8,7 +8,7 @@ import { useStores } from "@src/store/root.store";
 
 // model
 import { CreateStudyDto } from "@src/models/dto/study.dto";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { StudyType } from "@src/constant/enum.constant";
 import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
@@ -25,6 +25,7 @@ function CreateStudyPage() {
   const [selectedMine, setSelectedMine] = useState([]);
   const [selectedYours, setSelectedYours] = useState([]);
   const [uploaded, setUploaded] = useState<Resource[]>([]);
+  const [allowDatepicker, setUseDatepicker] = useState(true);
 
   const { values, handleChange, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
@@ -44,11 +45,13 @@ function CreateStudyPage() {
         take: [],
       },
       onSubmit(v: CreateStudyDto) {
+        console.log(allowDatepicker);
+
         studyStore
           .createStudy({
             ...v,
-            startDate: startDate.format("YYYY-MM-DD"),
-            endDate: endDate.format("YYYY-MM-DD"),
+            startDate: allowDatepicker ? startDate.format("YYYY-MM-DD") : null,
+            endDate: allowDatepicker ? endDate.format("YYYY-MM-DD") : null,
             give: selectedMine.map((x) => x.id),
             take: selectedYours.map((x) => x.id),
             images: uploaded.map((x) => x.path),
@@ -62,10 +65,19 @@ function CreateStudyPage() {
 
   usePreventRouteChangeIf(!submitted, null);
 
+  const toggleUseDatePicker = useCallback(
+    (e) => {
+      setUseDatepicker(!allowDatepicker);
+    },
+    [allowDatepicker],
+  );
+
   return (
     <StudyCreateTemplate
       startDate={startDate}
       onChangeStartDate={onChangeStartDate}
+      allowDatepicker={allowDatepicker}
+      toggleUseDatepicker={toggleUseDatePicker}
       endDate={endDate}
       onChangeEndDate={onChangeEndDate}
       onSubmit={handleSubmit}
