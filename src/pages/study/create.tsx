@@ -1,3 +1,6 @@
+import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+
 // components
 import StudyCreateTemplate from "@src/templates/StudyCreate.template";
 
@@ -5,15 +8,13 @@ import StudyCreateTemplate from "@src/templates/StudyCreate.template";
 import useForm from "@src/hooks/useForm.hook";
 import useDatepicker from "@src/hooks/useDatepicker";
 import { useStores } from "@src/store/root.store";
+import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 
 // model
 import { CreateStudyDto } from "@src/models/dto/study.dto";
-import { useCallback, useState } from "react";
 import { StudyType } from "@src/constant/enum.constant";
-import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
-import { useRouter } from "next/router";
-import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
 import { Resource } from "@src/models/dto/api-response";
 
 function CreateStudyPage() {
@@ -45,8 +46,6 @@ function CreateStudyPage() {
         take: [],
       },
       onSubmit(v: CreateStudyDto) {
-        console.log(allowDatepicker);
-
         studyStore
           .createStudy({
             ...v,
@@ -65,12 +64,9 @@ function CreateStudyPage() {
 
   usePreventRouteChangeIf(!submitted, null);
 
-  const toggleUseDatePicker = useCallback(
-    (e) => {
-      setUseDatepicker(!allowDatepicker);
-    },
-    [allowDatepicker],
-  );
+  const toggleUseDatePicker = useCallback(() => {
+    setUseDatepicker(!allowDatepicker);
+  }, [allowDatepicker]);
 
   return (
     <StudyCreateTemplate

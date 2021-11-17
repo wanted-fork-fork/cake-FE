@@ -2,9 +2,6 @@ import { useCallback, useMemo, useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import styled from "styled-components";
-import CloseIcon from "@src/components/icon/Close.icon";
-import { TextButton } from "@src/components/atoms/TextButton";
-import { FontSize } from "@src/styles/theme";
 
 const Container = styled.div`
   .image-gallery {
@@ -52,7 +49,7 @@ function ImageGalleryComponent({ images = [] as string[] }) {
   const onClick = useCallback((e) => {
     setPopupImgSrc(e.target.src);
   }, []);
-  const onClickPopup = useCallback((e) => {
+  const onClickPopup = useCallback(() => {
     setPopupImgSrc(null);
   }, []);
   return (

@@ -1,9 +1,10 @@
-import Image from "@src/components/atoms/Image";
 import styled from "styled-components";
 import Link from "next/link";
+import { MouseEventHandler, useMemo } from "react";
 
 // lib
 import { dateToFormatted } from "@src/utils/dayjs.util";
+import useCopyClipboardHook from "@src/hooks/useCopyClipboard.hook";
 
 // components
 import ColoredPinIcon from "@src/components/icon/ColoredPin.icon";
@@ -13,13 +14,11 @@ import { Button } from "@src/components/atoms/Button";
 import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
+import LoadingComponent from "@src/components/molecules/Loading.component";
+import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
-import { MouseEventHandler, useMemo } from "react";
-import LoadingComponent from "@src/components/molecules/Loading.component";
-import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
-import useCopyClipboardHook from "@src/hooks/useCopyClipboard.hook";
 
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;

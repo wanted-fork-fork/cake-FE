@@ -40,7 +40,7 @@ function UploadComponent({
       onUploaded(uploaded);
       setLoading(false);
     },
-    [setLoading, rootStore, onUploaded],
+    [setLoading, onUploaded, rootStore, folder],
   );
 
   return (
