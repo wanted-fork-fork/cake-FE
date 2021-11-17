@@ -18,6 +18,7 @@ import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.comp
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 import { useMemo } from "react";
 import LoadingComponent from "@src/components/molecules/Loading.component";
+import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
@@ -102,7 +103,8 @@ function StudyDetailTemplate({ study }) {
     <PageWrapperComponent title="" button={applyButton}>
       {/* Thumbnail */}
       <ImageWrapper>
-        <Image src={study.images ? study.images[0] : null} alt={study.title} />
+        {/* <Image src={study.images ? study.images[0] : null} alt={study.title} /> */}
+        <ImageGalleryComponent images={study.images} />
       </ImageWrapper>
       <StudyContentsWrapper>
         {/* Profile */}
