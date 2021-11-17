@@ -11,7 +11,8 @@ const studySample: StudyDetailDto = {
   title: "애프터 이펙트 알려주실 분 구합니다.",
   content:
     "저는 영상을 배우고 싶은데 혹시 영상러들 중 일러스트 관심잇으신 분 계신가요?",
-  location: "아주대학교 카탈로그",
+  storeName: "아주대학교 카탈로그",
+  storeAddress: "아주대학교 카탈로그",
   peopleCnt: 1,
   startDate: "2021-11-07T00:00:00.000+00:00",
   endDate: "2021-11-09T00:00:00.000+00:00",

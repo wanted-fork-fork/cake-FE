@@ -14,6 +14,7 @@ export enum CategoryType {
 }
 
 export enum UnivCategory {
+  _,
   HUMANITY, // 인문대
   SOCIAL, // 사회대
   ENGINEERING, // 공과대
@@ -36,6 +37,7 @@ export const UnivCategoryEnumToLabel = {
 };
 
 export enum StudyType {
+  _,
   OneToOne,
   OneToMany,
   ManyToMany,
@@ -77,4 +79,12 @@ export const NaviType = {
   FILTER: "FILTER",
   STUDY: "STUDY",
   PROFILE: "PROFILE",
+};
+
+export type FolderType = "study" | "apply" | "profile";
+
+export const FolderPathType = {
+  STUDY: "study",
+  APPLY: "apply",
+  PROFILE: "profile",
 };

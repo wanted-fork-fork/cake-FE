@@ -52,8 +52,8 @@ const DetailsInputStepComponent = observer(() => {
   const [nickname, setNickname] = useState("");
 
   const onUploadImage = useCallback(
-    (uploaded: Resource) => {
-      signupStore.setFormValue("img", uploaded.path);
+    (uploaded: Resource[]) => {
+      signupStore.setFormValue("img", uploaded[0].path);
     },
     [signupStore],
   );

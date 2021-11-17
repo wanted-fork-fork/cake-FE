@@ -1,9 +1,10 @@
-import Image from "@src/components/atoms/Image";
 import styled from "styled-components";
 import Link from "next/link";
+import { MouseEventHandler, useMemo } from "react";
 
 // lib
 import { dateToFormatted } from "@src/utils/dayjs.util";
+import useCopyClipboardHook from "@src/hooks/useCopyClipboard.hook";
 
 // components
 import ColoredPinIcon from "@src/components/icon/ColoredPin.icon";
@@ -13,11 +14,11 @@ import { Button } from "@src/components/atoms/Button";
 import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
+import LoadingComponent from "@src/components/molecules/Loading.component";
+import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
-import { useMemo } from "react";
-import LoadingComponent from "@src/components/molecules/Loading.component";
 
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
@@ -46,16 +47,25 @@ const LocationWrapper = styled.div`
   display: flex;
   align-items: center;
   font-size: ${FontSize.Small};
+  gap: 5px;
+  div {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  p {
+    margin-bottom: 0;
+  }
   button {
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 10px;
     background-color: transparent;
     outline: none;
     border: 0;
     display: flex;
     align-items: center;
     color: ${theme.color.primary};
-    width: 70px;
+    width: 80px;
     float: right;
     font-size: ${FontSize.Small};
   }
@@ -68,6 +78,8 @@ const StudyWrapper = styled.div`
 `;
 
 function StudyDetailTemplate({ study }) {
+  const [copied, onCopy] = useCopyClipboardHook(study?.storeAddress || "");
+
   const applyButton = useMemo(
     () =>
       !study || !study.apply ? (
@@ -102,7 +114,8 @@ function StudyDetailTemplate({ study }) {
     <PageWrapperComponent title="" button={applyButton}>
       {/* Thumbnail */}
       <ImageWrapper>
-        <Image src={study.images ? study.images[0] : null} alt={study.title} />
+        {/* <Image src={study.images ? study.images[0] : null} alt={study.title} /> */}
+        <ImageGalleryComponent images={study.images} />
       </ImageWrapper>
       <StudyContentsWrapper>
         {/* Profile */}
@@ -116,15 +129,21 @@ function StudyDetailTemplate({ study }) {
         {/* Info */}
         <div>
           <StudyInfoComponent study={study} />
-          {study.location && (
+          {study.storeName && (
             <LocationWrapper>
               <div>
                 <ColoredPinIcon />
               </div>
-              <span>{study.location}</span>
-              <button type="button">
+              <div>
+                <p>{study.storeName}</p>
+                <p>{study.storeAddress}</p>
+              </div>
+              <button
+                type="button"
+                onClick={onCopy as MouseEventHandler<HTMLButtonElement>}
+              >
                 <ColoredCopyIcon />
-                <div>복사</div>
+                {copied ? <div>복사 완료!</div> : <div>복사</div>}
               </button>
             </LocationWrapper>
           )}

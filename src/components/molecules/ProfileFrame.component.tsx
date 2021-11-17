@@ -6,13 +6,15 @@ import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { Resource } from "@src/models/dto/api-response";
 import { useMemo, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
+import CameraIcon from "@src/components/icon/Camera.icon";
+import { FolderPathType } from "@src/constant/enum.constant";
 
 interface ProfileFrameProps {
   mb?: string;
-  size?: "large" | "small";
+  size?: "large" | "small" | "medium";
   allowUpload?: boolean;
   imgSrc?: string;
-  onUploadImage?: (e: Resource) => void;
+  onUploadImage?: (e: Resource[]) => void;
 }
 
 const ProfileImageWrapper = styled.div<BaseProps>`
@@ -26,12 +28,34 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
 
   img {
     width: auto;
-    height: ${({ size }) => (size === "large" ? "80px" : "32px")};
+    height: ${({ size }) => {
+      switch (size) {
+        case "large":
+          return "80px";
+        case "medium":
+          return "72px";
+        case "small":
+          return "32px";
+        default:
+          return "80px";
+      }
+    }};
   }
 
   svg {
     width: auto;
-    height: ${({ size }) => (size === "large" ? "48px" : "18px")};
+    height: ${({ size }) => {
+      switch (size) {
+        case "large":
+          return "48px";
+        case "medium":
+          return "48px";
+        case "small":
+          return "18px";
+        default:
+          return "48px";
+      }
+    }};
   }
 
   ${({ size }) => {
@@ -40,6 +64,12 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
         return `  
         width: 80px;
        height: 80px;
+        `;
+      case "medium":
+        return `  
+        width: 72px;
+        height: 72px;
+        border-width: 5px;
         `;
       case "small":
         return `  
@@ -53,6 +83,7 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
         height: 80px;`;
     }
   }}
+
   border-radius: 50%;
 
   display: flex;
@@ -63,6 +94,26 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
   position: relative;
 
   background-color: ${theme.color.gray0};
+`;
+
+const CameraButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+
+  border: 1px solid ${theme.color.gray2};
+  border-radius: 50%;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 32px;
+  width: 32px;
+
+  cursor: pointer;
 `;
 
 const S = {
@@ -97,7 +148,16 @@ function ProfileFrameComponent({
     <S.ProfileImageWrapper mb={mb}>
       <S.CircleImageFrame size={size}>{image}</S.CircleImageFrame>
       {allowUpload && (
-        <UploadComponent setLoading={setLoading} onUploaded={onUploadImage} />
+        <UploadComponent
+          folder={FolderPathType.PROFILE}
+          icon={
+            <CameraButtonWrapper>
+              <CameraIcon />
+            </CameraButtonWrapper>
+          }
+          setLoading={setLoading}
+          onUploaded={onUploadImage}
+        />
       )}
     </S.ProfileImageWrapper>
   );

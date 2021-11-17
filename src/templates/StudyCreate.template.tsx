@@ -16,14 +16,18 @@ import { Textarea } from "@src/components/atoms/Textarea";
 
 // styles
 import theme, { Padding } from "@src/styles/theme";
-import { LightUnderline } from "@src/styles/common";
+import { BaseProps, BaseStyleProps, LightUnderline } from "@src/styles/common";
 import CategorySelectDrawerComponent from "@src/components/organs/CategorySelectDrawer.component";
 import { Category } from "@src/components/atoms/Category";
 import useVisibleHook from "@src/hooks/useVisible.hook";
 import TradeIcon from "@src/components/icon/Trade.icon";
 import dayjs from "dayjs";
+import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
+import { FolderPathType } from "@src/constant/enum.constant";
+import { Checkbox } from "antd";
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.div<BaseProps>`
+  ${BaseStyleProps};
   padding: 0 ${Padding.pageX};
   input,
   select {
@@ -42,7 +46,7 @@ const WithUnderline = styled.div`
   display: flex;
   align-items: center;
   padding-top: 8px;
-  padding-bottom: 0;
+  padding-bottom: 8px;
   margin-bottom: 5px;
 `;
 
@@ -62,6 +66,8 @@ function StudyCreateTemplate({
   onSubmit,
   values,
   onChange,
+  allowDatepicker,
+  toggleUseDatepicker,
   startDate,
   onChangeStartDate,
   endDate,
@@ -70,6 +76,8 @@ function StudyCreateTemplate({
   setSelectedMine,
   selectedYours,
   setSelectedYours,
+  uploaded,
+  setUploaded,
 }) {
   const studyTypeList = useMemo(() => getStudyTypeList(), []);
   const [mineVisible, setMineVisible, setMineInvisible] = useVisibleHook(false);
@@ -166,6 +174,7 @@ function StudyCreateTemplate({
           <WithPrefixIcon>
             <CalendarIcon color={theme.color.gray3} />
             <DatePicker
+              disabled={!allowDatepicker}
               suffixIcon={null}
               placeholder="스터디 시작일"
               picker="date"
@@ -181,6 +190,7 @@ function StudyCreateTemplate({
           <WithPrefixIcon>
             <CalendarIcon color={theme.color.gray3} />
             <DatePicker
+              disabled={!allowDatepicker}
               suffixIcon={null}
               placeholder="스터디 종료일"
               picker="date"
@@ -193,7 +203,11 @@ function StudyCreateTemplate({
             />
           </WithPrefixIcon>
         </CategoryWrapper>
-        <WithUnderline />
+        <WithUnderline>
+          <Checkbox checked={!allowDatepicker} onChange={toggleUseDatepicker}>
+            참가자와 날짜 결정
+          </Checkbox>
+        </WithUnderline>
         {/* <InputWithSuffixComponent */}
         {/*  input={ */}
         {/*    <InputLikeButton */}
@@ -221,13 +235,21 @@ function StudyCreateTemplate({
         />
       </FormWrapper>
       <BoldDivider my="20px" />
-      <FormWrapper>
+      <FormWrapper mb="15px">
         <Textarea
           fontSize="small"
           name="content"
           placeholder="상세 내용, 일정 및 유의 사항을 입력해주세요."
           rows={10}
           onChange={onChange}
+        />
+      </FormWrapper>
+      <FormWrapper>
+        <MultipleImageUploadComponent
+          uploaded={uploaded}
+          setUploaded={setUploaded}
+          folder={FolderPathType.STUDY}
+          messageOnEmpty="강좌와 관련된 사진을 업로드 해주세요!"
         />
       </FormWrapper>
     </PageWrapperComponent>

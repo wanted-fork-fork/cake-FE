@@ -6,6 +6,7 @@ export interface BaseProps extends ThemeProps<DefaultTheme> {
   pt?: string;
   fontSize?: "small" | "default" | "large";
   height?: string;
+  textAlign?: "left" | "center" | "right";
 }
 
 export const BaseMarginBottom = css`
@@ -33,6 +34,10 @@ export const BaseFontSize = css`
         return FontSize.Default;
     }
   }};
+`;
+
+export const BaseTextAlign = css`
+  text-align: ${({ textAlign = "left" }: BaseProps) => textAlign};
 `;
 
 export const Underline = css`
@@ -71,4 +76,5 @@ export const BaseStyleProps = css`
   ${BaseMarginBottom};
   ${BaseFontSize};
   ${BaseHeight};
+  ${BaseTextAlign};
 `;

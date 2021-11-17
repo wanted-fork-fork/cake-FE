@@ -12,6 +12,7 @@ import CategoryService from "@src/services/Category.service";
 import CategoryStore from "@src/store/category.store";
 import StudyService from "@src/services/Study.service";
 import StudyStore from "@src/store/study.store";
+import { FolderType } from "@src/constant/enum.constant";
 
 export class RootStore {
   axiosInstance: AxiosInstance;
@@ -43,8 +44,8 @@ export class RootStore {
     this.studyStore = new StudyStore(this, studyService);
   }
 
-  async uploadImage(file) {
-    return this.resourceService.uploadImage(file);
+  async uploadImage(file, path: FolderType) {
+    return this.resourceService.uploadImage(file, path);
   }
 }
 

@@ -14,6 +14,7 @@ interface useFormReturn<T> {
   values: T;
   errors: formErrors;
   submitting: boolean;
+  submitted: boolean;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
   handleSubmit(e: SubmitEvent): void;
 }
@@ -25,6 +26,7 @@ function useForm<T>({
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +50,13 @@ function useForm<T>({
     if (submitting) {
       if (Object.keys(errors).length === 0) {
         onSubmit(values);
+        setSubmitted(true);
       }
       setSubmitting(false);
     }
   }, [submitting, values, errors, onSubmit]);
 
-  return { values, errors, submitting, handleChange, handleSubmit };
+  return { values, errors, submitting, handleChange, handleSubmit, submitted };
 }
 
 export default useForm;

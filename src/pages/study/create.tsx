@@ -1,3 +1,6 @@
+import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+
 // components
 import StudyCreateTemplate from "@src/templates/StudyCreate.template";
 
@@ -5,14 +8,14 @@ import StudyCreateTemplate from "@src/templates/StudyCreate.template";
 import useForm from "@src/hooks/useForm.hook";
 import useDatepicker from "@src/hooks/useDatepicker";
 import { useStores } from "@src/store/root.store";
+import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 
 // model
 import { CreateStudyDto } from "@src/models/dto/study.dto";
-import { useState } from "react";
 import { StudyType } from "@src/constant/enum.constant";
-import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
-import { useRouter } from "next/router";
+import { Resource } from "@src/models/dto/api-response";
 
 function CreateStudyPage() {
   const { studyStore } = useStores();
@@ -22,42 +25,55 @@ function CreateStudyPage() {
   const { value: endDate, onChange: onChangeEndDate } = useDatepicker();
   const [selectedMine, setSelectedMine] = useState([]);
   const [selectedYours, setSelectedYours] = useState([]);
+  const [uploaded, setUploaded] = useState<Resource[]>([]);
+  const [allowDatepicker, setUseDatepicker] = useState(true);
 
-  const { values, handleChange, handleSubmit } = useForm<CreateStudyDto>({
-    initialValues: {
-      title: "",
-      content: "",
-      location: "",
-      type: StudyType.OneToOne,
-      startDate: "2021-11-12",
-      endDate: "2021-11-12",
-      peopleCnt: 1,
-      chatRoom: "",
-      roomPwd: "",
-      images: [],
-      give: [],
-      take: [],
-    },
-    onSubmit(v: CreateStudyDto) {
-      studyStore
-        .createStudy({
-          ...v,
-          startDate: startDate.format("YYYY-MM-DD"),
-          endDate: endDate.format("YYYY-MM-DD"),
-          give: selectedMine.map((x) => x.id),
-          take: selectedYours.map((x) => x.id),
-        })
-        .then(() => router.push(`/`));
-    },
-    validate() {
-      return {};
-    },
-  });
+  const { values, handleChange, handleSubmit, submitted } =
+    useForm<CreateStudyDto>({
+      initialValues: {
+        title: "",
+        content: "",
+        storeName: "",
+        storeAddress: "",
+        type: StudyType.OneToOne,
+        startDate: "2021-11-12",
+        endDate: "2021-11-12",
+        peopleCnt: 1,
+        chatRoom: "",
+        roomPwd: "",
+        images: [],
+        give: [],
+        take: [],
+      },
+      onSubmit(v: CreateStudyDto) {
+        studyStore
+          .createStudy({
+            ...v,
+            startDate: allowDatepicker ? startDate.format("YYYY-MM-DD") : null,
+            endDate: allowDatepicker ? endDate.format("YYYY-MM-DD") : null,
+            give: selectedMine.map((x) => x.id),
+            take: selectedYours.map((x) => x.id),
+            images: uploaded.map((x) => x.path),
+          })
+          .then(() => router.push(`/`));
+      },
+      validate() {
+        return {};
+      },
+    });
+
+  usePreventRouteChangeIf(!submitted, null);
+
+  const toggleUseDatePicker = useCallback(() => {
+    setUseDatepicker(!allowDatepicker);
+  }, [allowDatepicker]);
 
   return (
     <StudyCreateTemplate
       startDate={startDate}
       onChangeStartDate={onChangeStartDate}
+      allowDatepicker={allowDatepicker}
+      toggleUseDatepicker={toggleUseDatePicker}
       endDate={endDate}
       onChangeEndDate={onChangeEndDate}
       onSubmit={handleSubmit}
@@ -67,6 +83,8 @@ function CreateStudyPage() {
       setSelectedMine={setSelectedMine}
       selectedYours={selectedYours}
       setSelectedYours={setSelectedYours}
+      uploaded={uploaded}
+      setUploaded={setUploaded}
     />
   );
 }

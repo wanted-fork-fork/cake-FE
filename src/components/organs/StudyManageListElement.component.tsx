@@ -8,6 +8,7 @@ import {
 import styled from "styled-components";
 import { Padding } from "@src/styles/theme";
 import { useMemo } from "react";
+import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
 
 const BottomWrapper = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ function StudyManageListElementComponent({ study }) {
       <StudyListElementComponent study={study} />
       <LightDivider mx={Padding.pageX} />
       <BottomWrapper>
-        <div />
+        <div>{study.user && <SimpleProfileComponent user={study.user} />}</div>
         <Button
           color={buttonColor}
           fontSize="small"
