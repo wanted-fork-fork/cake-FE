@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 // components
 import { Button } from "@src/components/atoms/Button";
@@ -20,6 +20,7 @@ import PencilIcon from "@src/components/icon/Pencil.icon";
 import { useRouter } from "next/router";
 import { NaviType } from "@src/constant/enum.constant";
 import StudyListComponent from "@src/components/organs/StudyList.component";
+import { useStores } from "@src/store/root.store";
 
 const MainContainer = styled.div`
   ${NoScroll};
@@ -95,6 +96,14 @@ function UserMainTemplate({
   onClickNext = () => null,
   hasMore = false,
 }) {
+  const { categoryStore } = useStores();
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    categoryStore
+      .getCategoryList()
+      .then((list) => setCategoryList(list.slice(3, 6)));
+  }, [categoryStore]);
+
   const router = useRouter();
   const onClickCreateStudy = useCallback(() => {
     router.push("/study/create");
@@ -132,10 +141,14 @@ function UserMainTemplate({
         <Button color="white">더보기</Button>
       </Banner>
       <CurationSectionsWrapper>
-        <h2>방금 올라온 따끈한 스터디 🍰</h2>
+        <h2>이런거 배워 보면 어때요? 🍰</h2>
         <CategoryListElementWrapper>
-          {categories.map((x) => (
-            <CategoryTag key={x}>{x}</CategoryTag>
+          {categoryList.map((x) => (
+            <Link key={x.id} href={`/filter?take=${x.id}`}>
+              <a>
+                <CategoryTag>{x.name}</CategoryTag>
+              </a>
+            </Link>
           ))}
         </CategoryListElementWrapper>
       </CurationSectionsWrapper>

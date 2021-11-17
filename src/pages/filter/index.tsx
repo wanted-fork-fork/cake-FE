@@ -1,12 +1,15 @@
 import FilteringTemplate from "@src/templates/Filtering.template";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { StudyType } from "@src/constant/enum.constant";
 import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
 import { AuthPermissionType } from "@src/constant/api.constant";
+import { useStores } from "@src/store/root.store";
+import { observer } from "mobx-react";
 
-function SearchPage() {
+const SearchPage = observer(() => {
   const router = useRouter();
+  const { categoryStore } = useStores();
 
   const [selectedMine, setSelectedMine] = useState([]);
   const [selectedYours, setSelectedYours] = useState([]);
@@ -25,6 +28,15 @@ function SearchPage() {
     );
   }, [router, selectedMine, selectedYours, studyType]);
 
+  useEffect(() => {
+    if (router.query.take) {
+      const found = categoryStore.categoryList.find(
+        (x) => x.id.toString() === router.query.take,
+      );
+      if (found) setSelectedYours([found]);
+    }
+  }, [categoryStore.categoryList, router]);
+
   return (
     <FilteringTemplate
       selectedMine={selectedMine}
@@ -37,7 +49,7 @@ function SearchPage() {
       onClickSearch={onClickSearch}
     />
   );
-}
+});
 
 export default SearchPage;
 export const getServersideProps = (ctx) =>
