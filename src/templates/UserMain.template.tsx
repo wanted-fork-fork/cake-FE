@@ -19,6 +19,7 @@ import FloatingButtonComponent from "@src/components/molecules/FloatingButton.co
 import PencilIcon from "@src/components/icon/Pencil.icon";
 import { useRouter } from "next/router";
 import { NaviType } from "@src/constant/enum.constant";
+import StudyListComponent from "@src/components/organs/StudyList.component";
 
 const MainContainer = styled.div`
   ${NoScroll};
@@ -79,7 +80,6 @@ const CategoryListElementWrapper = styled.div`
     margin-right: 8px;
   }
 `;
-const StudyListElementWrapper = styled.div``;
 const SearchContentsWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -96,28 +96,13 @@ function UserMainTemplate({
   hasMore = false,
 }) {
   const router = useRouter();
-  const studyListDom = useMemo(
-    () =>
-      studyList.map((study, index) => {
-        const elements = [];
-        elements.push(
-          <StudyListElementWrapper key={study.id}>
-            <StudyListElementComponent study={study} />
-          </StudyListElementWrapper>,
-        );
-        if (index < studyList.length - 1)
-          elements.push(<BoldDivider key={`${study.id}-div`} />);
-        return elements;
-      }),
-    [studyList],
-  );
   const onClickCreateStudy = useCallback(() => {
     router.push("/study/create");
   }, [router]);
   return (
     <MainContainer>
       <HeaderSectionsWrapper>
-        <Link href="/search">
+        <Link href="/filter">
           <a>
             <Button
               color={theme.color.gray1}
@@ -154,14 +139,11 @@ function UserMainTemplate({
           ))}
         </CategoryListElementWrapper>
       </CurationSectionsWrapper>
-      <LightDivider />
-      <div>{studyListDom}</div>
-      <LightDivider my="20px" />
-      {hasMore && (
-        <TextButton fontSize="small" onClick={onClickNext}>
-          더보기
-        </TextButton>
-      )}
+      <StudyListComponent
+        studyList={studyList}
+        hasMore={hasMore}
+        onClickNext={onClickNext}
+      />
       <FloatingButtonComponent
         icon={<PencilIcon />}
         onClick={onClickCreateStudy}
