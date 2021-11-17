@@ -26,6 +26,7 @@ export interface StudyListElement {
   give: string[];
   take: string[];
   img: string;
+  user?: UserProfile;
 }
 
 export interface StudyDetailDto extends StudyListElement {
