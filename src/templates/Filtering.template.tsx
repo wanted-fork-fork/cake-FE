@@ -98,6 +98,7 @@ function FilteringTemplate({
         buttonTextOnEmpty="아직 없어요"
         onClose={setMineInvisible}
         visible={mineVisible}
+        multiple={false}
       />
       <CategorySelectDrawerComponent
         title="관심 있거나 배우고 싶은 주제를 선택해주세요."
@@ -106,6 +107,7 @@ function FilteringTemplate({
         buttonTextOnEmpty="다 좋아요!"
         onClose={setYourInvisible}
         visible={yoursVisible}
+        multiple={false}
       />
 
       <Wrapper>
