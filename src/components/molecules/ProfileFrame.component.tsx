@@ -7,6 +7,7 @@ import { Resource } from "@src/models/dto/api-response";
 import { useMemo, useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import CameraIcon from "@src/components/icon/Camera.icon";
+import { FolderPathType } from "@src/constant/enum.constant";
 
 interface ProfileFrameProps {
   mb?: string;
@@ -148,6 +149,7 @@ function ProfileFrameComponent({
       <S.CircleImageFrame size={size}>{image}</S.CircleImageFrame>
       {allowUpload && (
         <UploadComponent
+          folder={FolderPathType.PROFILE}
           icon={
             <CameraButtonWrapper>
               <CameraIcon />

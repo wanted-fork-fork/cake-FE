@@ -80,3 +80,11 @@ export const NaviType = {
   STUDY: "STUDY",
   PROFILE: "PROFILE",
 };
+
+export type FolderType = "study" | "apply" | "profile";
+
+export const FolderPathType = {
+  STUDY: "study",
+  APPLY: "apply",
+  PROFILE: "profile",
+};
