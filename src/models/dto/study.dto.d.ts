@@ -29,7 +29,8 @@ export interface StudyListElement {
 
 export interface StudyDetailDto extends StudyListElement {
   content: string;
-  location: string;
+  storeName: string;
+  storeAddress: string;
   createdAt: string;
   images: string[];
   user: UserProfile;
