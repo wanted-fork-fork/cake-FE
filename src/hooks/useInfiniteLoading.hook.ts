@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const useInfiniteLoading = ({ getItems, pageToLoad = 0, listKeyName }) => {
+const useInfiniteLoading = ({
+  ready = true,
+  getItems,
+  pageToLoad = 0,
+  listKeyName,
+}) => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(pageToLoad);
   const initialPageLoaded = useRef(false);
@@ -25,14 +30,17 @@ const useInfiniteLoading = ({ getItems, pageToLoad = 0, listKeyName }) => {
   }, [loadItems, page]);
 
   useEffect(() => {
+    if (!ready) return;
     if (initialPageLoaded.current) {
       return;
     }
 
-    loadItems(pageToLoad); /* 5 */
-    initialPageLoaded.current = true;
+    if (loadItems(pageToLoad)) {
+      /* 5 */
+      initialPageLoaded.current = true;
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ready]);
 
   return {
     items,
