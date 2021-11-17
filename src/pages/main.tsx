@@ -5,6 +5,8 @@ import { useStores } from "@src/store/root.store";
 // components
 import UserMainTemplate from "@src/templates/UserMain.template";
 import { memo } from "react";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
 
 function UserMainPage() {
   const { studyStore } = useStores();
@@ -29,3 +31,5 @@ function UserMainPage() {
 }
 
 export default memo(UserMainPage);
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.USER);
