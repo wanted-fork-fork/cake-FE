@@ -16,9 +16,10 @@ import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.comp
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
-import { useMemo } from "react";
+import { MouseEventHandler, useMemo } from "react";
 import LoadingComponent from "@src/components/molecules/Loading.component";
 import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
+import useCopyClipboardHook from "@src/hooks/useCopyClipboard.hook";
 
 const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
@@ -47,16 +48,25 @@ const LocationWrapper = styled.div`
   display: flex;
   align-items: center;
   font-size: ${FontSize.Small};
+  gap: 5px;
+  div {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  p {
+    margin-bottom: 0;
+  }
   button {
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 10px;
     background-color: transparent;
     outline: none;
     border: 0;
     display: flex;
     align-items: center;
     color: ${theme.color.primary};
-    width: 70px;
+    width: 80px;
     float: right;
     font-size: ${FontSize.Small};
   }
@@ -69,6 +79,8 @@ const StudyWrapper = styled.div`
 `;
 
 function StudyDetailTemplate({ study }) {
+  const [copied, onCopy] = useCopyClipboardHook(study?.storeAddress || "");
+
   const applyButton = useMemo(
     () =>
       !study || !study.apply ? (
@@ -124,12 +136,15 @@ function StudyDetailTemplate({ study }) {
                 <ColoredPinIcon />
               </div>
               <div>
-                <span>{study.storeName}</span>
-                <span>({study.storeAddress})</span>
+                <p>{study.storeName}</p>
+                <p>{study.storeAddress}</p>
               </div>
-              <button type="button">
+              <button
+                type="button"
+                onClick={onCopy as MouseEventHandler<HTMLButtonElement>}
+              >
                 <ColoredCopyIcon />
-                <div>복사</div>
+                {copied ? <div>복사 완료!</div> : <div>복사</div>}
               </button>
             </LocationWrapper>
           )}
