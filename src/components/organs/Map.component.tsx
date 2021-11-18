@@ -1,8 +1,8 @@
 /* global kakao */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
 import { useStores } from "@src/store/root.store";
-import MapService from "@src/services/Map.service";
+import { Button } from "@src/components/atoms/Button";
 
 const MapComponent = observer(() => {
   const { userStore, mapService } = useStores();
@@ -13,17 +13,6 @@ const MapComponent = observer(() => {
   const [cafeList, setCafeList] = useState([]);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-
-  const infoWindow = useMemo(
-    () =>
-      new window.kakao.maps.InfoWindow({
-        content: selectedCafe?.place_name || "hi",
-        removable: true,
-      }),
-    [selectedCafe],
-  );
-
-  console.log(selectedCafe);
 
   useEffect(() => {
     if (mapDivRef.current && !mapLoaded && center && cafeList.length > 0) {
@@ -40,17 +29,27 @@ const MapComponent = observer(() => {
         const marker = new window.kakao.maps.Marker({
           map,
           position: new window.kakao.maps.LatLng(cafe.y, cafe.x),
-          title: cafe.title,
+          title: cafe.place_name,
           clickable: true,
         });
+        const infoWindow = new window.kakao.maps.InfoWindow({
+          content: cafe.place_name,
+          removable: true,
+        });
+
         window.kakao.maps.event.addListener(marker, "click", () => {
           setSelectedCafe(cafe);
+        });
+        window.kakao.maps.event.addListener(marker, "mouseover", () => {
           infoWindow.open(map, marker);
+        });
+        window.kakao.maps.event.addListener(marker, "mouseout", () => {
+          infoWindow.close(map, marker);
         });
         return marker;
       });
     }
-  }, [cafeList, center, infoWindow, selectedCafe]);
+  }, [cafeList, center, mapLoaded, selectedCafe]);
 
   useEffect(() => {
     if (!userStore.myUniv) {
@@ -66,7 +65,19 @@ const MapComponent = observer(() => {
     }
   }, [center, mapService, userStore, userStore.myUniv]);
 
-  return <div ref={mapDivRef} style={{ width: "500px", height: "500px" }} />;
+  return (
+    <div>
+      <div ref={mapDivRef} style={{ width: "500px", height: "500px" }} />
+      {selectedCafe && (
+        <div>
+          {selectedCafe.place_name}
+          <Button height="48px" fontSize="small" color="point">
+            결정
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 });
 
 export default MapComponent;
