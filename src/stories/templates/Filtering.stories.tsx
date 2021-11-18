@@ -1,5 +1,5 @@
 import FilteringTemplate from "@src/templates/Filtering.template";
-import SearchPage from "@src/pages/search";
+import SearchPage from "@src/pages/filter";
 
 export default {
   title: "template/Filtering",

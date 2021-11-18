@@ -51,6 +51,7 @@ function CategorySelectDrawerComponent({
   selectedList,
   setSelectedList,
   title = "",
+  multiple = true,
 }) {
   const { categoryStore } = useStores();
 
@@ -64,9 +65,10 @@ function CategorySelectDrawerComponent({
 
       if (found)
         setSelectedList(originalList.filter((x) => x.id !== selected.id));
-      else setSelectedList([...originalList, selected]);
+      else if (multiple) setSelectedList([...originalList, selected]);
+      else setSelectedList([selected]);
     },
-    [selectedList, setSelectedList],
+    [multiple, selectedList, setSelectedList],
   );
 
   useEffect(() => {

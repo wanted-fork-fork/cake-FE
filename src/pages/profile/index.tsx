@@ -1,20 +1,20 @@
-import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
-import { Button } from "@src/components/atoms/Button";
-import Link from "next/link";
-import { NaviType } from "@src/constant/enum.constant";
+import { withAuthentication } from "@src/hooks/withAuthentication.hoc";
+import { AuthPermissionType } from "@src/constant/api.constant";
+import MyPageTemplate from "@src/templates/MyPage.template";
+import { observer } from "mobx-react";
+import { useStores } from "@src/store/root.store";
+import { useEffect } from "react";
 
-function ProfilePage() {
-  return (
-    <div>
-      준비중입니다 :)
-      <Link href="/logout">
-        <a>
-          <Button color="primary">로그아웃</Button>
-        </a>
-      </Link>
-      <BottomNavigationComponent selected={NaviType.PROFILE} />
-    </div>
-  );
-}
+const ProfilePage = observer(() => {
+  const { userStore } = useStores();
+
+  useEffect(() => {
+    userStore.getMyProfile();
+  }, [userStore]);
+
+  return <MyPageTemplate profile={userStore.myProfile} />;
+});
 
 export default ProfilePage;
+export const getServersideProps = (ctx) =>
+  withAuthentication(ctx, AuthPermissionType.USER);

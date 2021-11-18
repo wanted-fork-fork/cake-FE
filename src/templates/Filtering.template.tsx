@@ -1,15 +1,21 @@
+import { useMemo } from "react";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import styled from "styled-components";
-import theme, { FontSize, Padding } from "@src/styles/theme";
+
+// lib
+import useVisibleHook from "@src/hooks/useVisible.hook";
+import { getStudyTypeList } from "@src/utils/enum.util";
+
+// components
 import { Button } from "@src/components/atoms/Button";
+import { Category } from "@src/components/atoms/Category";
 import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import SelectComponent from "@src/components/atoms/Select";
-import { useMemo } from "react";
-import { getStudyTypeList } from "@src/utils/enum.util";
-import { GuestMain } from "@src/styles/template/GuestMain.styles";
-import { Category } from "@src/components/atoms/Category";
-import useVisibleHook from "@src/hooks/useVisible.hook";
 import CategorySelectDrawerComponent from "@src/components/organs/CategorySelectDrawer.component";
+
+// styles
+import { GuestMain } from "@src/styles/template/GuestMain.styles";
+import theme, { FontSize, Padding } from "@src/styles/theme";
 
 const Wrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
@@ -50,6 +56,10 @@ function FilteringTemplate({
   setSelectedMine,
   selectedYours,
   setSelectedYours,
+  studyType,
+  setStudyType,
+  allowSearch,
+  onClickSearch,
 }) {
   const studyList = useMemo(() => getStudyTypeList(), []);
   const [mineVisible, setMineVisible, setMineInvisible] = useVisibleHook(false);
@@ -93,6 +103,7 @@ function FilteringTemplate({
         buttonTextOnEmpty="아직 없어요"
         onClose={setMineInvisible}
         visible={mineVisible}
+        multiple={false}
       />
       <CategorySelectDrawerComponent
         title="관심 있거나 배우고 싶은 주제를 선택해주세요."
@@ -101,13 +112,14 @@ function FilteringTemplate({
         buttonTextOnEmpty="다 좋아요!"
         onClose={setYourInvisible}
         visible={yoursVisible}
+        multiple={false}
       />
 
       <Wrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h3>나의 재능</h3>
-            <span>다른 사람에게 줄 수 있는 재능은?</span>
+            <h3>Give</h3>
+            <span>다른 사람에게 줄 수 있는 것은 무엇인가요?</span>
           </LabelWrapper>
           <Button
             height="56px"
@@ -125,8 +137,8 @@ function FilteringTemplate({
         </SectionWrapper>
         <SectionWrapper>
           <LabelWrapper>
-            <h3>배우고 싶은 재능</h3>
-            <span>배우고 싶은 재능은?</span>
+            <h3>Take</h3>
+            <span>다른 사람에게 받고 싶은 것은 무엇인가요?</span>
           </LabelWrapper>
           <Button
             height="56px"
@@ -151,15 +163,20 @@ function FilteringTemplate({
             placeholder="여러명이서, 한 명만?"
             shape="rounded"
             color="primary"
-            onSelect={null}
-            selected="0"
+            onSelect={setStudyType}
+            selected={studyType}
             list={studyList}
             idKeyName="key"
             labelKeyName="value"
           />
         </SectionWrapper>
         <GuestMain.BottomWrap>
-          <Button color="primary" width="100%" disabled>
+          <Button
+            color="primary"
+            width="100%"
+            disabled={!allowSearch}
+            onClick={onClickSearch}
+          >
             스터디 검색
           </Button>
         </GuestMain.BottomWrap>

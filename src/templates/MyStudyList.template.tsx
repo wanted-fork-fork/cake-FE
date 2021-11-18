@@ -52,8 +52,7 @@ function MyStudyListTemplate({ studyList = [] }) {
   const studyListDOM = useMemo(
     () =>
       studyList.map((x, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div key={x.id + index}>
+        <div key={x.id}>
           <StudyManageListElementComponent study={x} />
           {index < studyList.length - 1 && <BoldDivider />}
         </div>

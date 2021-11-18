@@ -1,23 +1,24 @@
 import Link from "next/link";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+// lib
+import { useStores } from "@src/store/root.store";
 
 // components
 import { Button } from "@src/components/atoms/Button";
-import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import { CategoryTag } from "@src/components/atoms/CategoryTag";
-import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
+import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
+import PencilIcon from "@src/components/icon/Pencil.icon";
 import CakeIcon from "@src/components/icon/Cake.icon";
-import { TextButton } from "@src/components/atoms/TextButton";
-import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
-import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
+import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
+import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
+import StudyListComponent from "@src/components/organs/StudyList.component";
 
 // styles
 import theme, { Color, FontSize, Padding } from "@src/styles/theme";
 import styled, { css } from "styled-components";
 import { NoScroll } from "@src/styles/common";
-import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
-import PencilIcon from "@src/components/icon/Pencil.icon";
-import { useRouter } from "next/router";
 import { NaviType } from "@src/constant/enum.constant";
 
 const MainContainer = styled.div`
@@ -79,7 +80,6 @@ const CategoryListElementWrapper = styled.div`
     margin-right: 8px;
   }
 `;
-const StudyListElementWrapper = styled.div``;
 const SearchContentsWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -89,35 +89,27 @@ const SearchContentsWrapper = styled.div`
   }
 `;
 
-const categories = ["일러스트", "운동", "JAVA"];
 function UserMainTemplate({
   studyList = [],
   onClickNext = () => null,
   hasMore = false,
 }) {
+  const { categoryStore } = useStores();
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    categoryStore
+      .getCategoryList()
+      .then((list) => setCategoryList(list.slice(3, 6)));
+  }, [categoryStore]);
+
   const router = useRouter();
-  const studyListDom = useMemo(
-    () =>
-      studyList.map((study, index) => {
-        const elements = [];
-        elements.push(
-          <StudyListElementWrapper key={study.id}>
-            <StudyListElementComponent study={study} />
-          </StudyListElementWrapper>,
-        );
-        if (index < studyList.length - 1)
-          elements.push(<BoldDivider key={`${study.id}-div`} />);
-        return elements;
-      }),
-    [studyList],
-  );
   const onClickCreateStudy = useCallback(() => {
     router.push("/study/create");
   }, [router]);
   return (
     <MainContainer>
       <HeaderSectionsWrapper>
-        <Link href="/search">
+        <Link href="/filter">
           <a>
             <Button
               color={theme.color.gray1}
@@ -147,21 +139,22 @@ function UserMainTemplate({
         <Button color="white">더보기</Button>
       </Banner>
       <CurationSectionsWrapper>
-        <h2>방금 올라온 따끈한 스터디 🍰</h2>
+        <h2>이런거 배워 보면 어때요? 🍰</h2>
         <CategoryListElementWrapper>
-          {categories.map((x) => (
-            <CategoryTag key={x}>{x}</CategoryTag>
+          {categoryList.map((x) => (
+            <Link key={x.id} href={`/filter?take=${x.id}`}>
+              <a>
+                <CategoryTag>{x.name}</CategoryTag>
+              </a>
+            </Link>
           ))}
         </CategoryListElementWrapper>
       </CurationSectionsWrapper>
-      <LightDivider />
-      <div>{studyListDom}</div>
-      <LightDivider my="20px" />
-      {hasMore && (
-        <TextButton fontSize="small" onClick={onClickNext}>
-          더보기
-        </TextButton>
-      )}
+      <StudyListComponent
+        studyList={studyList}
+        hasMore={hasMore}
+        onClickNext={onClickNext}
+      />
       <FloatingButtonComponent
         icon={<PencilIcon />}
         onClick={onClickCreateStudy}

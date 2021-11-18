@@ -7,7 +7,6 @@ import {
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
-import { StudyType } from "@src/constant/enum.constant";
 
 export default class StudyStore {
   private readonly rootStore: RootStore;
@@ -31,9 +30,9 @@ export default class StudyStore {
 
   async getFilteredStudy(
     page: number,
-    give: number,
-    take: number,
-    type: StudyType,
+    give: string | string[],
+    take: string | string[],
+    type: string | string[],
   ): Promise<StudyListElement[]> {
     return (await this.studyService.getFilteredStudy(
       page,

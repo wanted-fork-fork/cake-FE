@@ -126,6 +126,7 @@ function SelectComponent<T>({
         selected={selected}
         placeholder={placeholder}
         onChange={onSelect}
+        onSelect={onSelect}
         shape={shape}
       >
         {options}

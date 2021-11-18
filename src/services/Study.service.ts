@@ -5,7 +5,6 @@ import {
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
-import { StudyType } from "@src/constant/enum.constant";
 
 export default class StudyService extends BaseHttpService {
   prefix = "/study";
@@ -22,12 +21,12 @@ export default class StudyService extends BaseHttpService {
 
   async getFilteredStudy(
     page: number,
-    give: number,
-    take: number,
-    type: StudyType,
+    give: string | string[],
+    take: string | string[],
+    type: string | string[],
   ): Promise<StudyListElement[]> {
     return (await this.get<StudyListElement[]>(
-      `/page?page=${page}&give=${give}&take=${take}&type=${type}`,
+      `/page/filter?page=${page}&give=${give}&take=${take}&type=${type}`,
     )) as StudyListElement[];
   }
 

@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 // lib
 import { NaviType } from "@src/constant/enum.constant";
+import { UserMyPageDto } from "@src/models/dto/user.dto";
 
 // components
 import RightArrowIcon from "@src/components/icon/RightArrow.icon";
@@ -13,6 +15,7 @@ import DetailUserInfoComponent from "@src/components/organs/profile/DetailUserIn
 import PointDetailComponent from "@src/components/organs/profile/PointDetail.component";
 import RateSliderComponent from "@src/components/organs/profile/RateSlider.component";
 import ProfileCategoryListBox from "@src/components/organs/profile/ProfileCategoryListBox";
+import LoadingComponent from "@src/components/molecules/Loading.component";
 
 // styles
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
@@ -62,6 +65,7 @@ const InfoBoxTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 8px;
   h3 {
     margin-bottom: 0;
   }
@@ -92,67 +96,76 @@ const BottomButtonWrapper = styled.div`
   bottom: 100px;
 `;
 
-function MyPageTemplate({ profile }) {
+function MyPageTemplate({ profile = null as UserMyPageDto }) {
   return (
     <Container>
-      {/* Profile */}
-      <DetailUserInfoComponent user={profile.user} mb="20px" />
-      {/*  Point */}
-      <PointDetailComponent point={profile.point} mb="20px" />
-      {/*  InfoBox */}
-      <InfoBoxContainer>
-        {/* 신뢰도 */}
-        <InfoBox>
-          <InfoBoxTitleWrapper>
-            <h3>신뢰도</h3>
-          </InfoBoxTitleWrapper>
-          <RateWrapper>
-            <StarIcon />
-            {profile.user.rate}
-          </RateWrapper>
-          {/* Slider */}
-          <RateSliderComponent rate={profile.user.rate} />
-        </InfoBox>
-        {/* 스터디 횟수 */}
-        <InfoBox>
-          <InfoBoxTitleWrapper>
-            <h3>스터디 횟수</h3>
-          </InfoBoxTitleWrapper>
-          <p>{profile.studyCount}회</p>
-        </InfoBox>
-        {/* 카테고리 - GIVE */}
-        <InfoBox>
-          <ProfileCategoryListBox
-            title="Give"
-            categories={profile.give}
-            pr="10px"
-          />
-        </InfoBox>
-        {/* 카테고리 - TAKE */}
-        <InfoBox>
-          <ProfileCategoryListBox title="Take" categories={profile.give} />
-        </InfoBox>
-      </InfoBoxContainer>
+      {profile ? (
+        <div>
+          {/* Profile */}
+          <DetailUserInfoComponent user={profile} mb="20px" />
+          {/*  Point */}
+          <PointDetailComponent point={profile.point} mb="20px" />
+          {/*  InfoBox */}
+          <InfoBoxContainer>
+            {/* 신뢰도 */}
+            <InfoBox>
+              <InfoBoxTitleWrapper>
+                <h3>신뢰도</h3>
+              </InfoBoxTitleWrapper>
+              <RateWrapper>
+                <StarIcon />
+                {profile.rate || 0}
+              </RateWrapper>
+              {/* Slider */}
+              <RateSliderComponent rate={profile.rate || 0} />
+            </InfoBox>
+            {/* 스터디 횟수 */}
+            <InfoBox>
+              <InfoBoxTitleWrapper>
+                <h3>스터디 횟수</h3>
+              </InfoBoxTitleWrapper>
+              <p>{profile.studyCnt}회</p>
+            </InfoBox>
+            {/* 카테고리 - GIVE */}
+            <InfoBox>
+              <ProfileCategoryListBox
+                title="Give"
+                categories={profile.give}
+                pr="10px"
+              />
+            </InfoBox>
+            {/* 카테고리 - TAKE */}
+            <InfoBox>
+              <ProfileCategoryListBox title="Take" categories={profile.take} />
+            </InfoBox>
+          </InfoBoxContainer>
 
-      <BoldDivider my="20px" />
+          <BoldDivider my="20px" />
 
-      <BottomWrapper>
-        <InfoBoxTitleWrapper>
-          <TextButton>
-            <p>이용 약관</p>
-          </TextButton>
-          <div>
-            <RightArrowIcon />
-          </div>
-        </InfoBoxTitleWrapper>
-        <BottomButtonWrapper>
-          <TextButton fontSize="small" mb="10px">
-            로그아웃
-          </TextButton>
-          <TextButton fontSize="small">회원탈퇴</TextButton>
-        </BottomButtonWrapper>
-      </BottomWrapper>
-
+          <BottomWrapper>
+            <InfoBoxTitleWrapper>
+              <TextButton>
+                <p>이용 약관</p>
+              </TextButton>
+              <div>
+                <RightArrowIcon />
+              </div>
+            </InfoBoxTitleWrapper>
+            <BottomButtonWrapper>
+              <Link href="/logout">
+                <a>
+                  <TextButton fontSize="small" mb="10px">
+                    로그아웃
+                  </TextButton>
+                </a>
+              </Link>
+              <TextButton fontSize="small">회원탈퇴</TextButton>
+            </BottomButtonWrapper>
+          </BottomWrapper>
+        </div>
+      ) : (
+        <LoadingComponent />
+      )}
       <BottomNavigationComponent selected={NaviType.PROFILE} />
     </Container>
   );

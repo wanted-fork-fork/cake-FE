@@ -3,6 +3,7 @@ import RightArrowIcon from "@src/components/icon/RightArrow.icon";
 import styled from "styled-components";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { FontSize, Padding } from "@src/styles/theme";
+import { UserMyPageDto } from "@src/models/dto/user.dto";
 
 const ProfileWrapper = styled.div<BaseProps>`
   ${BaseStyleProps};
@@ -26,10 +27,14 @@ const Email = styled.p`
   font-size: ${FontSize.SecondaryLabel};
 `;
 
-function DetailUserInfoComponent({ user, mb }) {
+function DetailUserInfoComponent({ user = null as UserMyPageDto, mb }) {
   return (
     <ProfileWrapper mb={mb}>
-      <ProfileFrameComponent imgSrc={user.img} allowUpload size="medium" />
+      <ProfileFrameComponent
+        imgSrc={user.profileImg}
+        allowUpload
+        size="medium"
+      />
       <ProfileInfoWrapper>
         <Nickname>{user.nickname}</Nickname>
         <Email>{user.email}</Email>

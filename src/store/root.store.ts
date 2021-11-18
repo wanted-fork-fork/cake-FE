@@ -13,6 +13,7 @@ import CategoryStore from "@src/store/category.store";
 import StudyService from "@src/services/Study.service";
 import StudyStore from "@src/store/study.store";
 import { FolderType } from "@src/constant/enum.constant";
+import UserService from "@src/services/User.service";
 
 export class RootStore {
   axiosInstance: AxiosInstance;
@@ -35,10 +36,11 @@ export class RootStore {
     const resourceService = new ResourceService(this.axiosInstance);
     const categoryService = new CategoryService(this.axiosInstance);
     const studyService = new StudyService(this.axiosInstance);
+    const userService = new UserService(this.axiosInstance);
 
     this.resourceService = resourceService;
 
-    this.userStore = new UserStore(this, authService);
+    this.userStore = new UserStore(this, authService, userService);
     this.categoryStore = new CategoryStore(this, categoryService);
     this.signupStore = new SignupStore(this, signupService);
     this.studyStore = new StudyStore(this, studyService);
