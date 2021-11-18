@@ -5,6 +5,9 @@ export default class CategoryService extends BaseHttpService {
   prefix = "/category";
 
   async getCategoryList() {
-    return (await this.get<Category[]>(this.prefix, {})) as Category[];
+    return (await this.get<Category[]>(
+      `${this.prefix}?point=false`,
+      {},
+    )) as Category[];
   }
 }

@@ -44,6 +44,7 @@ function CreateStudyPage() {
         images: [],
         give: [],
         take: [],
+        point: 0,
       },
       onSubmit(v: CreateStudyDto) {
         studyStore
