@@ -1,8 +1,14 @@
-/* global kakao */
 import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
 import { useStores } from "@src/store/root.store";
 import { Button } from "@src/components/atoms/Button";
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line
+    kakao: any;
+  }
+}
 
 const MapComponent = observer(() => {
   const { userStore, mapService } = useStores();
@@ -15,35 +21,37 @@ const MapComponent = observer(() => {
   const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
+    const { kakao } = window;
+
     if (mapDivRef.current && !mapLoaded && center && cafeList.length > 0) {
       setMapLoaded(true);
 
       const mapOption = {
-        center: new window.kakao.maps.LatLng(center.y, center.x), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(center.y, center.x), // 지도의 중심좌표
         level: 3, // 지도의 확대 레벨
       };
-      // eslint-disable-next-line no-new
-      const map = new window.kakao.maps.Map(mapDivRef.current, mapOption);
+
+      const map = new kakao.maps.Map(mapDivRef.current, mapOption);
 
       cafeList.map((cafe) => {
-        const marker = new window.kakao.maps.Marker({
+        const marker = new kakao.maps.Marker({
           map,
-          position: new window.kakao.maps.LatLng(cafe.y, cafe.x),
+          position: new kakao.maps.LatLng(cafe.y, cafe.x),
           title: cafe.place_name,
           clickable: true,
         });
-        const infoWindow = new window.kakao.maps.InfoWindow({
+        const infoWindow = new kakao.maps.InfoWindow({
           content: cafe.place_name,
           removable: true,
         });
 
-        window.kakao.maps.event.addListener(marker, "click", () => {
+        kakao.maps.event.addListener(marker, "click", () => {
           setSelectedCafe(cafe);
         });
-        window.kakao.maps.event.addListener(marker, "mouseover", () => {
+        kakao.maps.event.addListener(marker, "mouseover", () => {
           infoWindow.open(map, marker);
         });
-        window.kakao.maps.event.addListener(marker, "mouseout", () => {
+        kakao.maps.event.addListener(marker, "mouseout", () => {
           infoWindow.close(map, marker);
         });
         return marker;
@@ -55,12 +63,14 @@ const MapComponent = observer(() => {
     if (!userStore.myUniv) {
       userStore.getMyUniv();
     } else if (!center) {
-      mapService.searchWithKeyword(userStore.myUniv).then((res) => {
-        const found = res.documents[0];
+      mapService.searchWithKeyword(userStore.myUniv).then((univ) => {
+        const found = univ.documents[0];
         setCenter({ x: found.x, y: found.y });
-        mapService.searchWithCategories(found.x, found.y).then((res) => {
-          setCafeList(res.documents);
-        });
+        mapService
+          .searchWithCategories(found.x, found.y)
+          .then((cafeResponse) => {
+            setCafeList(cafeResponse.documents);
+          });
       });
     }
   }, [center, mapService, userStore, userStore.myUniv]);
