@@ -30,6 +30,15 @@ export interface StudyListElement {
   user?: UserProfile;
 }
 
+export interface StudyFilteringDto {
+  filter: {
+    give: string;
+    take: string;
+    type: StudyType;
+  };
+  study: StudyListElement[];
+}
+
 export interface StudyDetailDto extends StudyListElement {
   content: string;
   storeName: string;

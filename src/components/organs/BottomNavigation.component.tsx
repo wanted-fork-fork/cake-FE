@@ -50,7 +50,7 @@ function BottomNavigationComponent({ selected = NaviType.MAIN }) {
           <NavButton type="button">
             <CategoryMenuIcon selected={selected === NaviType.FILTER} />
             <Description selected={selected === NaviType.FILTER}>
-              카테고리
+              스터디 필터링
             </Description>
           </NavButton>
         </Link>
