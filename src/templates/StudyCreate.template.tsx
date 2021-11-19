@@ -25,6 +25,9 @@ import dayjs from "dayjs";
 import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
 import { FolderPathType } from "@src/constant/enum.constant";
 import { Checkbox } from "antd";
+import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
+import PinIcon from "@src/components/icon/Pin.icon";
+import CafeSelectMapComponent from "@src/components/organs/CafeSelectMap.component";
 
 const FormWrapper = styled.div<BaseProps>`
   ${BaseStyleProps};
@@ -76,6 +79,8 @@ function StudyCreateTemplate({
   setSelectedMine,
   selectedYours,
   setSelectedYours,
+  selectedCafe,
+  setSelectedCafe,
   uploaded,
   setUploaded,
 }) {
@@ -83,6 +88,7 @@ function StudyCreateTemplate({
   const [mineVisible, setMineVisible, setMineInvisible] = useVisibleHook(false);
   const [yoursVisible, setYourVisible, setYourInvisible] =
     useVisibleHook(false);
+  const [mapVisible, setMapVisible, setMapInvisible] = useVisibleHook(false);
 
   const disabledStart = useCallback(
     (current) => current && current < dayjs().add(-1, "day").endOf("day"),
@@ -208,19 +214,27 @@ function StudyCreateTemplate({
             참가자와 날짜 결정
           </Checkbox>
         </WithUnderline>
-        {/* <InputWithSuffixComponent */}
-        {/*  input={ */}
-        {/*    <InputLikeButton */}
-        {/*      type="button" */}
-        {/*      color="gray" */}
-        {/*      fontSize="small" */}
-        {/*      onClick={null} */}
-        {/*    > */}
-        {/*      장소 */}
-        {/*    </InputLikeButton> */}
-        {/*  } */}
-        {/*  suffix={<PinIcon />} */}
-        {/* /> */}
+        <InputWithSuffixComponent
+          input={
+            <InputLikeButton
+              type="button"
+              color="gray"
+              selected={selectedCafe !== null}
+              fontSize="small"
+              onClick={setMapVisible}
+              height="43px"
+            >
+              {selectedCafe ? selectedCafe.place_name : "장소"}
+            </InputLikeButton>
+          }
+          suffix={<PinIcon />}
+        />
+        {mapVisible && (
+          <CafeSelectMapComponent
+            onClickOkay={setSelectedCafe}
+            setInvisible={setMapInvisible}
+          />
+        )}
         <LightUnderlineInput
           name="chatRoom"
           placeholder="오픈채팅링크"
