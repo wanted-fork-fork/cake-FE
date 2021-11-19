@@ -10,19 +10,18 @@ declare global {
   }
 }
 
-const MapComponent = observer(() => {
+const MapComponent = observer(({ setSelectedCafe }) => {
+  const { kakao } = window;
+
   const { userStore, mapService } = useStores();
 
   const mapDivRef = useRef(null);
 
   const [center, setCenter] = useState(null);
   const [cafeList, setCafeList] = useState([]);
-  const [selectedCafe, setSelectedCafe] = useState(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
-    const { kakao } = window;
-
     if (mapDivRef.current && !mapLoaded && center && cafeList.length > 0) {
       setMapLoaded(true);
 
@@ -47,6 +46,11 @@ const MapComponent = observer(() => {
 
         kakao.maps.event.addListener(marker, "click", () => {
           setSelectedCafe(cafe);
+          map.setCenter(new kakao.maps.LatLng(cafe.y, cafe.x));
+          // if (!selectedMarker || selectedMarker !== marker) {
+          //   if (selectedMarker)
+          //     selectedMarker.setImage(selectedMarker.normalImage);
+          // }
         });
         kakao.maps.event.addListener(marker, "mouseover", () => {
           infoWindow.open(map, marker);
@@ -57,7 +61,7 @@ const MapComponent = observer(() => {
         return marker;
       });
     }
-  }, [cafeList, center, mapLoaded, selectedCafe]);
+  }, [cafeList, center, kakao, mapLoaded, setSelectedCafe]);
 
   useEffect(() => {
     if (!userStore.myUniv) {
@@ -77,15 +81,10 @@ const MapComponent = observer(() => {
 
   return (
     <div>
-      <div ref={mapDivRef} style={{ width: "500px", height: "500px" }} />
-      {selectedCafe && (
-        <div>
-          {selectedCafe.place_name}
-          <Button height="48px" fontSize="small" color="point">
-            결정
-          </Button>
-        </div>
-      )}
+      <div
+        ref={mapDivRef}
+        style={{ width: window.innerWidth, height: "400px" }}
+      />
     </div>
   );
 });
