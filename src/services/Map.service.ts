@@ -1,8 +1,13 @@
 import BaseHttpService from "@src/services/BaseHttp.service";
 import { SearchPlaceDto } from "@src/models/dto/map.dto";
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { APIErrorResponse, APIResponse } from "@src/models/dto/api-response";
+import { APIErrorResponse } from "@src/models/dto/api-response";
 
+const commonOptions: AxiosRequestConfig = {
+  headers: {
+    Authorization: `KakaoAK ${process.env.KAKAO_API_KEY}`,
+  },
+};
 export default class MapService extends BaseHttpService {
   BASE_URL = "https://dapi.kakao.com/v2/local";
 
@@ -12,7 +17,7 @@ export default class MapService extends BaseHttpService {
     path: string,
     options: AxiosRequestConfig = {},
   ): Promise<T | void> {
-    Object.assign(options, this._getCommonOptions());
+    Object.assign(options, commonOptions);
     return this.axiosInstance
       .get<T>(`${this.BASE_URL}${path}`, options)
       .then((res: AxiosResponse<T>) => res.data)
@@ -36,13 +41,5 @@ export default class MapService extends BaseHttpService {
         this.CAFE_CATEGORY_CODE
       }&x=${x}&y=${y}&radius=${15000}`,
     )) as SearchPlaceDto;
-  }
-
-  _getCommonOptions(): AxiosRequestConfig {
-    return {
-      headers: {
-        Authorization: `KakaoAK ${process.env.KAKAO_API_KEY}`,
-      },
-    };
   }
 }

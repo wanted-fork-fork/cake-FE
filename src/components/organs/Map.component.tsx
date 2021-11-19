@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
 import { useStores } from "@src/store/root.store";
-import { Button } from "@src/components/atoms/Button";
 
 declare global {
   interface Window {
