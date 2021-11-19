@@ -84,6 +84,7 @@ function UserMainTemplate({
   studyList = [],
   onClickNext = () => null,
   hasMore = false,
+  loading,
 }) {
   const { categoryStore } = useStores();
   const [categoryList, setCategoryList] = useState([]);
@@ -127,6 +128,7 @@ function UserMainTemplate({
         </CategoryListElementWrapper>
       </CurationSectionsWrapper>
       <StudyListComponent
+        loading={loading}
         studyList={studyList}
         hasMore={hasMore}
         onClickNext={onClickNext}
