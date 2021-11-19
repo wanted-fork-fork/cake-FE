@@ -4,6 +4,7 @@ import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
 export default {};
 export const ErrorMessage = styled.p<BaseProps>`
+  margin-bottom: 0;
   ${BaseStyleProps};
   font-size: ${FontSize.PrimaryDescription};
   color: ${theme.color.point};

@@ -14,6 +14,7 @@ import StudyService from "@src/services/Study.service";
 import StudyStore from "@src/store/study.store";
 import { FolderType } from "@src/constant/enum.constant";
 import UserService from "@src/services/User.service";
+import MapService from "@src/services/Map.service";
 
 export class RootStore {
   axiosInstance: AxiosInstance;
@@ -28,6 +29,8 @@ export class RootStore {
 
   resourceService: ResourceService;
 
+  mapService: MapService;
+
   constructor() {
     this.axiosInstance = Axios.createAxiosInstance();
 
@@ -37,8 +40,10 @@ export class RootStore {
     const categoryService = new CategoryService(this.axiosInstance);
     const studyService = new StudyService(this.axiosInstance);
     const userService = new UserService(this.axiosInstance);
+    const mapService = new MapService(this.axiosInstance);
 
     this.resourceService = resourceService;
+    this.mapService = mapService;
 
     this.userStore = new UserStore(this, authService, userService);
     this.categoryStore = new CategoryStore(this, categoryService);

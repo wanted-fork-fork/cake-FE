@@ -6,7 +6,6 @@ function createAxiosInstance() {
     httpsAgent: new Agent({
       rejectUnauthorized: false,
     }),
-    withCredentials: true,
   });
 }
 

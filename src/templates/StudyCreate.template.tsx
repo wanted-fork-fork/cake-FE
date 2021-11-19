@@ -25,6 +25,10 @@ import dayjs from "dayjs";
 import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
 import { FolderPathType } from "@src/constant/enum.constant";
 import { Checkbox } from "antd";
+import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
+import PinIcon from "@src/components/icon/Pin.icon";
+import CafeSelectMapComponent from "@src/components/organs/CafeSelectMap.component";
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 const FormWrapper = styled.div<BaseProps>`
   ${BaseStyleProps};
@@ -76,6 +80,8 @@ function StudyCreateTemplate({
   setSelectedMine,
   selectedYours,
   setSelectedYours,
+  selectedCafe,
+  setSelectedCafe,
   uploaded,
   setUploaded,
 }) {
@@ -83,6 +89,7 @@ function StudyCreateTemplate({
   const [mineVisible, setMineVisible, setMineInvisible] = useVisibleHook(false);
   const [yoursVisible, setYourVisible, setYourInvisible] =
     useVisibleHook(false);
+  const [mapVisible, setMapVisible, setMapInvisible] = useVisibleHook(false);
 
   const disabledStart = useCallback(
     (current) => current && current < dayjs().add(-1, "day").endOf("day"),
@@ -208,30 +215,49 @@ function StudyCreateTemplate({
             참가자와 날짜 결정
           </Checkbox>
         </WithUnderline>
-        {/* <InputWithSuffixComponent */}
-        {/*  input={ */}
-        {/*    <InputLikeButton */}
-        {/*      type="button" */}
-        {/*      color="gray" */}
-        {/*      fontSize="small" */}
-        {/*      onClick={null} */}
-        {/*    > */}
-        {/*      장소 */}
-        {/*    </InputLikeButton> */}
-        {/*  } */}
-        {/*  suffix={<PinIcon />} */}
-        {/* /> */}
+        <InputWithSuffixComponent
+          input={
+            <InputLikeButton
+              type="button"
+              color="gray"
+              selected={selectedCafe !== null}
+              fontSize="small"
+              onClick={setMapVisible}
+              height="43px"
+            >
+              {selectedCafe ? selectedCafe.place_name : "장소"}
+            </InputLikeButton>
+          }
+          suffix={<PinIcon />}
+        />
+        {mapVisible && (
+          <CafeSelectMapComponent
+            onClickOkay={setSelectedCafe}
+            setInvisible={setMapInvisible}
+          />
+        )}
         <LightUnderlineInput
           name="chatRoom"
           placeholder="오픈채팅링크"
           fontSize="small"
           onChange={onChange}
         />
-        <LightUnderlineInput
-          name="roomPwd"
-          placeholder="오픈채팅 비밀번호"
-          fontSize="small"
-          onChange={onChange}
+        <InputWithSuffixComponent
+          input={
+            <LightUnderlineInput
+              name="roomPwd"
+              placeholder="오픈채팅 비밀번호"
+              fontSize="small"
+              onChange={onChange}
+            />
+          }
+          suffix={
+            values.roomPwd.length > 0 && (
+              <ErrorMessage>
+                비밀번호는 참여 확정자에게만 공개됩니다
+              </ErrorMessage>
+            )
+          }
         />
       </FormWrapper>
       <BoldDivider my="20px" />
