@@ -82,6 +82,10 @@ function StudyCreateTemplate({
   setSelectedYours,
   selectedCafe,
   setSelectedCafe,
+  givePoint,
+  onChangeGivePoint,
+  takePoint,
+  onChangeTakePoint,
   uploaded,
   setUploaded,
 }) {
@@ -101,21 +105,20 @@ function StudyCreateTemplate({
       (startDate && current < dayjs(startDate).add(-1, "day").endOf("day")),
     [startDate],
   );
-  const myCategoryDom = useMemo(
-    () =>
-      selectedMine.length === 0
-        ? "나의 능력"
-        : selectedMine.map((x) => <Category key={x.id}>{x.name}</Category>),
-    [selectedMine],
-  );
+  const myCategoryDom = useMemo(() => {
+    if (selectedMine.length === 0) return "나의 능력";
+    if (givePoint)
+      return <Category key="give-point">{givePoint} 포인트</Category>;
+    return selectedMine.map((x) => <Category key={x.id}>{x.name}</Category>);
+  }, [givePoint, selectedMine]);
 
-  const yourCategoryDom = useMemo(
-    () =>
-      selectedYours.length === 0
-        ? "너의 능력"
-        : selectedYours.map((x) => <Category key={x.id}>{x.name}</Category>),
-    [selectedYours],
-  );
+  const yourCategoryDom = useMemo(() => {
+    if (selectedYours.length === 0) return "너의 능력";
+    if (takePoint)
+      return <Category key="take-point">{takePoint} 포인트</Category>;
+    return selectedYours.map((x) => <Category key={x.id}>{x.name}</Category>);
+  }, [selectedYours, takePoint]);
+
   return (
     <PageWrapperComponent
       title="스터디 생성"
@@ -158,6 +161,9 @@ function StudyCreateTemplate({
             buttonTextOnEmpty="아직 없어요"
             onClose={setMineInvisible}
             visible={mineVisible}
+            showPoint
+            pointValue={givePoint}
+            onChangePointValue={onChangeGivePoint}
           />
           <div>
             <TradeIcon
@@ -175,6 +181,9 @@ function StudyCreateTemplate({
             buttonTextOnEmpty="다 좋아요!"
             onClose={setYourInvisible}
             visible={yoursVisible}
+            showPoint
+            pointValue={takePoint}
+            onChangePointValue={onChangeTakePoint}
           />
         </CategoryWrapper>
         <CategoryWrapper>

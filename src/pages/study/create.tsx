@@ -16,6 +16,7 @@ import { CreateStudyDto } from "@src/models/dto/study.dto";
 import { StudyType } from "@src/constant/enum.constant";
 import { AuthPermissionType } from "@src/constant/api.constant";
 import { Resource } from "@src/models/dto/api-response";
+import useInput from "@src/hooks/useInput.hook";
 
 function CreateStudyPage() {
   const { studyStore } = useStores();
@@ -28,6 +29,8 @@ function CreateStudyPage() {
   const [uploaded, setUploaded] = useState<Resource[]>([]);
   const [allowDatepicker, setUseDatepicker] = useState(true);
   const [selectedCafe, setSelectedCafe] = useState(null);
+  const { value: givePoint, handleChange: onChangeGivePoint } = useInput("");
+  const { value: takePoint, handleChange: onChangeTakePoint } = useInput("");
 
   const { values, handleChange, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
@@ -66,7 +69,7 @@ function CreateStudyPage() {
       },
     });
 
-  usePreventRouteChangeIf(!submitted, null);
+  // usePreventRouteChangeIf(!submitted, null);
 
   const toggleUseDatePicker = useCallback(() => {
     setUseDatepicker(!allowDatepicker);
@@ -89,6 +92,10 @@ function CreateStudyPage() {
       setSelectedYours={setSelectedYours}
       selectedCafe={selectedCafe}
       setSelectedCafe={setSelectedCafe}
+      givePoint={givePoint}
+      onChangeGivePoint={onChangeGivePoint}
+      takePoint={takePoint}
+      onChangeTakePoint={onChangeTakePoint}
       uploaded={uploaded}
       setUploaded={setUploaded}
     />

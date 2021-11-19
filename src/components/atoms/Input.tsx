@@ -22,6 +22,13 @@ const BaseInput = css<InputStyleProps>`
   }
 `;
 
+export const BoxInput = styled.input<InputStyleProps>`
+  ${BaseInput};
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid ${theme.color.point};
+`;
+
 export const DividedInput = styled.input`
   ${BaseInput};
   border: none;
