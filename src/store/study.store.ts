@@ -4,6 +4,7 @@ import StudyService from "@src/services/Study.service";
 import {
   CreateStudyDto,
   StudyDetailDto,
+  StudyFilteringDto,
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
@@ -33,13 +34,13 @@ export default class StudyStore {
     give: string | string[],
     take: string | string[],
     type: string | string[],
-  ): Promise<StudyListElement[]> {
+  ): Promise<StudyFilteringDto> {
     return (await this.studyService.getFilteredStudy(
       page,
       give,
       take,
       type,
-    )) as StudyListElement[];
+    )) as StudyFilteringDto;
   }
 
   async getMyStudyList(): Promise<StudyManageListElement[]> {

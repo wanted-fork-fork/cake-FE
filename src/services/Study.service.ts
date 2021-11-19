@@ -2,6 +2,7 @@ import BaseHttpService from "@src/services/BaseHttp.service";
 import {
   CreateStudyDto,
   StudyDetailDto,
+  StudyFilteringDto,
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
@@ -24,10 +25,10 @@ export default class StudyService extends BaseHttpService {
     give: string | string[],
     take: string | string[],
     type: string | string[],
-  ): Promise<StudyListElement[]> {
-    return (await this.get<StudyListElement[]>(
+  ): Promise<StudyFilteringDto> {
+    return (await this.get<StudyFilteringDto>(
       `/page/filter?page=${page}&give=${give}&take=${take}&type=${type}`,
-    )) as StudyListElement[];
+    )) as StudyFilteringDto;
   }
 
   async getMyStudyList(): Promise<StudyManageListElement[]> {
