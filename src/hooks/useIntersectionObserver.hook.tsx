@@ -1,5 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 
+// https://dev.to/anxinyang/infinite-scroll-with-react-hook-intersection-observer-img 코드 참고
 function useIntersectionObserver(
   ref: MutableRefObject<Element | null>,
   options: IntersectionObserverInit = {},
