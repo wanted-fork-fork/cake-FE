@@ -15,6 +15,7 @@ export interface CreateStudyDto {
   images: string[];
   give: string[];
   take: string[];
+  point: number;
 }
 
 export interface StudyListElement {

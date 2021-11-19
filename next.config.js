@@ -12,6 +12,7 @@ const nextConfig = {
       process.env.IMAGE_ENDPOINT ||
       "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com",
     IS_DEV: process.env.NODE_ENV === "development",
+    KAKAO_API_KEY: process.env.KAKAO_API_KEY || "",
   },
 };
 

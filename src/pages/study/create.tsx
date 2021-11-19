@@ -27,6 +27,7 @@ function CreateStudyPage() {
   const [selectedYours, setSelectedYours] = useState([]);
   const [uploaded, setUploaded] = useState<Resource[]>([]);
   const [allowDatepicker, setUseDatepicker] = useState(true);
+  const [selectedCafe, setSelectedCafe] = useState(null);
 
   const { values, handleChange, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
@@ -44,6 +45,7 @@ function CreateStudyPage() {
         images: [],
         give: [],
         take: [],
+        point: 0,
       },
       onSubmit(v: CreateStudyDto) {
         studyStore
@@ -54,6 +56,8 @@ function CreateStudyPage() {
             give: selectedMine.map((x) => x.id),
             take: selectedYours.map((x) => x.id),
             images: uploaded.map((x) => x.path),
+            storeName: selectedCafe.place_name,
+            storeAddress: selectedCafe.road_address_name,
           })
           .then(() => router.push(`/`));
       },
@@ -83,6 +87,8 @@ function CreateStudyPage() {
       setSelectedMine={setSelectedMine}
       selectedYours={selectedYours}
       setSelectedYours={setSelectedYours}
+      selectedCafe={selectedCafe}
+      setSelectedCafe={setSelectedCafe}
       uploaded={uploaded}
       setUploaded={setUploaded}
     />

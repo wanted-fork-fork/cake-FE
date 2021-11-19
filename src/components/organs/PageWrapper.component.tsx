@@ -23,10 +23,10 @@ const SubmitWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-function PageWrapperComponent({ title, button, children }) {
+function PageWrapperComponent({ title, button, onBack = null, children }) {
   return (
     <Container>
-      <TitleHeaderComponent title={title} />
+      <TitleHeaderComponent title={title} onBack={onBack} />
       <div>{children}</div>
       {button && (
         <BottomSection>
