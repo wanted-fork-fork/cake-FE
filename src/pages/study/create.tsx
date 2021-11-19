@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // components
@@ -19,7 +19,7 @@ import { Resource } from "@src/models/dto/api-response";
 import useInput from "@src/hooks/useInput.hook";
 
 function CreateStudyPage() {
-  const { studyStore } = useStores();
+  const { studyStore, userStore } = useStores();
   const router = useRouter();
 
   const { value: startDate, onChange: onChangeStartDate } = useDatepicker();
@@ -31,6 +31,11 @@ function CreateStudyPage() {
   const [selectedCafe, setSelectedCafe] = useState(null);
   const { value: givePoint, handleChange: onChangeGivePoint } = useInput("");
   const { value: takePoint, handleChange: onChangeTakePoint } = useInput("");
+  const [remainPoint, setRemainPoint] = useState(0);
+
+  useEffect(() => {
+    userStore.getMyPoint().then((point) => setRemainPoint(point));
+  }, [userStore]);
 
   const { values, handleChange, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
@@ -94,6 +99,7 @@ function CreateStudyPage() {
       selectedCafe={selectedCafe}
       setSelectedCafe={setSelectedCafe}
       givePoint={givePoint}
+      remainPoint={remainPoint}
       onChangeGivePoint={onChangeGivePoint}
       takePoint={takePoint}
       onChangeTakePoint={onChangeTakePoint}

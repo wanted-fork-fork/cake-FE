@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { NoScroll } from "@src/styles/common";
 import { useStores } from "@src/store/root.store";
 import CategorySelectComponent from "@src/components/molecules/CategorySelectComponent";
-import { Padding } from "@src/styles/theme";
+import { FontSize, Padding } from "@src/styles/theme";
 import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
 import { BoxInput } from "@src/components/atoms/Input";
 import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
@@ -27,13 +27,20 @@ const Container = styled.div<ContainerProp>`
   top: 0;
   bottom: 0;
   display: ${({ visible }) => (visible ? "block" : "none")};
+`;
 
+const LabelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 80px;
   h3 {
-    padding-top: 70px;
-    text-align: left;
-    margin-bottom: 20px;
-    font-weight: 600;
-    word-break: keep-all;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  span {
+    margin-left: 10px;
+    font-size: ${FontSize.Small};
   }
 `;
 const PointWrapper = styled.div`
@@ -57,6 +64,7 @@ function CategorySelectDrawerComponent({
   selectedList,
   setSelectedList,
   title = "",
+  description = "",
   multiple = true,
   showPoint = false,
   remain = 0,
@@ -73,7 +81,7 @@ function CategorySelectDrawerComponent({
       let originalList = [...selectedList];
       if (pointSelected) {
         originalList = [];
-        onChangePointValue({ target: { value: "" } });
+        if (onChangePointValue) onChangePointValue({ target: { value: "" } });
       }
       setPointSelected(false);
 
@@ -136,8 +144,11 @@ function CategorySelectDrawerComponent({
   return (
     <Container visible={visible}>
       <TitleHeaderComponent title="" onBack={onClose} />
-      <h3>{title}</h3>
-      {pointSelected && (
+      <LabelWrapper>
+        <h3>{title}</h3>
+        <span>{description}</span>
+      </LabelWrapper>
+      {pointSelected && onChangePointValue && (
         <PointWrapper>
           <InputWithSuffixComponent
             input={

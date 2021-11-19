@@ -86,6 +86,7 @@ function StudyCreateTemplate({
   onChangeGivePoint,
   takePoint,
   onChangeTakePoint,
+  remainPoint,
   uploaded,
   setUploaded,
 }) {
@@ -106,14 +107,14 @@ function StudyCreateTemplate({
     [startDate],
   );
   const myCategoryDom = useMemo(() => {
-    if (selectedMine.length === 0) return "나의 능력";
+    if (selectedMine.length === 0) return "Give";
     if (givePoint)
       return <Category key="give-point">{givePoint} 포인트</Category>;
     return selectedMine.map((x) => <Category key={x.id}>{x.name}</Category>);
   }, [givePoint, selectedMine]);
 
   const yourCategoryDom = useMemo(() => {
-    if (selectedYours.length === 0) return "너의 능력";
+    if (selectedYours.length === 0) return "Take";
     if (takePoint)
       return <Category key="take-point">{takePoint} 포인트</Category>;
     return selectedYours.map((x) => <Category key={x.id}>{x.name}</Category>);
@@ -164,6 +165,7 @@ function StudyCreateTemplate({
             showPoint
             pointValue={givePoint}
             onChangePointValue={onChangeGivePoint}
+            remain={remainPoint}
           />
           <div>
             <TradeIcon
