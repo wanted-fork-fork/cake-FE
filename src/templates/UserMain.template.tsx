@@ -8,15 +8,15 @@ import { useStores } from "@src/store/root.store";
 // components
 import { Button } from "@src/components/atoms/Button";
 import { CategoryTag } from "@src/components/atoms/CategoryTag";
-import ColoredSearchIcon from "@src/components/icon/ColoredSearch.icon";
 import PencilIcon from "@src/components/icon/Pencil.icon";
 import CakeIcon from "@src/components/icon/Cake.icon";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
 import FloatingButtonComponent from "@src/components/molecules/FloatingButton.component";
 import StudyListComponent from "@src/components/organs/StudyList.component";
+import SearchLikeFilterLinkButtonComponent from "@src/components/molecules/SearchLikeFilterLinkButton.component";
 
 // styles
-import theme, { Color, FontSize, Padding } from "@src/styles/theme";
+import { Color, FontSize, Padding } from "@src/styles/theme";
 import styled, { css } from "styled-components";
 import { NoScroll } from "@src/styles/common";
 import { NaviType } from "@src/constant/enum.constant";
@@ -80,15 +80,6 @@ const CategoryListElementWrapper = styled.div`
     margin-right: 8px;
   }
 `;
-const SearchContentsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 ${Padding.pageX};
-  svg {
-    margin-right: 10px;
-  }
-`;
-
 function UserMainTemplate({
   studyList = [],
   onClickNext = () => null,
@@ -109,22 +100,7 @@ function UserMainTemplate({
   return (
     <MainContainer>
       <HeaderSectionsWrapper>
-        <Link href="/filter">
-          <a>
-            <Button
-              color={theme.color.gray1}
-              textAlign="left"
-              shape="full-rounded"
-              height="48px"
-              fontSize="small"
-            >
-              <SearchContentsWrapper>
-                <ColoredSearchIcon />
-                <span>어떤 스터디 원해?</span>
-              </SearchContentsWrapper>
-            </Button>
-          </a>
-        </Link>
+        <SearchLikeFilterLinkButtonComponent contents="어떤 스터디 원해?" />
       </HeaderSectionsWrapper>
       <Banner>
         <p>
