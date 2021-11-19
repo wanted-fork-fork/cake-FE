@@ -28,6 +28,7 @@ import { Checkbox } from "antd";
 import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
 import PinIcon from "@src/components/icon/Pin.icon";
 import CafeSelectMapComponent from "@src/components/organs/CafeSelectMap.component";
+import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
 
 const FormWrapper = styled.div<BaseProps>`
   ${BaseStyleProps};
@@ -241,11 +242,22 @@ function StudyCreateTemplate({
           fontSize="small"
           onChange={onChange}
         />
-        <LightUnderlineInput
-          name="roomPwd"
-          placeholder="오픈채팅 비밀번호"
-          fontSize="small"
-          onChange={onChange}
+        <InputWithSuffixComponent
+          input={
+            <LightUnderlineInput
+              name="roomPwd"
+              placeholder="오픈채팅 비밀번호"
+              fontSize="small"
+              onChange={onChange}
+            />
+          }
+          suffix={
+            values.roomPwd.length > 0 && (
+              <ErrorMessage>
+                비밀번호는 참여 확정자에게만 공개됩니다
+              </ErrorMessage>
+            )
+          }
         />
       </FormWrapper>
       <BoldDivider my="20px" />
