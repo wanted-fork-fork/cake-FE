@@ -33,6 +33,7 @@ function SearchResultPage() {
     items: studyList,
     hasMore,
     onNext,
+    loading,
   } = useInfiniteLoading({
     ready:
       router.query.take !== undefined &&
@@ -51,6 +52,7 @@ function SearchResultPage() {
       studyList={studyList}
       hasMore={hasMore}
       onNext={onNext}
+      loading={loading}
     />
   );
 }

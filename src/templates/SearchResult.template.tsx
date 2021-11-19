@@ -31,6 +31,7 @@ function SearchResultTemplate({
   studyList,
   hasMore,
   onNext,
+  loading,
 }) {
   return (
     <PageWrapperComponent title="스터디 필터링" button={null}>
@@ -48,6 +49,7 @@ function SearchResultTemplate({
       )}
       {studyList.length > 0 && (
         <StudyListComponent
+          loading={loading}
           studyList={studyList}
           onClickNext={onNext}
           hasMore={hasMore}
