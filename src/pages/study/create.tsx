@@ -59,8 +59,9 @@ function CreateStudyPage() {
             give: selectedMine.map((x) => x.id),
             take: selectedYours.map((x) => x.id),
             images: uploaded.map((x) => x.path),
-            storeName: selectedCafe.place_name,
-            storeAddress: selectedCafe.road_address_name,
+            storeName: selectedCafe?.place_name || "",
+            storeAddress: selectedCafe?.road_address_name || "",
+            point: givePoint || takePoint || 0,
           })
           .then(() => router.push(`/`));
       },

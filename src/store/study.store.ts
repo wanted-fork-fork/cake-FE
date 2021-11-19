@@ -7,6 +7,7 @@ import {
   StudyListElement,
   StudyManageListElement,
 } from "@src/models/dto/study.dto";
+import { StudyType } from "@src/constant/enum.constant";
 
 export default class StudyStore {
   private readonly rootStore: RootStore;
@@ -20,7 +21,22 @@ export default class StudyStore {
     makeAutoObservable(this);
   }
 
-  async createStudy(props: CreateStudyDto) {
+  async createStudy(props: {
+    peopleCnt: number;
+    give: any[];
+    images: string[];
+    endDate: string;
+    title: string;
+    type: StudyType;
+    content: string;
+    point: string | number;
+    take: any[];
+    storeAddress: string;
+    storeName: string;
+    roomPwd: string;
+    startDate: string;
+    chatRoom: string;
+  }) {
     return (await this.studyService.createStudy(props)) as string;
   }
 
