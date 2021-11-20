@@ -11,7 +11,7 @@ import { FolderPathType } from "@src/constant/enum.constant";
 
 interface ProfileFrameProps {
   mb?: string;
-  size?: "large" | "small" | "medium";
+  size?: "large" | "small" | "mid-small" | "medium";
   allowUpload?: boolean;
   imgSrc?: string;
   onUploadImage?: (e: Resource[]) => void;
@@ -34,6 +34,8 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
           return "80px";
         case "medium":
           return "72px";
+        case "mid-small":
+          return "56px";
         case "small":
           return "32px";
         default:
@@ -50,6 +52,8 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
           return "48px";
         case "medium":
           return "48px";
+        case "mid-small":
+          return "32px";
         case "small":
           return "18px";
         default:
@@ -69,6 +73,12 @@ const CircleImageFrame = styled.div<ProfileFrameProps>`
         return `  
         width: 72px;
         height: 72px;
+        border-width: 5px;
+        `;
+      case "mid-small":
+        return `  
+        width: 56px;
+        height: 56px;
         border-width: 5px;
         `;
       case "small":
