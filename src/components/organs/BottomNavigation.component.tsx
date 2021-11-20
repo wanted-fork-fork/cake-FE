@@ -54,7 +54,7 @@ function BottomNavigationComponent({ selected = NaviType.MAIN }) {
             </Description>
           </NavButton>
         </Link>
-        <Link href="/profile/study">
+        <Link href="/study/manage">
           <NavButton type="button">
             <StudyManageIcon selected={selected === NaviType.STUDY} />
             <Description selected={selected === NaviType.STUDY}>

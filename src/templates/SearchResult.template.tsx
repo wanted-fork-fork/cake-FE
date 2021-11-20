@@ -2,26 +2,13 @@ import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
 import { NaviType, StudyTypeEnumToLabel } from "@src/constant/enum.constant";
 import styled from "styled-components";
-import { FontSize, Padding } from "@src/styles/theme";
+import { Padding } from "@src/styles/theme";
 import StudyListComponent from "@src/components/organs/StudyList.component";
 import SearchLikeFilterLinkButtonComponent from "@src/components/molecules/SearchLikeFilterLinkButton.component";
-import EmptyIcon from "@src/components/icon/Empty.icon";
+import EmptyComponent from "@src/components/molecules/Empty.component";
 
 const Wrapper = styled.div`
   padding: 0 ${Padding.pageX};
-`;
-
-const EmptyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 60px;
-  svg {
-    margin-bottom: 20px;
-  }
-  p {
-    font-size: ${FontSize.PrimaryDescription};
-  }
 `;
 
 function SearchResultTemplate({
@@ -42,10 +29,7 @@ function SearchResultTemplate({
         />
       </Wrapper>
       {studyList.length === 0 && (
-        <EmptyWrapper>
-          <EmptyIcon />
-          <p>해당 스터디가 존재하지 않습니다.</p>
-        </EmptyWrapper>
+        <EmptyComponent message="해당 스터디가 존재하지 않습니다." />
       )}
       {studyList.length > 0 && (
         <StudyListComponent

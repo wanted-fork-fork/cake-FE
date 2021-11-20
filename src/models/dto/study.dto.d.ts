@@ -52,3 +52,17 @@ export interface StudyDetailDto extends StudyListElement {
 export interface StudyManageListElement extends StudyListElement {
   state: StudyState;
 }
+
+export interface StudyMemberInfo {
+  userId: number;
+  studyMemberId: number;
+  nickname: string;
+  profileImg: string;
+  rate: number | null;
+  state: StudyState;
+}
+
+export interface StudyApplyDetail extends StudyMemberInfo {
+  msg: string;
+  applyFiles: string[];
+}
