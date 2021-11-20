@@ -17,9 +17,11 @@ export default class CategoryStore {
     makeAutoObservable(this);
   }
 
-  async getCategoryList() {
+  async getCategoryList(containPoint = false) {
     if (this.categoryList.length === 0) {
-      const categoryList = await this.categoryService.getCategoryList();
+      const categoryList = await this.categoryService.getCategoryList(
+        containPoint,
+      );
       this.categoryList = [...categoryList];
     }
 

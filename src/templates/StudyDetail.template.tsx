@@ -20,7 +20,7 @@ import ImageGalleryComponent from "@src/components/molecules/ImageGallery.compon
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 
-const StudyContentsWrapper = styled.div`
+export const StudyContentsWrapper = styled.div`
   padding: 20px ${Padding.pageX} 0;
   h3 {
     margin-bottom: 7px;
@@ -31,7 +31,7 @@ const StudyContentsWrapper = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
+export const ImageWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -71,7 +71,7 @@ const LocationWrapper = styled.div`
   }
 `;
 
-const StudyWrapper = styled.div`
+export const StudyWrapper = styled.div`
   white-space: pre-wrap;
   margin-top: 20px;
   padding-bottom: 20px;

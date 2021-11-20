@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 import { LightDivider } from "@src/components/atoms/Divider";
 import { Button } from "@src/components/atoms/Button";
@@ -36,15 +38,19 @@ function StudyManageListElementComponent({ study }) {
       <LightDivider mx={Padding.pageX} />
       <BottomWrapper>
         <div>{study.user && <SimpleProfileComponent user={study.user} />}</div>
-        <Button
-          color={buttonColor}
-          fontSize="small"
-          width="100px"
-          height="36px"
-          shape="full-rounded"
-        >
-          {StudyStateToManageButtonLabel[study.state]}
-        </Button>
+        <Link href={`/study/manage/${study.id}`}>
+          <a>
+            <Button
+              color={buttonColor}
+              fontSize="small"
+              width="100px"
+              height="36px"
+              shape="full-rounded"
+            >
+              {StudyStateToManageButtonLabel[study.state]}
+            </Button>
+          </a>
+        </Link>
       </BottomWrapper>
     </div>
   );

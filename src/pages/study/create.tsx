@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // components
@@ -16,9 +16,10 @@ import { CreateStudyDto } from "@src/models/dto/study.dto";
 import { StudyType } from "@src/constant/enum.constant";
 import { AuthPermissionType } from "@src/constant/api.constant";
 import { Resource } from "@src/models/dto/api-response";
+import useInput from "@src/hooks/useInput.hook";
 
 function CreateStudyPage() {
-  const { studyStore } = useStores();
+  const { studyStore, userStore } = useStores();
   const router = useRouter();
 
   const { value: startDate, onChange: onChangeStartDate } = useDatepicker();
@@ -28,6 +29,13 @@ function CreateStudyPage() {
   const [uploaded, setUploaded] = useState<Resource[]>([]);
   const [allowDatepicker, setUseDatepicker] = useState(true);
   const [selectedCafe, setSelectedCafe] = useState(null);
+  const { value: givePoint, handleChange: onChangeGivePoint } = useInput("");
+  const { value: takePoint, handleChange: onChangeTakePoint } = useInput("");
+  const [remainPoint, setRemainPoint] = useState(0);
+
+  useEffect(() => {
+    userStore.getMyPoint().then((point) => setRemainPoint(point));
+  }, [userStore]);
 
   const { values, handleChange, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
@@ -56,8 +64,9 @@ function CreateStudyPage() {
             give: selectedMine.map((x) => x.id),
             take: selectedYours.map((x) => x.id),
             images: uploaded.map((x) => x.path),
-            storeName: selectedCafe.place_name,
-            storeAddress: selectedCafe.road_address_name,
+            storeName: selectedCafe?.place_name || "",
+            storeAddress: selectedCafe?.road_address_name || "",
+            point: givePoint || takePoint || 0,
           })
           .then(() => router.push(`/`));
       },
@@ -89,6 +98,11 @@ function CreateStudyPage() {
       setSelectedYours={setSelectedYours}
       selectedCafe={selectedCafe}
       setSelectedCafe={setSelectedCafe}
+      givePoint={givePoint}
+      remainPoint={remainPoint}
+      onChangeGivePoint={onChangeGivePoint}
+      takePoint={takePoint}
+      onChangeTakePoint={onChangeTakePoint}
       uploaded={uploaded}
       setUploaded={setUploaded}
     />

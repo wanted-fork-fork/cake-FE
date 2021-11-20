@@ -10,6 +10,7 @@ const useInfiniteLoading = ({
   const [page, setPage] = useState(pageToLoad);
   const initialPageLoaded = useRef(false);
   const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const loadItems = useCallback(
     async (nextPage) => {
@@ -20,12 +21,14 @@ const useInfiniteLoading = ({
         setHasMore(true); /* 4 */
         setItems((prevItems) => [...prevItems, ...data[listKeyName]]);
       }
+      setLoading(false);
     },
     [getItems, listKeyName],
   );
 
   const onNext = useCallback(() => {
     setPage(page + 1);
+    setLoading(true);
     loadItems(page + 1);
   }, [loadItems, page]);
 
@@ -47,6 +50,7 @@ const useInfiniteLoading = ({
     hasMore,
     loadItems,
     onNext,
+    loading,
   };
 };
 

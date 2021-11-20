@@ -13,9 +13,9 @@ export interface CreateStudyDto {
   chatRoom: string;
   roomPwd: string;
   images: string[];
-  give: string[];
-  take: string[];
-  point: number;
+  give: string[] | number[];
+  take: string[] | number[];
+  point: number | string;
 }
 
 export interface StudyListElement {
@@ -30,6 +30,15 @@ export interface StudyListElement {
   user?: UserProfile;
 }
 
+export interface StudyFilteringDto {
+  filter: {
+    give: string;
+    take: string;
+    type: StudyType;
+  };
+  study: StudyListElement[];
+}
+
 export interface StudyDetailDto extends StudyListElement {
   content: string;
   storeName: string;
@@ -42,4 +51,18 @@ export interface StudyDetailDto extends StudyListElement {
 
 export interface StudyManageListElement extends StudyListElement {
   state: StudyState;
+}
+
+export interface StudyMemberInfo {
+  userId: number;
+  studyMemberId: number;
+  nickname: string;
+  profileImg: string;
+  rate: number | null;
+  state: StudyState;
+}
+
+export interface StudyApplyDetail extends StudyMemberInfo {
+  msg: string;
+  applyFiles: string[];
 }

@@ -3,6 +3,7 @@ import theme, { FontSize } from "@src/styles/theme";
 
 export interface BaseProps extends ThemeProps<DefaultTheme> {
   mb?: string;
+  mr?: string;
   pt?: string;
   fontSize?: "small" | "default" | "large";
   height?: string;
@@ -11,6 +12,10 @@ export interface BaseProps extends ThemeProps<DefaultTheme> {
 
 export const BaseMarginBottom = css`
   margin-bottom: ${(props: BaseProps) => props.mb};
+`;
+
+export const BaseMarginRight = css`
+  margin-right: ${(props: BaseProps) => props.mr};
 `;
 
 export const BasePaddingTop = css`
@@ -74,6 +79,7 @@ export const NoScroll = css`
 export const BaseStyleProps = css`
   ${BasePaddingTop};
   ${BaseMarginBottom};
+  ${BaseMarginRight};
   ${BaseFontSize};
   ${BaseHeight};
   ${BaseTextAlign};

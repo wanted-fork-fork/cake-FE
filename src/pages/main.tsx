@@ -15,6 +15,7 @@ function UserMainPage() {
     items: studyList,
     hasMore,
     onNext,
+    loading,
   } = useInfiniteLoading({
     getItems: (p) => studyStore.getStudyFeed(p),
     pageToLoad: 0,
@@ -23,6 +24,7 @@ function UserMainPage() {
 
   return (
     <UserMainTemplate
+      loading={loading}
       studyList={studyList}
       onClickNext={onNext}
       hasMore={hasMore}

@@ -81,4 +81,12 @@ export default class UserStore {
       this.myProfile =
         (await this.userService.findMyPageProfile()) as UserMyPageDto;
   }
+
+  async getUserProfile(id) {
+    return (await this.userService.findMyPageProfile(id)) as UserMyPageDto;
+  }
+
+  async getMyPoint() {
+    return (await this.userService.findMyRemainPoint()) as number;
+  }
 }

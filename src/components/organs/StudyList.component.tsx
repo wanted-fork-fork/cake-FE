@@ -1,9 +1,25 @@
 import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
 import { TextButton } from "@src/components/atoms/TextButton";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
+import useIntersectionObserver from "@src/hooks/useIntersectionObserver.hook";
+import styled from "styled-components";
 
-function StudyListComponent({ studyList, hasMore, onClickNext }) {
+const ListWrapper = styled.div`
+  min-height: 50vh;
+`;
+const ThresholdWrapper = styled.div`
+  height: 20px;
+`;
+function StudyListComponent({ studyList, hasMore, loading, onClickNext }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const entry = useIntersectionObserver(ref, { threshold: 0 }, !hasMore);
+
+  useEffect(
+    () => !loading && hasMore && entry && onClickNext(),
+    [entry, hasMore, loading, onClickNext],
+  );
+
   const studyListDom = useMemo(
     () =>
       studyList.map((study, index) => {
@@ -21,16 +37,17 @@ function StudyListComponent({ studyList, hasMore, onClickNext }) {
   );
 
   return (
-    <div>
+    <ListWrapper>
       <LightDivider />
-      <div>{studyListDom}</div>
+      <ListWrapper>{studyListDom}</ListWrapper>
       <LightDivider my="20px" />
+      <ThresholdWrapper ref={ref} />
       {hasMore && (
         <TextButton fontSize="small" onClick={onClickNext}>
           더보기
         </TextButton>
       )}
-    </div>
+    </ListWrapper>
   );
 }
 

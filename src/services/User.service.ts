@@ -8,9 +8,13 @@ export default class UserService extends BaseHttpService {
     return (await this.get<string>(`${this.prefix}/univ`)) as string;
   }
 
-  async findMyPageProfile(): Promise<UserMyPageDto> {
+  async findMyPageProfile(id = null): Promise<UserMyPageDto> {
     return (await this.get<UserMyPageDto>(
-      `${this.prefix}/mypage`,
+      `${this.prefix}/mypage${id ? `?id=${id}` : ""}`,
     )) as UserMyPageDto;
+  }
+
+  async findMyRemainPoint(): Promise<number> {
+    return (await this.get<number>(`${this.prefix}/point`)) as number;
   }
 }

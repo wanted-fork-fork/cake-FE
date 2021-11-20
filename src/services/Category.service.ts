@@ -4,9 +4,9 @@ import { Category } from "@src/models/dto/signup.dto";
 export default class CategoryService extends BaseHttpService {
   prefix = "/category";
 
-  async getCategoryList() {
+  async getCategoryList(containPoint = false) {
     return (await this.get<Category[]>(
-      `${this.prefix}?point=false`,
+      `${this.prefix}?point=${containPoint ? "true" : "false"}`,
       {},
     )) as Category[];
   }
