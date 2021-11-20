@@ -67,7 +67,7 @@ function CategorySelectDrawerComponent({
   description = "",
   multiple = true,
   showPoint = false,
-  remain = 0,
+  remain = null,
   pointValue = "",
   onChangePointValue = null,
 }) {
@@ -107,6 +107,11 @@ function CategorySelectDrawerComponent({
       .then((list) => setCategoryList(list));
   }, [categoryStore, showPoint]);
 
+  useEffect(() => {
+    const found = selectedList.find((x) => x.name === "포인트");
+    if (found) setPointSelected(true);
+  }, [selectedList]);
+
   const categoryListDom = useMemo(
     () =>
       categoryList
@@ -141,6 +146,14 @@ function CategorySelectDrawerComponent({
     setPointSelected(true);
   }, [pointInfo, setSelectedList]);
 
+  const disableButton = useMemo(
+    () =>
+      !showPoint ||
+      (pointSelected && pointValue === "") ||
+      (remain !== null && pointValue > remain),
+    [pointSelected, pointValue, remain, showPoint],
+  );
+
   return (
     <Container visible={visible}>
       <TitleHeaderComponent title="" onBack={onClose} />
@@ -160,7 +173,7 @@ function CategorySelectDrawerComponent({
               />
             }
             suffix={
-              remain ? (
+              remain !== null ? (
                 <ErrorMessage pt="5px" mr="15px">
                   잔여 코인 {remain}코인
                 </ErrorMessage>
@@ -170,6 +183,11 @@ function CategorySelectDrawerComponent({
             }
           />
         </PointWrapper>
+      )}
+      {remain !== null && pointValue > remain && (
+        <ErrorMessage mb="10px">
+          입력한 코인이 남은 코인보다 많습니다!
+        </ErrorMessage>
       )}
       <ContentWrapper>
         {pointInfo && (
@@ -190,6 +208,7 @@ function CategorySelectDrawerComponent({
             type="button"
             color={selectedNothing ? "gray" : "primary"}
             onClick={onClose}
+            disabled={disableButton}
           >
             {selectedNothing ? buttonTextOnEmpty : "선택 완료"}
           </Button>
