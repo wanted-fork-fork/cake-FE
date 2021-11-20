@@ -19,11 +19,11 @@ const HeaderWrapper = styled.div`
     text-align: center;
   }
 `;
-function StudyApplierListTemplate({ applierList }) {
+function StudyApplierListTemplate({ loading, applierList }) {
   return (
     <PageWrapperComponent title="신청자 명단" button={null}>
       <ListWrapper>
-        {applierList.length === 0 && (
+        {!loading && applierList.length === 0 && (
           <EmptyComponent message="신청한 파티셰가 없습니다." />
         )}
         {applierList.length > 0 && (
