@@ -4,20 +4,28 @@ import { AuthPermissionType } from "@src/constant/api.constant";
 import useInfiniteLoading from "@src/hooks/useInfiniteLoading.hook";
 import { useStores } from "@src/store/root.store";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 function SearchResultPage() {
   const router = useRouter();
   const { studyStore } = useStores();
+  const [give, setGive] = useState("");
+  const [take, setTake] = useState("");
 
   const getNextItems = useCallback(
     async (page) =>
-      studyStore.getFilteredStudy(
-        page,
-        router.query.take,
-        router.query.give,
-        router.query.type,
-      ),
+      studyStore
+        .getFilteredStudy(
+          page,
+          router.query.take,
+          router.query.give,
+          router.query.type,
+        )
+        .then((res) => {
+          setGive(res.filter.give);
+          setTake(res.filter.take);
+          return res;
+        }),
     [router, studyStore],
   );
 
@@ -25,6 +33,7 @@ function SearchResultPage() {
     items: studyList,
     hasMore,
     onNext,
+    loading,
   } = useInfiniteLoading({
     ready:
       router.query.take !== undefined &&
@@ -37,9 +46,13 @@ function SearchResultPage() {
 
   return (
     <SearchResultTemplate
+      give={give}
+      take={take}
+      type={router.query.type}
       studyList={studyList}
       hasMore={hasMore}
       onNext={onNext}
+      loading={loading}
     />
   );
 }
