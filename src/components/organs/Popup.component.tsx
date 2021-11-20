@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FontSize } from "@src/styles/theme";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -22,12 +23,27 @@ const Modal = styled.div`
   padding: 12px;
   text-align: center;
 `;
-
-function PopupComponent({ content, bottom }) {
+const contentPadding = { padding: "15px 0 10px 0" };
+const Title = styled.h3`
+  font-size: ${FontSize.Default};
+  margin-bottom: 10px;
+`;
+const Description = styled.p`
+  font-size: ${FontSize.PrimaryDescription};
+  margin-bottom: 10px;
+`;
+function PopupComponent({
+  title = "",
+  description = "" as string | JSX.Element,
+  bottom,
+}) {
   return (
     <Wrapper>
       <Modal>
-        <div>{content}</div>
+        <div style={contentPadding}>
+          {title && <Title>{title}</Title>}
+          {description && <Description>{description}</Description>}
+        </div>
         <div>{bottom}</div>
       </Modal>
     </Wrapper>

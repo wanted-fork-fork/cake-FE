@@ -1,12 +1,7 @@
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
-import { dateToFormatted } from "@src/utils/dayjs.util";
-import { LightDivider } from "@src/components/atoms/Divider";
-import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
-import ColoredPinIcon from "@src/components/icon/ColoredPin.icon";
-import { MouseEventHandler, useMemo } from "react";
-import ColoredCopyIcon from "@src/components/icon/ColoredCopy.icon";
+import { useMemo } from "react";
 import LoadingComponent from "@src/components/molecules/Loading.component";
 import {
   ImageWrapper,
@@ -16,25 +11,59 @@ import {
 import { Button } from "@src/components/atoms/Button";
 import Link from "next/link";
 import { StudyState } from "@src/constant/enum.constant";
+import PopupComponent from "@src/components/organs/Popup.component";
 
-function StudyApplyDetailTemplate({ applyDetail }) {
-  const applyButton = useMemo(
-    () =>
-      !applyDetail || applyDetail.state === StudyState.APPLIED ? (
-        <Button color="point" height="44px" fontSize="small" width="100px">
-          참여자 선정
-        </Button>
-      ) : (
-        <Link href={`/study/apply/${applyDetail.id}`}>
-          <a>
-            <Button color="gray" height="44px" fontSize="small" width="100px">
-              참여 취소
-            </Button>
-          </a>
-        </Link>
-      ),
-    [applyDetail],
-  );
+function StudyApplyDetailTemplate({
+  applyDetail,
+  onClickApproval,
+  popupVisible,
+  onClosePopup,
+  popupMessage,
+}) {
+  const applyButton = useMemo(() => {
+    if (!applyDetail) return "";
+    switch (applyDetail.state) {
+      case StudyState.APPLIED:
+        return (
+          <Button
+            color="point"
+            height="44px"
+            fontSize="small"
+            width="100px"
+            onClick={() => onClickApproval(StudyState.JOINED)}
+          >
+            참여자 선정
+          </Button>
+        );
+      case StudyState.JOINED:
+        return (
+          <Button
+            color="gray"
+            height="44px"
+            fontSize="small"
+            width="100px"
+            onClick={() => onClickApproval(StudyState.REJECTED)}
+          >
+            참여 취소
+          </Button>
+        );
+      case StudyState.REJECTED:
+        return (
+          <Button
+            color="gray"
+            height="44px"
+            fontSize="small"
+            width="100px"
+            disabled
+            onClick={() => onClickApproval(StudyState.REJECTED)}
+          >
+            취소됨
+          </Button>
+        );
+      default:
+        return "";
+    }
+  }, [applyDetail, onClickApproval]);
 
   const appliedUser = useMemo(
     () =>
@@ -60,6 +89,16 @@ function StudyApplyDetailTemplate({ applyDetail }) {
         {/* Contents */}
         <StudyWrapper>{applyDetail.msg}</StudyWrapper>
       </StudyContentsWrapper>
+      {popupVisible && (
+        <PopupComponent
+          bottom={
+            <Button color="point" onClick={onClosePopup} height="48px">
+              확인
+            </Button>
+          }
+          description={popupMessage}
+        />
+      )}
     </PageWrapperComponent>
   ) : (
     <LoadingComponent />
