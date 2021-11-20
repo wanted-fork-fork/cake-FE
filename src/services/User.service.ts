@@ -13,4 +13,8 @@ export default class UserService extends BaseHttpService {
       `${this.prefix}/mypage`,
     )) as UserMyPageDto;
   }
+
+  async findMyRemainPoint(): Promise<number> {
+    return (await this.get<number>(`${this.prefix}/point`)) as number;
+  }
 }

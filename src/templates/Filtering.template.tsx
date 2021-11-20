@@ -69,7 +69,7 @@ function FilteringTemplate({
   const myCategoryDom = useMemo(
     () =>
       selectedMine.length === 0 ? (
-        <p>내가 잘 하는 것은?</p>
+        <p>다른 사람에게 줄 수 있는 것은?</p>
       ) : (
         <div>
           {selectedMine.map((x) => (
@@ -97,22 +97,26 @@ function FilteringTemplate({
   return (
     <PageWrapperComponent title="스터디 필터링" button={null}>
       <CategorySelectDrawerComponent
-        title="자신 있는 재능을 선택해주세요."
+        title="Give"
+        description="다른 사람에게 줄 수 있는 것은 무엇인가요?"
         selectedList={selectedMine}
         setSelectedList={setSelectedMine}
         buttonTextOnEmpty="아직 없어요"
         onClose={setMineInvisible}
         visible={mineVisible}
         multiple={false}
+        showPoint
       />
       <CategorySelectDrawerComponent
-        title="관심 있거나 배우고 싶은 주제를 선택해주세요."
+        title="Take"
+        description="다른 사람에게 받고 싶은 것은 무엇인가요?"
         selectedList={selectedYours}
         setSelectedList={setSelectedYours}
         buttonTextOnEmpty="다 좋아요!"
         onClose={setYourInvisible}
         visible={yoursVisible}
         multiple={false}
+        showPoint
       />
 
       <Wrapper>

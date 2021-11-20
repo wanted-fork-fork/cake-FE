@@ -17,7 +17,7 @@ const studySample: StudyListElementDto = {
   img: "https://cdn.pixabay.com/photo/2021/09/01/16/09/cake-6591719__340.jpg",
 };
 const Template = ({ studyList = [] }) => (
-  <UserMainTemplate studyList={studyList} />
+  <UserMainTemplate studyList={studyList} loading={false} />
 );
 
 export const UserMain = Template.bind({});

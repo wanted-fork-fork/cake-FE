@@ -13,9 +13,9 @@ export interface CreateStudyDto {
   chatRoom: string;
   roomPwd: string;
   images: string[];
-  give: string[];
-  take: string[];
-  point: number;
+  give: string[] | number[];
+  take: string[] | number[];
+  point: number | string;
 }
 
 export interface StudyListElement {
