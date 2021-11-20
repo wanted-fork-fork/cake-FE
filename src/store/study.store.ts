@@ -3,11 +3,14 @@ import { makeAutoObservable } from "mobx";
 import StudyService from "@src/services/Study.service";
 import {
   CreateStudyDto,
+  StudyApplyDetail,
   StudyDetailDto,
   StudyFilteringDto,
   StudyListElement,
   StudyManageListElement,
+  StudyMemberInfo,
 } from "@src/models/dto/study.dto";
+import { StudyState } from "@src/constant/enum.constant";
 
 export default class StudyStore {
   private readonly rootStore: RootStore;
@@ -53,6 +56,25 @@ export default class StudyStore {
 
   async getStudyDetail(id: number): Promise<StudyDetailDto> {
     return (await this.studyService.getStudyDetail(id)) as StudyDetailDto;
+  }
+
+  async findAllStudyMember(id) {
+    return (await this.studyService.findAllStudyMember(
+      id,
+    )) as StudyMemberInfo[];
+  }
+
+  async findStudyMemberDetail(memberId) {
+    return (await this.studyService.findStudyMemberDetail(
+      memberId,
+    )) as StudyApplyDetail;
+  }
+
+  async approveStudyMember(studyMemberId: number, state: StudyState) {
+    return (await this.studyService.approveStudyMember(
+      studyMemberId,
+      state,
+    )) as string;
   }
 
   async applyStudy(
