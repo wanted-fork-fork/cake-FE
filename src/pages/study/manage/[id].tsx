@@ -1,7 +1,8 @@
-import StudyApplierListTemplate from "@src/templates/StudyApplierList.template";
 import { useStores } from "@src/store/root.store";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+// components
+import StudyApplierListTemplate from "@src/templates/StudyApplierList.template";
 
 function StudyApplierListPage() {
   const router = useRouter();

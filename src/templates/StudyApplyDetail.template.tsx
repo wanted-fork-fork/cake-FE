@@ -1,3 +1,6 @@
+import { StudyState } from "@src/constant/enum.constant";
+
+// components
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
@@ -9,8 +12,6 @@ import {
   StudyWrapper,
 } from "@src/templates/StudyDetail.template";
 import { Button } from "@src/components/atoms/Button";
-import Link from "next/link";
-import { StudyState } from "@src/constant/enum.constant";
 import PopupComponent from "@src/components/organs/Popup.component";
 
 function StudyApplyDetailTemplate({

@@ -1,10 +1,16 @@
+import styled from "styled-components";
+
+// lib
+import { NaviType } from "@src/constant/enum.constant";
+
+// components
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
-import { NaviType } from "@src/constant/enum.constant";
 import ApplierListElementComponent from "@src/components/molecules/ApplierListElement.component";
-import styled from "styled-components";
-import { FontSize, Padding } from "@src/styles/theme";
 import EmptyComponent from "@src/components/molecules/Empty.component";
+
+// styles
+import { FontSize, Padding } from "@src/styles/theme";
 
 const ListWrapper = styled.div`
   padding: 20px ${Padding.pageX};

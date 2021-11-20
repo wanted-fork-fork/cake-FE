@@ -2,7 +2,7 @@ import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
 import { NaviType, StudyTypeEnumToLabel } from "@src/constant/enum.constant";
 import styled from "styled-components";
-import { FontSize, Padding } from "@src/styles/theme";
+import { Padding } from "@src/styles/theme";
 import StudyListComponent from "@src/components/organs/StudyList.component";
 import SearchLikeFilterLinkButtonComponent from "@src/components/molecules/SearchLikeFilterLinkButton.component";
 import EmptyComponent from "@src/components/molecules/Empty.component";
