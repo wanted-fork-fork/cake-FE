@@ -6,7 +6,7 @@ import { FontSize } from "@src/styles/theme";
 
 const Bottom = () => (
   <div>
-    <Link href="/profile/study">
+    <Link href="/study/manage">
       <a>
         <Button color="point" fontSize="small" height="48px" mb="10px">
           스터디 관리로 이동

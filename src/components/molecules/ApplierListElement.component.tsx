@@ -7,12 +7,13 @@ import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.compon
 import StarIcon from "@src/components/icon/Star.icon";
 import DocumentIcon from "@src/components/icon/Document.icon";
 import { FontSize } from "@src/styles/theme";
+import { StudyState } from "@src/constant/enum.constant";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 52px auto 52px 52px;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 `;
 const InfoWrapper = styled.div`
   width: 100%;
@@ -53,7 +54,7 @@ function ApplierListElementComponent({ userInfo }) {
         </RateWrapper>
       </InfoWrapper>
       <CenterWrapper>
-        <Switch />
+        <Switch checked={userInfo.state === StudyState.JOINED} />
       </CenterWrapper>
       <CenterWrapper>
         <Link href="/apply">
