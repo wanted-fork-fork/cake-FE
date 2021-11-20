@@ -75,7 +75,7 @@ function CreateStudyPage() {
       },
     });
 
-  // usePreventRouteChangeIf(!submitted, null);
+  usePreventRouteChangeIf(!submitted, null);
 
   const toggleUseDatePicker = useCallback(() => {
     setUseDatepicker(!allowDatepicker);
