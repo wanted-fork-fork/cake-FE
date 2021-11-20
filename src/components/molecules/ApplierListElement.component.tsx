@@ -57,7 +57,7 @@ function ApplierListElementComponent({ userInfo }) {
         <Switch checked={userInfo.state === StudyState.JOINED} />
       </CenterWrapper>
       <CenterWrapper>
-        <Link href="/apply">
+        <Link href={`/study/manage/apply/${userInfo.studyMemberId}`}>
           <a>
             <DocumentIcon />
           </a>
