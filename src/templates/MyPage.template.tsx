@@ -21,7 +21,7 @@ import LoadingComponent from "@src/components/molecules/Loading.component";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import theme, { FontSize, Padding } from "@src/styles/theme";
 
-const Container = styled.div`
+export const Container = styled.div`
   padding-top: 20px;
   padding-bottom: 80px;
 
@@ -30,14 +30,14 @@ const Container = styled.div`
   }
 `;
 
-const InfoBox = styled.div`
+export const InfoBox = styled.div`
   //padding: 10px;
   p {
     font-size: ${FontSize.SecondaryLabel};
   }
 `;
 
-const InfoBoxContainer = styled.div<BaseProps>`
+export const InfoBoxContainer = styled.div<BaseProps>`
   ${BaseStyleProps};
 
   margin: ${Padding.page};
@@ -61,7 +61,7 @@ const InfoBoxContainer = styled.div<BaseProps>`
   }
 `;
 
-const InfoBoxTitleWrapper = styled.div`
+export const InfoBoxTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,7 +75,7 @@ const InfoBoxTitleWrapper = styled.div`
   }
 `;
 
-const RateWrapper = styled.div`
+export const RateWrapper = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
