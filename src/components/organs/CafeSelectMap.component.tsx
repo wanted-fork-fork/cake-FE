@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@src/components/atoms/Button";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
-import { FontSize, Padding } from "@src/styles/theme";
+import theme, { FontSize, nowWindowSize, Padding } from "@src/styles/theme";
 
 const Container = styled.div`
   position: fixed;
@@ -13,6 +13,11 @@ const Container = styled.div`
   bottom: 0;
   background-color: #fff;
   z-index: 9999;
+
+  ${theme.window.tab} {
+    width: ${nowWindowSize};
+    margin: auto;
+  }
 `;
 const CafeWrapper = styled.div`
   padding: 0 ${Padding.pageX};

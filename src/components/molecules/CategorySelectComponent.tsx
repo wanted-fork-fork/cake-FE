@@ -1,6 +1,6 @@
 import CameraIcon from "@src/components/icon/Camera.icon";
 import styled from "styled-components";
-import theme, { Padding, windowSize } from "@src/styles/theme";
+import theme, { nowWindowSize, Padding, windowSize } from "@src/styles/theme";
 import CheckIcon from "@src/components/icon/Check.icon";
 import { MouseEventHandler } from "react";
 
@@ -22,8 +22,8 @@ const CategoryImageWrapper = styled.div<CategoryImageWrapperProp>`
       case "full":
       default:
         return `
-        height: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
-        width: calc((100vw - 2 * ${Padding.pageX} - 30px) / 4);
+        height: calc((${nowWindowSize} - 2 * ${Padding.pageX} - 30px) / 4);
+        width: calc((${nowWindowSize} - 2 * ${Padding.pageX} - 30px) / 4);
         `;
     }
   }};
