@@ -1,6 +1,11 @@
 import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import styled from "styled-components";
-import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+import theme, {
+  FixedX,
+  FontSize,
+  Padding,
+  windowSize,
+} from "@src/styles/theme";
 import { useCallback } from "react";
 import { useRouter } from "next/router";
 
@@ -21,8 +26,9 @@ const Container = styled.div`
 
   ${theme.window.tab} {
     width: ${windowSize.mobile};
-    left: auto;
-    right: auto;
+    left: ${FixedX};
+    right: ${FixedX};
+    margin: 0;
   }
 `;
 

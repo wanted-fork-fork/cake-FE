@@ -1,15 +1,21 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { GuestMain } from "@src/styles/template/GuestMain.styles";
-import { Button } from "@src/components/atoms/Button";
 import styled from "styled-components";
-import { NoScroll } from "@src/styles/common";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+// lib
 import { useStores } from "@src/store/root.store";
-import CategorySelectComponent from "@src/components/molecules/CategorySelectComponent";
-import { FontSize, Padding } from "@src/styles/theme";
-import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
-import { BoxInput } from "@src/components/atoms/Input";
-import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
+
+// components
+import { Button } from "@src/components/atoms/Button";
 import { ErrorMessage } from "@src/components/atoms/text/ErrorMessage";
+import { BoxInput } from "@src/components/atoms/Input";
+import CategorySelectComponent from "@src/components/molecules/CategorySelectComponent";
+import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
+import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
+
+// styles
+import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+import { GuestMain } from "@src/styles/template/GuestMain.styles";
+import { NoScroll } from "@src/styles/common";
 
 interface ContainerProp {
   visible: boolean;
@@ -27,6 +33,11 @@ const Container = styled.div<ContainerProp>`
   top: 0;
   bottom: 0;
   display: ${({ visible }) => (visible ? "block" : "none")};
+
+  ${theme.window.tab} {
+    width: ${windowSize.mobile};
+    margin: auto;
+  }
 `;
 
 const LabelWrapper = styled.div`
@@ -149,9 +160,9 @@ function CategorySelectDrawerComponent({
   const disableButton = useMemo(
     () =>
       !showPoint ||
-      (pointSelected && pointValue === "") ||
+      (pointSelected && pointValue === "" && onChangePointValue) ||
       (remain !== null && pointValue > remain),
-    [pointSelected, pointValue, remain, showPoint],
+    [onChangePointValue, pointSelected, pointValue, remain, showPoint],
   );
 
   return (
