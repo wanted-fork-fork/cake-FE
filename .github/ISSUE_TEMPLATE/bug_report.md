@@ -2,7 +2,7 @@
 name: Bug report
 about: 프로젝트 버그 리포트를 위한 템플릿입니다.
 title: "[BUG]"
-labels: bug
+labels: "\U0001FAB2 버그"
 assignees: ooooorobo
 
 ---

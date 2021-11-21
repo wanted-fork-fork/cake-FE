@@ -2,7 +2,7 @@
 name: Feature request
 about: 프로젝트 기능 요청을 위한 탬플릿입니다.
 title: "[Feature]"
-labels: enhancement
+labels: "✨ 기능"
 assignees: ooooorobo
 
 ---
