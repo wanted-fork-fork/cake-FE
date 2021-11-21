@@ -6,6 +6,7 @@ const InfoBoxTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 36px;
   h3 {
     //margin-bottom: 0;
   }
@@ -32,14 +33,17 @@ const CategoryListWrapper = styled.div<{ pr: string }>`
     height: calc((100vw - 40px - 40px) / 6 - 6px);
   }
 `;
-function ProfileCategoryListBox({ title, categories, pr = "0" }) {
+function ProfileCategoryListBox({
+  title,
+  categories,
+  pr = "0",
+  allowModify = true,
+}) {
   return (
     <div>
       <InfoBoxTitleWrapper>
         <h3>{title}</h3>
-        <div>
-          <RightArrowIcon />
-        </div>
+        <div>{allowModify && <RightArrowIcon />}</div>
       </InfoBoxTitleWrapper>
       <CategoryListWrapper pr={pr}>
         {categories.map((x) => (
