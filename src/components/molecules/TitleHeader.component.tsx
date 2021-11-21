@@ -2,6 +2,7 @@ import LeftArrowIcon from "@src/components/icon/LeftArrow.icon";
 import styled from "styled-components";
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
 import { useCallback } from "react";
+import { useRouter } from "next/router";
 
 const Container = styled.div`
   display: flex;
@@ -38,13 +39,20 @@ const IconWrapper = styled.a`
 
 const S = { Container, Title, IconWrapper };
 function TitleHeaderComponent({ title, onBack = null }) {
+  const router = useRouter();
+
   const back = useCallback(
     (e) => {
       e.stopPropagation();
-      if (onBack) return onBack();
-      return window.history.back();
+      if (onBack) onBack();
+      else if (
+        document.referrer &&
+        document.referrer.indexOf(process.env.SITE_DOMAIN) !== -1
+      )
+        window.history.back();
+      else router.push("/");
     },
-    [onBack],
+    [onBack, router],
   );
   return (
     <Container>
