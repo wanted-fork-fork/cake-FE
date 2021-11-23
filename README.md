@@ -16,10 +16,9 @@
 Cake는 위드코로나 시행에 발맞춰, 대학생들이 같은 학교 학생과 직접 만나 서로의 재능을 교환할 수 있도록 돕는 재능 공유 플랫폼입니다.   
 Cake와 함께, 믿음직한 우리 학교 선후배, 동기들과 새로운 재능을 개발해 보세요! 🔥
 
-## 배포된 페이지 링크
-
-- 웹 페이지: https://wanted-cake.netlify.app/
-- 스토리북: https://wanted-fork-fork.github.io/cake-FE/
+- 🏠 [웹 페이지](https://wanted-cake.netlify.app/)
+- 📑 [기술 설계 문서](https://docs.google.com/document/d/15EEdAm05md8PaBFjUEky3PJozWJyxrYEZ_oCcNg83Bk/edit?usp=sharing)
+- 📔 [스토리북](https://wanted-fork-fork.github.io/cake-FE/)
 
 ## 주요 기능
 - **스터디 목록**: 우리 학교에서 모집 중인 스터디 목록을 볼 수 있습니다.
