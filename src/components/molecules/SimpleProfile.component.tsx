@@ -1,6 +1,11 @@
+import Link from "next/link";
+import styled from "styled-components";
+
+// components
 import ProfileFrameComponent from "@src/components/molecules/ProfileFrame.component";
 import StarIcon from "@src/components/icon/Star.icon";
-import styled from "styled-components";
+
+// styles
 import { FontSize } from "@src/styles/theme";
 
 const ProfileWrapper = styled.div`
@@ -21,18 +26,22 @@ const ProfileWrapper = styled.div`
 
 function SimpleProfileComponent({ user }) {
   return (
-    <ProfileWrapper>
-      <ProfileFrameComponent
-        allowUpload={false}
-        size="small"
-        imgSrc={user.img}
-      />
-      <span>{user.nickname}</span>
-      <span>
-        <StarIcon />
-        <span>{user.rate || "비공개"}</span>
-      </span>
-    </ProfileWrapper>
+    <Link href={`/profile/${user.id}`}>
+      <a>
+        <ProfileWrapper>
+          <ProfileFrameComponent
+            allowUpload={false}
+            size="small"
+            imgSrc={user.img}
+          />
+          <span>{user.nickname}</span>
+          <span>
+            <StarIcon />
+            <span>{user.rate || "비공개"}</span>
+          </span>
+        </ProfileWrapper>
+      </a>
+    </Link>
   );
 }
 

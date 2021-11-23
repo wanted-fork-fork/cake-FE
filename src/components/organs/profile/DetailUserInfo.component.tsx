@@ -27,21 +27,23 @@ const Email = styled.p`
   font-size: ${FontSize.SecondaryLabel};
 `;
 
-function DetailUserInfoComponent({ user = null as UserMyPageDto, mb }) {
+function DetailUserInfoComponent({
+  user = null as UserMyPageDto,
+  mb,
+  allowModify = true,
+}) {
   return (
     <ProfileWrapper mb={mb}>
       <ProfileFrameComponent
         imgSrc={user.profileImg}
-        allowUpload
+        allowUpload={allowModify}
         size="medium"
       />
       <ProfileInfoWrapper>
         <Nickname>{user.nickname}</Nickname>
-        <Email>{user.email}</Email>
+        {allowModify && <Email>{user.email}</Email>}
       </ProfileInfoWrapper>
-      <div>
-        <RightArrowIcon />
-      </div>
+      <div>{allowModify && <RightArrowIcon />}</div>
     </ProfileWrapper>
   );
 }

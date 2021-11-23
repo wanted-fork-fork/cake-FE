@@ -1,11 +1,14 @@
-import { useCallback, useMemo, useState } from "react";
-import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
 import styled from "styled-components";
+import ImageGallery from "react-image-gallery";
+import { useCallback, useMemo, useState } from "react";
+
+// styles
+import "react-image-gallery/styles/css/image-gallery.css";
+import { nowWindowSize } from "@src/styles/theme";
 
 const Container = styled.div`
   .image-gallery {
-    width: 100vw;
+    width: ${nowWindowSize};
   }
   .image-gallery-image {
     height: 250px;

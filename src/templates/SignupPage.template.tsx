@@ -20,6 +20,7 @@ import { TextButton } from "@src/components/atoms/TextButton";
 import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { GuestMain } from "@src/styles/template/GuestMain.styles";
+import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
 
 const Container = styled.div`
   width: 100%;
@@ -94,12 +95,15 @@ function SignupPageTemplate({
 }: SignupTemplateProps) {
   return (
     <S.Container>
+      {step === SignupStep.SELECT_SCHOOL && <TitleHeaderComponent title="" />}
       <S.HeaderWrap pt="20px" mb="30px">
-        <BackWrap show={SignupTitleMessages[step].allowBack}>
-          <TextButton color="black" onClick={onClickPrev}>
-            <LeftArrowIcon />
-          </TextButton>
-        </BackWrap>
+        {step !== SignupStep.SELECT_SCHOOL && (
+          <BackWrap show={SignupTitleMessages[step].allowBack}>
+            <TextButton color="black" onClick={onClickPrev}>
+              <LeftArrowIcon />
+            </TextButton>
+          </BackWrap>
+        )}
       </S.HeaderWrap>
       <S.TitleWrap mb="60px">
         <S.TitleText mb="8px">{SignupTitleMessages[step].title}</S.TitleText>

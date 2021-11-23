@@ -7,6 +7,9 @@ export const windowSize = {
   mobileS: "23.125em", // 370px
 };
 
+export const FixedX = `calc((100vw - ${windowSize.mobile}) / 2)`;
+export const nowWindowSize = `min(100vw, ${windowSize.mobile} - 20px)`;
+
 const theme: DefaultTheme = {
   color: {
     primary: "#fc1150", // custom

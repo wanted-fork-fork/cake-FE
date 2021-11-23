@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "@src/styles/theme";
+import theme, { FixedX } from "@src/styles/theme";
 
 const Wrapper = styled.button`
   position: fixed;
@@ -15,6 +15,10 @@ const Wrapper = styled.button`
   border: none;
   &:focus {
     outline: none;
+  }
+
+  ${theme.window.tab} {
+    right: ${FixedX};
   }
 `;
 

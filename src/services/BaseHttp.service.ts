@@ -17,6 +17,8 @@ export default class BaseHttpService {
 
   _accessToken: string = null;
 
+  _sentRefresh = false;
+
   constructor(axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance;
   }
@@ -107,20 +109,24 @@ export default class BaseHttpService {
     this.removeToken();
 
     // refresh token
-    this.post<string>(`${API_PREFIX.AUTH}/refresh`)
-      .then((res: string) => {
-        this._saveToken(res);
+    if (!this._sentRefresh) {
+      this._sentRefresh = true;
+      this.post<string>(`${API_PREFIX.AUTH}/refresh`)
+        .then((res: string) => {
+          this._saveToken(res);
 
-        // request again
-        const { config } = error;
-        config.headers = this._getCommonOptions()
-          .headers as AxiosRequestHeaders;
-        return this.axiosInstance.request(config);
-      })
-      .catch(() => {
-        this.removeToken();
-        Router.push("/login");
-      });
+          // request again
+          const { config } = error;
+          config.headers = this._getCommonOptions()
+            .headers as AxiosRequestHeaders;
+          return this.axiosInstance.request(config);
+        })
+        .catch(() => {
+          this.removeToken();
+          Router.push("/login");
+        });
+      this._sentRefresh = false;
+    }
   }
 
   _getCommonOptions(): AxiosRequestConfig {
