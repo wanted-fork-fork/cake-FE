@@ -11,6 +11,7 @@ export default {
 
 const Template = (args: SignupTemplateProps) => {
   const isStepCompleted = {
+    [SignupStep.TERM_CONFIRM]: true,
     [SignupStep.SELECT_SCHOOL]: true,
     [SignupStep.CONFIRM_EMAIL]: true,
     [SignupStep.PASSWORD_INPUT]: true,
@@ -21,6 +22,11 @@ const Template = (args: SignupTemplateProps) => {
   return <SignupPageTemplate isStepCompleted={isStepCompleted} {...args} />;
 };
 
+export const TermConfirmStep = Template.bind({});
+TermConfirmStep.args = {
+  step: SignupStep.TERM_CONFIRM,
+};
+
 export const SelectSchoolStep = Template.bind({});
 SelectSchoolStep.args = {
   step: SignupStep.SELECT_SCHOOL,
@@ -28,6 +34,10 @@ SelectSchoolStep.args = {
 export const ConfirmEmailStep = Template.bind({});
 ConfirmEmailStep.args = {
   step: SignupStep.CONFIRM_EMAIL,
+  selectedUniv: {
+    name: "아주대학교",
+    email: "ajou.ac.kr",
+  },
 };
 export const PasswordInputStep = Template.bind({});
 PasswordInputStep.args = {
