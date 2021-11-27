@@ -16,7 +16,8 @@ import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
 const SignupPage = observer(() => {
   const { signupStore, categoryStore } = useStores();
 
-  const [step, setStep] = useState<SignupStep>(SignupStep.SELECT_SCHOOL);
+  const [step, setStep] = useState<SignupStep>(SignupStep.TERM_CONFIRM);
+  const [confirmed, setConfirmed] = useState(false);
 
   usePreventRouteChangeIf(step !== SignupStep.COMPLETE_SIGNUP, null);
 
@@ -30,6 +31,7 @@ const SignupPage = observer(() => {
 
   const isStepCompleted = useMemo(
     () => ({
+      [SignupStep.TERM_CONFIRM]: confirmed,
       [SignupStep.SELECT_SCHOOL]: signupStore.form.univ !== "",
       [SignupStep.CONFIRM_EMAIL]: signupStore.emailConfirmed,
       [SignupStep.PASSWORD_INPUT]: signupStore.form.pwd,
@@ -41,6 +43,7 @@ const SignupPage = observer(() => {
       [SignupStep.SELECT_TAKE_CATEGORY]: true,
     }),
     [
+      confirmed,
       signupStore.form.univ,
       signupStore.form.pwd,
       signupStore.form.univCategory,
@@ -117,6 +120,8 @@ const SignupPage = observer(() => {
   return (
     <SignupPageTemplate
       step={step}
+      confirmed={confirmed}
+      setConfirmed={setConfirmed}
       onClickNext={onMoveNext}
       onClickPrev={onMovePrev}
       onClickReqConfirmMail={onClickReqConfirmMail}

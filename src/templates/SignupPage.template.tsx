@@ -75,6 +75,8 @@ const S = {
 
 export type SignupTemplateProps = {
   step: SignupStep;
+  confirmed: boolean;
+  setConfirmed?: (conf: boolean) => void;
   onClickNext?: () => void;
   onClickPrev?: () => void;
   onCheckConfirmMail?: (email: string) => void;
@@ -85,9 +87,11 @@ export type SignupTemplateProps = {
 };
 
 function SignupPageTemplate({
-  step = SignupStep.SELECT_SCHOOL,
+  step = SignupStep.TERM_CONFIRM,
   selectedUniv,
   isStepCompleted,
+  confirmed,
+  setConfirmed,
   onClickNext,
   onClickPrev,
   onClickReqConfirmMail,
@@ -113,7 +117,12 @@ function SignupPageTemplate({
         </S.DescriptionText>
       </S.TitleWrap>
       <S.ContentWrap>
-        {step === SignupStep.TERM_CONFIRM && <TermConfirmStepComponent />}
+        {step === SignupStep.TERM_CONFIRM && (
+          <TermConfirmStepComponent
+            confirmed={confirmed}
+            setConfirmed={setConfirmed}
+          />
+        )}
         {step === SignupStep.SELECT_SCHOOL && <SelectSchoolStepComponent />}
         {step === SignupStep.CONFIRM_EMAIL && (
           <ConfirmEmailStepComponent

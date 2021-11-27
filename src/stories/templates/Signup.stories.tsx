@@ -3,6 +3,7 @@ import SignupPageTemplate, {
   SignupTemplateProps,
 } from "@src/templates/SignupPage.template";
 import { SignupStep } from "@src/constant/enum.constant";
+import { useState } from "react";
 
 export default {
   title: "template/Signup",
@@ -19,7 +20,15 @@ const Template = (args: SignupTemplateProps) => {
     [SignupStep.SELECT_GIVE_CATEGORY]: true,
     [SignupStep.SELECT_TAKE_CATEGORY]: true,
   };
-  return <SignupPageTemplate isStepCompleted={isStepCompleted} {...args} />;
+  const [confirmed, setConfirmed] = useState(false);
+  return (
+    <SignupPageTemplate
+      isStepCompleted={isStepCompleted}
+      confirmed={confirmed}
+      setConfirmed={setConfirmed}
+      {...args}
+    />
+  );
 };
 
 export const TermConfirmStep = Template.bind({});
