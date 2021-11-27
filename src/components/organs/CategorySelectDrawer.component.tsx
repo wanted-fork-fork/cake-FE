@@ -13,32 +13,10 @@ import TitleHeaderComponent from "@src/components/molecules/TitleHeader.componen
 import InputWithSuffixComponent from "@src/components/molecules/InputWithSuffix.component";
 
 // styles
-import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
+import { FontSize } from "@src/styles/theme";
 import { GuestMain } from "@src/styles/template/GuestMain.styles";
 import { NoScroll } from "@src/styles/common";
-
-interface ContainerProp {
-  visible: boolean;
-}
-const Container = styled.div<ContainerProp>`
-  width: 100%;
-  height: 100vh;
-  padding: ${Padding.page};
-
-  background-color: #fff;
-  z-index: 10000;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: ${({ visible }) => (visible ? "block" : "none")};
-
-  ${theme.window.tab} {
-    width: ${windowSize.mobile};
-    margin: auto;
-  }
-`;
+import { PagePopup } from "@src/components/atoms/PagePopup";
 
 const LabelWrapper = styled.div`
   display: flex;
@@ -166,7 +144,7 @@ function CategorySelectDrawerComponent({
   );
 
   return (
-    <Container visible={visible}>
+    <PagePopup visible={visible}>
       <TitleHeaderComponent title="" onBack={onClose} />
       <LabelWrapper>
         <h3>{title}</h3>
@@ -225,7 +203,7 @@ function CategorySelectDrawerComponent({
           </Button>
         </GuestMain.BottomWrap>
       </ContentWrapper>
-    </Container>
+    </PagePopup>
   );
 }
 

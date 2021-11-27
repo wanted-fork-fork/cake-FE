@@ -5,54 +5,15 @@ import CheckIcon from "@src/components/icon/Check.icon";
 import theme from "@src/styles/theme";
 import styled from "styled-components";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import useVisibleHook from "@src/hooks/useVisible.hook";
-
-interface CircleButtonProps {
-  size: string;
-  filled?: boolean;
-  selected?: boolean;
-}
-const CircleButton = styled.div<CircleButtonProps>`
-  cursor: pointer;
-  border: 1px solid ${theme.color.gray3};
-  border-radius: 100px;
-  width: ${({ size }) => size};
-  height: ${({ size }) => size};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: calc(${({ size }) => size} - 14px);
-
-  ${({ selected = false, filled = true }) =>
-    selected &&
-    `
-    background-color: ${filled ? theme.color.primary : "#fff"}; 
-    border-color: transparent;
-    svg {
-      color: #fff;
-    }
-  `}
-
-  svg {
-    width: calc(${({ size }) => size} - 12px);
-    height: calc(${({ size }) => size} - 12px);
-  }
-`;
-
-const TermButtonContentsWrapper = styled.div<BaseProps>`
-  ${BaseStyleProps};
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
+import Term from "@src/components/atoms/terms/Term";
+import TermPopupComponent from "@src/components/organs/TermPopup.component";
+import Privacy from "@src/components/atoms/terms/Privacy";
+import TermCheckButtonComponent, {
+  CircleButton,
+  TermButtonContentsWrapper,
+} from "@src/components/molecules/TermCheckButton.component";
 
 function TermConfirmStepComponent({ confirmed, setConfirmed }) {
   const [
@@ -67,6 +28,9 @@ function TermConfirmStepComponent({ confirmed, setConfirmed }) {
     setPrivacyNotConfirmed,
     togglePrivacyConfirmed,
   ] = useVisibleHook(false);
+  const [termVisible, setTermVisible, setTermInvisible] = useVisibleHook(false);
+  const [privacyVisible, setPrivacyVisible, setPrivacyInvisible] =
+    useVisibleHook(false);
 
   const onClickConfirmAll = useCallback(() => {
     if (!confirmed) {
@@ -99,6 +63,21 @@ function TermConfirmStepComponent({ confirmed, setConfirmed }) {
 
   return (
     <div>
+      <TermPopupComponent
+        title="이용약관"
+        visible={termVisible}
+        setInvisible={setTermInvisible}
+      >
+        <Term />
+      </TermPopupComponent>
+      <TermPopupComponent
+        title="개인정보처리방침"
+        visible={privacyVisible}
+        setInvisible={setPrivacyInvisible}
+      >
+        <Privacy />
+      </TermPopupComponent>
+
       <Button
         height="56px"
         fontSize="default"
@@ -117,36 +96,18 @@ function TermConfirmStepComponent({ confirmed, setConfirmed }) {
           약관 전체 동의
         </TermButtonContentsWrapper>
       </Button>
-      <TermButtonContentsWrapper mb="20px">
-        <div>
-          <CircleButton
-            size="24px"
-            selected={termConfirmed}
-            onClick={toggleTermConfirmed}
-          >
-            <CheckIcon color={termConfirmed ? "#fff" : theme.color.gray3} />
-          </CircleButton>
-        </div>
-        <TextButton fontSize="small">
-          <span>(필수) Cake 이용약관</span>
-          <SmallRightArrowIcon />
-        </TextButton>
-      </TermButtonContentsWrapper>
-      <TermButtonContentsWrapper mb="20px">
-        <div>
-          <CircleButton
-            size="24px"
-            selected={privacyConfirmed}
-            onClick={togglePrivacyConfirmed}
-          >
-            <CheckIcon color={privacyConfirmed ? "#fff" : theme.color.gray3} />
-          </CircleButton>
-        </div>
-        <TextButton fontSize="small">
-          <span>(필수) Cake 개인정보처리방침</span>
-          <SmallRightArrowIcon />
-        </TextButton>
-      </TermButtonContentsWrapper>
+      <TermCheckButtonComponent
+        confirmed={termConfirmed}
+        toggleConfirmed={toggleTermConfirmed}
+        setPopupVisible={setTermVisible}
+        termName="(필수) Cake 이용약관"
+      />
+      <TermCheckButtonComponent
+        confirmed={privacyConfirmed}
+        toggleConfirmed={togglePrivacyConfirmed}
+        setPopupVisible={setPrivacyVisible}
+        termName="(필수) Cake 개인정보처리방침"
+      />
     </div>
   );
 }
