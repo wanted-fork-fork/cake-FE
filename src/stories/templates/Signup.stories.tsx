@@ -3,6 +3,7 @@ import SignupPageTemplate, {
   SignupTemplateProps,
 } from "@src/templates/SignupPage.template";
 import { SignupStep } from "@src/constant/enum.constant";
+import { useState } from "react";
 
 export default {
   title: "template/Signup",
@@ -11,6 +12,7 @@ export default {
 
 const Template = (args: SignupTemplateProps) => {
   const isStepCompleted = {
+    [SignupStep.TERM_CONFIRM]: true,
     [SignupStep.SELECT_SCHOOL]: true,
     [SignupStep.CONFIRM_EMAIL]: true,
     [SignupStep.PASSWORD_INPUT]: true,
@@ -18,7 +20,20 @@ const Template = (args: SignupTemplateProps) => {
     [SignupStep.SELECT_GIVE_CATEGORY]: true,
     [SignupStep.SELECT_TAKE_CATEGORY]: true,
   };
-  return <SignupPageTemplate isStepCompleted={isStepCompleted} {...args} />;
+  const [confirmed, setConfirmed] = useState(false);
+  return (
+    <SignupPageTemplate
+      isStepCompleted={isStepCompleted}
+      confirmed={confirmed}
+      setConfirmed={setConfirmed}
+      {...args}
+    />
+  );
+};
+
+export const TermConfirmStep = Template.bind({});
+TermConfirmStep.args = {
+  step: SignupStep.TERM_CONFIRM,
 };
 
 export const SelectSchoolStep = Template.bind({});
@@ -28,6 +43,10 @@ SelectSchoolStep.args = {
 export const ConfirmEmailStep = Template.bind({});
 ConfirmEmailStep.args = {
   step: SignupStep.CONFIRM_EMAIL,
+  selectedUniv: {
+    name: "아주대학교",
+    email: "ajou.ac.kr",
+  },
 };
 export const PasswordInputStep = Template.bind({});
 PasswordInputStep.args = {
