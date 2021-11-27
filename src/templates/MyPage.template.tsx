@@ -20,6 +20,10 @@ import LoadingComponent from "@src/components/molecules/Loading.component";
 // styles
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import theme, { FontSize, Padding } from "@src/styles/theme";
+import TermPopupComponent from "@src/components/organs/TermPopup.component";
+import Term from "@src/components/atoms/terms/Term";
+import Privacy from "@src/components/atoms/terms/Privacy";
+import useVisibleHook from "@src/hooks/useVisible.hook";
 
 export const Container = styled.div`
   padding-top: 20px;
@@ -73,6 +77,11 @@ export const InfoBoxTitleWrapper = styled.div`
     margin-bottom: 0;
     text-align: left;
   }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 export const RateWrapper = styled.div`
@@ -82,13 +91,19 @@ export const RateWrapper = styled.div`
   font-size: ${FontSize.Small};
 `;
 
+const TermButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const BottomWrapper = styled.div`
   ${TextButton} {
     text-align: left;
   }
 
   padding: ${Padding.page};
-  height: 300px;
+  min-height: 300px;
 `;
 
 const BottomButtonWrapper = styled.div`
@@ -97,6 +112,10 @@ const BottomButtonWrapper = styled.div`
 `;
 
 function MyPageTemplate({ profile = null as UserMyPageDto }) {
+  const [termVisible, setTermVisible, setTermInvisible] = useVisibleHook(false);
+  const [privacyVisible, setPrivacyVisible, setPrivacyInvisible] =
+    useVisibleHook(false);
+
   return (
     <Container>
       {profile ? (
@@ -104,7 +123,8 @@ function MyPageTemplate({ profile = null as UserMyPageDto }) {
           {/* Profile */}
           <DetailUserInfoComponent user={profile} mb="20px" />
           {/*  Point */}
-          <PointDetailComponent point={profile.point} mb="20px" />
+          {/* TODO:: 2021.11.27. 현재 포인트 사용하지 않게 되어 삭제함. 포인트 추가하게 되었을 때 다시 추가 */}
+          {/* <PointDetailComponent point={profile.point} mb="20px" /> */}
           {/*  InfoBox */}
           <InfoBoxContainer>
             {/* 신뢰도 */}
@@ -142,15 +162,21 @@ function MyPageTemplate({ profile = null as UserMyPageDto }) {
 
           <BoldDivider my="20px" />
 
+          {/* 약관 */}
           <BottomWrapper>
-            <InfoBoxTitleWrapper>
-              <TextButton>
-                <p>이용 약관</p>
-              </TextButton>
-              <div>
+            <TextButton mb="10px" onClick={setTermVisible}>
+              <TermButtonWrapper>
+                <span>이용 약관</span>
                 <RightArrowIcon />
-              </div>
-            </InfoBoxTitleWrapper>
+              </TermButtonWrapper>
+            </TextButton>
+            <TextButton onClick={setPrivacyVisible}>
+              <TermButtonWrapper>
+                <span>개인정보처리방침</span>
+                <RightArrowIcon />
+              </TermButtonWrapper>
+            </TextButton>
+
             <BottomButtonWrapper>
               <Link href="/logout">
                 <a>
@@ -166,6 +192,22 @@ function MyPageTemplate({ profile = null as UserMyPageDto }) {
       ) : (
         <LoadingComponent />
       )}
+
+      <TermPopupComponent
+        title="이용약관"
+        visible={termVisible}
+        setInvisible={setTermInvisible}
+      >
+        <Term />
+      </TermPopupComponent>
+      <TermPopupComponent
+        title="개인정보처리방침"
+        visible={privacyVisible}
+        setInvisible={setPrivacyInvisible}
+      >
+        <Privacy />
+      </TermPopupComponent>
+
       <BottomNavigationComponent selected={NaviType.PROFILE} />
     </Container>
   );
