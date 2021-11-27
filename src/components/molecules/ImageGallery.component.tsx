@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import ImageGallery, {
-  fullscreen as activateFullscreen,
-} from "react-image-gallery";
+import ImageGallery from "react-image-gallery";
 import { useCallback, useMemo, useRef, useState } from "react";
 
 // styles
