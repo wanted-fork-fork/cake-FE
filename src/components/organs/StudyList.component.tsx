@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 import useIntersectionObserver from "@src/hooks/useIntersectionObserver.hook";
 import styled from "styled-components";
+import StudyListElementSkeleton from "@src/components/skeletons/StudyListElement.skeleton";
 
 const ListWrapper = styled.div`
   min-height: 50vh;
@@ -39,7 +40,17 @@ function StudyListComponent({ studyList, hasMore, loading, onClickNext }) {
   return (
     <ListWrapper>
       <LightDivider />
-      <ListWrapper>{studyListDom}</ListWrapper>
+      <ListWrapper>
+        {studyListDom}
+        {loading && (
+          <>
+            <StudyListElementSkeleton />
+            <StudyListElementSkeleton />
+            <StudyListElementSkeleton />
+            <StudyListElementSkeleton />
+          </>
+        )}
+      </ListWrapper>
       <LightDivider my="20px" />
       <ThresholdWrapper ref={ref} />
       {hasMore && (
