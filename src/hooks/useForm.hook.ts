@@ -6,7 +6,7 @@ interface useFormProp<T> {
   validate(values: T): formErrors;
 }
 
-interface formErrors {
+export interface formErrors {
   [name: string]: string;
 }
 
@@ -40,8 +40,8 @@ function useForm<T>({
     async (e: SubmitEvent) => {
       setSubmitting(true);
       e.preventDefault();
-      await new Promise((r) => setTimeout(r, 1000));
       setErrors(validate(values));
+      await new Promise((r) => setTimeout(r, 1000));
     },
     [validate, values],
   );

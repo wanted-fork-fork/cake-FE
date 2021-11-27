@@ -1,75 +1,103 @@
 import styled from "styled-components";
 import ImageGallery from "react-image-gallery";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 // styles
 import "react-image-gallery/styles/css/image-gallery.css";
-import { nowWindowSize } from "@src/styles/theme";
+import theme, { FontSize, nowWindowSize } from "@src/styles/theme";
 
-const Container = styled.div`
+interface ContainerProp {
+  fullscreen?: boolean;
+}
+const Container = styled.div<ContainerProp>`
   .image-gallery {
-    width: ${nowWindowSize};
+    width: ${({ fullscreen = false }) => (fullscreen ? "auto" : nowWindowSize)};
+    z-index: ${({ fullscreen = false }) => (fullscreen ? "10000" : "")};
+  }
+  .image-gallery.fullscreen-modal {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .image-gallery-index {
+    top: -40px;
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: transparent;
+    width: fit-content;
+    font-size: ${FontSize.PrimaryDescription};
   }
   .image-gallery-image {
-    height: 250px;
+    height: ${({ fullscreen = false }) => (fullscreen ? "auto" : "250px")};
   }
+  position: relative;
 `;
 
-const Popup = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  button {
-    position: absolute;
-    width: fit-content;
-    top: 5px;
-    right: 5px;
-  }
-  img {
-    width: 100%;
-    height: auto;
-  }
+const NowNumberWrapper = styled.div`
+  font-size: ${FontSize.Small};
+  background-color: ${theme.color.point};
+  color: #fff;
+  padding: 5px 13px;
+  width: fit-content;
+  border-radius: 50px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, 0);
 `;
 
 function ImageGalleryComponent({ images = [] as string[] }) {
-  const [popupImgSrc, setPopupImgSrc] = useState(null);
+  const ref = useRef(null);
+  const [now, setNow] = useState(0);
+  const [fullscreen, setFullscreen] = useState(false);
+
   const imageList = useMemo(
     () =>
       images.map((x) => ({
         original: x,
-        originalHeight: "250px",
-        originalWidth: "auto",
+        thumbnailHeight: "250px",
+        thumbnailWidth: "auto",
       })),
     [images],
   );
-  const onClick = useCallback((e) => {
-    setPopupImgSrc(e.target.src);
-  }, []);
-  const onClickPopup = useCallback(() => {
-    setPopupImgSrc(null);
-  }, []);
+  const imageStatusDom = useMemo(
+    () => (
+      <NowNumberWrapper>
+        {now + 1} / {images.length}
+      </NowNumberWrapper>
+    ),
+    [now, images],
+  );
+
+  const onClick = useCallback(() => {
+    if (fullscreen) ref.current.exitFullScreen();
+    else ref.current.fullScreen();
+  }, [ref, fullscreen]);
+
   return (
-    <Container>
+    <Container fullscreen={fullscreen}>
       <ImageGallery
+        ref={ref}
         items={imageList}
         onClick={onClick}
         showThumbnails={false}
         showFullscreenButton={false}
         showPlayButton={false}
-        showBullets
-      />
-      {popupImgSrc && (
-        <Popup onClick={onClickPopup}>
-          <img src={popupImgSrc} alt="popup" />
-        </Popup>
-      )}
+        showBullets={false}
+        showNav={false}
+        showIndex={fullscreen}
+        useBrowserFullscreen={false}
+        onBeforeSlide={setNow}
+        onScreenChange={setFullscreen}
+      >
+        hi
+      </ImageGallery>
+      {imageStatusDom}
+      {/* {popupImgSrc && ( */}
+      {/*  <Popup onClick={onClickPopup}> */}
+      {/*    <img src={popupImgSrc} alt="popup" /> */}
+      {/*  </Popup> */}
+      {/* )} */}
     </Container>
   );
 }

@@ -1,4 +1,5 @@
 export enum SignupStep {
+  TERM_CONFIRM,
   SELECT_SCHOOL,
   CONFIRM_EMAIL,
   PASSWORD_INPUT,

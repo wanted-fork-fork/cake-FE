@@ -6,6 +6,12 @@ export type TitleMessageType = {
 };
 export const SignupTitleMessages: TitleMessageType[] = [
   {
+    title: "Cake가 처음이신가요?",
+    description: "약관에 동의하시고 Cake를 이용해보세요!",
+    button: "학교 계정 인증하기",
+    allowBack: true,
+  },
+  {
     title: "학교를 선택해주세요.",
     description: "",
     button: "학교 계정 인증하기",

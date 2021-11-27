@@ -21,6 +21,7 @@ import { FontSize, Padding } from "@src/styles/theme";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { GuestMain } from "@src/styles/template/GuestMain.styles";
 import TitleHeaderComponent from "@src/components/molecules/TitleHeader.component";
+import TermConfirmStepComponent from "@src/components/organs/signup/TermConfirmStep.component";
 
 const Container = styled.div`
   width: 100%;
@@ -74,6 +75,8 @@ const S = {
 
 export type SignupTemplateProps = {
   step: SignupStep;
+  confirmed: boolean;
+  setConfirmed?: (conf: boolean) => void;
   onClickNext?: () => void;
   onClickPrev?: () => void;
   onCheckConfirmMail?: (email: string) => void;
@@ -84,9 +87,11 @@ export type SignupTemplateProps = {
 };
 
 function SignupPageTemplate({
-  step = SignupStep.SELECT_SCHOOL,
+  step = SignupStep.TERM_CONFIRM,
   selectedUniv,
   isStepCompleted,
+  confirmed,
+  setConfirmed,
   onClickNext,
   onClickPrev,
   onClickReqConfirmMail,
@@ -95,9 +100,9 @@ function SignupPageTemplate({
 }: SignupTemplateProps) {
   return (
     <S.Container>
-      {step === SignupStep.SELECT_SCHOOL && <TitleHeaderComponent title="" />}
+      {step === 0 && <TitleHeaderComponent title="" />}
       <S.HeaderWrap pt="20px" mb="30px">
-        {step !== SignupStep.SELECT_SCHOOL && (
+        {step !== 0 && (
           <BackWrap show={SignupTitleMessages[step].allowBack}>
             <TextButton color="black" onClick={onClickPrev}>
               <LeftArrowIcon />
@@ -112,6 +117,12 @@ function SignupPageTemplate({
         </S.DescriptionText>
       </S.TitleWrap>
       <S.ContentWrap>
+        {step === SignupStep.TERM_CONFIRM && (
+          <TermConfirmStepComponent
+            confirmed={confirmed}
+            setConfirmed={setConfirmed}
+          />
+        )}
         {step === SignupStep.SELECT_SCHOOL && <SelectSchoolStepComponent />}
         {step === SignupStep.CONFIRM_EMAIL && (
           <ConfirmEmailStepComponent
