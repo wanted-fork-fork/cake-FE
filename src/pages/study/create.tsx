@@ -21,11 +21,11 @@ import { chatroomPrefix } from "@src/constant/policy.constant";
 import { checkMinimumLength } from "@src/utils/validate";
 
 function CreateStudyPage() {
-  const { studyStore, userStore } = useStores();
+  const { studyStore } = useStores();
   const router = useRouter();
 
-  const { value: startDate, onChange: onChangeStartDate } = useDatepicker();
-  const { value: endDate, onChange: onChangeEndDate } = useDatepicker();
+  const { value: startDate, onChange: onChangeStartDate } = useDatepicker(null);
+  const { value: endDate, onChange: onChangeEndDate } = useDatepicker(null);
   const [selectedMine, setSelectedMine] = useState([]);
   const [selectedYours, setSelectedYours] = useState([]);
   const [uploaded, setUploaded] = useState<Resource[]>([]);
@@ -56,8 +56,8 @@ function CreateStudyPage() {
         studyStore
           .createStudy({
             ...v,
-            startDate: allowDatepicker ? startDate.format("YYYY-MM-DD") : null,
-            endDate: allowDatepicker ? endDate.format("YYYY-MM-DD") : null,
+            startDate: allowDatepicker ? startDate?.format("YYYY-MM-DD") : null,
+            endDate: allowDatepicker ? endDate?.format("YYYY-MM-DD") : null,
             give: selectedMine.map((x) => x.id),
             take: selectedYours.map((x) => x.id),
             images: uploaded.map((x) => x.path),

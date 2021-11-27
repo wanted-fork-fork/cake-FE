@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
-import dayjs from "dayjs";
 
-function useDatepicker() {
-  const [value, setValue] = useState(dayjs());
+function useDatepicker(defaultValue) {
+  const [value, setValue] = useState(defaultValue);
 
   const onChange = useCallback((v) => {
     setValue(v);
