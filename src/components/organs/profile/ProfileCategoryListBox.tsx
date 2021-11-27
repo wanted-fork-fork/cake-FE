@@ -1,6 +1,6 @@
 import RightArrowIcon from "@src/components/icon/RightArrow.icon";
 import styled from "styled-components";
-import theme, { nowWindowSize, windowSize } from "@src/styles/theme";
+import theme, { nowWindowSize } from "@src/styles/theme";
 
 const InfoBoxTitleWrapper = styled.div`
   display: flex;
@@ -56,11 +56,6 @@ function ProfileCategoryListBox({
         <div>{allowModify && <RightArrowIcon />}</div>
       </InfoBoxTitleWrapper>
       <CategoryListWrapper pr={pr}>
-        {categories.map((x) => (
-          <Category key={x.id}>
-            <img src={x.img} alt={x.name} />
-          </Category>
-        ))}{" "}
         {categories.map((x) => (
           <Category key={x.id}>
             <img src={x.img} alt={x.name} />
