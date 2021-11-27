@@ -69,6 +69,7 @@ const WithPrefixIcon = styled.div`
 function StudyCreateTemplate({
   onSubmit,
   values,
+  errors,
   onChange,
   allowDatepicker,
   toggleUseDatepicker,
@@ -86,7 +87,6 @@ function StudyCreateTemplate({
   onChangeGivePoint,
   takePoint,
   onChangeTakePoint,
-  remainPoint,
   uploaded,
   setUploaded,
 }) {
@@ -142,6 +142,7 @@ function StudyCreateTemplate({
           fontSize="small"
           onChange={onChange}
         />
+        {errors.title && <ErrorMessage>{errors.title}</ErrorMessage>}
         <Select
           name="type"
           selected={values.type}
@@ -165,7 +166,6 @@ function StudyCreateTemplate({
             showPoint
             pointValue={givePoint}
             onChangePointValue={onChangeGivePoint}
-            remain={remainPoint}
           />
           <div>
             <TradeIcon
@@ -253,6 +253,7 @@ function StudyCreateTemplate({
           fontSize="small"
           onChange={onChange}
         />
+        {errors.chatRoom && <ErrorMessage>{errors.chatRoom}</ErrorMessage>}
         <InputWithSuffixComponent
           input={
             <LightUnderlineInput
