@@ -1,19 +1,18 @@
-import { Button } from "@src/components/atoms/Button";
-import { TextButton } from "@src/components/atoms/TextButton";
-import SmallRightArrowIcon from "@src/components/icon/SmallRightArrow.icon";
-import CheckIcon from "@src/components/icon/Check.icon";
-import theme from "@src/styles/theme";
-import styled from "styled-components";
-import { BaseProps, BaseStyleProps } from "@src/styles/common";
 import { useCallback, useEffect } from "react";
+// lib
 import useVisibleHook from "@src/hooks/useVisible.hook";
+// components
+import { Button } from "@src/components/atoms/Button";
+import CheckIcon from "@src/components/icon/Check.icon";
 import Term from "@src/components/atoms/terms/Term";
-import TermPopupComponent from "@src/components/organs/TermPopup.component";
 import Privacy from "@src/components/atoms/terms/Privacy";
+import TermPopupComponent from "@src/components/organs/TermPopup.component";
 import TermCheckButtonComponent, {
   CircleButton,
   TermButtonContentsWrapper,
 } from "@src/components/molecules/TermCheckButton.component";
+// styles
+import theme from "@src/styles/theme";
 
 function TermConfirmStepComponent({ confirmed, setConfirmed }) {
   const [
