@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import StudyCreateTemplate from "@src/templates/StudyCreate.template";
 
 // hooks
-import useForm from "@src/hooks/useForm.hook";
+import useForm, { formErrors } from "@src/hooks/useForm.hook";
 import useDatepicker from "@src/hooks/useDatepicker";
 import { useStores } from "@src/store/root.store";
 import usePreventRouteChangeIf from "@src/hooks/usePreventRouteChangeIf.hook";
@@ -17,6 +17,8 @@ import { StudyType } from "@src/constant/enum.constant";
 import { AuthPermissionType } from "@src/constant/api.constant";
 import { Resource } from "@src/models/dto/api-response";
 import useInput from "@src/hooks/useInput.hook";
+import { chatroomPrefix } from "@src/constant/policy.constant";
+import { checkMinimumLength } from "@src/utils/validate";
 
 function CreateStudyPage() {
   const { studyStore, userStore } = useStores();
@@ -31,13 +33,8 @@ function CreateStudyPage() {
   const [selectedCafe, setSelectedCafe] = useState(null);
   const { value: givePoint, handleChange: onChangeGivePoint } = useInput("");
   const { value: takePoint, handleChange: onChangeTakePoint } = useInput("");
-  const [remainPoint, setRemainPoint] = useState(0);
 
-  useEffect(() => {
-    userStore.getMyPoint().then((point) => setRemainPoint(point));
-  }, [userStore]);
-
-  const { values, handleChange, handleSubmit, submitted } =
+  const { values, handleChange, errors, handleSubmit, submitted } =
     useForm<CreateStudyDto>({
       initialValues: {
         title: "",
@@ -70,8 +67,19 @@ function CreateStudyPage() {
           })
           .then(() => router.push(`/`));
       },
-      validate() {
-        return {};
+      validate(v) {
+        let error: formErrors = {};
+        error = checkMinimumLength({
+          value: v.title,
+          minimum: 0,
+          message: "제목을 입력해주세요.",
+          keyName: "title",
+          error,
+        });
+        if (v.chatRoom && !v.chatRoom.startsWith(chatroomPrefix)) {
+          error.chatRoom = "카카오톡 오픈채팅 링크가 맞는지 확인해주세요.";
+        }
+        return error;
       },
     });
 
@@ -92,6 +100,7 @@ function CreateStudyPage() {
       onSubmit={handleSubmit}
       onChange={handleChange}
       values={values}
+      errors={errors}
       selectedMine={selectedMine}
       setSelectedMine={setSelectedMine}
       selectedYours={selectedYours}
@@ -99,7 +108,6 @@ function CreateStudyPage() {
       selectedCafe={selectedCafe}
       setSelectedCafe={setSelectedCafe}
       givePoint={givePoint}
-      remainPoint={remainPoint}
       onChangeGivePoint={onChangeGivePoint}
       takePoint={takePoint}
       onChangeTakePoint={onChangeTakePoint}
