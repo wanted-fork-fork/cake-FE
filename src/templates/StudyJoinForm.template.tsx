@@ -1,19 +1,20 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 
+// lib
+import { FolderPathType } from "@src/constant/enum.constant";
+
 // components
+import { LightUnderlineInput } from "@src/components/atoms/Input";
 import { Button } from "@src/components/atoms/Button";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import StudyJoinSuccessModalComponent from "@src/stories/templates/StudyJoinSuccessModal.component";
-import LoadingComponent from "@src/components/molecules/Loading.component";
 import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
 import { Textarea } from "@src/components/atoms/Textarea";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
-import { LightUnderlineInput } from "@src/components/atoms/Input";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import { FolderPathType } from "@src/constant/enum.constant";
 
 const ContentsWrapper = styled.div`
   padding: 40px ${Padding.pageX};

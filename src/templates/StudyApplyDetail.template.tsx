@@ -1,11 +1,12 @@
+import { useMemo } from "react";
+
+// lib
 import { StudyState } from "@src/constant/enum.constant";
 
 // components
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
-import { useMemo } from "react";
-import LoadingComponent from "@src/components/molecules/Loading.component";
 import {
   ImageWrapper,
   StudyContentsWrapper,
