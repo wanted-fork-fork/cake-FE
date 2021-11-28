@@ -15,7 +15,7 @@ const ProfileWrapper = styled.div`
 const TitleWrapper = styled.div`
   margin-bottom: 10px;
 `;
-function StudyDetailSkeleton() {
+function StudyDetailSkeleton({ showTitle = true }) {
   return (
     <Container>
       <ProfileWrapper>
@@ -26,23 +26,28 @@ function StudyDetailSkeleton() {
           active
         />
       </ProfileWrapper>
-      <TitleWrapper>
+      {showTitle && (
         <div>
-          <Skeleton.Input
-            size="small"
-            style={{ width: "240px", marginBottom: "10px" }}
-            active
-          />
+          {" "}
+          <TitleWrapper>
+            <div>
+              <Skeleton.Input
+                size="small"
+                style={{ width: "240px", marginBottom: "10px" }}
+                active
+              />
+            </div>
+            <div>
+              <Skeleton.Input
+                size="small"
+                style={{ width: "120px", height: "14px" }}
+                active
+              />
+            </div>
+          </TitleWrapper>
+          <LightDivider />
         </div>
-        <div>
-          <Skeleton.Input
-            size="small"
-            style={{ width: "120px", height: "14px" }}
-            active
-          />
-        </div>
-      </TitleWrapper>
-      <LightDivider />
+      )}
       <Skeleton active />
     </Container>
   );
