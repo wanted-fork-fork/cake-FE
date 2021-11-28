@@ -121,10 +121,7 @@ export default class BaseHttpService {
             .headers as AxiosRequestHeaders;
           return this.axiosInstance.request(config);
         })
-        .then((res: AxiosResponse<APIResponse<T>>) => {
-          console.log("hi! ", res.data.data);
-          return res.data.data;
-        })
+        .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
         .catch(() => {
           this.removeToken();
           Router.push("/login");
