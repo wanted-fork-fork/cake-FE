@@ -6,7 +6,7 @@ import useIntersectionObserver from "@src/hooks/useIntersectionObserver.hook";
 import styled from "styled-components";
 
 const ListWrapper = styled.div`
-  min-height: 50vh;
+  min-height: 70vh;
 `;
 const ThresholdWrapper = styled.div`
   height: 20px;
@@ -17,7 +17,7 @@ function StudyListComponent({ studyList, hasMore, loading, onClickNext }) {
 
   useEffect(
     () => !loading && hasMore && entry && onClickNext(),
-    [entry, hasMore, loading, onClickNext],
+    [loading, hasMore, entry, onClickNext],
   );
 
   const studyListDom = useMemo(
