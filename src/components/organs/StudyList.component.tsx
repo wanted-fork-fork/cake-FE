@@ -1,9 +1,9 @@
 import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
-import { TextButton } from "@src/components/atoms/TextButton";
 import { useEffect, useMemo, useRef } from "react";
 import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 import useIntersectionObserver from "@src/hooks/useIntersectionObserver.hook";
 import styled from "styled-components";
+import StudyListElementSkeleton from "@src/components/skeletons/StudyListElement.skeleton";
 
 const ListWrapper = styled.div`
   min-height: 70vh;
@@ -38,15 +38,19 @@ function StudyListComponent({ studyList, hasMore, loading, onClickNext }) {
 
   return (
     <ListWrapper>
-      <LightDivider />
-      <ListWrapper>{studyListDom}</ListWrapper>
-      <LightDivider my="20px" />
+      {(loading || studyList.length > 0) && <LightDivider />}
+      <ListWrapper>
+        {studyListDom}
+        {loading && (
+          <>
+            <StudyListElementSkeleton />
+            <StudyListElementSkeleton />
+            <StudyListElementSkeleton />
+            <StudyListElementSkeleton />
+          </>
+        )}
+      </ListWrapper>
       <ThresholdWrapper ref={ref} />
-      {hasMore && (
-        <TextButton fontSize="small" onClick={onClickNext}>
-          더보기
-        </TextButton>
-      )}
     </ListWrapper>
   );
 }
