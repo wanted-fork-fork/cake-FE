@@ -105,13 +105,13 @@ export default class BaseHttpService {
     }
   }
 
-  _handle401<T>(error: AxiosError<APIErrorResponse>) {
+  _handle401<T>(error: AxiosError<APIErrorResponse>): Promise<T | void> | null {
     this.removeToken();
 
     // refresh token
     if (!this._sentRefresh) {
       this._sentRefresh = true;
-      this.post<string>(`${API_PREFIX.AUTH}/refresh`)
+      return this.post<string>(`${API_PREFIX.AUTH}/refresh`)
         .then((res: string) => {
           this._saveToken(res);
 
@@ -130,6 +130,7 @@ export default class BaseHttpService {
           this._sentRefresh = false;
         });
     }
+    return null;
   }
 
   _getCommonOptions(): AxiosRequestConfig {
