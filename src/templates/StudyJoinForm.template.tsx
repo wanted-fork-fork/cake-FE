@@ -44,7 +44,7 @@ function StudyJoinFormTemplate({
     setPopupVisible(true);
   }, [onSubmit]);
 
-  return study ? (
+  return (
     <PageWrapperComponent
       title="참여 신청"
       button={
@@ -62,7 +62,10 @@ function StudyJoinFormTemplate({
       <ContentsWrapper>
         <FormWrapper>
           <Label>참여 스터디</Label>
-          <LightUnderlineInput placeholder={study.title} disabled />
+          <LightUnderlineInput
+            placeholder={study ? study.title : ""}
+            disabled
+          />
         </FormWrapper>
         <FormWrapper>
           <Label mb="10px">신청 동기 및 기타 사항</Label>
@@ -85,8 +88,6 @@ function StudyJoinFormTemplate({
       </ContentsWrapper>
       {popupVisible && <StudyJoinSuccessModalComponent />}
     </PageWrapperComponent>
-  ) : (
-    <LoadingComponent />
   );
 }
 
