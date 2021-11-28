@@ -1,11 +1,12 @@
+import { useMemo } from "react";
+
+// lib
 import { StudyState } from "@src/constant/enum.constant";
 
 // components
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
-import { useMemo } from "react";
-import LoadingComponent from "@src/components/molecules/Loading.component";
 import {
   ImageWrapper,
   StudyContentsWrapper,
@@ -13,6 +14,7 @@ import {
 } from "@src/templates/StudyDetail.template";
 import { Button } from "@src/components/atoms/Button";
 import PopupComponent from "@src/components/organs/Popup.component";
+import StudyDetailSkeleton from "@src/components/skeletons/StudyDetail.skeleton";
 
 function StudyApplyDetailTemplate({
   applyDetail,
@@ -70,6 +72,7 @@ function StudyApplyDetailTemplate({
     () =>
       applyDetail
         ? {
+            id: applyDetail.userId,
             img: applyDetail.profileImg,
             nickname: applyDetail.nickname,
             rate: applyDetail.rate,
@@ -77,32 +80,36 @@ function StudyApplyDetailTemplate({
         : null,
     [applyDetail],
   );
-  return applyDetail ? (
+  return (
     <PageWrapperComponent title="" button={applyButton}>
-      {/* Thumbnail */}
-      <ImageWrapper>
-        {/* <Image src={study.images ? study.images[0] : null} alt={study.title} /> */}
-        <ImageGalleryComponent images={applyDetail.applyFiles} />
-      </ImageWrapper>
-      <StudyContentsWrapper>
-        {/* Profile */}
-        <SimpleProfileComponent user={appliedUser} />
-        {/* Contents */}
-        <StudyWrapper>{applyDetail.msg}</StudyWrapper>
-      </StudyContentsWrapper>
-      {popupVisible && (
-        <PopupComponent
-          bottom={
-            <Button color="point" onClick={onClosePopup} height="48px">
-              확인
-            </Button>
-          }
-          description={popupMessage}
-        />
+      {applyDetail ? (
+        <div>
+          {/* Thumbnail */}
+          <ImageWrapper>
+            {/* <Image src={study.images ? study.images[0] : null} alt={study.title} /> */}
+            <ImageGalleryComponent images={applyDetail.applyFiles} />
+          </ImageWrapper>
+          <StudyContentsWrapper>
+            {/* Profile */}
+            <SimpleProfileComponent user={appliedUser} />
+            {/* Contents */}
+            <StudyWrapper>{applyDetail.msg}</StudyWrapper>
+          </StudyContentsWrapper>
+          {popupVisible && (
+            <PopupComponent
+              bottom={
+                <Button color="point" onClick={onClosePopup} height="48px">
+                  확인
+                </Button>
+              }
+              description={popupMessage}
+            />
+          )}
+        </div>
+      ) : (
+        <StudyDetailSkeleton showTitle={false} />
       )}
     </PageWrapperComponent>
-  ) : (
-    <LoadingComponent />
   );
 }
 

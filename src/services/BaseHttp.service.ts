@@ -32,7 +32,7 @@ export default class BaseHttpService {
       .get<APIResponse<T>>(`${this.BASE_URL}${path}`, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
-        this._handleHttpError(error),
+        this._handleHttpError<T>(error),
       );
   }
 
@@ -46,7 +46,7 @@ export default class BaseHttpService {
       .post<APIResponse<T>>(`${this.BASE_URL}${path}`, data, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
-        this._handleHttpError(error),
+        this._handleHttpError<T>(error),
       );
   }
 
@@ -59,7 +59,7 @@ export default class BaseHttpService {
       .delete<APIResponse<T>>(`${this.BASE_URL}${path}`, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
-        this._handleHttpError(error),
+        this._handleHttpError<T>(error),
       );
   }
 
@@ -73,7 +73,7 @@ export default class BaseHttpService {
       .patch<APIResponse<T>>(`${this.BASE_URL}${path}`, data, options)
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
-        this._handleHttpError(error),
+        this._handleHttpError<T>(error),
       );
   }
 
@@ -88,24 +88,24 @@ export default class BaseHttpService {
       )
       .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
       .catch((error: AxiosError<APIErrorResponse>) =>
-        this._handleHttpError(error),
+        this._handleHttpError<T>(error),
       );
   }
 
-  _handleHttpError(error: AxiosError<APIErrorResponse>) {
+  _handleHttpError<T>(error: AxiosError<APIErrorResponse>) {
     if (error?.response?.data) {
       const { status } = error?.response?.data;
       if (status !== 401) {
         throw error.response.data;
       } else {
-        return this._handle401(error);
+        return this._handle401<T>(error);
       }
     } else {
       throw error;
     }
   }
 
-  _handle401(error: AxiosError<APIErrorResponse>) {
+  _handle401<T>(error: AxiosError<APIErrorResponse>) {
     this.removeToken();
 
     // refresh token
@@ -121,11 +121,14 @@ export default class BaseHttpService {
             .headers as AxiosRequestHeaders;
           return this.axiosInstance.request(config);
         })
+        .then((res: AxiosResponse<APIResponse<T>>) => res.data.data)
         .catch(() => {
           this.removeToken();
           Router.push("/login");
+        })
+        .finally(() => {
+          this._sentRefresh = false;
         });
-      this._sentRefresh = false;
     }
   }
 

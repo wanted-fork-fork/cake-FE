@@ -1,19 +1,20 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 
+// lib
+import { FolderPathType } from "@src/constant/enum.constant";
+
 // components
+import { LightUnderlineInput } from "@src/components/atoms/Input";
 import { Button } from "@src/components/atoms/Button";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import StudyJoinSuccessModalComponent from "@src/stories/templates/StudyJoinSuccessModal.component";
-import LoadingComponent from "@src/components/molecules/Loading.component";
 import MultipleImageUploadComponent from "@src/components/molecules/MultipleImageUpload.component";
 import { Textarea } from "@src/components/atoms/Textarea";
 
 // styles
 import { FontSize, Padding } from "@src/styles/theme";
-import { LightUnderlineInput } from "@src/components/atoms/Input";
 import { BaseProps, BaseStyleProps } from "@src/styles/common";
-import { FolderPathType } from "@src/constant/enum.constant";
 
 const ContentsWrapper = styled.div`
   padding: 40px ${Padding.pageX};
@@ -44,7 +45,7 @@ function StudyJoinFormTemplate({
     setPopupVisible(true);
   }, [onSubmit]);
 
-  return study ? (
+  return (
     <PageWrapperComponent
       title="참여 신청"
       button={
@@ -62,7 +63,10 @@ function StudyJoinFormTemplate({
       <ContentsWrapper>
         <FormWrapper>
           <Label>참여 스터디</Label>
-          <LightUnderlineInput placeholder={study.title} disabled />
+          <LightUnderlineInput
+            placeholder={study ? study.title : ""}
+            disabled
+          />
         </FormWrapper>
         <FormWrapper>
           <Label mb="10px">신청 동기 및 기타 사항</Label>
@@ -85,8 +89,6 @@ function StudyJoinFormTemplate({
       </ContentsWrapper>
       {popupVisible && <StudyJoinSuccessModalComponent />}
     </PageWrapperComponent>
-  ) : (
-    <LoadingComponent />
   );
 }
 

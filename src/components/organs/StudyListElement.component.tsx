@@ -13,7 +13,7 @@ export interface StudyListElementComponentProps {
   study: StudyListElement;
 }
 
-const Container = styled.div`
+export const StudyListElementContainer = styled.div`
   display: grid;
   grid-template-columns: auto 100px;
   width: 100%;
@@ -47,7 +47,7 @@ const ImageWrapper = styled.div`
   }
 `;
 const S = {
-  Container,
+  Container: StudyListElementContainer,
   ContentsWrapper,
 
   ImageWrapper,

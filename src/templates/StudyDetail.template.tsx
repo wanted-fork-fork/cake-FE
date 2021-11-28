@@ -14,8 +14,8 @@ import { Button } from "@src/components/atoms/Button";
 import StudyInfoComponent from "@src/components/molecules/StudyInfo.component";
 import PageWrapperComponent from "@src/components/organs/PageWrapper.component";
 import SimpleProfileComponent from "@src/components/molecules/SimpleProfile.component";
-import LoadingComponent from "@src/components/molecules/Loading.component";
 import ImageGalleryComponent from "@src/components/molecules/ImageGallery.component";
+import StudyDetailSkeleton from "@src/components/skeletons/StudyDetail.skeleton";
 
 // styles
 import theme, { FontSize, Padding, windowSize } from "@src/styles/theme";
@@ -110,50 +110,55 @@ function StudyDetailTemplate({ study }) {
     [study],
   );
 
-  return study ? (
+  return (
     <PageWrapperComponent title="" button={applyButton}>
-      {/* Thumbnail */}
-      <ImageWrapper>
-        {/* <Image src={study.images ? study.images[0] : null} alt={study.title} /> */}
-        <ImageGalleryComponent images={study.images} />
-      </ImageWrapper>
-      <StudyContentsWrapper>
-        {/* Profile */}
-        <SimpleProfileComponent user={study.user} />
-        {/*  Title */}
+      {study ? (
         <div>
-          <h3>{study.title}</h3>
-          <p>{dateToFormatted(study.createdAt, "YYYY.MM.DD")} 게시</p>
+          {/* Thumbnail */}
+          <ImageWrapper>
+            {/* <Image src={study.images ? study.images[0] : null} alt={study.title} /> */}
+            <ImageGalleryComponent images={study.images} />
+          </ImageWrapper>
+          <StudyContentsWrapper>
+            {/* Profile */}
+            <SimpleProfileComponent user={study.user} />
+            {/*  Title */}
+            <div>
+              <h3>{study.title}</h3>
+              <p>{dateToFormatted(study.createdAt, "YYYY.MM.DD")} 게시</p>
+            </div>
+            <LightDivider my="10px" />
+            {/* Info */}
+            <div>
+              <StudyInfoComponent study={study} />
+              {study.storeName && (
+                <LocationWrapper>
+                  <div>
+                    <ColoredPinIcon />
+                  </div>
+                  <div>
+                    <p>{study.storeName}</p>
+                    <p>{study.storeAddress}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={onCopy as MouseEventHandler<HTMLButtonElement>}
+                  >
+                    <ColoredCopyIcon />
+                    {copied ? <div>복사 완료!</div> : <div>복사</div>}
+                  </button>
+                </LocationWrapper>
+              )}
+            </div>
+
+            {/* Contents */}
+            <StudyWrapper>{study.content}</StudyWrapper>
+          </StudyContentsWrapper>
         </div>
-        <LightDivider my="10px" />
-        {/* Info */}
-        <div>
-          <StudyInfoComponent study={study} />
-          {study.storeName && (
-            <LocationWrapper>
-              <div>
-                <ColoredPinIcon />
-              </div>
-              <div>
-                <p>{study.storeName}</p>
-                <p>{study.storeAddress}</p>
-              </div>
-              <button
-                type="button"
-                onClick={onCopy as MouseEventHandler<HTMLButtonElement>}
-              >
-                <ColoredCopyIcon />
-                {copied ? <div>복사 완료!</div> : <div>복사</div>}
-              </button>
-            </LocationWrapper>
-          )}
-        </div>
-        {/* Contents */}
-        <StudyWrapper>{study.content}</StudyWrapper>
-      </StudyContentsWrapper>
+      ) : (
+        <StudyDetailSkeleton />
+      )}
     </PageWrapperComponent>
-  ) : (
-    <LoadingComponent />
   );
 }
 
