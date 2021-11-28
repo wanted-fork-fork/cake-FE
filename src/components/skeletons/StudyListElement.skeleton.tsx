@@ -6,13 +6,14 @@ import { CategoryTypeTag } from "@src/components/molecules/StudyInfo.component";
 import styled from "styled-components";
 import { memo } from "react";
 import { BoldDivider } from "@src/components/atoms/Divider";
+import { BaseProps, BaseStyleProps } from "@src/styles/common";
 
 const { Input: SInput } = Skeleton;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<BaseProps>`
+  ${BaseStyleProps};
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   gap: 5px;
 `;
 function StudyListElementSkeleton() {
@@ -22,10 +23,10 @@ function StudyListElementSkeleton() {
         <div>
           <SInput
             size="small"
-            style={{ width: "180px", marginBottom: "10px", height: "20px" }}
+            style={{ width: "180px", marginBottom: "5px", height: "20px" }}
             active
           />
-          <Wrapper>
+          <Wrapper mb="5px">
             <PersonIcon />
             <SInput
               size="small"
@@ -39,7 +40,7 @@ function StudyListElementSkeleton() {
               active
             />
           </Wrapper>
-          <Wrapper>
+          <Wrapper mb="5px">
             <CategoryTypeTag>GIVE</CategoryTypeTag>
             <SInput
               size="small"
