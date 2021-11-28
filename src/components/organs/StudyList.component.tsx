@@ -39,7 +39,7 @@ function StudyListComponent({ studyList, hasMore, loading, onClickNext }) {
 
   return (
     <ListWrapper>
-      <LightDivider />
+      {(loading || studyList.length > 0) && <LightDivider />}
       <ListWrapper>
         {studyListDom}
         {loading && (
@@ -51,13 +51,7 @@ function StudyListComponent({ studyList, hasMore, loading, onClickNext }) {
           </>
         )}
       </ListWrapper>
-      <LightDivider my="20px" />
       <ThresholdWrapper ref={ref} />
-      {hasMore && (
-        <TextButton fontSize="small" onClick={onClickNext}>
-          더보기
-        </TextButton>
-      )}
     </ListWrapper>
   );
 }
