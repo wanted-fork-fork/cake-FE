@@ -28,7 +28,7 @@ const CategoryWrapper = styled.div`
   }
 `;
 
-const CategoryTypeTag = styled.span`
+export const CategoryTypeTag = styled.span`
   background-color: ${theme.color.point};
   color: #fff;
   font-weight: 700;

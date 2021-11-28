@@ -1,5 +1,6 @@
 import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 import { StudyListElement as StudyListElementDto } from "@src/models/dto/study.dto";
+import StudyListElementSkeleton from "@src/components/skeletons/StudyListElement.skeleton";
 
 export default {
   title: "organs/Study List Element",
@@ -17,6 +18,11 @@ const studySample: StudyListElementDto = {
   img: "https://cdn.pixabay.com/photo/2021/09/01/16/09/cake-6591719__340.jpg",
 };
 
-const Template = () => <StudyListElementComponent study={studySample} />;
+const Template = () => (
+  <div>
+    <StudyListElementComponent study={studySample} />
+    <StudyListElementSkeleton />
+  </div>
+);
 
 export const StudyListElement = Template.bind({});

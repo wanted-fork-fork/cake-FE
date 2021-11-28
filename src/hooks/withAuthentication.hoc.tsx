@@ -3,6 +3,7 @@ import { AuthPermissionType } from "@src/constant/api.constant";
 export const withAuthentication = async (
   ctx,
   authPermission = AuthPermissionType.ALL,
+  getServerSideProps = null,
 ) => {
   try {
     let userPermission = AuthPermissionType.ALL;
@@ -22,6 +23,10 @@ export const withAuthentication = async (
     }
 
     if (userPermission >= authPermission) {
+      if (getServerSideProps) {
+        const { props } = getServerSideProps(ctx);
+        return { props };
+      }
       return { props: {} };
     }
 

@@ -6,6 +6,7 @@ import { Padding } from "@src/styles/theme";
 import StudyListComponent from "@src/components/organs/StudyList.component";
 import SearchLikeFilterLinkButtonComponent from "@src/components/molecules/SearchLikeFilterLinkButton.component";
 import EmptyComponent from "@src/components/molecules/Empty.component";
+import { useMemo } from "react";
 
 const Wrapper = styled.div`
   padding: 0 ${Padding.pageX};
@@ -20,25 +21,26 @@ function SearchResultTemplate({
   onNext,
   loading,
 }) {
+  const ready = useMemo(() => give && take && type, [give, take, type]);
   return (
     <PageWrapperComponent title="스터디 필터링" button={null}>
       <Wrapper>
         <SearchLikeFilterLinkButtonComponent
           mb="20px"
-          contents={`${give} / ${take} / ${StudyTypeEnumToLabel[type]}`}
+          contents={
+            ready ? `${give} / ${take} / ${StudyTypeEnumToLabel[type]}` : ""
+          }
         />
       </Wrapper>
-      {studyList.length === 0 && (
+      {!loading && studyList.length === 0 && (
         <EmptyComponent message="해당 스터디가 존재하지 않습니다." />
       )}
-      {studyList.length > 0 && (
-        <StudyListComponent
-          loading={loading}
-          studyList={studyList}
-          onClickNext={onNext}
-          hasMore={hasMore}
-        />
-      )}
+      <StudyListComponent
+        loading={loading}
+        studyList={studyList}
+        onClickNext={onNext}
+        hasMore={hasMore}
+      />
       <BottomNavigationComponent selected={NaviType.FILTER} />
     </PageWrapperComponent>
   );
