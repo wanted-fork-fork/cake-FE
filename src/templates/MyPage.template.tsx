@@ -12,7 +12,6 @@ import { TextButton } from "@src/components/atoms/TextButton";
 import { BoldDivider } from "@src/components/atoms/Divider";
 import BottomNavigationComponent from "@src/components/organs/BottomNavigation.component";
 import DetailUserInfoComponent from "@src/components/organs/profile/DetailUserInfo.component";
-import PointDetailComponent from "@src/components/organs/profile/PointDetail.component";
 import RateSliderComponent from "@src/components/organs/profile/RateSlider.component";
 import ProfileCategoryListBox from "@src/components/organs/profile/ProfileCategoryListBox";
 import LoadingComponent from "@src/components/molecules/Loading.component";
