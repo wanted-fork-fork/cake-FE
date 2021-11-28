@@ -1,5 +1,4 @@
 import { BoldDivider, LightDivider } from "@src/components/atoms/Divider";
-import { TextButton } from "@src/components/atoms/TextButton";
 import { useEffect, useMemo, useRef } from "react";
 import StudyListElementComponent from "@src/components/organs/StudyListElement.component";
 import useIntersectionObserver from "@src/hooks/useIntersectionObserver.hook";

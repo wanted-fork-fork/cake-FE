@@ -31,5 +31,7 @@ const studySample: StudyDetailDto = {
 };
 
 const Template = () => <StudyDetailTemplate study={studySample} />;
+const SkeletonTemplate = () => <StudyDetailTemplate study={null} />;
 
 export const StudyDetail = Template.bind({});
+export const Skeleton = SkeletonTemplate.bind({});
