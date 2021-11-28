@@ -4,7 +4,7 @@ import { AuthPermissionType } from "@src/constant/api.constant";
 import useInfiniteLoading from "@src/hooks/useInfiniteLoading.hook";
 import { useStores } from "@src/store/root.store";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 function SearchResultPage() {
   const router = useRouter();
@@ -29,16 +29,22 @@ function SearchResultPage() {
     [router, studyStore],
   );
 
+  const ready = useMemo(
+    () =>
+      router.query.take !== undefined &&
+      router.query.give !== undefined &&
+      router.query.type !== undefined,
+    [router.query],
+  );
+
   const {
     items: studyList,
     hasMore,
     onNext,
     loading,
   } = useInfiniteLoading({
-    ready:
-      router.query.take !== undefined &&
-      router.query.give !== undefined &&
-      router.query.type !== undefined,
+    ready,
+
     getItems: getNextItems,
     pageToLoad: 0,
     listKeyName: "study",
