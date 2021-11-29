@@ -50,6 +50,7 @@ function StudyJoinFormTemplate({
       title="참여 신청"
       button={
         <Button
+          data-testid="submit-apply-btn"
           onClick={handleSubmit}
           color="point"
           height="44px"
@@ -65,12 +66,14 @@ function StudyJoinFormTemplate({
           <Label>참여 스터디</Label>
           <LightUnderlineInput
             placeholder={study ? study.title : ""}
+            data-testid="study-title-input"
             disabled
           />
         </FormWrapper>
         <FormWrapper>
           <Label mb="10px">신청 동기 및 기타 사항</Label>
           <Textarea
+            data-testid="comment-textarea"
             value={contents}
             onChange={handleChangeContents}
             fontSize="small"

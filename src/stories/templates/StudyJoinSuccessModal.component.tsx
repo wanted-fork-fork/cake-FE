@@ -6,14 +6,26 @@ const Bottom = () => (
   <div>
     <Link href="/study/manage">
       <a>
-        <Button color="point" fontSize="small" height="48px" mb="10px">
+        <Button
+          data-testid="go-manage-btn"
+          color="point"
+          fontSize="small"
+          height="48px"
+          mb="10px"
+        >
           스터디 관리로 이동
         </Button>
       </a>
     </Link>{" "}
     <Link href="/">
       <a>
-        <Button color="white" fontSize="small" filled={false} height="48px">
+        <Button
+          data-testid="go-list-btn"
+          color="white"
+          fontSize="small"
+          filled={false}
+          height="48px"
+        >
           글 목록으로
         </Button>
       </a>
