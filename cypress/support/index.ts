@@ -24,7 +24,9 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
-      login(): Chainable<Element>;
+      login(): void;
+      logout(): void;
+      checkPath(pathname: string, chainer?: string): void;
     }
   }
 }

@@ -43,6 +43,7 @@ function LoginPageTemplate({ onSubmit, onChange, values, error }): JSX.Element {
           id="email"
           name="email"
           type="email"
+          data-testid="email-inp"
         />
         <DividedInput
           height="65px"
@@ -52,11 +53,18 @@ function LoginPageTemplate({ onSubmit, onChange, values, error }): JSX.Element {
           id="password"
           name="password"
           type="password"
+          data-testid="password-inp"
         />
-        <Button color="primary" height="50px" mb="10px">
+        <Button
+          onClick={onSubmit}
+          color="primary"
+          height="50px"
+          mb="10px"
+          data-testid="login"
+        >
           로그인
         </Button>
-        <ErrorMessage textAlign="center" mb="10px">
+        <ErrorMessage textAlign="center" mb="10px" data-testid="login-error">
           {error}
         </ErrorMessage>
       </S.ContentsWrap>

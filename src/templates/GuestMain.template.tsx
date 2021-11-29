@@ -15,14 +15,14 @@ function GuestMainTemplate() {
       <SGuestMain.ContentsWrap mb="20px">
         <Link href="/login">
           <a>
-            <Button color="white" type="button">
+            <Button color="white" type="button" data-testid="go-login-btn">
               로그인
             </Button>
           </a>
         </Link>
         <Link href="/signup">
           <a>
-            <Button color="white" type="button">
+            <Button color="white" type="button" data-testid="go-signup-btn">
               학교 계정으로 회원가입
             </Button>
           </a>
