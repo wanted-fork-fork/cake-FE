@@ -26,6 +26,7 @@ declare global {
     interface Chainable {
       login(): void;
       logout(): void;
+
       checkPath(pathname: string, chainer?: string): void;
     }
   }
