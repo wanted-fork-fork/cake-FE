@@ -1,0 +1,106 @@
+{
+  "success": true,
+  "code": 200,
+  "data": [
+    {
+      "id": 10,
+      "name": "악기연주",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/49c48a7f3.png"
+    },
+    {
+      "id": 11,
+      "name": "운동",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/4b97683ab.png"
+    },
+    {
+      "id": 12,
+      "name": "영상음향",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/1af17e3c2.png"
+    },
+    {
+      "id": 13,
+      "name": "수학",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/c4b37f515.png"
+    },
+    {
+      "id": 14,
+      "name": "요리",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/df4e42084.png"
+    },
+    {
+      "id": 15,
+      "name": "베이킹",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/acc2bca51.png"
+    },
+    {
+      "id": 16,
+      "name": "독서",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/422d8ffe4.png"
+    },
+    {
+      "id": 17,
+      "name": "미라클모닝",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/c898418a8.png"
+    },
+    {
+      "id": 18,
+      "name": "현금",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/a35924adb.png"
+    },
+    {
+      "id": 20,
+      "name": "DIY",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/eabf4bec2.png"
+    },
+    {
+      "id": 21,
+      "name": "글쓰기",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/b91b5eebb.png"
+    },
+    {
+      "id": 22,
+      "name": "기타",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/3aca49257.png"
+    },
+    {
+      "id": 23,
+      "name": "댄스",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/a920ca0cb.png"
+    },
+    {
+      "id": 24,
+      "name": "디자인",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/7b7ccd02f.png"
+    },
+    {
+      "id": 25,
+      "name": "사진",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/d4b1f2131.png"
+    },
+    {
+      "id": 27,
+      "name": "외국어",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/c434518cd.png"
+    },
+    {
+      "id": 28,
+      "name": "요리/베이킹",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/acc2bca51.png"
+    },
+    {
+      "id": 29,
+      "name": "재테크",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/ec6364c1e.png"
+    },
+    {
+      "id": 30,
+      "name": "취업준비",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/615a2cc54.png"
+    },
+    {
+      "id": 31,
+      "name": "프로그래밍",
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/d0d9adea5.png"
+    }
+  ]
+}
