@@ -26,6 +26,6 @@
     "storeName": "카탈로그",
     "storeAddress": "경기도 수원시 권선구 ...",
     "content": "test content",
-    "apply": true
+    "apply": false
   }
 }
