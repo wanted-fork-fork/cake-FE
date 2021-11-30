@@ -22,9 +22,11 @@ function ApplyStudyPage() {
   usePreventRouteChangeIf(!submitted, null);
 
   useEffect(() => {
-    const { id = "1" } = router.query;
-    const idToNum = parseInt(id.toString(), 10);
-    studyStore.getStudyDetail(idToNum).then((std) => setStudyDetail(std));
+    const { id } = router.query;
+    if (id) {
+      const idToNum = parseInt(id.toString(), 10);
+      studyStore.getStudyDetail(idToNum).then((std) => setStudyDetail(std));
+    }
   }, [router.query, studyStore]);
 
   const onSubmit = useCallback(async () => {

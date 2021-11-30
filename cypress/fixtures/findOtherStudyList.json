@@ -1,0 +1,46 @@
+{
+  "success": true,
+  "code": 200,
+  "data": [
+    {
+      "id": 20,
+      "title": "강아지 산책 하실 분~",
+      "peopleCnt": 1,
+      "startDate": null,
+      "endDate": null,
+      "give": [
+        "운동"
+      ],
+      "take": [
+        "운동"
+      ],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/study/427d367ec.jpeg",
+      "state": 2,
+      "user": {
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/profile/9daccdbc7.jpeg",
+        "nickname": "헤옹",
+        "rate": null,
+        "id": 2
+      }
+    },
+    {
+      "id": 5,
+      "title": "test title",
+      "peopleCnt": 1,
+      "startDate": "2021-11-07T00:00:00.000+00:00",
+      "endDate": "2021-11-09T00:00:00.000+00:00",
+      "give": [
+        "악기연주"
+      ],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 4,
+      "user": {
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/profile/3b95bd536.jpg",
+        "nickname": "정후삼촌",
+        "rate": null,
+        "id": 1
+      }
+    }
+  ]
+}

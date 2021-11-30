@@ -99,7 +99,7 @@ function UserMainTemplate({
     router.push("/study/create");
   }, [router]);
   return (
-    <MainContainer>
+    <MainContainer data-testid="user-main-container">
       <HeaderSectionsWrapper>
         <SearchLikeFilterLinkButtonComponent contents="어떤 스터디 원해?" />
       </HeaderSectionsWrapper>
@@ -121,7 +121,9 @@ function UserMainTemplate({
           {categoryList.map((x) => (
             <Link key={x.id} href={`/filter?take=${x.id}`}>
               <a>
-                <CategoryTag>{x.name}</CategoryTag>
+                <CategoryTag data-testid="recommended-category-btn">
+                  {x.name}
+                </CategoryTag>
               </a>
             </Link>
           ))}

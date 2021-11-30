@@ -38,7 +38,7 @@ function PopupComponent({
   bottom,
 }) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="modal">
       <Modal>
         <div style={contentPadding}>
           {title && <Title>{title}</Title>}

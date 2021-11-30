@@ -28,7 +28,7 @@ function SimpleProfileComponent({ user }) {
   return (
     <Link href={`/profile/${user.id}`}>
       <a>
-        <ProfileWrapper>
+        <ProfileWrapper data-testid="profile-container">
           <ProfileFrameComponent
             allowUpload={false}
             size="small"

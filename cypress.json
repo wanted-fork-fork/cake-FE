@@ -1,0 +1,9 @@
+{
+  "projectId": "jt8rpq",
+  "baseUrl": "http://localhost:3000",
+  "env": {
+    "cypress-react-selector": {
+      "root": "#root"
+    }
+  }
+}

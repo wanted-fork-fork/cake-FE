@@ -18,6 +18,7 @@ function SearchLikeFilterLinkButtonComponent({ contents, mb = "0" }) {
     <Link href="/filter">
       <a>
         <Button
+          data-testid="search-box-btn"
           color={theme.color.gray1}
           textAlign="left"
           shape="full-rounded"

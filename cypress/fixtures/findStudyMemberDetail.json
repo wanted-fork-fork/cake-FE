@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "code": 200,
+  "data": {
+    "studyMemberId": 21,
+    "msg": "신청메시지입니다여",
+    "applyFiles": [
+      "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/apply/62d04731a.png",
+      "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/apply/e146eaa0a.png"
+    ],
+    "userId": 1,
+    "nickname": "정후삼촌",
+    "profileImg": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/profile/3b95bd536.jpg",
+    "state": 2,
+    "rate": null
+  }
+}

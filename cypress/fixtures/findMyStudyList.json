@@ -1,0 +1,210 @@
+{
+  "success": true,
+  "code": 200,
+  "data": [
+    {
+      "id": 29,
+      "title": "날짜 테스트",
+      "peopleCnt": 1,
+      "startDate": null,
+      "endDate": null,
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 28,
+      "title": "wpahr",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 27,
+      "title": "오픈채팅 ㅌㅅㅌ",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 26,
+      "title": "",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 25,
+      "title": "",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 24,
+      "title": "",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 23,
+      "title": "",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 22,
+      "title": "",
+      "peopleCnt": 1,
+      "startDate": "2021-11-28T00:00:00.000+00:00",
+      "endDate": "2021-11-28T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 18,
+      "title": "vhdlsxm xptmxm",
+      "peopleCnt": 1,
+      "startDate": "2021-11-20T00:00:00.000+00:00",
+      "endDate": "2021-11-20T00:00:00.000+00:00",
+      "give": [
+        "2300원"
+      ],
+      "take": [
+        "베이킹"
+      ],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 17,
+      "title": "산큐에서 스터디하기",
+      "peopleCnt": 1,
+      "startDate": "2021-11-20T00:00:00.000+00:00",
+      "endDate": "2021-11-20T00:00:00.000+00:00",
+      "give": [
+        "운동"
+      ],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 16,
+      "title": "장소를 선택했습니다",
+      "peopleCnt": 1,
+      "startDate": "2021-11-20T00:00:00.000+00:00",
+      "endDate": "2021-11-20T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 12,
+      "title": "참날협",
+      "peopleCnt": 1,
+      "startDate": null,
+      "endDate": null,
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 11,
+      "title": "ㅌㅅㅌ",
+      "peopleCnt": 1,
+      "startDate": null,
+      "endDate": null,
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 10,
+      "title": "xtx...",
+      "peopleCnt": 1,
+      "startDate": "2021-11-24T00:00:00.000+00:00",
+      "endDate": "2021-11-27T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 9,
+      "title": "ㅊㄴㅎㅌㅅㅌ",
+      "peopleCnt": 1,
+      "startDate": "2021-11-29T00:00:00.000+00:00",
+      "endDate": "2021-12-04T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 8,
+      "title": "참날협 다시 테스트",
+      "peopleCnt": 1,
+      "startDate": "2021-11-22T00:00:00.000+00:00",
+      "endDate": "2021-12-01T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 7,
+      "title": "참가자와 날짜 협의 테스트",
+      "peopleCnt": 1,
+      "startDate": "2021-11-22T00:00:00.000+00:00",
+      "endDate": "2021-11-27T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg",
+      "state": 1
+    },
+    {
+      "id": 6,
+      "title": "여러장 테스트",
+      "peopleCnt": 1,
+      "startDate": "2021-11-17T00:00:00.000+00:00",
+      "endDate": "2021-11-17T00:00:00.000+00:00",
+      "give": [],
+      "take": [],
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/study/9975735b3.7f51ad1e",
+      "state": 1
+    }
+  ]
+}

@@ -84,6 +84,7 @@ function StudyDetailTemplate({ study }) {
     () =>
       !study || !study.apply ? (
         <Button
+          data-testid="study-apply-btn"
           disabled
           color="point"
           height="44px"
@@ -96,6 +97,7 @@ function StudyDetailTemplate({ study }) {
         <Link href={`/study/apply/${study.id}`}>
           <a>
             <Button
+              data-testid="study-apply-btn"
               disabled={false}
               color="point"
               height="44px"

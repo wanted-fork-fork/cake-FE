@@ -1,0 +1,71 @@
+{
+  "success": true,
+  "code": 200,
+  "data": {
+    "study": [
+      {
+        "id": 4,
+        "title": "test title",
+        "peopleCnt": 1,
+        "startDate": "2021-11-07T00:00:00.000+00:00",
+        "endDate": "2021-11-09T00:00:00.000+00:00",
+        "give": [
+          "악기연주"
+        ],
+        "take": [
+          "운동",
+          "악기연주"
+        ],
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/whole.jpg"
+      },
+      {
+        "id": 3,
+        "title": "test title",
+        "peopleCnt": 1,
+        "startDate": "2021-11-07T00:00:00.000+00:00",
+        "endDate": "2021-11-09T00:00:00.000+00:00",
+        "give": [
+          "악기연주"
+        ],
+        "take": [
+          "운동"
+        ],
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg"
+      },
+      {
+        "id": 2,
+        "title": "test title",
+        "peopleCnt": 1,
+        "startDate": "2021-11-07T00:00:00.000+00:00",
+        "endDate": "2021-11-09T00:00:00.000+00:00",
+        "give": [
+          "악기연주"
+        ],
+        "take": [
+          "운동"
+        ],
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/study/2ff3ddf4a.png"
+      },
+      {
+        "id": 1,
+        "title": "test title",
+        "peopleCnt": 1,
+        "startDate": "2021-11-07T00:00:00.000+00:00",
+        "endDate": "2021-11-09T00:00:00.000+00:00",
+        "give": [
+          "악기연주"
+        ],
+        "take": [
+          "운동"
+        ],
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/thumbnail/piece.jpg"
+      }
+    ],
+    "totalPage": 1,
+    "filter": {
+      "give": "악기연주",
+      "take": "운동",
+      "type": 1
+    }
+  }
+}

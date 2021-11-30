@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "code": 200,
+  "data": {
+    "id": 2,
+    "images": [
+      "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/study/2ff3ddf4a.png"
+    ],
+    "user": {
+      "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/profile/3b95bd536.jpg",
+      "nickname": "정후삼촌",
+      "rate": null,
+      "id": 1
+    },
+    "title": "test title",
+    "createdAt": "2021-11-16T16:57:39.000+00:00",
+    "peopleCnt": 1,
+    "startDate": "2021-11-07T00:00:00.000+00:00",
+    "endDate": "2021-11-09T00:00:00.000+00:00",
+    "give": [
+      "악기연주"
+    ],
+    "take": [
+      "운동"
+    ],
+    "storeName": "카탈로그",
+    "storeAddress": "경기도 수원시 권선구 ...",
+    "content": "test content",
+    "apply": false
+  }
+}

@@ -24,7 +24,11 @@ const Wrapper = styled.button`
 
 function FloatingButtonComponent({ onClick, icon }) {
   return (
-    <Wrapper type="button" onClick={onClick}>
+    <Wrapper
+      data-testid="floating-create-study-btn"
+      type="button"
+      onClick={onClick}
+    >
       {icon}
     </Wrapper>
   );

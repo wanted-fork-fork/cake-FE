@@ -56,7 +56,7 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
   return (
     <Link href={`/study/${study.id}`}>
       <a>
-        <S.Container key={study.id}>
+        <S.Container data-testid="study-list-element" key={study.id}>
           <S.ContentsWrapper>
             <h3>{study.title}</h3>
             <StudyInfoComponent study={study} />

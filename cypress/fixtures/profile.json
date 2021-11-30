@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "code": 200,
+  "data": {
+    "profileImg": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/profile/9daccdbc7.jpeg",
+    "nickname": "헤옹",
+    "email": "hyewon7678@ajou.ac.kr",
+    "point": null,
+    "rate": null,
+    "studyCnt": 3,
+    "give": [
+      {
+        "id": 11,
+        "name": "운동",
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/4b97683ab.png"
+      },
+      {
+        "id": 14,
+        "name": "요리",
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/df4e42084.png"
+      }
+    ],
+    "take": [
+      {
+        "id": 15,
+        "name": "베이킹",
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/acc2bca51.png"
+      },
+      {
+        "id": 17,
+        "name": "미라클모닝",
+        "img": "https://fork-fork-cake.s3.ap-northeast-2.amazonaws.com/category/c898418a8.png"
+      }
+    ]
+  }
+}
