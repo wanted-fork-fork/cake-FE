@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@src/*": ["./src/*"],
+      "@src/*": [
+        "./src/*"
+      ]
     },
     "target": "es5",
     "lib": [
@@ -19,7 +21,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "preserve"
   },
   "include": [
@@ -31,4 +33,3 @@
     "node_modules"
   ]
 }
-
