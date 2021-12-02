@@ -27,6 +27,7 @@ function FloatingButtonComponent({ onClick, icon }) {
     <Wrapper
       data-testid="floating-create-study-btn"
       type="button"
+      title="스터디 만들기"
       onClick={onClick}
     >
       {icon}

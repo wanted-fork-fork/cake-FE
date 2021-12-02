@@ -29,7 +29,7 @@ const CategoryWrapper = styled.div`
 `;
 
 export const CategoryTypeTag = styled.span`
-  background-color: ${theme.color.point};
+  background-color: ${theme.color.secondary};
   color: #fff;
   font-weight: 700;
   font-size: ${FontSize.Small};
