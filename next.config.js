@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withAntdLess = require("next-plugin-antd-less");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -22,6 +24,15 @@ module.exports = withAntdLess({
   lessVarsFilePath: "./src/styles/variables.less",
   ...nextConfig,
   webpack(config) {
+    if (process.env.ANALYZE) {
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzeMode: "server",
+          analyzerPort: 8889,
+          openAnalyzer: true,
+        }),
+      );
+    }
     return config;
   },
 });

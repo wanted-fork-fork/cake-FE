@@ -37,12 +37,14 @@ const Banner = styled.div`
   overflow: hidden;
   color: #fff;
   p {
-    font-family: "GmarketSans";
+    font-family: "GmarketSans", "sans-serif";
+    font-weight: 500;
     margin-top: 20px;
     margin-left: 20px;
   }
   strong {
-    font-family: "GmarketSans";
+    font-family: "GmarketSans", "sans-serif";
+    font-weight: 700;
     font-size: ${FontSize.MainTitleStrong};
   }
   button {

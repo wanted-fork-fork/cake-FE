@@ -10,7 +10,8 @@
     "lint": "./node_modules/.bin/eslint src --ext .ts,.tsx",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "cypress-open": "npx run cypress open"
+    "cypress-open": "npx run cypress open",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@ant-design/icons": "4.7.0",
@@ -58,6 +59,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "prettier": "2.4.1",
     "react-is": "17.0.2",
-    "typescript": "4.4.4"
+    "typescript": "4.4.4",
+    "webpack-bundle-analyzer": "4.5.0"
   }
 }
