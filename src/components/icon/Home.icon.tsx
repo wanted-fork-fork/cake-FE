@@ -3,11 +3,11 @@ import theme from "@src/styles/theme";
 
 function HomeIcon({ selected }) {
   const color = useMemo(
-    () => (selected ? theme.color.point : theme.color.black),
+    () => (selected ? theme.color.secondary : theme.color.black),
     [selected],
   );
   const fill = useMemo(
-    () => (selected ? theme.color.point : "none"),
+    () => (selected ? theme.color.secondary : "none"),
     [selected],
   );
   return (

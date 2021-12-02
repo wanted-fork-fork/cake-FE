@@ -3,7 +3,7 @@ import theme from "@src/styles/theme";
 
 function StudyManageIcon({ selected }) {
   const color = useMemo(
-    () => (selected ? theme.color.point : theme.color.black),
+    () => (selected ? theme.color.secondary : theme.color.black),
     [selected],
   );
 
