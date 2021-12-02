@@ -9,6 +9,7 @@ import GlobalStyle from "@src/styles/globals";
 import theme, { windowSize } from "@src/styles/theme";
 import GlobalFonts from "@src/styles/fonts";
 import "../styles/variables.less";
+import { useEffect } from "react";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
@@ -33,6 +34,16 @@ const Content = styled.div`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(() => console.log("Service Worker is Working"))
+          .catch((e) => console.error(e));
+      });
+    }
+  }, []);
   return (
     <>
       <Head>
