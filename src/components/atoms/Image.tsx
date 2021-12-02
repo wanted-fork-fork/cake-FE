@@ -9,13 +9,20 @@ Image.defaultProps = {
     "https://cdn.pixabay.com/photo/2021/09/01/16/09/cake-6591719__340.jpg",
 };
 
-function Image({ fallback, src, alt, ...props }: Props) {
+function Image({ fallback, src, alt, width, height, ...props }: Props) {
   const [imgSrc, setImgSrc] = useState<string | undefined>(src);
   const onError = useCallback(() => setImgSrc(fallback), [fallback]);
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <img src={imgSrc || fallback} alt={alt} {...props} onError={onError} />
+    <img
+      src={imgSrc || fallback}
+      alt={alt}
+      width={width}
+      height={height}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+      onError={onError}
+    />
   );
 }
 
