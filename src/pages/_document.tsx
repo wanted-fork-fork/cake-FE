@@ -110,6 +110,11 @@ export default class MyDocument extends Document {
             href="/favicon-16x16.png"
           />
           <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#fc1150" />
+          <meta
+            name="description"
+            content="우리 학교 재능 공유 플랫폼, Cake!"
+          />
         </Head>
         <body>
           <Main />
