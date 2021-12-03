@@ -27,7 +27,6 @@ self.addEventListener("install", (event) => {
 
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener("fetch", (e) => {
-  console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
   e.respondWith(
     caches.match(e.request).then((r) => {
       if (r) {
@@ -41,12 +40,17 @@ self.addEventListener("fetch", (e) => {
           return response;
         }
 
+        const requestUrl = e.request.url || "";
+
         const responseToCache = response.clone();
-        if (!e.request.url.startsWith("chrome-extension"))
+        if (
+          !requestUrl.startsWith("chrome-extension") &&
+          !requestUrl.includes("wanted-cake.site:8080") &&
+          e.request.method !== "POST"
+        )
           caches.open(version + cacheName).then((cache) => {
             cache.put(e.request, responseToCache);
           });
-        else console.log("chrome!");
 
         return response;
       });
