@@ -119,11 +119,11 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {/* <script src="https://developers.kakao.com/sdk/js/kakao.js" /> */}
-          {/* <script */}
-          {/*  type="text/javascript" */}
-          {/*  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=80399417d0aa8f83f573facbe56d28a1" */}
-          {/* /> */}
+          <script src="https://developers.kakao.com/sdk/js/kakao.js" />
+          <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=80399417d0aa8f83f573facbe56d28a1"
+          />
         </body>
       </Html>
     );
