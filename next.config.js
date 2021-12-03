@@ -17,6 +17,13 @@ const nextConfig = {
     KAKAO_API_KEY: process.env.KAKAO_API_KEY || "",
     SITE_DOMAIN: process.env.SITE_DOMAIN || "localhost",
   },
+  images: {
+    domains: [
+      "fork-fork-cake.s3.ap-northeast-2.amazonaws.com",
+      "cdn.pixabay.com",
+    ],
+    minimumCacheTTL: 60,
+  },
 };
 
 module.exports = withAntdLess({

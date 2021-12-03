@@ -5,7 +5,7 @@ export default createGlobalStyle`
     font-family: 'GmarketSans';
     font-weight: 700;
     font-style: normal;
-    src: url('fonts/GmarketSans/GmarketSansTTFBold.ttf') format('woff');
+    src: url('/fonts/GmarketSans/GmarketSansTTFBold.ttf') format('woff');
     font-display: swap;
   }
 
@@ -13,7 +13,7 @@ export default createGlobalStyle`
     font-family: 'GmarketSans';
     font-weight: 500;
     font-style: normal;
-    src: url('fonts/GmarketSans/GmarketSansTTFMedium.ttf') format('truetype');
+    src: url('/fonts/GmarketSans/GmarketSansTTFMedium.ttf') format('truetype');
     font-display: swap;
   }
 
