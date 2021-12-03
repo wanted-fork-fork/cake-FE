@@ -37,10 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then(() => console.log("Service Worker is Working"))
-          .catch((e) => console.error(e));
+        navigator.serviceWorker.register("/sw.js");
       });
     }
   }, []);
