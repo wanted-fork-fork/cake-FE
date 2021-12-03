@@ -66,6 +66,7 @@ function StudyListElementComponent({ study }: StudyListElementComponentProps) {
               src={study.img || "/img/default-thumbnail.png"}
               alt={study.title}
               height={100}
+              width={100}
             />
           </S.ImageWrapper>
         </S.Container>

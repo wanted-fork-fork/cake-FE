@@ -9,6 +9,7 @@ import GlobalStyle from "@src/styles/globals";
 import theme, { windowSize } from "@src/styles/theme";
 import GlobalFonts from "@src/styles/fonts";
 import "../styles/variables.less";
+import { useEffect } from "react";
 
 const Container = styled.div`
   ${({ theme: defaultTheme }) => css`
@@ -33,12 +34,19 @@ const Content = styled.div`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js");
+      });
+    }
+  }, []);
   return (
     <>
       <Head>
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"
         />
         <title>Cake</title>
       </Head>

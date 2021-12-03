@@ -13,7 +13,7 @@ export const nowWindowSize = `min(100vw, ${windowSize.mobile} - 20px)`;
 const theme: DefaultTheme = {
   color: {
     primary: "#fc1150", // custom
-    secondary: "#fa5d66", // custom
+    secondary: "#ea0845", // custom
     point: "#F95E66", // custom
     black: "#000000",
     gray5: "#444444",
@@ -37,7 +37,7 @@ const theme: DefaultTheme = {
 };
 
 export const Color = {
-  mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.secondary} 100%)`,
+  mainGradient: `linear-gradient(270deg, ${theme.color.primary} 0%, ${theme.color.point} 100%)`,
 };
 
 export const FontSize = {

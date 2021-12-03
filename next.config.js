@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withAntdLess = require("next-plugin-antd-less");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -15,6 +17,13 @@ const nextConfig = {
     KAKAO_API_KEY: process.env.KAKAO_API_KEY || "",
     SITE_DOMAIN: process.env.SITE_DOMAIN || "localhost",
   },
+  images: {
+    domains: [
+      "fork-fork-cake.s3.ap-northeast-2.amazonaws.com",
+      "cdn.pixabay.com",
+    ],
+    minimumCacheTTL: 60,
+  },
 };
 
 module.exports = withAntdLess({
@@ -22,6 +31,15 @@ module.exports = withAntdLess({
   lessVarsFilePath: "./src/styles/variables.less",
   ...nextConfig,
   webpack(config) {
+    if (process.env.ANALYZE) {
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzeMode: "server",
+          analyzerPort: 8889,
+          openAnalyzer: true,
+        }),
+      );
+    }
     return config;
   },
 });

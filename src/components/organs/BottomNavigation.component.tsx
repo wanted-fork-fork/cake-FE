@@ -32,7 +32,7 @@ interface DesType {
 }
 const Description = styled.p<DesType>`
   color: ${({ selected }) =>
-    selected ? theme.color.point : theme.color.black};
+    selected ? theme.color.secondary : theme.color.black};
 `;
 function BottomNavigationComponent({ selected = NaviType.MAIN }) {
   return (

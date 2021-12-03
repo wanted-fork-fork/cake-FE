@@ -44,6 +44,7 @@ function LoginPageTemplate({ onSubmit, onChange, values, error }): JSX.Element {
           name="email"
           type="email"
           data-testid="email-inp"
+          autoComplete="username"
         />
         <DividedInput
           height="65px"
@@ -54,6 +55,7 @@ function LoginPageTemplate({ onSubmit, onChange, values, error }): JSX.Element {
           name="password"
           type="password"
           data-testid="password-inp"
+          autoComplete="current-password"
         />
         <Button
           onClick={onSubmit}
